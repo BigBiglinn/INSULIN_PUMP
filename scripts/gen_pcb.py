@@ -4,6 +4,7 @@ Run with KiCad's bundled Python:
   "C:\\Program Files\\KiCad\\10.0\\bin\\python.exe" scripts/gen_pcb.py place     # board, placement, zones
   "C:\\Program Files\\KiCad\\10.0\\bin\\python.exe" scripts/gen_pcb.py dsn       # export Specctra DSN
   "C:\\Program Files\\KiCad\\10.0\\bin\\python.exe" scripts/gen_pcb.py ses FILE  # import routed SES, refill
+  "C:\\Program Files\\KiCad\\10.0\\bin\\python.exe" scripts/gen_pcb.py move MOVES.json LOG  # placement-only change
 
 Board rules here are GENERIC 4-layer values (not a specific fab's rule file, OPEN B.7).
 """
@@ -368,9 +369,12 @@ def _seg_pt_dist(x0, y0, x1, y1, px, py):
     return math.hypot(x0 + u * dx - px, y0 + u * dy - py)
 
 
-def fanout(board, plane_nets=("GND", "VBAT", "+3V3"), via_d=0.6, drill=0.3, clr=0.25, trk=0.3):
+def fanout(board, plane_nets=("GND", "VBAT", "+3V3"), via_d=0.6, drill=0.3, clr=0.25, trk=0.3, only=None,
+           seed_existing=False):
     """Stub + via from every SMD pad of a plane net to its inner plane (only where that plane
-    actually lies under the pad). Exposed pads get a via in their centre."""
+    actually lies under the pad). Exposed pads get a via in their centre.
+    only: set of "REF.PAD" to restrict the fan-out to (used by `move`); seed_existing: treat the
+    tracks/vias already on the board as obstacles (needed on a routed board)."""
     zones = {}
     for z in board.Zones():
         if z.GetLayer() in (pcbnew.In1_Cu, pcbnew.In2_Cu):
@@ -379,12 +383,26 @@ def fanout(board, plane_nets=("GND", "VBAT", "+3V3"), via_d=0.6, drill=0.3, clr=
     boxes = [(p, _pad_box(p)) for p in pads if p.GetNumber() != "" or p.GetNetname() != ""]
     vias = []
     stubs = []
+    existing = []                                            # (x0, y0, x1, y1, net, half width + clearance)
+    if seed_existing:
+        for t in board.GetTracks():
+            n = t.GetNetname()
+            c = 0.65 if n.endswith(HV_SUFFIX) else 0.2
+            if t.Type() == pcbnew.PCB_VIA_T:
+                q = t.GetPosition()
+                vias.append((pcbnew.ToMM(q.x), pcbnew.ToMM(q.y), n))
+            else:
+                a, e = t.GetStart(), t.GetEnd()
+                existing.append((pcbnew.ToMM(a.x), pcbnew.ToMM(a.y), pcbnew.ToMM(e.x), pcbnew.ToMM(e.y), n,
+                                 pcbnew.ToMM(t.GetWidth()) / 2 + c))
     done, skipped = 0, []
     for fp in board.GetFootprints():
         fc = fp.GetPosition()
         for pad in fp.Pads():
             net = pad.GetNetname()
             if net not in plane_nets or pad.GetAttribute() != pcbnew.PAD_ATTRIB_SMD:
+                continue
+            if only is not None and f"{fp.GetReference()}.{pad.GetNumber()}" not in only:
                 continue
             pos = pad.GetPosition()
             if not any(z.Outline().Contains(pcbnew.VECTOR2I(pos.x, pos.y)) for z in zones.get(net, [])):
@@ -431,6 +449,14 @@ def fanout(board, plane_nets=("GND", "VBAT", "+3V3"), via_d=0.6, drill=0.3, clr=
                         if nn == net:
                             continue
                         if _seg_pt_dist(a0, b0, a1, b1, vx, vy) < via_d / 2 + ww / 2 + 0.2 or                                 _seg_pt_dist(px, py, vx, vy, a1, b1) < via_d / 2 + wt / 2 + 0.2 or                                 min(_seg_pt_dist(px, py, vx, vy, a0, b0), _seg_pt_dist(a0, b0, a1, b1, px, py)) < wt / 2 + ww / 2 + 0.2:
+                            bad = True; break
+                if not bad:
+                    for (a0, b0, a1, b1, nn, hw) in existing:
+                        if nn == net:
+                            continue
+                        if _seg_pt_dist(a0, b0, a1, b1, vx, vy) < via_d / 2 + hw or any(
+                                _seg_pt_dist(a0, b0, a1, b1, px + (vx - px) * k / 8, py + (vy - py) * k / 8) < wt / 2 + hw
+                                for k in range(9)):
                             bad = True; break
                 if bad or any(math.hypot(vx - a, vy - b_) < via_d + clr for a, b_, nn in vias if nn != net)                         or any(math.hypot(vx - a, vy - b_) < via_d + 0.15 for a, b_, nn in vias if nn == net):
                     continue
@@ -628,6 +654,111 @@ def import_ses(ses):
     pcbnew.SaveBoard(BOARD, board)
 
 
+def orphan_vias(board, removed):
+    """Vias at an end of a removed plane-net track that no remaining track reaches (geometric test:
+    the connectivity graph links every plane-net item through the zone, so it cannot be used here)."""
+    gone = {t.m_Uuid.AsString() for t in removed}
+    ends = {(t.GetNetCode(), e.x, e.y) for t in removed if t.Type() != pcbnew.PCB_VIA_T for e in (t.GetStart(), t.GetEnd())}
+    out = []
+    for v in board.GetTracks():
+        if v.Type() != pcbnew.PCB_VIA_T or v.m_Uuid.AsString() in gone:
+            continue
+        q = v.GetPosition()
+        if (v.GetNetCode(), q.x, q.y) not in ends:
+            continue
+        r = v.GetWidth(pcbnew.F_Cu) // 2
+        if not any(t.Type() != pcbnew.PCB_VIA_T and t.m_Uuid.AsString() not in gone and t.GetNetCode() == v.GetNetCode()
+                   and ((t.GetStart() - q).EuclideanNorm() <= r or (t.GetEnd() - q).EuclideanNorm() <= r)
+                   for t in board.GetTracks()):
+            out.append(v)
+    return out
+
+
+def move(moves_json, log_path):
+    """Placement-only change on the routed board (PLACEMENT_PROPOSAL.md section 6).
+    moves_json: {"REF": [x_mm, y_mm, rot_deg]}. Rips up every track/via of the signal nets on the
+    moved pads, the plane fan-out stubs (and their vias) on moved plane-net pads, and any foreign
+    copper the moved pads now collide with; re-fans the moved plane pads; refills. Does NOT re-route."""
+    import json
+    moves = json.load(open(moves_json, encoding="utf8"))
+    board = pcbnew.LoadBoard(BOARD)
+    fps = {fp.GetReference(): fp for fp in board.GetFootprints()}
+    plane = ("GND", "VBAT", "+3V3")
+    out = []
+    sig, plane_pads = set(), []
+    for r in moves:
+        for p in fps[r].Pads():
+            n = p.GetNetname()
+            if not n or n.startswith("unconnected"):
+                continue
+            (plane_pads.append(p) if n in plane else sig.add(n))
+    # 1. signal nets on moved pads: whole-net rip-up
+    dead = [t for t in board.GetTracks() if t.GetNetname() in sig]
+    # 2. plane-net stubs touching moved pads, plus a via at the stub's far end if nothing else uses it
+    stub_ids = set()                                         # tracks with an end ON a moved plane pad
+    for t in board.GetTracks():
+        if t.Type() != pcbnew.PCB_TRACE_T:
+            continue
+        for p in plane_pads:
+            if p.GetNetCode() == t.GetNetCode() and p.IsOnLayer(t.GetLayer()) and (
+                    p.HitTest(t.GetStart()) or p.HitTest(t.GetEnd())):
+                stub_ids.add(t.m_Uuid.AsString())
+                break
+    stubs = [t for t in board.GetTracks() if t.m_Uuid.AsString() in stub_ids]
+    dead += stubs + orphan_vias(board, stubs)
+    seen, uniq = set(), []
+    for t in dead:
+        k = t.m_Uuid.AsString()
+        if k not in seen:
+            seen.add(k)
+            uniq.append(t)
+    out.append(f"signal nets ripped (whole net): {len(sig)}: {sorted(n.split('/')[-1] for n in sig)}")
+    out.append(f"plane-net pads on moved parts: {len(plane_pads)}; plane stubs removed: {len(stubs)}")
+    nseg = sum(1 for t in uniq if t.Type() != pcbnew.PCB_VIA_T)
+    out.append(f"removed {nseg} segments, {len(uniq) - nseg} vias "
+               f"({sum(pcbnew.ToMM(t.GetLength()) for t in uniq if t.Type() != pcbnew.PCB_VIA_T):.0f} mm)")
+    for t in uniq:
+        board.Delete(t)
+    # 3. apply the moves
+    for r, (x, y, rot) in moves.items():
+        fp = fps[r]
+        p0 = fp.GetPosition()
+        out.append(f"move {r}: ({pcbnew.ToMM(p0.x):.2f}, {pcbnew.ToMM(p0.y):.2f}, {fp.GetOrientationDegrees():.0f})"
+                   f" -> ({x}, {y}, {rot})")
+        fp.SetOrientationDegrees(rot)
+        fp.SetPosition(V(x, y))
+    # 4. foreign copper the moved pads now hit: signal net -> whole net, plane net -> that item only
+    moved = [p for r in moves for p in fps[r].Pads()]
+    lyrs = (pcbnew.F_Cu, pcbnew.In1_Cu, pcbnew.In2_Cu, pcbnew.B_Cu)
+    hit_nets, hit_items = set(), []
+    for t in board.GetTracks():
+        for p in moved:
+            if p.GetNetCode() == t.GetNetCode() and p.GetNetCode() > 0:
+                continue
+            hv = t.GetNetname().endswith(HV_SUFFIX) or p.GetNetname().endswith(HV_SUFFIX)
+            c = MM(0.6 if hv else 0.2)
+            if any(t.IsOnLayer(l) and p.IsOnLayer(l) and t.GetEffectiveShape(l).Collide(p.GetEffectiveShape(l), c)
+                   for l in lyrs):
+                (hit_items.append(t) if t.GetNetname() in plane else hit_nets.add(t.GetNetname()))
+                break
+    extra = [t for t in board.GetTracks() if t.GetNetname() in hit_nets]
+    out.append(f"foreign copper hit by moved pads: signal nets ripped {sorted(n.split('/')[-1] for n in hit_nets)} "
+               f"({len(extra)} items); plane-net items removed {len(hit_items)}")
+    hit_items += orphan_vias(board, hit_items)
+    for t in extra + hit_items:
+        board.Delete(t)
+    # 5. re-fan moved plane pads (existing copper as obstacles), refill
+    only = {f"{p.GetParentFootprint().GetReference()}.{p.GetNumber()}" for p in plane_pads}
+    left = fanout(board, only=only, seed_existing=True)
+    smd = sum(1 for p in plane_pads if p.GetAttribute() == pcbnew.PAD_ATTRIB_SMD)
+    out.append(f"re-fan of moved plane pads: {smd} SMD (through-hole pads reach the planes directly); "
+               f"not fanned (left for the router): {sorted(left)}")
+    fill(board)
+    pcbnew.SaveBoard(BOARD, board)
+    open(log_path, "w", encoding="utf8").write("\n".join(out) + "\n")
+    print("\n".join(out))
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "place"
     if cmd == "place":
@@ -636,6 +767,8 @@ if __name__ == "__main__":
         export_dsn(sys.argv[2])
     elif cmd == "ses":
         import_ses(sys.argv[2])
+    elif cmd == "move":
+        move(sys.argv[2], sys.argv[3])
     elif cmd == "fill":
         b = pcbnew.LoadBoard(BOARD)
         fill(b)

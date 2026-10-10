@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-10T16:44:27",
+    "date": "2026-10-11T01:17:03",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -45,12 +45,12 @@
                     "uuid": "8c918755-5748-479d-ae3e-9110d075afb1"
                 },
                 {
-                    "description": "Track [/48V flyback/SW48_GATE] on F.Cu, length 0.9899 mm",
+                    "description": "Pad 1 [/48V flyback/SW48_GATE] of R310 on F.Cu",
                     "pos": {
-                        "x": 171.5,
-                        "y": 146.975
+                        "x": 172.2,
+                        "y": 146.275
                     },
-                    "uuid": "9aa82502-c4b7-448a-be37-832eb8f81a75"
+                    "uuid": "d2a58341-1921-488a-9715-93b83135241b"
                 }
             ],
             "severity": "error",
@@ -60,12 +60,265 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [+48V_MOT] on F.Cu, length 1.1457 mm",
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of Q302 on F.Cu",
                     "pos": {
-                        "x": 192.288,
-                        "y": 142.175
+                        "x": 157.295,
+                        "y": 179.645
                     },
-                    "uuid": "85a4dec9-4c5e-4a77-b0d8-16ee1067df00"
+                    "uuid": "54609ad4-57e4-4791-8b89-f551ac8ce7a6"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of Q302 on F.Cu",
+                    "pos": {
+                        "x": 163.595,
+                        "y": 179.645
+                    },
+                    "uuid": "74ce7354-1f6f-41f2-a0e5-ba0a54c36f1a"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of Q302 on F.Cu",
+                    "pos": {
+                        "x": 163.595,
+                        "y": 179.645
+                    },
+                    "uuid": "74ce7354-1f6f-41f2-a0e5-ba0a54c36f1a"
+                },
+                {
+                    "description": "PTH pad 1 [/48V flyback/+48V_RAW] of C311",
+                    "pos": {
+                        "x": 180.4988,
+                        "y": 171.0
+                    },
+                    "uuid": "cdfe1527-cd38-4c76-8e06-667b7419b4a3"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of Q302 on F.Cu",
+                    "pos": {
+                        "x": 163.595,
+                        "y": 179.645
+                    },
+                    "uuid": "74ce7354-1f6f-41f2-a0e5-ba0a54c36f1a"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of R307 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 154.6
+                    },
+                    "uuid": "b9983d05-11d6-411e-9f34-a97f8dcb27aa"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "PTH pad 1 [/48V flyback/+48V_RAW] of C311",
+                    "pos": {
+                        "x": 180.4988,
+                        "y": 171.0
+                    },
+                    "uuid": "cdfe1527-cd38-4c76-8e06-667b7419b4a3"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of C312 on F.Cu",
+                    "pos": {
+                        "x": 194.0,
+                        "y": 161.625
+                    },
+                    "uuid": "15789354-692a-4b1e-873a-63321540321c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of C309 on F.Cu",
+                    "pos": {
+                        "x": 193.775,
+                        "y": 152.5
+                    },
+                    "uuid": "318f5dfc-d69e-483f-ad23-8c54003251c1"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of R311 on F.Cu",
+                    "pos": {
+                        "x": 198.0375,
+                        "y": 149.5
+                    },
+                    "uuid": "80e75841-0b5f-47bd-8d59-7c2f04f698e6"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of C310 on F.Cu",
+                    "pos": {
+                        "x": 193.775,
+                        "y": 156.0
+                    },
+                    "uuid": "7d2dd1bb-dbb8-4350-a35c-bb4665105894"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of C309 on F.Cu",
+                    "pos": {
+                        "x": 193.775,
+                        "y": 152.5
+                    },
+                    "uuid": "318f5dfc-d69e-483f-ad23-8c54003251c1"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of D301 on F.Cu",
+                    "pos": {
+                        "x": 194.0,
+                        "y": 159.5
+                    },
+                    "uuid": "3be4686a-4f95-403b-847c-a3b8eb6426b6"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of C312 on F.Cu",
+                    "pos": {
+                        "x": 194.0,
+                        "y": 161.625
+                    },
+                    "uuid": "15789354-692a-4b1e-873a-63321540321c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of D301 on F.Cu",
+                    "pos": {
+                        "x": 194.0,
+                        "y": 159.5
+                    },
+                    "uuid": "3be4686a-4f95-403b-847c-a3b8eb6426b6"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of C310 on F.Cu",
+                    "pos": {
+                        "x": 193.775,
+                        "y": 156.0
+                    },
+                    "uuid": "7d2dd1bb-dbb8-4350-a35c-bb4665105894"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of R311 on F.Cu",
+                    "pos": {
+                        "x": 198.0375,
+                        "y": 149.5
+                    },
+                    "uuid": "80e75841-0b5f-47bd-8d59-7c2f04f698e6"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of R309 on F.Cu",
+                    "pos": {
+                        "x": 194.85,
+                        "y": 144.775
+                    },
+                    "uuid": "0f8164f4-aa26-4c20-acf2-63a880694dd7"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [+48V_MOT] of R312 on F.Cu",
+                    "pos": {
+                        "x": 180.9125,
+                        "y": 142.975
+                    },
+                    "uuid": "84610f78-3d31-4464-a513-d159b8754a0c"
+                },
+                {
+                    "description": "Pad 3 [+48V_MOT] of Q302 on F.Cu",
+                    "pos": {
+                        "x": 157.295,
+                        "y": 181.945
+                    },
+                    "uuid": "2d5facf4-a981-4274-8ea1-afb50a2aed7b"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "PTH pad 1 [+48V_MOT] of C702",
+                    "pos": {
+                        "x": 200.5,
+                        "y": 158.0
+                    },
+                    "uuid": "b1c03b5a-a048-43b6-b5ed-18b02500b2e9"
+                },
+                {
+                    "description": "Pad 2 [+48V_MOT] of R311 on F.Cu",
+                    "pos": {
+                        "x": 200.9625,
+                        "y": 149.5
+                    },
+                    "uuid": "0083eef4-b9cd-466f-844f-3d8cf8562652"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [+48V_MOT] of R311 on F.Cu",
+                    "pos": {
+                        "x": 200.9625,
+                        "y": 149.5
+                    },
+                    "uuid": "0083eef4-b9cd-466f-844f-3d8cf8562652"
                 },
                 {
                     "description": "Pad 2 [+48V_MOT] of J703 on F.Cu",
@@ -83,20 +336,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [+48V_MOT] on B.Cu, length 1.6808 mm",
+                    "description": "Pad 1 [+48V_MOT] of TP301 on F.Cu",
                     "pos": {
-                        "x": 195.3105,
-                        "y": 165.1885
+                        "x": 201.5,
+                        "y": 145.0
                     },
-                    "uuid": "7b6a4468-c1c2-444b-91f4-df1199059f24"
+                    "uuid": "d51c7e5b-281a-46f7-87f3-a4b42a5e65c5"
                 },
                 {
-                    "description": "Pad 2 [+48V_MOT] of J703 on F.Cu",
+                    "description": "Pad 1 [+48V_MOT] of R312 on F.Cu",
                     "pos": {
-                        "x": 204.475,
-                        "y": 147.5
+                        "x": 180.9125,
+                        "y": 142.975
                     },
-                    "uuid": "92caa402-65f3-481a-bcda-21ee628c84c5"
+                    "uuid": "84610f78-3d31-4464-a513-d159b8754a0c"
                 }
             ],
             "severity": "error",
@@ -105,6 +358,37 @@
         {
             "description": "Missing connection between items",
             "items": [
+                {
+                    "description": "Pad 2 [+48V_MOT] of J703 on F.Cu",
+                    "pos": {
+                        "x": 204.475,
+                        "y": 147.5
+                    },
+                    "uuid": "92caa402-65f3-481a-bcda-21ee628c84c5"
+                },
+                {
+                    "description": "Pad 1 [+48V_MOT] of TP301 on F.Cu",
+                    "pos": {
+                        "x": 201.5,
+                        "y": 145.0
+                    },
+                    "uuid": "d51c7e5b-281a-46f7-87f3-a4b42a5e65c5"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [+3V3] of R302 on F.Cu",
+                    "pos": {
+                        "x": 162.825,
+                        "y": 161.8
+                    },
+                    "uuid": "f1d9f8f4-a2fc-4159-a5f8-c844145664d8"
+                },
                 {
                     "description": "Via [+3V3] on F.Cu - B.Cu",
                     "pos": {
@@ -112,14 +396,6 @@
                         "y": 159.49
                     },
                     "uuid": "4e4bc3c1-2116-4b13-9f84-f72e4843a30c"
-                },
-                {
-                    "description": "Track [+3V3] on F.Cu, length 1.0000 mm",
-                    "pos": {
-                        "x": 164.63,
-                        "y": 157.495
-                    },
-                    "uuid": "adcf6e80-6562-4895-a31b-1a735d19e815"
                 }
             ],
             "severity": "error",
@@ -129,12 +405,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [VBAT_SENSE] on F.Cu, length 2.3500 mm",
+                    "description": "Pad 1 [VBAT_SENSE] of R108 on F.Cu",
                     "pos": {
                         "x": 117.7,
                         "y": 125.275
                     },
-                    "uuid": "5e086205-7ba4-4243-b98a-c858030ea6a3"
+                    "uuid": "66c398da-7b49-43a8-8439-98efe6dbe475"
                 },
                 {
                     "description": "Track [VBAT_SENSE] on F.Cu, length 0.4370 mm",
@@ -175,20 +451,112 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [/PMD401 & encoder interface/ENC_VCC] on F.Cu, length 1.5390 mm",
+                    "description": "Pad 1 [/PMD401 & encoder interface/ENC_VCC] of C701 on F.Cu",
                     "pos": {
-                        "x": 171.845,
-                        "y": 104.334
+                        "x": 198.725,
+                        "y": 138.5
                     },
-                    "uuid": "23ca1b71-ab9c-48f0-9366-6fb2a4e896fb"
+                    "uuid": "b997d910-34f9-4f94-b671-de386d3adea9"
                 },
                 {
-                    "description": "Track [/PMD401 & encoder interface/ENC_VCC] on F.Cu, length 3.3500 mm",
+                    "description": "Pad 3 [/PMD401 & encoder interface/ENC_VCC] of J705 on F.Cu",
                     "pos": {
-                        "x": 187.148,
-                        "y": 108.727
+                        "x": 204.475,
+                        "y": 139.5
                     },
-                    "uuid": "69034cd5-b1c1-4daa-9790-d9a6ced6f9c2"
+                    "uuid": "760d4bb8-a8a0-4605-b2ef-c48436a5aac1"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/PMD401 & encoder interface/ENC_VCC] of JP701 on F.Cu",
+                    "pos": {
+                        "x": 199.5,
+                        "y": 134.5
+                    },
+                    "uuid": "8eb0f380-9a62-4501-85f2-ea53a7d28784"
+                },
+                {
+                    "description": "Pad 1 [/PMD401 & encoder interface/ENC_VCC] of C701 on F.Cu",
+                    "pos": {
+                        "x": 198.725,
+                        "y": 138.5
+                    },
+                    "uuid": "b997d910-34f9-4f94-b671-de386d3adea9"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/PMD401 & encoder interface/ENC_B] of D708 on F.Cu",
+                    "pos": {
+                        "x": 179.595,
+                        "y": 104.995
+                    },
+                    "uuid": "ff4bd783-3353-44ce-a249-2c08456454a9"
+                },
+                {
+                    "description": "Pad 2 [/PMD401 & encoder interface/ENC_B] of R709 on F.Cu",
+                    "pos": {
+                        "x": 170.35,
+                        "y": 108.275
+                    },
+                    "uuid": "4933952f-f590-4fad-9f09-e5dbdcc22399"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/PMD401 & encoder interface/ENC_B] of R712 on F.Cu",
+                    "pos": {
+                        "x": 182.35,
+                        "y": 109.775
+                    },
+                    "uuid": "f6bb2e43-001d-4744-b4dc-bd0642ec2f52"
+                },
+                {
+                    "description": "Pad 1 [/PMD401 & encoder interface/ENC_B] of D708 on F.Cu",
+                    "pos": {
+                        "x": 179.595,
+                        "y": 104.995
+                    },
+                    "uuid": "ff4bd783-3353-44ce-a249-2c08456454a9"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 4 [/PMD401 & encoder interface/ENC_B] of J705 on F.Cu",
+                    "pos": {
+                        "x": 204.475,
+                        "y": 138.5
+                    },
+                    "uuid": "295f3ae5-17b3-421e-a76a-dc65e3387864"
+                },
+                {
+                    "description": "Pad 2 [/PMD401 & encoder interface/ENC_B] of R712 on F.Cu",
+                    "pos": {
+                        "x": 182.35,
+                        "y": 109.775
+                    },
+                    "uuid": "f6bb2e43-001d-4744-b4dc-bd0642ec2f52"
                 }
             ],
             "severity": "error",
@@ -221,6 +589,98 @@
             "description": "Missing connection between items",
             "items": [
                 {
+                    "description": "Pad 2 [/48V flyback/FLY_SEC] of D301 on F.Cu",
+                    "pos": {
+                        "x": 191.2,
+                        "y": 159.5
+                    },
+                    "uuid": "1f9a9147-348c-456d-95aa-5881b687a504"
+                },
+                {
+                    "description": "Pad 4 [/48V flyback/FLY_SEC] of T301 on F.Cu",
+                    "pos": {
+                        "x": 188.0,
+                        "y": 159.5
+                    },
+                    "uuid": "a09b147c-6471-48cd-96d6-ab92438d0497"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_SEC] of R313 on F.Cu",
+                    "pos": {
+                        "x": 191.2,
+                        "y": 161.6375
+                    },
+                    "uuid": "02c4493a-5732-4d6d-9edd-e71e10a9903c"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_SEC] of D301 on F.Cu",
+                    "pos": {
+                        "x": 191.2,
+                        "y": 159.5
+                    },
+                    "uuid": "1f9a9147-348c-456d-95aa-5881b687a504"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_SNUB] of R313 on F.Cu",
+                    "pos": {
+                        "x": 191.2,
+                        "y": 164.5625
+                    },
+                    "uuid": "167d32f6-7dc3-43d0-aeab-507440c7f1b8"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_SNUB] of C312 on F.Cu",
+                    "pos": {
+                        "x": 194.0,
+                        "y": 164.575
+                    },
+                    "uuid": "fcae78be-579b-433f-8cf3-704ff0f32fb7"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_RT] of R301 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 160.0
+                    },
+                    "uuid": "9e874821-42ab-491e-aa00-cd2951da8bc5"
+                },
+                {
+                    "description": "Pad 10 [/48V flyback/FLY_RT] of U301 on F.Cu",
+                    "pos": {
+                        "x": 164.65,
+                        "y": 159.25
+                    },
+                    "uuid": "55e17b78-9363-4b09-9432-1cc1e104578c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
                     "description": "Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu",
                     "pos": {
                         "x": 118.2,
@@ -229,12 +689,219 @@
                     "uuid": "d68b3813-8eb9-4fd6-94f4-b73a4a331f6e"
                 },
                 {
-                    "description": "Pad 1 [/Power input & charger/VBAT_FUSED] of C102 on F.Cu",
+                    "description": "Track [/Power input & charger/VBAT_FUSED] on F.Cu, length 2.6092 mm",
                     "pos": {
-                        "x": 112.68,
-                        "y": 117.795
+                        "x": 114.525,
+                        "y": 119.64
                     },
-                    "uuid": "adfcfc7f-256e-44c1-b015-7e21d40f54e8"
+                    "uuid": "7952e228-ba03-4087-b274-f2b2644e8225"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 3 [/48V flyback/FLY_GATE] of U301 on F.Cu",
+                    "pos": {
+                        "x": 166.55,
+                        "y": 159.25
+                    },
+                    "uuid": "19078f66-5497-45a4-97a7-620ee586ea19"
+                },
+                {
+                    "description": "Pad 4 [/48V flyback/FLY_GATE] of Q301 on F.Cu",
+                    "pos": {
+                        "x": 169.76,
+                        "y": 160.47
+                    },
+                    "uuid": "aebbc490-ad25-460d-91b7-ec0c89db305d"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_CS] of R305 on F.Cu",
+                    "pos": {
+                        "x": 168.0375,
+                        "y": 164.6
+                    },
+                    "uuid": "019d9b79-0121-4677-8f2a-64ec2f0e914b"
+                },
+                {
+                    "description": "Pad 3 [/48V flyback/FLY_CS] of Q301 on F.Cu",
+                    "pos": {
+                        "x": 169.76,
+                        "y": 159.83
+                    },
+                    "uuid": "15485685-3b64-41d8-8cdc-582e22b92f24"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_CS] of Q301 on F.Cu",
+                    "pos": {
+                        "x": 169.76,
+                        "y": 158.53
+                    },
+                    "uuid": "40739398-90cc-47b3-9579-14bbad217159"
+                },
+                {
+                    "description": "Pad 5 [/48V flyback/FLY_CS] of U301 on F.Cu",
+                    "pos": {
+                        "x": 166.55,
+                        "y": 158.25
+                    },
+                    "uuid": "039eb9e2-2d4f-4098-b3da-4d1699276f87"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_CS] of Q301 on F.Cu",
+                    "pos": {
+                        "x": 169.76,
+                        "y": 159.17
+                    },
+                    "uuid": "4b4bbc25-f68b-4027-aa75-a4c35c6ee5c3"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_CS] of Q301 on F.Cu",
+                    "pos": {
+                        "x": 169.76,
+                        "y": 158.53
+                    },
+                    "uuid": "40739398-90cc-47b3-9579-14bbad217159"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 3 [/48V flyback/FLY_CS] of Q301 on F.Cu",
+                    "pos": {
+                        "x": 169.76,
+                        "y": 159.83
+                    },
+                    "uuid": "15485685-3b64-41d8-8cdc-582e22b92f24"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_CS] of Q301 on F.Cu",
+                    "pos": {
+                        "x": 169.76,
+                        "y": 159.17
+                    },
+                    "uuid": "4b4bbc25-f68b-4027-aa75-a4c35c6ee5c3"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_COMP] of R303 on F.Cu",
+                    "pos": {
+                        "x": 165.375,
+                        "y": 155.6
+                    },
+                    "uuid": "7f55cc21-b8c6-4e4b-9552-eda978c6cc24"
+                },
+                {
+                    "description": "Pad 6 [/48V flyback/FLY_COMP] of U301 on F.Cu",
+                    "pos": {
+                        "x": 166.55,
+                        "y": 157.75
+                    },
+                    "uuid": "360e1e51-67eb-48b3-950a-c27935177139"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_COMP] of C307 on F.Cu",
+                    "pos": {
+                        "x": 165.425,
+                        "y": 152.0
+                    },
+                    "uuid": "71eddd7a-f5c4-404e-b0ca-76ae401d92b2"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_COMP] of R303 on F.Cu",
+                    "pos": {
+                        "x": 165.375,
+                        "y": 155.6
+                    },
+                    "uuid": "7f55cc21-b8c6-4e4b-9552-eda978c6cc24"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_FB] of R308 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 156.4
+                    },
+                    "uuid": "387226a5-067e-4fec-bb86-35cec6555a1e"
+                },
+                {
+                    "description": "Pad 8 [/48V flyback/FLY_FB] of U301 on F.Cu",
+                    "pos": {
+                        "x": 164.65,
+                        "y": 158.25
+                    },
+                    "uuid": "680f0c21-42ed-422d-8549-48352de4c9eb"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_FB] of R307 on F.Cu",
+                    "pos": {
+                        "x": 162.825,
+                        "y": 154.6
+                    },
+                    "uuid": "4552f4ab-6afc-45ed-b46e-5a9f45dc28e0"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_FB] of R308 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 156.4
+                    },
+                    "uuid": "387226a5-067e-4fec-bb86-35cec6555a1e"
                 }
             ],
             "severity": "error",
@@ -246,16 +913,16 @@
                 {
                     "description": "Pad 1 [/48V flyback/FLY_SS] of C305 on F.Cu",
                     "pos": {
-                        "x": 163.03,
-                        "y": 146.505
+                        "x": 161.225,
+                        "y": 158.2
                     },
                     "uuid": "5b42d02b-af90-4ce7-8964-c3b661630b22"
                 },
                 {
                     "description": "Pad 9 [/48V flyback/FLY_SS] of U301 on F.Cu",
                     "pos": {
-                        "x": 164.95,
-                        "y": 152.25
+                        "x": 164.65,
+                        "y": 158.75
                     },
                     "uuid": "66a823c9-d250-433a-a3c6-5f001da31ad5"
                 }
@@ -267,18 +934,41 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 28 [FLY_PGOOD] of U501 on F.Cu",
+                    "description": "Pad 1 [FLY_PGOOD] of TP302 on F.Cu",
                     "pos": {
-                        "x": 151.4375,
-                        "y": 120.25
+                        "x": 159.0,
+                        "y": 161.8
                     },
-                    "uuid": "d7ea42c4-34ca-4659-b530-b7b8fb07c1ed"
+                    "uuid": "5512823d-83d4-44cf-a01a-08f7986fa80a"
+                },
+                {
+                    "description": "Pad 1 [FLY_PGOOD] of R302 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 161.8
+                    },
+                    "uuid": "f6ae55a9-acb6-4a25-be21-170944120ba0"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [FLY_PGOOD] of R302 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 161.8
+                    },
+                    "uuid": "f6ae55a9-acb6-4a25-be21-170944120ba0"
                 },
                 {
                     "description": "Pad 11 [FLY_PGOOD] of U301 on F.Cu",
                     "pos": {
-                        "x": 164.95,
-                        "y": 151.25
+                        "x": 164.65,
+                        "y": 159.75
                     },
                     "uuid": "48743327-9b46-45c7-b38b-f02a81d5e16e"
                 }
@@ -290,20 +980,135 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [FLY_PGOOD] on F.Cu, length 2.1538 mm",
+                    "description": "Pad 11 [FLY_PGOOD] of U301 on F.Cu",
                     "pos": {
-                        "x": 166.732,
-                        "y": 152.773
+                        "x": 164.65,
+                        "y": 159.75
                     },
-                    "uuid": "552f2655-1644-4cce-973a-6eff29055994"
+                    "uuid": "48743327-9b46-45c7-b38b-f02a81d5e16e"
                 },
                 {
-                    "description": "Pad 1 [FLY_PGOOD] of TP302 on F.Cu",
+                    "description": "Pad 28 [FLY_PGOOD] of U501 on F.Cu",
                     "pos": {
-                        "x": 197.5476,
-                        "y": 145.0463
+                        "x": 151.4375,
+                        "y": 120.25
                     },
-                    "uuid": "5512823d-83d4-44cf-a01a-08f7986fa80a"
+                    "uuid": "d7ea42c4-34ca-4659-b530-b7b8fb07c1ed"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 12 [FLY_EN] of U301 on F.Cu",
+                    "pos": {
+                        "x": 164.65,
+                        "y": 160.25
+                    },
+                    "uuid": "4e4394a9-d89e-42df-942f-7aec286256c4"
+                },
+                {
+                    "description": "Pad 1 [FLY_EN] of Q303 on F.Cu",
+                    "pos": {
+                        "x": 166.795,
+                        "y": 177.345
+                    },
+                    "uuid": "1cee9a9e-5a46-4240-ab0f-8f3b15ffc387"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [FLY_EN] of R401 on F.Cu",
+                    "pos": {
+                        "x": 171.2,
+                        "y": 126.775
+                    },
+                    "uuid": "520a20d2-bf2f-4eca-bdfb-ce2326ad8756"
+                },
+                {
+                    "description": "Pad 1 [FLY_EN] of TP401 on F.Cu",
+                    "pos": {
+                        "x": 175.5476,
+                        "y": 129.5463
+                    },
+                    "uuid": "7b439b4e-f4a3-465f-b560-61e1572c455c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 3 [FLY_EN] of Q401 on F.Cu",
+                    "pos": {
+                        "x": 172.9375,
+                        "y": 136.0
+                    },
+                    "uuid": "d254b25f-ad09-4c01-ae07-a764c8f851b7"
+                },
+                {
+                    "description": "Pad 12 [FLY_EN] of U301 on F.Cu",
+                    "pos": {
+                        "x": 164.65,
+                        "y": 160.25
+                    },
+                    "uuid": "4e4394a9-d89e-42df-942f-7aec286256c4"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [FLY_EN] of TP401 on F.Cu",
+                    "pos": {
+                        "x": 175.5476,
+                        "y": 129.5463
+                    },
+                    "uuid": "7b439b4e-f4a3-465f-b560-61e1572c455c"
+                },
+                {
+                    "description": "Pad 3 [FLY_EN] of Q401 on F.Cu",
+                    "pos": {
+                        "x": 172.9375,
+                        "y": 136.0
+                    },
+                    "uuid": "d254b25f-ad09-4c01-ae07-a764c8f851b7"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [FLY_EN] of R402 on F.Cu",
+                    "pos": {
+                        "x": 176.85,
+                        "y": 126.775
+                    },
+                    "uuid": "63f3de11-28d7-4a2c-9d9c-06263cc00ca0"
+                },
+                {
+                    "description": "Pad 1 [FLY_EN] of TP401 on F.Cu",
+                    "pos": {
+                        "x": 175.5476,
+                        "y": 129.5463
+                    },
+                    "uuid": "7b439b4e-f4a3-465f-b560-61e1572c455c"
                 }
             ],
             "severity": "error",
@@ -382,6 +1187,98 @@
             "description": "Missing connection between items",
             "items": [
                 {
+                    "description": "Pad 1 [/48V flyback/FLY_CLAMP] of C308 on F.Cu",
+                    "pos": {
+                        "x": 175.2,
+                        "y": 154.25
+                    },
+                    "uuid": "db300e4b-7869-466f-9e61-4537f4c19ece"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_CLAMP] of D302 on F.Cu",
+                    "pos": {
+                        "x": 175.2,
+                        "y": 156.0
+                    },
+                    "uuid": "efb3cf83-a07e-4bcb-b721-3f0f7afd3308"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_CLAMP] of R306 on F.Cu",
+                    "pos": {
+                        "x": 179.0375,
+                        "y": 147.0
+                    },
+                    "uuid": "e882c5e4-4a65-44be-98c8-e32788671ae9"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_CLAMP] of C308 on F.Cu",
+                    "pos": {
+                        "x": 175.2,
+                        "y": 154.25
+                    },
+                    "uuid": "db300e4b-7869-466f-9e61-4537f4c19ece"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_SW] of D302 on F.Cu",
+                    "pos": {
+                        "x": 175.2,
+                        "y": 158.8
+                    },
+                    "uuid": "42cdce34-efa4-4be2-9929-14cc6a9a6e50"
+                },
+                {
+                    "description": "Pad 5 [/48V flyback/FLY_SW] of Q301 on F.Cu",
+                    "pos": {
+                        "x": 171.585,
+                        "y": 159.5
+                    },
+                    "uuid": "d3b83ba1-c466-4f87-8abd-d35aec68ac2c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_SW] of T301 on F.Cu",
+                    "pos": {
+                        "x": 179.0,
+                        "y": 159.5
+                    },
+                    "uuid": "79ee17c1-d00f-42f5-b22b-ff908729f7ff"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_SW] of D302 on F.Cu",
+                    "pos": {
+                        "x": 175.2,
+                        "y": 158.8
+                    },
+                    "uuid": "42cdce34-efa4-4be2-9929-14cc6a9a6e50"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
                     "description": "Pad 43 [/Main MCU STM32WBA55/WBA_VDDRFPA] of U501 on F.Cu",
                     "pos": {
                         "x": 147.75,
@@ -390,12 +1287,58 @@
                     "uuid": "5fe8439f-59a4-4f8f-a2ab-ca41bb341dc9"
                 },
                 {
-                    "description": "Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.2360 mm",
+                    "description": "Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu",
                     "pos": {
                         "x": 148.813,
-                        "y": 128.712
+                        "y": 128.476
                     },
-                    "uuid": "6352bfd3-e509-4678-93b1-c6d6c6eb61f0"
+                    "uuid": "cde82ab0-0ab9-409d-bf5e-94f3432b698c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 12 [HB_S2M] of U501 on F.Cu",
+                    "pos": {
+                        "x": 144.5625,
+                        "y": 121.75
+                    },
+                    "uuid": "a71169f6-1be6-46ef-9a83-4c2e6a1cc105"
+                },
+                {
+                    "description": "Pad 13 [HB_S2M] of U601 on F.Cu",
+                    "pos": {
+                        "x": 147.25,
+                        "y": 164.1625
+                    },
+                    "uuid": "76fe6c6e-6c00-4879-a2ad-4beb64cffa3c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 18 [ENC_B_S] of U601 on F.Cu",
+                    "pos": {
+                        "x": 149.75,
+                        "y": 164.1625
+                    },
+                    "uuid": "300e0679-37eb-42f7-a877-a15198bd0b05"
+                },
+                {
+                    "description": "Pad 1 [ENC_B_S] of R712 on F.Cu",
+                    "pos": {
+                        "x": 180.7,
+                        "y": 109.775
+                    },
+                    "uuid": "6823b015-fb51-49d8-a2ba-5d9fd5eb0ac7"
                 }
             ],
             "severity": "error",
@@ -407,18 +1350,18 @@
                 {
                     "description": "PTH pad 3 [CON_SUP_TX] of J503",
                     "pos": {
-                        "x": 164.27,
-                        "y": 104.5
+                        "x": 146.08,
+                        "y": 147.0
                     },
                     "uuid": "28162d77-3e1d-4c0b-88f0-249f6a9b6c3c"
                 },
                 {
-                    "description": "Track [CON_SUP_TX] on F.Cu, length 0.9260 mm",
+                    "description": "Pad 29 [CON_SUP_TX] of U601 on F.Cu",
                     "pos": {
-                        "x": 152.621,
-                        "y": 159.001
+                        "x": 154.1625,
+                        "y": 160.75
                     },
-                    "uuid": "44739ba0-5783-4776-a84e-5311ad517e44"
+                    "uuid": "c815a99d-66cf-402e-8de2-7d2667951106"
                 }
             ],
             "severity": "error",
@@ -428,20 +1371,66 @@
             "description": "Missing connection between items",
             "items": [
                 {
+                    "description": "PTH pad 4 [CON_SUP_RX] of J503",
+                    "pos": {
+                        "x": 148.62,
+                        "y": 147.0
+                    },
+                    "uuid": "595b0f79-d810-4697-b9c8-6b2fcea230e7"
+                },
+                {
                     "description": "Pad 32 [CON_SUP_RX] of U601 on F.Cu",
                     "pos": {
                         "x": 154.1625,
                         "y": 159.25
                     },
                     "uuid": "f888aff6-465d-44fd-a79e-9637b656101c"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "PTH pad 2 [/Main MCU STM32WBA55/CON_MAIN_TX] of J503",
+                    "pos": {
+                        "x": 143.54,
+                        "y": 147.0
+                    },
+                    "uuid": "50885f0a-9cee-4cd0-ae43-55cbab28a402"
                 },
                 {
-                    "description": "PTH pad 4 [CON_SUP_RX] of J503",
+                    "description": "Pad 4 [/Main MCU STM32WBA55/CON_MAIN_TX] of U501 on F.Cu",
                     "pos": {
-                        "x": 166.81,
-                        "y": 104.5
+                        "x": 144.5625,
+                        "y": 117.75
                     },
-                    "uuid": "595b0f79-d810-4697-b9c8-6b2fcea230e7"
+                    "uuid": "b0d0c33a-b449-4e20-91b2-562e16d348df"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_COMP_RC] of C306 on F.Cu",
+                    "pos": {
+                        "x": 165.425,
+                        "y": 153.8
+                    },
+                    "uuid": "d0ec1c2c-a0dc-4d6c-858d-947691ee2a64"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_COMP_RC] of R303 on F.Cu",
+                    "pos": {
+                        "x": 167.025,
+                        "y": 155.6
+                    },
+                    "uuid": "ff669b3f-def8-41f1-9c37-264a0e803440"
                 }
             ],
             "severity": "error",
@@ -543,6 +1532,52 @@
             "description": "Missing connection between items",
             "items": [
                 {
+                    "description": "Pad 3 [/PMD401 & encoder interface/PMD_5V] of JP701 on F.Cu",
+                    "pos": {
+                        "x": 200.8,
+                        "y": 134.5
+                    },
+                    "uuid": "ec537310-d719-4406-bb48-4863b9b26268"
+                },
+                {
+                    "description": "Pad 2 [/PMD401 & encoder interface/PMD_5V] of J702 on F.Cu",
+                    "pos": {
+                        "x": 204.475,
+                        "y": 121.5
+                    },
+                    "uuid": "8bd4aad3-80da-4216-87cf-029398974a92"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [/PMD401 & encoder interface/PMD_5V] of J702 on F.Cu",
+                    "pos": {
+                        "x": 204.475,
+                        "y": 121.5
+                    },
+                    "uuid": "8bd4aad3-80da-4216-87cf-029398974a92"
+                },
+                {
+                    "description": "Pad 3 [/PMD401 & encoder interface/PMD_5V] of J701 on F.Cu",
+                    "pos": {
+                        "x": 204.475,
+                        "y": 112.5
+                    },
+                    "uuid": "5fc94f1c-32bd-44d2-b28e-b34408d33a64"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
                     "description": "Track [/Main MCU STM32WBA55/MAIN_SWCLK] on B.Cu, length 0.7760 mm",
                     "pos": {
                         "x": 145.135,
@@ -574,12 +1609,12 @@
                     "uuid": "234f2b4e-adfe-4a91-b02b-88e92aaa1fcb"
                 },
                 {
-                    "description": "Track [/PMD401 & encoder interface/RS485_B] on B.Cu, length 10.0000 mm",
+                    "description": "Pad 7 [/PMD401 & encoder interface/RS485_B] of U701 on F.Cu",
                     "pos": {
                         "x": 194.475,
                         "y": 129.365
                     },
-                    "uuid": "4142bdfb-5660-40e2-997d-d40448b5b434"
+                    "uuid": "7eb7b152-7d19-4a40-af50-a0138a4af777"
                 }
             ],
             "severity": "error",
@@ -859,21 +1894,6 @@
             "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "Via [/PMD401 & encoder interface/ENC_VCC] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 171.757,
-                        "y": 104.422
-                    },
-                    "uuid": "24724e28-84d0-419f-aded-05be736e4708"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
                     "description": "Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu",
                     "pos": {
                         "x": 155.582,
@@ -910,21 +1930,6 @@
                         "y": 113.5215
                     },
                     "uuid": "7287c219-b031-4ccc-875f-d84d69e8240b"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "Via [CON_SUP_TX] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 152.621,
-                        "y": 159.001
-                    },
-                    "uuid": "c9ea421c-f28c-4f03-97ba-65aca70d7811"
                 }
             ],
             "severity": "warning",
@@ -1048,236 +2053,6 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of R702",
-                    "pos": {
-                        "x": 171.025,
-                        "y": 104.345
-                    },
-                    "uuid": "7055453c-5b31-4906-bbfd-8d6eed416955"
-                },
-                {
-                    "description": "Segment of JP701 on F.Silkscreen",
-                    "pos": {
-                        "x": 173.245,
-                        "y": 103.795
-                    },
-                    "uuid": "c44d44a9-ced3-47a0-aa7e-537e4a123d1a"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of R702 on F.Silkscreen",
-                    "pos": {
-                        "x": 170.787742,
-                        "y": 106.2975
-                    },
-                    "uuid": "0fdadb0a-89b5-453d-b43f-1d0aab7ad023"
-                },
-                {
-                    "description": "Reference field of R709",
-                    "pos": {
-                        "x": 169.525,
-                        "y": 106.845
-                    },
-                    "uuid": "b1f5d7ac-1eed-4df2-81d9-b9cb8292102d"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Arc of JP701 on F.Silkscreen",
-                    "pos": {
-                        "x": 170.494999,
-                        "y": 103.095001
-                    },
-                    "uuid": "64ff9bee-34ba-46fc-aa48-97c3a748372d"
-                },
-                {
-                    "description": "Reference field of R702",
-                    "pos": {
-                        "x": 171.025,
-                        "y": 104.345
-                    },
-                    "uuid": "7055453c-5b31-4906-bbfd-8d6eed416955"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of D701 on F.Silkscreen",
-                    "pos": {
-                        "x": 175.035,
-                        "y": 101.645
-                    },
-                    "uuid": "2653d56b-fb80-4e03-8ee1-c6301fc8404f"
-                },
-                {
-                    "description": "Reference field of D707",
-                    "pos": {
-                        "x": 176.645,
-                        "y": 103.145
-                    },
-                    "uuid": "d2958618-7d91-41fa-bc46-512cded55c4e"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of C510 on F.Silkscreen",
-                    "pos": {
-                        "x": 136.38442,
-                        "y": 130.285
-                    },
-                    "uuid": "2a577e42-98e2-407b-907f-0498ade13e9d"
-                },
-                {
-                    "description": "Reference field of R511",
-                    "pos": {
-                        "x": 136.525,
-                        "y": 130.845
-                    },
-                    "uuid": "c8e426e5-aec0-4a78-b252-92c10236b7c3"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of Y502 on F.Silkscreen",
-                    "pos": {
-                        "x": 131.37,
-                        "y": 131.07
-                    },
-                    "uuid": "77b21ee9-d501-4ebd-ab4e-e1999cb71276"
-                },
-                {
-                    "description": "Reference field of C519",
-                    "pos": {
-                        "x": 130.955,
-                        "y": 131.345
-                    },
-                    "uuid": "820066a6-dc9f-491d-8264-6b533ef53231"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of R108",
-                    "pos": {
-                        "x": 118.525,
-                        "y": 123.845
-                    },
-                    "uuid": "4f545f41-57d7-4ed5-8590-49742c523321"
-                },
-                {
-                    "description": "Segment of R103 on F.Silkscreen",
-                    "pos": {
-                        "x": 118.287742,
-                        "y": 123.2975
-                    },
-                    "uuid": "b7937d6a-9616-45bc-8ada-1645c3e14641"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of R107",
-                    "pos": {
-                        "x": 114.525,
-                        "y": 123.845
-                    },
-                    "uuid": "8b29384b-95b0-43bd-bdf0-fd509b25074b"
-                },
-                {
-                    "description": "Segment of R102 on F.Silkscreen",
-                    "pos": {
-                        "x": 114.287742,
-                        "y": 123.2975
-                    },
-                    "uuid": "c2e54e66-1a5d-47a8-b28a-8c1a9aafa13c"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of TP101",
-                    "pos": {
-                        "x": 122.0476,
-                        "y": 124.0983
-                    },
-                    "uuid": "6e056246-4ec1-4b30-9415-16349b00ad2e"
-                },
-                {
-                    "description": "Reference field of TP102",
-                    "pos": {
-                        "x": 125.0476,
-                        "y": 124.0983
-                    },
-                    "uuid": "a7ee65be-dc99-4f39-9dee-1a43dd6c906c"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of R108",
-                    "pos": {
-                        "x": 118.525,
-                        "y": 123.845
-                    },
-                    "uuid": "4f545f41-57d7-4ed5-8590-49742c523321"
-                },
-                {
-                    "description": "Reference field of TP101",
-                    "pos": {
-                        "x": 122.0476,
-                        "y": 124.0983
-                    },
-                    "uuid": "6e056246-4ec1-4b30-9415-16349b00ad2e"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
                     "description": "Reference field of C518",
                     "pos": {
                         "x": 160.455,
@@ -1347,29 +2122,6 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of C515",
-                    "pos": {
-                        "x": 152.955,
-                        "y": 130.845
-                    },
-                    "uuid": "21bcc9a0-4dfd-4ca5-a7de-ae09d72ef521"
-                },
-                {
-                    "description": "Reference field of C516",
-                    "pos": {
-                        "x": 155.455,
-                        "y": 130.845
-                    },
-                    "uuid": "fac4bbe1-852f-433c-8d0c-c2748be4ef07"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
                     "description": "Reference field of C517",
                     "pos": {
                         "x": 157.955,
@@ -1407,6 +2159,75 @@
                         "y": 130.845
                     },
                     "uuid": "fac4bbe1-852f-433c-8d0c-c2748be4ef07"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of L502",
+                    "pos": {
+                        "x": 147.975,
+                        "y": 130.845
+                    },
+                    "uuid": "40dd8186-fe7e-4767-bc2d-f0c84b59733b"
+                },
+                {
+                    "description": "Reference field of C514",
+                    "pos": {
+                        "x": 150.455,
+                        "y": 130.845
+                    },
+                    "uuid": "f1fafd72-cb62-40c0-9f84-1de3e3e40470"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of L502",
+                    "pos": {
+                        "x": 147.975,
+                        "y": 130.845
+                    },
+                    "uuid": "40dd8186-fe7e-4767-bc2d-f0c84b59733b"
+                },
+                {
+                    "description": "Segment of C513 on F.Silkscreen",
+                    "pos": {
+                        "x": 148.38442,
+                        "y": 130.285
+                    },
+                    "uuid": "8dc0667e-3dc2-4a8c-b3ce-1412845cf69e"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of C510 on F.Silkscreen",
+                    "pos": {
+                        "x": 136.38442,
+                        "y": 130.285
+                    },
+                    "uuid": "2a577e42-98e2-407b-907f-0498ade13e9d"
+                },
+                {
+                    "description": "Reference field of R511",
+                    "pos": {
+                        "x": 136.525,
+                        "y": 130.845
+                    },
+                    "uuid": "c8e426e5-aec0-4a78-b252-92c10236b7c3"
                 }
             ],
             "severity": "warning",
@@ -1485,52 +2306,6 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of L502",
-                    "pos": {
-                        "x": 147.975,
-                        "y": 130.845
-                    },
-                    "uuid": "40dd8186-fe7e-4767-bc2d-f0c84b59733b"
-                },
-                {
-                    "description": "Reference field of C514",
-                    "pos": {
-                        "x": 150.455,
-                        "y": 130.845
-                    },
-                    "uuid": "f1fafd72-cb62-40c0-9f84-1de3e3e40470"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of L502",
-                    "pos": {
-                        "x": 147.975,
-                        "y": 130.845
-                    },
-                    "uuid": "40dd8186-fe7e-4767-bc2d-f0c84b59733b"
-                },
-                {
-                    "description": "Segment of C513 on F.Silkscreen",
-                    "pos": {
-                        "x": 148.38442,
-                        "y": 130.285
-                    },
-                    "uuid": "8dc0667e-3dc2-4a8c-b3ce-1412845cf69e"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
                     "description": "Segment of D501 on F.Silkscreen",
                     "pos": {
                         "x": 151.04,
@@ -1577,6 +2352,29 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
+                    "description": "Segment of D501 on F.Silkscreen",
+                    "pos": {
+                        "x": 151.04,
+                        "y": 130.51
+                    },
+                    "uuid": "14cd1a1f-90ab-453d-ae4f-86ad7d527489"
+                },
+                {
+                    "description": "Reference field of C515",
+                    "pos": {
+                        "x": 152.955,
+                        "y": 130.845
+                    },
+                    "uuid": "21bcc9a0-4dfd-4ca5-a7de-ae09d72ef521"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
                     "description": "Reference field of C515",
                     "pos": {
                         "x": 152.955,
@@ -1600,20 +2398,89 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of D501 on F.Silkscreen",
-                    "pos": {
-                        "x": 151.04,
-                        "y": 130.51
-                    },
-                    "uuid": "14cd1a1f-90ab-453d-ae4f-86ad7d527489"
-                },
-                {
                     "description": "Reference field of C515",
                     "pos": {
                         "x": 152.955,
                         "y": 130.845
                     },
                     "uuid": "21bcc9a0-4dfd-4ca5-a7de-ae09d72ef521"
+                },
+                {
+                    "description": "Reference field of C516",
+                    "pos": {
+                        "x": 155.455,
+                        "y": 130.845
+                    },
+                    "uuid": "fac4bbe1-852f-433c-8d0c-c2748be4ef07"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of U301",
+                    "pos": {
+                        "x": 164.965,
+                        "y": 161.667
+                    },
+                    "uuid": "23e3bb44-8fb7-4fa0-b0bc-a7e2a8741802"
+                },
+                {
+                    "description": "Reference field of C304",
+                    "pos": {
+                        "x": 165.6,
+                        "y": 161.47
+                    },
+                    "uuid": "5cbb980c-ff0d-43f9-adb7-2194f3f02dcb"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of R308",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 154.97
+                    },
+                    "uuid": "360c608a-df18-4dc7-aace-c816bf54cf8d"
+                },
+                {
+                    "description": "Segment of R307 on F.Silkscreen",
+                    "pos": {
+                        "x": 161.762742,
+                        "y": 155.1225
+                    },
+                    "uuid": "dd24f904-fea6-48ee-bfa0-3bc1de25bb45"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of C305",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 156.77
+                    },
+                    "uuid": "8bae4191-c18d-4cdb-904b-b98cee9c0a4b"
+                },
+                {
+                    "description": "Segment of R308 on F.Silkscreen",
+                    "pos": {
+                        "x": 161.762742,
+                        "y": 156.9225
+                    },
+                    "uuid": "9b7bbddb-6176-4015-b3e0-d854d11b1529"
                 }
             ],
             "severity": "warning",
@@ -1646,6 +2513,98 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
+                    "description": "Reference field of R107",
+                    "pos": {
+                        "x": 114.525,
+                        "y": 123.845
+                    },
+                    "uuid": "8b29384b-95b0-43bd-bdf0-fd509b25074b"
+                },
+                {
+                    "description": "Segment of R102 on F.Silkscreen",
+                    "pos": {
+                        "x": 114.287742,
+                        "y": 123.2975
+                    },
+                    "uuid": "c2e54e66-1a5d-47a8-b28a-8c1a9aafa13c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of R108",
+                    "pos": {
+                        "x": 118.525,
+                        "y": 123.845
+                    },
+                    "uuid": "4f545f41-57d7-4ed5-8590-49742c523321"
+                },
+                {
+                    "description": "Segment of R103 on F.Silkscreen",
+                    "pos": {
+                        "x": 118.287742,
+                        "y": 123.2975
+                    },
+                    "uuid": "b7937d6a-9616-45bc-8ada-1645c3e14641"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of TP101",
+                    "pos": {
+                        "x": 122.0476,
+                        "y": 124.0983
+                    },
+                    "uuid": "6e056246-4ec1-4b30-9415-16349b00ad2e"
+                },
+                {
+                    "description": "Reference field of TP102",
+                    "pos": {
+                        "x": 125.0476,
+                        "y": 124.0983
+                    },
+                    "uuid": "a7ee65be-dc99-4f39-9dee-1a43dd6c906c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of R108",
+                    "pos": {
+                        "x": 118.525,
+                        "y": 123.845
+                    },
+                    "uuid": "4f545f41-57d7-4ed5-8590-49742c523321"
+                },
+                {
+                    "description": "Reference field of TP101",
+                    "pos": {
+                        "x": 122.0476,
+                        "y": 124.0983
+                    },
+                    "uuid": "6e056246-4ec1-4b30-9415-16349b00ad2e"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
                     "description": "Reference field of U201",
                     "pos": {
                         "x": 122.0,
@@ -1669,20 +2628,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of R309",
+                    "description": "Segment of Y502 on F.Silkscreen",
                     "pos": {
-                        "x": 194.025,
-                        "y": 143.345
+                        "x": 131.37,
+                        "y": 131.07
                     },
-                    "uuid": "7c2e8041-9732-416d-a9c7-acbee30e831d"
+                    "uuid": "77b21ee9-d501-4ebd-ab4e-e1999cb71276"
                 },
                 {
-                    "description": "Reference field of TP302",
+                    "description": "Reference field of C519",
                     "pos": {
-                        "x": 197.5476,
-                        "y": 143.5983
+                        "x": 130.955,
+                        "y": 131.345
                     },
-                    "uuid": "dc0f3e06-da31-4bbc-8009-894dc2eb992c"
+                    "uuid": "820066a6-dc9f-491d-8264-6b533ef53231"
                 }
             ],
             "severity": "warning",
@@ -1692,20 +2651,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of TP302",
+                    "description": "Reference field of TP401",
                     "pos": {
-                        "x": 197.5476,
-                        "y": 143.5983
+                        "x": 175.5476,
+                        "y": 128.0983
                     },
-                    "uuid": "dc0f3e06-da31-4bbc-8009-894dc2eb992c"
+                    "uuid": "04da99a6-0809-4545-b7a4-3fcf1bcb0432"
                 },
                 {
-                    "description": "Segment of D302 on F.Silkscreen",
+                    "description": "Reference field of TP402",
                     "pos": {
-                        "x": 194.035,
-                        "y": 143.095
+                        "x": 178.5476,
+                        "y": 128.0983
                     },
-                    "uuid": "eae9e691-4452-49c5-8738-ba89648fef9f"
+                    "uuid": "f064be66-2f34-4e6f-a0a6-ee1cdb53c9fe"
                 }
             ],
             "severity": "warning",
@@ -1715,20 +2674,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of R309",
+                    "description": "Reference field of TP403",
                     "pos": {
-                        "x": 194.025,
-                        "y": 143.345
+                        "x": 181.5476,
+                        "y": 128.0983
                     },
-                    "uuid": "7c2e8041-9732-416d-a9c7-acbee30e831d"
+                    "uuid": "1d46d625-0bca-46d5-8772-467cdeea419b"
                 },
                 {
-                    "description": "Segment of D302 on F.Silkscreen",
+                    "description": "Reference field of TP402",
                     "pos": {
-                        "x": 194.035,
-                        "y": 143.095
+                        "x": 178.5476,
+                        "y": 128.0983
                     },
-                    "uuid": "eae9e691-4452-49c5-8738-ba89648fef9f"
+                    "uuid": "f064be66-2f34-4e6f-a0a6-ee1cdb53c9fe"
                 }
             ],
             "severity": "warning",
@@ -1738,20 +2697,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "PCB text '48V ZONE' on F.Silkscreen",
+                    "description": "Segment of R312 on F.Silkscreen",
                     "pos": {
-                        "x": 192.0,
-                        "y": 145.0
+                        "x": 181.697936,
+                        "y": 144.685
                     },
-                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
+                    "uuid": "e192f344-7074-443a-84e4-36a517785c1b"
                 },
                 {
-                    "description": "Reference field of TP302",
+                    "description": "Reference field of R306",
                     "pos": {
-                        "x": 197.5476,
-                        "y": 143.5983
+                        "x": 182.0,
+                        "y": 144.37
                     },
-                    "uuid": "dc0f3e06-da31-4bbc-8009-894dc2eb992c"
+                    "uuid": "e40ce693-0b40-4520-a39e-5fee4a47cced"
                 }
             ],
             "severity": "warning",
@@ -1761,20 +2720,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "PCB text '48V ZONE' on F.Silkscreen",
+                    "description": "Reference field of T301",
                     "pos": {
-                        "x": 192.0,
-                        "y": 145.0
+                        "x": 183.5,
+                        "y": 148.5
                     },
-                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
+                    "uuid": "0590bd98-2f76-4e0a-a1b6-504d3d940560"
                 },
                 {
-                    "description": "Circle of TP302 on F.Silkscreen",
+                    "description": "Segment of R306 on F.Silkscreen",
                     "pos": {
-                        "x": 197.5476,
-                        "y": 145.0463
+                        "x": 179.822936,
+                        "y": 148.71
                     },
-                    "uuid": "92b48897-4b9d-48b3-8aeb-948bdd79cb71"
+                    "uuid": "b8d97169-1bcf-4e8d-ac62-c6fedc8b2397"
                 }
             ],
             "severity": "warning",
@@ -1784,20 +2743,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "PCB text '48V ZONE' on F.Silkscreen",
+                    "description": "Segment of C310 on F.Silkscreen",
                     "pos": {
-                        "x": 192.0,
-                        "y": 145.0
+                        "x": 193.011252,
+                        "y": 154.64
                     },
-                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
+                    "uuid": "272bee0d-f733-4f01-9ef8-4dedb66b1f5e"
                 },
                 {
-                    "description": "Segment of R309 on F.Silkscreen",
+                    "description": "Reference field of C309",
                     "pos": {
-                        "x": 193.787742,
-                        "y": 144.2525
+                        "x": 192.3,
+                        "y": 154.8
                     },
-                    "uuid": "be2213c5-2dde-4cb3-aa85-cbe922f68449"
+                    "uuid": "30e215ac-7aad-4052-9a54-8642608b0a6b"
                 }
             ],
             "severity": "warning",
@@ -1807,66 +2766,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of R309 on F.Silkscreen",
+                    "description": "Reference field of C312",
                     "pos": {
-                        "x": 193.787742,
-                        "y": 145.2975
+                        "x": 192.15,
+                        "y": 163.1
                     },
-                    "uuid": "79bdd5c6-ba06-472b-9205-4b0f149bded2"
+                    "uuid": "32d02b6a-7930-47c8-98c2-6b203e0b30c7"
                 },
                 {
-                    "description": "PCB text '48V ZONE' on F.Silkscreen",
+                    "description": "Segment of R313 on F.Silkscreen",
                     "pos": {
-                        "x": 192.0,
-                        "y": 145.0
+                        "x": 192.11,
+                        "y": 162.372936
                     },
-                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of R701 on F.Silkscreen",
-                    "pos": {
-                        "x": 196.287742,
-                        "y": 105.2975
-                    },
-                    "uuid": "197d0558-2ff5-4efc-9708-43237ca309ad"
-                },
-                {
-                    "description": "Reference field of R708",
-                    "pos": {
-                        "x": 195.025,
-                        "y": 105.845
-                    },
-                    "uuid": "3a15eccf-2006-4eb3-848d-63253ed69c03"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of R701",
-                    "pos": {
-                        "x": 196.525,
-                        "y": 103.345
-                    },
-                    "uuid": "439b5659-52e4-4f42-b6f2-01c750241528"
-                },
-                {
-                    "description": "Segment of D706 on F.Silkscreen",
-                    "pos": {
-                        "x": 195.035,
-                        "y": 103.345
-                    },
-                    "uuid": "67af8688-e1eb-4ec7-aa00-d3996d17c93e"
+                    "uuid": "83685268-3b93-4909-b53e-ba75331d6f0e"
                 }
             ],
             "severity": "warning",
@@ -1890,6 +2803,29 @@
                         "y": 103.345
                     },
                     "uuid": "439b5659-52e4-4f42-b6f2-01c750241528"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of R701",
+                    "pos": {
+                        "x": 196.525,
+                        "y": 103.345
+                    },
+                    "uuid": "439b5659-52e4-4f42-b6f2-01c750241528"
+                },
+                {
+                    "description": "Segment of D706 on F.Silkscreen",
+                    "pos": {
+                        "x": 195.035,
+                        "y": 103.345
+                    },
+                    "uuid": "67af8688-e1eb-4ec7-aa00-d3996d17c93e"
                 }
             ],
             "severity": "warning",
@@ -1945,20 +2881,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of D704 on F.Silkscreen",
+                    "description": "Segment of R701 on F.Silkscreen",
                     "pos": {
-                        "x": 187.035,
-                        "y": 103.345
+                        "x": 196.287742,
+                        "y": 105.2975
                     },
-                    "uuid": "6b1a8c16-47b1-4ce2-a0f0-1b0b08569934"
+                    "uuid": "197d0558-2ff5-4efc-9708-43237ca309ad"
                 },
                 {
-                    "description": "Reference field of C701",
+                    "description": "Reference field of R708",
                     "pos": {
-                        "x": 188.525,
-                        "y": 103.345
+                        "x": 195.025,
+                        "y": 105.845
                     },
-                    "uuid": "b5d2551a-2e33-4076-b977-7c4416e8069d"
+                    "uuid": "3a15eccf-2006-4eb3-848d-63253ed69c03"
                 }
             ],
             "severity": "warning",
@@ -2014,6 +2950,52 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
+                    "description": "Reference field of D709",
+                    "pos": {
+                        "x": 184.645,
+                        "y": 103.145
+                    },
+                    "uuid": "e9472575-ae44-42d1-b554-5cb7c955e8f3"
+                },
+                {
+                    "description": "Segment of D703 on F.Silkscreen",
+                    "pos": {
+                        "x": 183.035,
+                        "y": 101.645
+                    },
+                    "uuid": "ea10d473-ab46-456d-8db6-726a4947eada"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of D703 on F.Silkscreen",
+                    "pos": {
+                        "x": 183.035,
+                        "y": 103.345
+                    },
+                    "uuid": "0b262b71-8077-4268-ac2c-a45aa86d8b13"
+                },
+                {
+                    "description": "Reference field of D709",
+                    "pos": {
+                        "x": 184.645,
+                        "y": 103.145
+                    },
+                    "uuid": "e9472575-ae44-42d1-b554-5cb7c955e8f3"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
                     "description": "Reference field of TP701",
                     "pos": {
                         "x": 189.0476,
@@ -2051,52 +3033,6 @@
                         "y": 108.345
                     },
                     "uuid": "ca7c81f3-2c26-400b-bf77-f3c923a1ebed"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of C701 on F.Silkscreen",
-                    "pos": {
-                        "x": 188.38442,
-                        "y": 105.285
-                    },
-                    "uuid": "4045c06d-2044-4d79-9af7-e65646631361"
-                },
-                {
-                    "description": "Reference field of R706",
-                    "pos": {
-                        "x": 187.025,
-                        "y": 105.845
-                    },
-                    "uuid": "726b738b-166f-4ec2-ab42-12a3681b2b1f"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of R705",
-                    "pos": {
-                        "x": 183.025,
-                        "y": 105.845
-                    },
-                    "uuid": "646030a3-ae0a-4007-8e04-7022a2702bfb"
-                },
-                {
-                    "description": "Segment of D709 on F.Silkscreen",
-                    "pos": {
-                        "x": 183.035,
-                        "y": 104.145
-                    },
-                    "uuid": "6dbfaeb6-bba2-49f4-b11d-40d328235c45"
                 }
             ],
             "severity": "warning",
@@ -2175,20 +3111,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of D704 on F.Silkscreen",
+                    "description": "Reference field of R705",
                     "pos": {
-                        "x": 187.035,
-                        "y": 101.645
+                        "x": 183.025,
+                        "y": 105.845
                     },
-                    "uuid": "b5244386-cef7-4f13-a1ed-b7ce90d647be"
+                    "uuid": "646030a3-ae0a-4007-8e04-7022a2702bfb"
                 },
                 {
-                    "description": "Reference field of C701",
+                    "description": "Segment of D709 on F.Silkscreen",
                     "pos": {
-                        "x": 188.525,
-                        "y": 103.345
+                        "x": 183.035,
+                        "y": 104.145
                     },
-                    "uuid": "b5d2551a-2e33-4076-b977-7c4416e8069d"
+                    "uuid": "6dbfaeb6-bba2-49f4-b11d-40d328235c45"
                 }
             ],
             "severity": "warning",
@@ -2198,20 +3134,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of D709",
+                    "description": "PCB text '48V ZONE' on F.Silkscreen",
                     "pos": {
-                        "x": 184.645,
-                        "y": 103.145
+                        "x": 192.0,
+                        "y": 145.0
                     },
-                    "uuid": "e9472575-ae44-42d1-b554-5cb7c955e8f3"
+                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
                 },
                 {
-                    "description": "Segment of D703 on F.Silkscreen",
+                    "description": "Circle of TP301 on F.Silkscreen",
                     "pos": {
-                        "x": 183.035,
-                        "y": 101.645
+                        "x": 201.5,
+                        "y": 145.0
                     },
-                    "uuid": "ea10d473-ab46-456d-8db6-726a4947eada"
+                    "uuid": "fdfca749-7dad-4265-9d7c-ef7f713f0e52"
                 }
             ],
             "severity": "warning",
@@ -2221,20 +3157,342 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of D703 on F.Silkscreen",
+                    "description": "Reference field of TP301",
                     "pos": {
-                        "x": 183.035,
-                        "y": 103.345
+                        "x": 201.5,
+                        "y": 143.552
                     },
-                    "uuid": "0b262b71-8077-4268-ac2c-a45aa86d8b13"
+                    "uuid": "70db3517-4b5c-456f-b997-ae722459a466"
                 },
                 {
-                    "description": "Reference field of D709",
+                    "description": "PCB text '48V ZONE' on F.Silkscreen",
                     "pos": {
-                        "x": 184.645,
-                        "y": 103.145
+                        "x": 192.0,
+                        "y": 145.0
                     },
-                    "uuid": "e9472575-ae44-42d1-b554-5cb7c955e8f3"
+                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "PCB text '48V ZONE' on F.Silkscreen",
+                    "pos": {
+                        "x": 192.0,
+                        "y": 145.0
+                    },
+                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
+                },
+                {
+                    "description": "Segment of R309 on F.Silkscreen",
+                    "pos": {
+                        "x": 193.787742,
+                        "y": 144.2525
+                    },
+                    "uuid": "be2213c5-2dde-4cb3-aa85-cbe922f68449"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of R309 on F.Silkscreen",
+                    "pos": {
+                        "x": 193.787742,
+                        "y": 145.2975
+                    },
+                    "uuid": "79bdd5c6-ba06-472b-9205-4b0f149bded2"
+                },
+                {
+                    "description": "PCB text '48V ZONE' on F.Silkscreen",
+                    "pos": {
+                        "x": 192.0,
+                        "y": 145.0
+                    },
+                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of C702",
+                    "pos": {
+                        "x": 203.0,
+                        "y": 150.5
+                    },
+                    "uuid": "4d6e3ba5-4ed3-4264-9d16-29f0ccf57edc"
+                },
+                {
+                    "description": "Segment of J703 on F.Silkscreen",
+                    "pos": {
+                        "x": 204.69,
+                        "y": 150.11
+                    },
+                    "uuid": "a5bb4bd9-fcce-4064-848c-0c9c910cb0c8"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of J703 on F.Silkscreen",
+                    "pos": {
+                        "x": 207.19,
+                        "y": 150.11
+                    },
+                    "uuid": "45073e18-108a-472d-b6d3-a20feafec825"
+                },
+                {
+                    "description": "Reference field of C702",
+                    "pos": {
+                        "x": 203.0,
+                        "y": 150.5
+                    },
+                    "uuid": "4d6e3ba5-4ed3-4264-9d16-29f0ccf57edc"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of C312",
+                    "pos": {
+                        "x": 192.15,
+                        "y": 163.1
+                    },
+                    "uuid": "32d02b6a-7930-47c8-98c2-6b203e0b30c7"
+                },
+                {
+                    "description": "Reference field of R313",
+                    "pos": {
+                        "x": 193.03,
+                        "y": 163.1
+                    },
+                    "uuid": "b65b9cf3-287e-42be-9a87-2af4b15d5912"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of C312 on F.Silkscreen",
+                    "pos": {
+                        "x": 193.09,
+                        "y": 163.811252
+                    },
+                    "uuid": "2b408b0a-945d-49ce-be19-e28f81aa5f33"
+                },
+                {
+                    "description": "Reference field of R313",
+                    "pos": {
+                        "x": 193.03,
+                        "y": 163.1
+                    },
+                    "uuid": "b65b9cf3-287e-42be-9a87-2af4b15d5912"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of D301",
+                    "pos": {
+                        "x": 192.6,
+                        "y": 161.5
+                    },
+                    "uuid": "73c3a88c-0fb5-491c-a904-76c1ea3479c4"
+                },
+                {
+                    "description": "Reference field of R313",
+                    "pos": {
+                        "x": 193.03,
+                        "y": 163.1
+                    },
+                    "uuid": "b65b9cf3-287e-42be-9a87-2af4b15d5912"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of C310",
+                    "pos": {
+                        "x": 192.3,
+                        "y": 158.3
+                    },
+                    "uuid": "3268097a-c61e-4ba7-a068-e90d4eb4f7ed"
+                },
+                {
+                    "description": "Segment of D301 on F.Silkscreen",
+                    "pos": {
+                        "x": 194.86,
+                        "y": 158.55
+                    },
+                    "uuid": "8ed24d6a-20fe-42db-8c72-391e17275799"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of C312",
+                    "pos": {
+                        "x": 192.15,
+                        "y": 163.1
+                    },
+                    "uuid": "32d02b6a-7930-47c8-98c2-6b203e0b30c7"
+                },
+                {
+                    "description": "Reference field of D301",
+                    "pos": {
+                        "x": 192.6,
+                        "y": 161.5
+                    },
+                    "uuid": "73c3a88c-0fb5-491c-a904-76c1ea3479c4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of C306 on F.Silkscreen",
+                    "pos": {
+                        "x": 166.05942,
+                        "y": 154.31
+                    },
+                    "uuid": "77b4f45a-b3b1-4b7d-9671-a68953a40dfe"
+                },
+                {
+                    "description": "Reference field of R303",
+                    "pos": {
+                        "x": 166.2,
+                        "y": 154.17
+                    },
+                    "uuid": "a6d94b57-5b7e-40ed-acd6-50db92f34086"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of C307 on F.Silkscreen",
+                    "pos": {
+                        "x": 166.05942,
+                        "y": 152.51
+                    },
+                    "uuid": "1fe26d42-e01a-4225-a49e-3f3a935826a8"
+                },
+                {
+                    "description": "Reference field of C306",
+                    "pos": {
+                        "x": 166.2,
+                        "y": 152.37
+                    },
+                    "uuid": "865b793c-9428-4b4f-b3bd-4ed5beabcc48"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of R301",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 158.57
+                    },
+                    "uuid": "502be20b-d01b-4ce7-9695-33ed5af1685f"
+                },
+                {
+                    "description": "Segment of C305 on F.Silkscreen",
+                    "pos": {
+                        "x": 161.85942,
+                        "y": 158.71
+                    },
+                    "uuid": "eb0a2be9-3f20-4da0-b130-3dc244abb104"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of C304",
+                    "pos": {
+                        "x": 165.6,
+                        "y": 161.47
+                    },
+                    "uuid": "5cbb980c-ff0d-43f9-adb7-2194f3f02dcb"
+                },
+                {
+                    "description": "Polygon of U301 on F.Silkscreen",
+                    "pos": {
+                        "x": 166.97,
+                        "y": 160.57
+                    },
+                    "uuid": "651f43be-92b4-4e93-8c8c-78097f6bddf4"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Segment of R301 on F.Silkscreen",
+                    "pos": {
+                        "x": 161.762742,
+                        "y": 160.5225
+                    },
+                    "uuid": "5577c588-05ca-495b-b309-0d43f177224f"
+                },
+                {
+                    "description": "Reference field of R302",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 160.37
+                    },
+                    "uuid": "f9ccf945-0be6-4128-b7b4-66748bd1158c"
                 }
             ],
             "severity": "warning",
@@ -2267,18 +3525,18 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of R311 on F.Silkscreen",
+                    "description": "Reference field of C303",
                     "pos": {
-                        "x": 190.097936,
-                        "y": 143.085
+                        "x": 171.5,
+                        "y": 152.52
                     },
-                    "uuid": "76bfaec3-94e8-4655-900c-42206d7d75c4"
+                    "uuid": "b30a5366-d27b-421e-bd1b-d095172cfca3"
                 },
                 {
                     "description": "Reference field of C308",
                     "pos": {
-                        "x": 190.245,
-                        "y": 143.345
+                        "x": 173.52,
+                        "y": 153.3
                     },
                     "uuid": "b3b9bbd2-665c-4580-b8c5-1ca26c38dc30"
                 }
@@ -2290,20 +3548,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of C312 on F.Silkscreen",
+                    "description": "Rectangle of T301 on F.Silkscreen",
                     "pos": {
-                        "x": 189.788748,
-                        "y": 153.41
+                        "x": 177.38,
+                        "y": 149.88
                     },
-                    "uuid": "6429c7d1-9527-43d4-acc0-2c7dd2f22c6b"
+                    "uuid": "bdffbf41-f55a-48f9-805f-75324a9510f3"
                 },
                 {
-                    "description": "Reference field of R313",
+                    "description": "Reference field of D302",
                     "pos": {
-                        "x": 190.5,
-                        "y": 153.67
+                        "x": 177.2,
+                        "y": 157.4
                     },
-                    "uuid": "b65b9cf3-287e-42be-9a87-2af4b15d5912"
+                    "uuid": "e7a2a267-1a57-4897-b4be-a7ec52732719"
                 }
             ],
             "severity": "warning",
@@ -2313,66 +3571,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of TP403",
+                    "description": "Reference field of TP302",
                     "pos": {
-                        "x": 181.5476,
-                        "y": 128.0983
+                        "x": 159.0,
+                        "y": 160.352
                     },
-                    "uuid": "1d46d625-0bca-46d5-8772-467cdeea419b"
+                    "uuid": "dc0f3e06-da31-4bbc-8009-894dc2eb992c"
                 },
                 {
-                    "description": "Reference field of TP402",
+                    "description": "Reference field of R302",
                     "pos": {
-                        "x": 178.5476,
-                        "y": 128.0983
+                        "x": 162.0,
+                        "y": 160.37
                     },
-                    "uuid": "f064be66-2f34-4e6f-a0a6-ee1cdb53c9fe"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of TP401",
-                    "pos": {
-                        "x": 175.5476,
-                        "y": 128.0983
-                    },
-                    "uuid": "04da99a6-0809-4545-b7a4-3fcf1bcb0432"
-                },
-                {
-                    "description": "Reference field of TP402",
-                    "pos": {
-                        "x": 178.5476,
-                        "y": 128.0983
-                    },
-                    "uuid": "f064be66-2f34-4e6f-a0a6-ee1cdb53c9fe"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Reference field of TP401",
-                    "pos": {
-                        "x": 175.5476,
-                        "y": 128.0983
-                    },
-                    "uuid": "04da99a6-0809-4545-b7a4-3fcf1bcb0432"
-                },
-                {
-                    "description": "Reference field of R405",
-                    "pos": {
-                        "x": 172.025,
-                        "y": 127.845
-                    },
-                    "uuid": "869ea0fe-88fa-4843-99ca-929bac6d477f"
+                    "uuid": "f9ccf945-0be6-4128-b7b4-66748bd1158c"
                 }
             ],
             "severity": "warning",
@@ -2405,20 +3617,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of D701 on F.Silkscreen",
+                    "description": "Reference field of TP401",
                     "pos": {
-                        "x": 175.035,
-                        "y": 103.345
+                        "x": 175.5476,
+                        "y": 128.0983
                     },
-                    "uuid": "b751f895-99c6-478f-b17c-f99813fb3935"
+                    "uuid": "04da99a6-0809-4545-b7a4-3fcf1bcb0432"
                 },
                 {
-                    "description": "Reference field of D707",
+                    "description": "Reference field of R405",
                     "pos": {
-                        "x": 176.645,
-                        "y": 103.145
+                        "x": 172.025,
+                        "y": 127.845
                     },
-                    "uuid": "d2958618-7d91-41fa-bc46-512cded55c4e"
+                    "uuid": "869ea0fe-88fa-4843-99ca-929bac6d477f"
                 }
             ],
             "severity": "warning",
@@ -2428,20 +3640,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of R703",
+                    "description": "Reference field of R710",
                     "pos": {
-                        "x": 175.025,
-                        "y": 105.845
+                        "x": 173.525,
+                        "y": 108.345
                     },
-                    "uuid": "1513704a-006a-4ef8-9061-66522fc9c26b"
+                    "uuid": "1dd857cb-fda4-4a80-969e-f3f95631946a"
                 },
                 {
-                    "description": "Segment of D707 on F.Silkscreen",
+                    "description": "Segment of R703 on F.Silkscreen",
                     "pos": {
-                        "x": 175.035,
-                        "y": 104.145
+                        "x": 174.787742,
+                        "y": 107.7975
                     },
-                    "uuid": "22b145d8-8784-4596-93a8-1ec040e906bb"
+                    "uuid": "ed3a0e72-3c7e-4120-b0a5-54e2f874cf64"
                 }
             ],
             "severity": "warning",
@@ -2451,20 +3663,43 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of R703",
+                    "description": "Segment of R702 on F.Silkscreen",
                     "pos": {
-                        "x": 175.025,
-                        "y": 105.845
+                        "x": 170.787742,
+                        "y": 106.2975
                     },
-                    "uuid": "1513704a-006a-4ef8-9061-66522fc9c26b"
+                    "uuid": "0fdadb0a-89b5-453d-b43f-1d0aab7ad023"
                 },
                 {
-                    "description": "Segment of D707 on F.Silkscreen",
+                    "description": "Reference field of R709",
                     "pos": {
-                        "x": 175.035,
-                        "y": 105.845
+                        "x": 169.525,
+                        "y": 106.845
                     },
-                    "uuid": "b4c78e16-85a6-4685-b3fc-d9c57d6b9835"
+                    "uuid": "b1f5d7ac-1eed-4df2-81d9-b9cb8292102d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance",
+            "items": [
+                {
+                    "description": "Reference field of R711",
+                    "pos": {
+                        "x": 177.525,
+                        "y": 108.345
+                    },
+                    "uuid": "336aace8-55af-4a5f-8f2e-7a9d56d7f578"
+                },
+                {
+                    "description": "Segment of R704 on F.Silkscreen",
+                    "pos": {
+                        "x": 178.787742,
+                        "y": 107.7975
+                    },
+                    "uuid": "b6a72e26-3452-42a8-b595-59803d3ed995"
                 }
             ],
             "severity": "warning",
@@ -2497,20 +3732,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of R710",
+                    "description": "Segment of D702 on F.Silkscreen",
                     "pos": {
-                        "x": 173.525,
-                        "y": 108.345
+                        "x": 179.035,
+                        "y": 101.645
                     },
-                    "uuid": "1dd857cb-fda4-4a80-969e-f3f95631946a"
+                    "uuid": "3865b40f-769c-4065-9df4-b5736b58cf52"
                 },
                 {
-                    "description": "Segment of R703 on F.Silkscreen",
+                    "description": "Reference field of D708",
                     "pos": {
-                        "x": 174.787742,
-                        "y": 107.7975
+                        "x": 180.645,
+                        "y": 103.145
                     },
-                    "uuid": "ed3a0e72-3c7e-4120-b0a5-54e2f874cf64"
+                    "uuid": "cf62e4aa-8681-40c7-966c-4c6e564312e9"
                 }
             ],
             "severity": "warning",
@@ -2612,20 +3847,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of D702 on F.Silkscreen",
+                    "description": "Segment of D701 on F.Silkscreen",
                     "pos": {
-                        "x": 179.035,
-                        "y": 101.645
+                        "x": 175.035,
+                        "y": 103.345
                     },
-                    "uuid": "3865b40f-769c-4065-9df4-b5736b58cf52"
+                    "uuid": "b751f895-99c6-478f-b17c-f99813fb3935"
                 },
                 {
-                    "description": "Reference field of D708",
+                    "description": "Reference field of D707",
                     "pos": {
-                        "x": 180.645,
+                        "x": 176.645,
                         "y": 103.145
                     },
-                    "uuid": "cf62e4aa-8681-40c7-966c-4c6e564312e9"
+                    "uuid": "d2958618-7d91-41fa-bc46-512cded55c4e"
                 }
             ],
             "severity": "warning",
@@ -2635,20 +3870,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of R310",
+                    "description": "Segment of D701 on F.Silkscreen",
                     "pos": {
-                        "x": 173.025,
-                        "y": 144.845
+                        "x": 175.035,
+                        "y": 101.645
                     },
-                    "uuid": "731436f5-cb63-4477-a079-5cf5d8ce7ff3"
+                    "uuid": "2653d56b-fb80-4e03-8ee1-c6301fc8404f"
                 },
                 {
-                    "description": "Segment of R306 on F.Silkscreen",
+                    "description": "Reference field of D707",
                     "pos": {
-                        "x": 173.197936,
-                        "y": 144.685
+                        "x": 176.645,
+                        "y": 103.145
                     },
-                    "uuid": "b8d97169-1bcf-4e8d-ac62-c6fedc8b2397"
+                    "uuid": "d2958618-7d91-41fa-bc46-512cded55c4e"
                 }
             ],
             "severity": "warning",
@@ -2658,20 +3893,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Reference field of R711",
+                    "description": "Reference field of R703",
                     "pos": {
-                        "x": 177.525,
-                        "y": 108.345
+                        "x": 175.025,
+                        "y": 105.845
                     },
-                    "uuid": "336aace8-55af-4a5f-8f2e-7a9d56d7f578"
+                    "uuid": "1513704a-006a-4ef8-9061-66522fc9c26b"
                 },
                 {
-                    "description": "Segment of R704 on F.Silkscreen",
+                    "description": "Segment of D707 on F.Silkscreen",
                     "pos": {
-                        "x": 178.787742,
-                        "y": 107.7975
+                        "x": 175.035,
+                        "y": 104.145
                     },
-                    "uuid": "b6a72e26-3452-42a8-b595-59803d3ed995"
+                    "uuid": "22b145d8-8784-4596-93a8-1ec040e906bb"
                 }
             ],
             "severity": "warning",
@@ -2681,89 +3916,20 @@
             "description": "Silkscreen clearance",
             "items": [
                 {
-                    "description": "Segment of D301 on F.Silkscreen",
+                    "description": "Reference field of R703",
                     "pos": {
-                        "x": 192.76,
-                        "y": 160.45
+                        "x": 175.025,
+                        "y": 105.845
                     },
-                    "uuid": "b46696c5-b553-4a47-b185-db3fa70aede5"
+                    "uuid": "1513704a-006a-4ef8-9061-66522fc9c26b"
                 },
                 {
-                    "description": "Segment of C702 on F.Silkscreen",
+                    "description": "Segment of D707 on F.Silkscreen",
                     "pos": {
-                        "x": 192.181618,
-                        "y": 160.425
+                        "x": 175.035,
+                        "y": 105.845
                     },
-                    "uuid": "e3ba4675-5277-46cb-a093-5df111f6bd32"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of D301 on F.Silkscreen",
-                    "pos": {
-                        "x": 192.76,
-                        "y": 160.45
-                    },
-                    "uuid": "2117c757-ca53-4152-9989-539a8d2709e3"
-                },
-                {
-                    "description": "Segment of C702 on F.Silkscreen",
-                    "pos": {
-                        "x": 192.181618,
-                        "y": 160.425
-                    },
-                    "uuid": "e3ba4675-5277-46cb-a093-5df111f6bd32"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of C702 on F.Silkscreen",
-                    "pos": {
-                        "x": 192.806618,
-                        "y": 159.8
-                    },
-                    "uuid": "9db1b144-d3a9-40c1-b379-4d621452c066"
-                },
-                {
-                    "description": "Segment of D301 on F.Silkscreen",
-                    "pos": {
-                        "x": 192.76,
-                        "y": 160.45
-                    },
-                    "uuid": "b46696c5-b553-4a47-b185-db3fa70aede5"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_overlap"
-        },
-        {
-            "description": "Silkscreen clearance",
-            "items": [
-                {
-                    "description": "Segment of D301 on F.Silkscreen",
-                    "pos": {
-                        "x": 192.76,
-                        "y": 160.45
-                    },
-                    "uuid": "2117c757-ca53-4152-9989-539a8d2709e3"
-                },
-                {
-                    "description": "Segment of C702 on F.Silkscreen",
-                    "pos": {
-                        "x": 192.806618,
-                        "y": 159.8
-                    },
-                    "uuid": "9db1b144-d3a9-40c1-b379-4d621452c066"
+                    "uuid": "b4c78e16-85a6-4685-b3fc-d9c57d6b9835"
                 }
             ],
             "severity": "warning",
@@ -2773,20 +3939,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of R405",
+                    "description": "Reference field of C518",
                     "pos": {
-                        "x": 172.025,
-                        "y": 127.845
+                        "x": 160.455,
+                        "y": 130.845
                     },
-                    "uuid": "869ea0fe-88fa-4843-99ca-929bac6d477f"
+                    "uuid": "334b5757-343f-4ea3-900c-1e48f9495588"
                 },
                 {
-                    "description": "Pad 1 [FLY_EN] of R401 on F.Cu",
+                    "description": "Pad 1 [/Main MCU STM32WBA55/LED_MAIN] of R502 on F.Cu",
                     "pos": {
-                        "x": 171.2,
-                        "y": 126.775
+                        "x": 159.7,
+                        "y": 129.775
                     },
-                    "uuid": "520a20d2-bf2f-4eca-bdfb-ce2326ad8756"
+                    "uuid": "584bc261-5464-486f-810f-c5b9e25d7982"
                 }
             ],
             "severity": "warning",
@@ -2796,20 +3962,43 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of R709",
+                    "description": "Reference field of C516",
                     "pos": {
-                        "x": 169.525,
-                        "y": 106.845
+                        "x": 155.455,
+                        "y": 130.845
                     },
-                    "uuid": "b1f5d7ac-1eed-4df2-81d9-b9cb8292102d"
+                    "uuid": "fac4bbe1-852f-433c-8d0c-c2748be4ef07"
                 },
                 {
-                    "description": "Pad 1 [PMD_MOSI_M] of R702 on F.Cu",
+                    "description": "Pad 1 [/Main MCU STM32WBA55/MAIN_BOOT0] of R501 on F.Cu",
                     "pos": {
-                        "x": 170.2,
-                        "y": 105.775
+                        "x": 155.7,
+                        "y": 129.775
                     },
-                    "uuid": "5ee314fb-eb71-4bed-9517-a28e6b423150"
+                    "uuid": "a1dacec6-c0eb-417f-95f9-c23b4749ae55"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C514",
+                    "pos": {
+                        "x": 150.455,
+                        "y": 130.845
+                    },
+                    "uuid": "f1fafd72-cb62-40c0-9f84-1de3e3e40470"
+                },
+                {
+                    "description": "Pad 2 [GND] of C513 on F.Cu",
+                    "pos": {
+                        "x": 149.3,
+                        "y": 129.775
+                    },
+                    "uuid": "415b4c3e-dd4f-45e6-9ad0-6ee59460dfde"
                 }
             ],
             "severity": "warning",
@@ -2842,181 +4031,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of C519",
+                    "description": "Reference field of R511",
                     "pos": {
-                        "x": 130.955,
-                        "y": 131.345
-                    },
-                    "uuid": "820066a6-dc9f-491d-8264-6b533ef53231"
-                },
-                {
-                    "description": "Pad 2 [/Main MCU STM32WBA55/LSE_OUT] of Y502 on F.Cu",
-                    "pos": {
-                        "x": 130.795,
-                        "y": 130.195
-                    },
-                    "uuid": "87a24553-636a-44ac-9cc3-0af18fbf7084"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R108",
-                    "pos": {
-                        "x": 118.525,
-                        "y": 123.845
-                    },
-                    "uuid": "4f545f41-57d7-4ed5-8590-49742c523321"
-                },
-                {
-                    "description": "Pad 2 [GND] of R103 on F.Cu",
-                    "pos": {
-                        "x": 119.35,
-                        "y": 122.775
-                    },
-                    "uuid": "d89fa971-d449-49cb-8a72-bbcdc85741e1"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R106",
-                    "pos": {
-                        "x": 110.525,
-                        "y": 123.845
-                    },
-                    "uuid": "334e965f-dd30-4ce1-913c-2b7d11936577"
-                },
-                {
-                    "description": "Pad 1 [VBAT_SENSE] of C104 on F.Cu",
-                    "pos": {
-                        "x": 109.75,
-                        "y": 122.775
-                    },
-                    "uuid": "e788bbc1-8e10-4e21-a296-6fcec5ba86cb"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R106",
-                    "pos": {
-                        "x": 110.525,
-                        "y": 123.845
-                    },
-                    "uuid": "334e965f-dd30-4ce1-913c-2b7d11936577"
-                },
-                {
-                    "description": "Pad 2 [GND] of C104 on F.Cu",
-                    "pos": {
-                        "x": 111.3,
-                        "y": 122.775
-                    },
-                    "uuid": "95bc3527-6e23-4b03-bccb-516046c7cadb"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of C518",
-                    "pos": {
-                        "x": 160.455,
+                        "x": 136.525,
                         "y": 130.845
                     },
-                    "uuid": "334b5757-343f-4ea3-900c-1e48f9495588"
+                    "uuid": "c8e426e5-aec0-4a78-b252-92c10236b7c3"
                 },
                 {
-                    "description": "Pad 1 [/Main MCU STM32WBA55/LED_MAIN] of R502 on F.Cu",
+                    "description": "Pad 2 [GND] of C510 on F.Cu",
                     "pos": {
-                        "x": 159.7,
+                        "x": 137.3,
                         "y": 129.775
                     },
-                    "uuid": "584bc261-5464-486f-810f-c5b9e25d7982"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of C517",
-                    "pos": {
-                        "x": 157.955,
-                        "y": 130.845
-                    },
-                    "uuid": "4c916c12-8f55-419e-a683-61a81e4a109f"
-                },
-                {
-                    "description": "Pad 1 [/Main MCU STM32WBA55/LED_MAIN] of R502 on F.Cu",
-                    "pos": {
-                        "x": 159.7,
-                        "y": 129.775
-                    },
-                    "uuid": "584bc261-5464-486f-810f-c5b9e25d7982"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of C517",
-                    "pos": {
-                        "x": 157.955,
-                        "y": 130.845
-                    },
-                    "uuid": "4c916c12-8f55-419e-a683-61a81e4a109f"
-                },
-                {
-                    "description": "Pad 2 [GND] of R501 on F.Cu",
-                    "pos": {
-                        "x": 157.35,
-                        "y": 129.775
-                    },
-                    "uuid": "67ea09bb-99f9-4cf9-82c2-35be7b77dd64"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R513",
-                    "pos": {
-                        "x": 144.525,
-                        "y": 130.845
-                    },
-                    "uuid": "ce487170-c025-4b58-be79-6ff104c69ace"
-                },
-                {
-                    "description": "Pad 1 [/Main MCU STM32WBA55/WBA_VDDRF] of C512 on F.Cu",
-                    "pos": {
-                        "x": 143.75,
-                        "y": 129.775
-                    },
-                    "uuid": "ab66027d-5262-4339-a492-1fcfc894c6ba"
+                    "uuid": "e21a71ec-9a7e-40f0-8653-0995035d91c1"
                 }
             ],
             "severity": "warning",
@@ -3040,6 +4068,52 @@
                         "y": 129.775
                     },
                     "uuid": "348eeacd-c41a-490e-b1eb-d1dab3e1fded"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of L502",
+                    "pos": {
+                        "x": 147.975,
+                        "y": 130.845
+                    },
+                    "uuid": "40dd8186-fe7e-4767-bc2d-f0c84b59733b"
+                },
+                {
+                    "description": "Pad 1 [/Main MCU STM32WBA55/WBA_VDDRFPA] of C513 on F.Cu",
+                    "pos": {
+                        "x": 147.75,
+                        "y": 129.775
+                    },
+                    "uuid": "43acdce4-cb8e-4669-8332-726df2cb403d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R513",
+                    "pos": {
+                        "x": 144.525,
+                        "y": 130.845
+                    },
+                    "uuid": "ce487170-c025-4b58-be79-6ff104c69ace"
+                },
+                {
+                    "description": "Pad 1 [/Main MCU STM32WBA55/WBA_VDDRF] of C512 on F.Cu",
+                    "pos": {
+                        "x": 143.75,
+                        "y": 129.775
+                    },
+                    "uuid": "ab66027d-5262-4339-a492-1fcfc894c6ba"
                 }
             ],
             "severity": "warning",
@@ -3095,35 +4169,12 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of R511",
+                    "description": "Reference field of L502",
                     "pos": {
-                        "x": 136.525,
+                        "x": 147.975,
                         "y": 130.845
                     },
-                    "uuid": "c8e426e5-aec0-4a78-b252-92c10236b7c3"
-                },
-                {
-                    "description": "Pad 2 [GND] of C510 on F.Cu",
-                    "pos": {
-                        "x": 137.3,
-                        "y": 129.775
-                    },
-                    "uuid": "e21a71ec-9a7e-40f0-8653-0995035d91c1"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of C514",
-                    "pos": {
-                        "x": 150.455,
-                        "y": 130.845
-                    },
-                    "uuid": "f1fafd72-cb62-40c0-9f84-1de3e3e40470"
+                    "uuid": "40dd8186-fe7e-4767-bc2d-f0c84b59733b"
                 },
                 {
                     "description": "Pad 2 [GND] of C513 on F.Cu",
@@ -3141,12 +4192,12 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of C514",
+                    "description": "Reference field of C515",
                     "pos": {
-                        "x": 150.455,
+                        "x": 152.955,
                         "y": 130.845
                     },
-                    "uuid": "f1fafd72-cb62-40c0-9f84-1de3e3e40470"
+                    "uuid": "21bcc9a0-4dfd-4ca5-a7de-ae09d72ef521"
                 },
                 {
                     "description": "Pad 1 [GND] of D501 on F.Cu",
@@ -3164,12 +4215,12 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of C515",
+                    "description": "Reference field of C514",
                     "pos": {
-                        "x": 152.955,
+                        "x": 150.455,
                         "y": 130.845
                     },
-                    "uuid": "21bcc9a0-4dfd-4ca5-a7de-ae09d72ef521"
+                    "uuid": "f1fafd72-cb62-40c0-9f84-1de3e3e40470"
                 },
                 {
                     "description": "Pad 1 [GND] of D501 on F.Cu",
@@ -3210,6 +4261,98 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
+                    "description": "Reference field of U301",
+                    "pos": {
+                        "x": 164.965,
+                        "y": 161.667
+                    },
+                    "uuid": "23e3bb44-8fb7-4fa0-b0bc-a7e2a8741802"
+                },
+                {
+                    "description": "Pad 2 [+3V3] of R302 on F.Cu",
+                    "pos": {
+                        "x": 162.825,
+                        "y": 161.8
+                    },
+                    "uuid": "f1d9f8f4-a2fc-4159-a5f8-c844145664d8"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R301",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 158.57
+                    },
+                    "uuid": "502be20b-d01b-4ce7-9695-33ed5af1685f"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_SS] of C305 on F.Cu",
+                    "pos": {
+                        "x": 161.225,
+                        "y": 158.2
+                    },
+                    "uuid": "5b42d02b-af90-4ce7-8964-c3b661630b22"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C305",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 156.77
+                    },
+                    "uuid": "8bae4191-c18d-4cdb-904b-b98cee9c0a4b"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_FB] of R308 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 156.4
+                    },
+                    "uuid": "387226a5-067e-4fec-bb86-35cec6555a1e"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C305",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 156.77
+                    },
+                    "uuid": "8bae4191-c18d-4cdb-904b-b98cee9c0a4b"
+                },
+                {
+                    "description": "Pad 2 [GND] of R308 on F.Cu",
+                    "pos": {
+                        "x": 162.825,
+                        "y": 156.4
+                    },
+                    "uuid": "b6d2a5f9-6afa-4989-b4c3-44a45009d731"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
                     "description": "Reference field of R107",
                     "pos": {
                         "x": 114.525,
@@ -3233,20 +4376,158 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of R708",
+                    "description": "Reference field of R106",
                     "pos": {
-                        "x": 195.025,
-                        "y": 105.845
+                        "x": 110.525,
+                        "y": 123.845
                     },
-                    "uuid": "3a15eccf-2006-4eb3-848d-63253ed69c03"
+                    "uuid": "334e965f-dd30-4ce1-913c-2b7d11936577"
                 },
                 {
-                    "description": "Pad 2 [GND] of C703 on F.Cu",
+                    "description": "Pad 1 [VBAT_SENSE] of C104 on F.Cu",
                     "pos": {
-                        "x": 193.3,
-                        "y": 104.775
+                        "x": 109.75,
+                        "y": 122.775
                     },
-                    "uuid": "34476e7a-27b9-42e9-9c35-7d9614ec23e5"
+                    "uuid": "e788bbc1-8e10-4e21-a296-6fcec5ba86cb"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R106",
+                    "pos": {
+                        "x": 110.525,
+                        "y": 123.845
+                    },
+                    "uuid": "334e965f-dd30-4ce1-913c-2b7d11936577"
+                },
+                {
+                    "description": "Pad 2 [GND] of C104 on F.Cu",
+                    "pos": {
+                        "x": 111.3,
+                        "y": 122.775
+                    },
+                    "uuid": "95bc3527-6e23-4b03-bccb-516046c7cadb"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R108",
+                    "pos": {
+                        "x": 118.525,
+                        "y": 123.845
+                    },
+                    "uuid": "4f545f41-57d7-4ed5-8590-49742c523321"
+                },
+                {
+                    "description": "Pad 2 [GND] of R103 on F.Cu",
+                    "pos": {
+                        "x": 119.35,
+                        "y": 122.775
+                    },
+                    "uuid": "d89fa971-d449-49cb-8a72-bbcdc85741e1"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C519",
+                    "pos": {
+                        "x": 130.955,
+                        "y": 131.345
+                    },
+                    "uuid": "820066a6-dc9f-491d-8264-6b533ef53231"
+                },
+                {
+                    "description": "Pad 2 [/Main MCU STM32WBA55/LSE_OUT] of Y502 on F.Cu",
+                    "pos": {
+                        "x": 130.795,
+                        "y": 130.195
+                    },
+                    "uuid": "87a24553-636a-44ac-9cc3-0af18fbf7084"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of T301",
+                    "pos": {
+                        "x": 183.5,
+                        "y": 148.5
+                    },
+                    "uuid": "0590bd98-2f76-4e0a-a1b6-504d3d940560"
+                },
+                {
+                    "description": "Pad 2 [VBAT] of R306 on F.Cu",
+                    "pos": {
+                        "x": 184.9625,
+                        "y": 147.0
+                    },
+                    "uuid": "b9bba306-08c5-4931-94c0-63df9e6c1fa2"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R306",
+                    "pos": {
+                        "x": 182.0,
+                        "y": 144.37
+                    },
+                    "uuid": "e40ce693-0b40-4520-a39e-5fee4a47cced"
+                },
+                {
+                    "description": "Pad 1 [+48V_MOT] of R312 on F.Cu",
+                    "pos": {
+                        "x": 180.9125,
+                        "y": 142.975
+                    },
+                    "uuid": "84610f78-3d31-4464-a513-d159b8754a0c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C309",
+                    "pos": {
+                        "x": 192.3,
+                        "y": 154.8
+                    },
+                    "uuid": "30e215ac-7aad-4052-9a54-8642608b0a6b"
+                },
+                {
+                    "description": "Pad 2 [GND] of C310 on F.Cu",
+                    "pos": {
+                        "x": 190.825,
+                        "y": 156.0
+                    },
+                    "uuid": "f7ef0af7-d126-444f-bc05-c18cd94cb501"
                 }
             ],
             "severity": "warning",
@@ -3279,89 +4560,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "PCB text '48V ZONE' on F.Silkscreen",
+                    "description": "Reference field of R708",
                     "pos": {
-                        "x": 192.0,
-                        "y": 145.0
+                        "x": 195.025,
+                        "y": 105.845
                     },
-                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
+                    "uuid": "3a15eccf-2006-4eb3-848d-63253ed69c03"
                 },
                 {
-                    "description": "Pad 2 [/48V flyback/+48V_RAW] of R309 on F.Cu",
+                    "description": "Pad 2 [GND] of C703 on F.Cu",
                     "pos": {
-                        "x": 194.85,
-                        "y": 144.775
+                        "x": 193.3,
+                        "y": 104.775
                     },
-                    "uuid": "0f8164f4-aa26-4c20-acf2-63a880694dd7"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R309",
-                    "pos": {
-                        "x": 194.025,
-                        "y": 143.345
-                    },
-                    "uuid": "7c2e8041-9732-416d-a9c7-acbee30e831d"
-                },
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_CLAMP] of D302 on F.Cu",
-                    "pos": {
-                        "x": 194.895,
-                        "y": 142.145
-                    },
-                    "uuid": "efb3cf83-a07e-4bcb-b721-3f0f7afd3308"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "PCB text '48V ZONE' on F.Silkscreen",
-                    "pos": {
-                        "x": 192.0,
-                        "y": 145.0
-                    },
-                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
-                },
-                {
-                    "description": "Pad 1 [FLY_PGOOD] of TP302 on F.Cu",
-                    "pos": {
-                        "x": 197.5476,
-                        "y": 145.0463
-                    },
-                    "uuid": "5512823d-83d4-44cf-a01a-08f7986fa80a"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R309",
-                    "pos": {
-                        "x": 194.025,
-                        "y": 143.345
-                    },
-                    "uuid": "7c2e8041-9732-416d-a9c7-acbee30e831d"
-                },
-                {
-                    "description": "Pad 2 [+48V_MOT] of R311 on F.Cu",
-                    "pos": {
-                        "x": 192.2875,
-                        "y": 142.175
-                    },
-                    "uuid": "0083eef4-b9cd-466f-844f-3d8cf8562652"
+                    "uuid": "34476e7a-27b9-42e9-9c35-7d9614ec23e5"
                 }
             ],
             "severity": "warning",
@@ -3394,20 +4606,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of R707",
+                    "description": "Reference field of D709",
                     "pos": {
-                        "x": 191.025,
-                        "y": 105.845
+                        "x": 184.645,
+                        "y": 103.145
                     },
-                    "uuid": "fa88cef1-039b-4502-8b29-773e820acbaa"
+                    "uuid": "e9472575-ae44-42d1-b554-5cb7c955e8f3"
                 },
                 {
-                    "description": "Pad 2 [GND] of C701 on F.Cu",
+                    "description": "Pad 1 [/PMD401 & encoder interface/PMD_SCLK] of D703 on F.Cu",
                     "pos": {
-                        "x": 189.3,
-                        "y": 104.775
+                        "x": 183.595,
+                        "y": 102.495
                     },
-                    "uuid": "17c826c0-4313-4a98-b353-9921e8c81897"
+                    "uuid": "a4e8465f-5e16-4965-946b-ed5a749c2726"
                 }
             ],
             "severity": "warning",
@@ -3463,52 +4675,6 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of R706",
-                    "pos": {
-                        "x": 187.025,
-                        "y": 105.845
-                    },
-                    "uuid": "726b738b-166f-4ec2-ab42-12a3681b2b1f"
-                },
-                {
-                    "description": "Pad 1 [/PMD401 & encoder interface/ENC_VCC] of C701 on F.Cu",
-                    "pos": {
-                        "x": 187.75,
-                        "y": 104.775
-                    },
-                    "uuid": "b997d910-34f9-4f94-b671-de386d3adea9"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of D709",
-                    "pos": {
-                        "x": 184.645,
-                        "y": 103.145
-                    },
-                    "uuid": "e9472575-ae44-42d1-b554-5cb7c955e8f3"
-                },
-                {
-                    "description": "Pad 1 [/PMD401 & encoder interface/PMD_SCLK] of D703 on F.Cu",
-                    "pos": {
-                        "x": 183.595,
-                        "y": 102.495
-                    },
-                    "uuid": "a4e8465f-5e16-4965-946b-ed5a749c2726"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
                     "description": "Reference field of D709",
                     "pos": {
                         "x": 184.645,
@@ -3532,20 +4698,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of C303",
+                    "description": "PCB text '48V ZONE' on F.Silkscreen",
                     "pos": {
-                        "x": 171.5,
-                        "y": 152.52
+                        "x": 192.0,
+                        "y": 145.0
                     },
-                    "uuid": "b30a5366-d27b-421e-bd1b-d095172cfca3"
+                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
                 },
                 {
-                    "description": "Pad 2 [GND] of C302 on F.Cu",
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of R309 on F.Cu",
                     "pos": {
-                        "x": 172.45,
-                        "y": 151.2
+                        "x": 194.85,
+                        "y": 144.775
                     },
-                    "uuid": "1b8bb210-ad2c-4bd5-bed6-407254e8bdda"
+                    "uuid": "0f8164f4-aa26-4c20-acf2-63a880694dd7"
                 }
             ],
             "severity": "warning",
@@ -3555,20 +4721,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of C303",
+                    "description": "PCB text '48V ZONE' on F.Silkscreen",
                     "pos": {
-                        "x": 171.5,
-                        "y": 152.52
+                        "x": 192.0,
+                        "y": 145.0
                     },
-                    "uuid": "b30a5366-d27b-421e-bd1b-d095172cfca3"
+                    "uuid": "89f40f98-022b-4601-9402-0705357163c6"
                 },
                 {
-                    "description": "Pad 1 [VBAT] of C302 on F.Cu",
+                    "description": "Pad 1 [+48V_MOT] of TP301 on F.Cu",
                     "pos": {
-                        "x": 170.55,
-                        "y": 151.2
+                        "x": 201.5,
+                        "y": 145.0
                     },
-                    "uuid": "61496c36-6325-4a00-b150-3e7d3607e5dd"
+                    "uuid": "d51c7e5b-281a-46f7-87f3-a4b42a5e65c5"
                 }
             ],
             "severity": "warning",
@@ -3601,18 +4767,18 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of C308",
+                    "description": "Reference field of C702",
                     "pos": {
-                        "x": 190.245,
-                        "y": 143.345
+                        "x": 203.0,
+                        "y": 150.5
                     },
-                    "uuid": "b3b9bbd2-665c-4580-b8c5-1ca26c38dc30"
+                    "uuid": "4d6e3ba5-4ed3-4264-9d16-29f0ccf57edc"
                 },
                 {
                     "description": "Pad 2 [+48V_MOT] of R311 on F.Cu",
                     "pos": {
-                        "x": 192.2875,
-                        "y": 142.175
+                        "x": 200.9625,
+                        "y": 149.5
                     },
                     "uuid": "0083eef4-b9cd-466f-844f-3d8cf8562652"
                 }
@@ -3624,20 +4790,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of C308",
+                    "description": "Reference field of C309",
                     "pos": {
-                        "x": 190.245,
-                        "y": 143.345
+                        "x": 192.3,
+                        "y": 154.8
                     },
-                    "uuid": "b3b9bbd2-665c-4580-b8c5-1ca26c38dc30"
+                    "uuid": "30e215ac-7aad-4052-9a54-8642608b0a6b"
                 },
                 {
-                    "description": "Pad 1 [/48V flyback/+48V_RAW] of R311 on F.Cu",
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of C310 on F.Cu",
                     "pos": {
-                        "x": 189.3625,
-                        "y": 142.175
+                        "x": 193.775,
+                        "y": 156.0
                     },
-                    "uuid": "80e75841-0b5f-47bd-8d59-7c2f04f698e6"
+                    "uuid": "7d2dd1bb-dbb8-4350-a35c-bb4665105894"
                 }
             ],
             "severity": "warning",
@@ -3649,18 +4815,478 @@
                 {
                     "description": "Reference field of R313",
                     "pos": {
-                        "x": 190.5,
-                        "y": 153.67
+                        "x": 193.03,
+                        "y": 163.1
+                    },
+                    "uuid": "b65b9cf3-287e-42be-9a87-2af4b15d5912"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of C312 on F.Cu",
+                    "pos": {
+                        "x": 194.0,
+                        "y": 161.625
+                    },
+                    "uuid": "15789354-692a-4b1e-873a-63321540321c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of D301",
+                    "pos": {
+                        "x": 192.6,
+                        "y": 161.5
+                    },
+                    "uuid": "73c3a88c-0fb5-491c-a904-76c1ea3479c4"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_SEC] of R313 on F.Cu",
+                    "pos": {
+                        "x": 191.2,
+                        "y": 161.6375
+                    },
+                    "uuid": "02c4493a-5732-4d6d-9edd-e71e10a9903c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of D301",
+                    "pos": {
+                        "x": 192.6,
+                        "y": 161.5
+                    },
+                    "uuid": "73c3a88c-0fb5-491c-a904-76c1ea3479c4"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/+48V_RAW] of C312 on F.Cu",
+                    "pos": {
+                        "x": 194.0,
+                        "y": 161.625
+                    },
+                    "uuid": "15789354-692a-4b1e-873a-63321540321c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C312",
+                    "pos": {
+                        "x": 192.15,
+                        "y": 163.1
+                    },
+                    "uuid": "32d02b6a-7930-47c8-98c2-6b203e0b30c7"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_SEC] of R313 on F.Cu",
+                    "pos": {
+                        "x": 191.2,
+                        "y": 161.6375
+                    },
+                    "uuid": "02c4493a-5732-4d6d-9edd-e71e10a9903c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R313",
+                    "pos": {
+                        "x": 193.03,
+                        "y": 163.1
                     },
                     "uuid": "b65b9cf3-287e-42be-9a87-2af4b15d5912"
                 },
                 {
                     "description": "Pad 1 [/48V flyback/FLY_SNUB] of C312 on F.Cu",
                     "pos": {
-                        "x": 189.025,
-                        "y": 152.5
+                        "x": 194.0,
+                        "y": 164.575
                     },
                     "uuid": "fcae78be-579b-433f-8cf3-704ff0f32fb7"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C312",
+                    "pos": {
+                        "x": 192.15,
+                        "y": 163.1
+                    },
+                    "uuid": "32d02b6a-7930-47c8-98c2-6b203e0b30c7"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_SNUB] of R313 on F.Cu",
+                    "pos": {
+                        "x": 191.2,
+                        "y": 164.5625
+                    },
+                    "uuid": "167d32f6-7dc3-43d0-aeab-507440c7f1b8"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R303",
+                    "pos": {
+                        "x": 166.2,
+                        "y": 154.17
+                    },
+                    "uuid": "a6d94b57-5b7e-40ed-acd6-50db92f34086"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_COMP_RC] of C306 on F.Cu",
+                    "pos": {
+                        "x": 165.425,
+                        "y": 153.8
+                    },
+                    "uuid": "d0ec1c2c-a0dc-4d6c-858d-947691ee2a64"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R303",
+                    "pos": {
+                        "x": 166.2,
+                        "y": 154.17
+                    },
+                    "uuid": "a6d94b57-5b7e-40ed-acd6-50db92f34086"
+                },
+                {
+                    "description": "Pad 2 [GND] of C306 on F.Cu",
+                    "pos": {
+                        "x": 166.975,
+                        "y": 153.8
+                    },
+                    "uuid": "ff11dbbf-f997-435e-b535-660324ab2bb9"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C306",
+                    "pos": {
+                        "x": 166.2,
+                        "y": 152.37
+                    },
+                    "uuid": "865b793c-9428-4b4f-b3bd-4ed5beabcc48"
+                },
+                {
+                    "description": "Pad 2 [GND] of C307 on F.Cu",
+                    "pos": {
+                        "x": 166.975,
+                        "y": 152.0
+                    },
+                    "uuid": "8a104317-fa9f-4d5f-aff1-b1568d0c5472"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C306",
+                    "pos": {
+                        "x": 166.2,
+                        "y": 152.37
+                    },
+                    "uuid": "865b793c-9428-4b4f-b3bd-4ed5beabcc48"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_COMP] of C307 on F.Cu",
+                    "pos": {
+                        "x": 165.425,
+                        "y": 152.0
+                    },
+                    "uuid": "71eddd7a-f5c4-404e-b0ca-76ae401d92b2"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R301",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 158.57
+                    },
+                    "uuid": "502be20b-d01b-4ce7-9695-33ed5af1685f"
+                },
+                {
+                    "description": "Pad 2 [GND] of C305 on F.Cu",
+                    "pos": {
+                        "x": 162.775,
+                        "y": 158.2
+                    },
+                    "uuid": "543bd08f-3bbd-4f2b-ab64-222a3fdd0fc0"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R302",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 160.37
+                    },
+                    "uuid": "f9ccf945-0be6-4128-b7b4-66748bd1158c"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_RT] of R301 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 160.0
+                    },
+                    "uuid": "9e874821-42ab-491e-aa00-cd2951da8bc5"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R302",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 160.37
+                    },
+                    "uuid": "f9ccf945-0be6-4128-b7b4-66748bd1158c"
+                },
+                {
+                    "description": "Pad 2 [GND] of R301 on F.Cu",
+                    "pos": {
+                        "x": 162.825,
+                        "y": 160.0
+                    },
+                    "uuid": "e7093afd-66a4-458b-bece-f6550bdc660d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C308",
+                    "pos": {
+                        "x": 173.52,
+                        "y": 153.3
+                    },
+                    "uuid": "b3b9bbd2-665c-4580-b8c5-1ca26c38dc30"
+                },
+                {
+                    "description": "Pad 2 [GND] of C303 on F.Cu",
+                    "pos": {
+                        "x": 172.45,
+                        "y": 154.2
+                    },
+                    "uuid": "0d9ffbd6-0e11-465c-83ba-dff5a2e1ba8d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C303",
+                    "pos": {
+                        "x": 171.5,
+                        "y": 152.52
+                    },
+                    "uuid": "b30a5366-d27b-421e-bd1b-d095172cfca3"
+                },
+                {
+                    "description": "Pad 1 [VBAT] of C302 on F.Cu",
+                    "pos": {
+                        "x": 170.55,
+                        "y": 151.2
+                    },
+                    "uuid": "61496c36-6325-4a00-b150-3e7d3607e5dd"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C303",
+                    "pos": {
+                        "x": 171.5,
+                        "y": 152.52
+                    },
+                    "uuid": "b30a5366-d27b-421e-bd1b-d095172cfca3"
+                },
+                {
+                    "description": "Pad 2 [GND] of C302 on F.Cu",
+                    "pos": {
+                        "x": 172.45,
+                        "y": 151.2
+                    },
+                    "uuid": "1b8bb210-ad2c-4bd5-bed6-407254e8bdda"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C308",
+                    "pos": {
+                        "x": 173.52,
+                        "y": 153.3
+                    },
+                    "uuid": "b3b9bbd2-665c-4580-b8c5-1ca26c38dc30"
+                },
+                {
+                    "description": "Pad 2 [GND] of C302 on F.Cu",
+                    "pos": {
+                        "x": 172.45,
+                        "y": 151.2
+                    },
+                    "uuid": "1b8bb210-ad2c-4bd5-bed6-407254e8bdda"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of TP302",
+                    "pos": {
+                        "x": 159.0,
+                        "y": 160.352
+                    },
+                    "uuid": "dc0f3e06-da31-4bbc-8009-894dc2eb992c"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/FLY_RT] of R301 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 160.0
+                    },
+                    "uuid": "9e874821-42ab-491e-aa00-cd2951da8bc5"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R308",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 154.97
+                    },
+                    "uuid": "360c608a-df18-4dc7-aace-c816bf54cf8d"
+                },
+                {
+                    "description": "Pad 1 [/48V flyback/+48V_RAW] of R307 on F.Cu",
+                    "pos": {
+                        "x": 161.175,
+                        "y": 154.6
+                    },
+                    "uuid": "b9983d05-11d6-411e-9f34-a97f8dcb27aa"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R308",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 154.97
+                    },
+                    "uuid": "360c608a-df18-4dc7-aace-c816bf54cf8d"
+                },
+                {
+                    "description": "Pad 2 [/48V flyback/FLY_FB] of R307 on F.Cu",
+                    "pos": {
+                        "x": 162.825,
+                        "y": 154.6
+                    },
+                    "uuid": "4552f4ab-6afc-45ed-b46e-5a9f45dc28e0"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R405",
+                    "pos": {
+                        "x": 172.025,
+                        "y": 127.845
+                    },
+                    "uuid": "869ea0fe-88fa-4843-99ca-929bac6d477f"
+                },
+                {
+                    "description": "Pad 1 [FLY_EN] of R401 on F.Cu",
+                    "pos": {
+                        "x": 171.2,
+                        "y": 126.775
+                    },
+                    "uuid": "520a20d2-bf2f-4eca-bdfb-ce2326ad8756"
                 }
             ],
             "severity": "warning",
@@ -3684,144 +5310,6 @@
                         "y": 126.775
                     },
                     "uuid": "3fee3c9d-4728-4609-97bf-a3c427cea03c"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of D707",
-                    "pos": {
-                        "x": 176.645,
-                        "y": 103.145
-                    },
-                    "uuid": "d2958618-7d91-41fa-bc46-512cded55c4e"
-                },
-                {
-                    "description": "Pad 1 [/PMD401 & encoder interface/PMD_MOSI] of D701 on F.Cu",
-                    "pos": {
-                        "x": 175.595,
-                        "y": 102.495
-                    },
-                    "uuid": "76be4e15-661b-4d96-bd52-b3b298882fef"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R710",
-                    "pos": {
-                        "x": 173.525,
-                        "y": 108.345
-                    },
-                    "uuid": "1dd857cb-fda4-4a80-969e-f3f95631946a"
-                },
-                {
-                    "description": "Pad 1 [PMD_SS_M] of R703 on F.Cu",
-                    "pos": {
-                        "x": 174.2,
-                        "y": 107.275
-                    },
-                    "uuid": "80e59664-24d4-474f-adeb-1cc0bf142239"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of D708",
-                    "pos": {
-                        "x": 180.645,
-                        "y": 103.145
-                    },
-                    "uuid": "cf62e4aa-8681-40c7-966c-4c6e564312e9"
-                },
-                {
-                    "description": "Pad 1 [/PMD401 & encoder interface/PMD_SS] of D702 on F.Cu",
-                    "pos": {
-                        "x": 179.595,
-                        "y": 102.495
-                    },
-                    "uuid": "93eea15e-4492-4bc5-ac62-e5497460bc44"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of D708",
-                    "pos": {
-                        "x": 180.645,
-                        "y": 103.145
-                    },
-                    "uuid": "cf62e4aa-8681-40c7-966c-4c6e564312e9"
-                },
-                {
-                    "description": "Pad 2 [GND] of D702 on F.Cu",
-                    "pos": {
-                        "x": 181.695,
-                        "y": 102.495
-                    },
-                    "uuid": "4f557882-c979-42f8-aa63-5627a3c086d8"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of D707",
-                    "pos": {
-                        "x": 176.645,
-                        "y": 103.145
-                    },
-                    "uuid": "d2958618-7d91-41fa-bc46-512cded55c4e"
-                },
-                {
-                    "description": "Pad 2 [GND] of D701 on F.Cu",
-                    "pos": {
-                        "x": 177.695,
-                        "y": 102.495
-                    },
-                    "uuid": "dbbbf7cf-3d5f-424d-90e9-85e1a7d9eee8"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R310",
-                    "pos": {
-                        "x": 173.025,
-                        "y": 144.845
-                    },
-                    "uuid": "731436f5-cb63-4477-a079-5cf5d8ce7ff3"
-                },
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_CLAMP] of R306 on F.Cu",
-                    "pos": {
-                        "x": 172.4125,
-                        "y": 142.975
-                    },
-                    "uuid": "e882c5e4-4a65-44be-98c8-e32788671ae9"
                 }
             ],
             "severity": "warning",
@@ -3877,6 +5365,75 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
+                    "description": "Reference field of R710",
+                    "pos": {
+                        "x": 173.525,
+                        "y": 108.345
+                    },
+                    "uuid": "1dd857cb-fda4-4a80-969e-f3f95631946a"
+                },
+                {
+                    "description": "Pad 1 [PMD_SS_M] of R703 on F.Cu",
+                    "pos": {
+                        "x": 174.2,
+                        "y": 107.275
+                    },
+                    "uuid": "80e59664-24d4-474f-adeb-1cc0bf142239"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of R709",
+                    "pos": {
+                        "x": 169.525,
+                        "y": 106.845
+                    },
+                    "uuid": "b1f5d7ac-1eed-4df2-81d9-b9cb8292102d"
+                },
+                {
+                    "description": "Pad 1 [PMD_MOSI_M] of R702 on F.Cu",
+                    "pos": {
+                        "x": 170.2,
+                        "y": 105.775
+                    },
+                    "uuid": "5ee314fb-eb71-4bed-9517-a28e6b423150"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of D708",
+                    "pos": {
+                        "x": 180.645,
+                        "y": 103.145
+                    },
+                    "uuid": "cf62e4aa-8681-40c7-966c-4c6e564312e9"
+                },
+                {
+                    "description": "Pad 1 [/PMD401 & encoder interface/PMD_SS] of D702 on F.Cu",
+                    "pos": {
+                        "x": 179.595,
+                        "y": 102.495
+                    },
+                    "uuid": "93eea15e-4492-4bc5-ac62-e5497460bc44"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
                     "description": "Reference field of R712",
                     "pos": {
                         "x": 181.525,
@@ -3891,6 +5448,29 @@
                         "y": 107.275
                     },
                     "uuid": "25dd179f-d412-4788-b136-ea3c841cc47d"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of D708",
+                    "pos": {
+                        "x": 180.645,
+                        "y": 103.145
+                    },
+                    "uuid": "cf62e4aa-8681-40c7-966c-4c6e564312e9"
+                },
+                {
+                    "description": "Pad 2 [GND] of D702 on F.Cu",
+                    "pos": {
+                        "x": 181.695,
+                        "y": 102.495
+                    },
+                    "uuid": "4f557882-c979-42f8-aa63-5627a3c086d8"
                 }
             ],
             "severity": "warning",
@@ -3923,20 +5503,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of L502",
+                    "description": "Reference field of D707",
                     "pos": {
-                        "x": 147.975,
-                        "y": 130.845
+                        "x": 176.645,
+                        "y": 103.145
                     },
-                    "uuid": "40dd8186-fe7e-4767-bc2d-f0c84b59733b"
+                    "uuid": "d2958618-7d91-41fa-bc46-512cded55c4e"
                 },
                 {
-                    "description": "Pad 1 [/Main MCU STM32WBA55/WBA_VDDRFPA] of C513 on F.Cu",
+                    "description": "Pad 2 [GND] of D701 on F.Cu",
                     "pos": {
-                        "x": 147.75,
-                        "y": 129.775
+                        "x": 177.695,
+                        "y": 102.495
                     },
-                    "uuid": "43acdce4-cb8e-4669-8332-726df2cb403d"
+                    "uuid": "dbbbf7cf-3d5f-424d-90e9-85e1a7d9eee8"
                 }
             ],
             "severity": "warning",
@@ -3946,20 +5526,20 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of L502",
+                    "description": "Reference field of D707",
                     "pos": {
-                        "x": 147.975,
-                        "y": 130.845
+                        "x": 176.645,
+                        "y": 103.145
                     },
-                    "uuid": "40dd8186-fe7e-4767-bc2d-f0c84b59733b"
+                    "uuid": "d2958618-7d91-41fa-bc46-512cded55c4e"
                 },
                 {
-                    "description": "Pad 2 [GND] of C513 on F.Cu",
+                    "description": "Pad 1 [/PMD401 & encoder interface/PMD_MOSI] of D701 on F.Cu",
                     "pos": {
-                        "x": 149.3,
-                        "y": 129.775
+                        "x": 175.595,
+                        "y": 102.495
                     },
-                    "uuid": "415b4c3e-dd4f-45e6-9ad0-6ee59460dfde"
+                    "uuid": "76be4e15-661b-4d96-bd52-b3b298882fef"
                 }
             ],
             "severity": "warning",
@@ -3969,20 +5549,43 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Reference field of C516",
+                    "description": "Reference field of C517",
                     "pos": {
-                        "x": 155.455,
+                        "x": 157.955,
                         "y": 130.845
                     },
-                    "uuid": "fac4bbe1-852f-433c-8d0c-c2748be4ef07"
+                    "uuid": "4c916c12-8f55-419e-a683-61a81e4a109f"
                 },
                 {
-                    "description": "Pad 1 [/Main MCU STM32WBA55/MAIN_BOOT0] of R501 on F.Cu",
+                    "description": "Pad 2 [GND] of R501 on F.Cu",
                     "pos": {
-                        "x": 155.7,
+                        "x": 157.35,
                         "y": 129.775
                     },
-                    "uuid": "a1dacec6-c0eb-417f-95f9-c23b4749ae55"
+                    "uuid": "67ea09bb-99f9-4cf9-82c2-35be7b77dd64"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C517",
+                    "pos": {
+                        "x": 157.955,
+                        "y": 130.845
+                    },
+                    "uuid": "4c916c12-8f55-419e-a683-61a81e4a109f"
+                },
+                {
+                    "description": "Pad 1 [/Main MCU STM32WBA55/LED_MAIN] of R502 on F.Cu",
+                    "pos": {
+                        "x": 159.7,
+                        "y": 129.775
+                    },
+                    "uuid": "584bc261-5464-486f-810f-c5b9e25d7982"
                 }
             ],
             "severity": "warning",
@@ -4006,29 +5609,6 @@
                         "y": 129.775
                     },
                     "uuid": "67ea09bb-99f9-4cf9-82c2-35be7b77dd64"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Reference field of R313",
-                    "pos": {
-                        "x": 190.5,
-                        "y": 153.67
-                    },
-                    "uuid": "b65b9cf3-287e-42be-9a87-2af4b15d5912"
-                },
-                {
-                    "description": "Pad 2 [/48V flyback/+48V_RAW] of C312 on F.Cu",
-                    "pos": {
-                        "x": 191.975,
-                        "y": 152.5
-                    },
-                    "uuid": "15789354-692a-4b1e-873a-63321540321c"
                 }
             ],
             "severity": "warning",

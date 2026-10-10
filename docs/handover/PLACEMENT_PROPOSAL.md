@@ -150,3 +150,67 @@ Nothing below is done until you approve.
 2. **M8:** relocate Q302/R309/R310 next to the output, or leave the switch placeholders where they are.
 3. **R711/R712:** leave them at the branch point (recommended), or move them to U601 anyway.
 4. **After placement:** apply and stop for review, or apply and continue to the staged re-route.
+
+## 8. Applied result (11 Oct 2026, branch `placement-opt`; NOT routed, NOT fabrication-ready)
+
+**Owner decisions:** variant v2; M8 not applied (Q302/R309/R310 stay where they are); R711/R712 stay where they are; stop for review after placement, with no re-route.
+
+**Moves applied:** 26 parts, listed in `validation/placement/moves_applied.json`. This is v2 minus M8, and also minus R312.
+- With R309 left in place, R312's v2 position overlapped it (a courtyard overlap and an R309.1 SW48_GATE / R312.1 +48V_MOT pad short).
+- R312 therefore stays at its baseline position. This was found on a scratch copy before anything was applied.
+
+**Tool and recovery:**
+- Applied with `gen_pcb.py move validation/placement/moves_applied.json validation/logs/placement_move_log.txt`.
+- The baseline is unchanged at tag `baseline-routing-e8d141c`. Revert with `git checkout baseline-routing-e8d141c -- hardware/kicad/pump_v2.kicad_pcb`.
+
+**Rip-up:**
+- 20 signal nets on the moved pads were ripped as whole nets.
+- 3 more nets were ripped because their copper ran through the new J503/JP701/C701 sites: ENC_B, ENC_B_S and **HB_S2M** (the supervisor heartbeat).
+- 25 plane fan-out stubs on moved plane pads were removed, with their orphaned vias.
+- 21 moved SMD plane pads were re-fanned; none were left over.
+- The full comparison is in `validation/placement/applied_vs_baseline.txt`.
+
+| Check | Baseline e8d141c | After placement |
+| --- | --- | --- |
+| ERC | 6 power_pin_not_driven (U501 pins 3/38/39/40/43/45) + 1 lib_symbol_mismatch (U701) | identical; schematic not modified |
+| DRC copper (clearance, short, courtyard, hole, edge) | 0 | 0 |
+| Schematic parity | 0 | 0 |
+| Unconnected | 35 (A 12 / B 1 / C 22) | 80 (A 12 / B 1 / C 14 / **D 53**, opened by rip-up) |
+| via_dangling / track_dangling | 8 / 1 | 6 / 1 (the 2 removed were on ripped nets; no new ones) |
+| silk_over_copper / silk_overlap / silk_edge | 55 / 75 / 3 | 73 / 82 / 3 (cosmetic; moved references, to be tidied) |
+| Footprints moved outside the approved list | n/a | none (121 of 121 unchanged) |
+| Zone outlines | n/a | identical |
+| Copper on non-ripped nets | n/a | only plane stubs/vias on GND/VBAT/+3V3 at moved pads (44 items removed, 40 added) |
+| WBA55 region (U501 + 12 mm) | 32 parts | 31 parts. J503 left the region and no part moved into it. Only CON_MAIN_TX/ENC_B_S/HB_S2M track segments were removed there (ripped nets). No WBA55 supply, clock or RF copper was touched. |
+
+**Loop metrics** (straight pad-to-pad):
+
+| Loop | Baseline (mm) | After (mm) |
+| --- | --- | --- |
+| Clamp | 59.7 | 13.9 |
+| Secondary | 73.1 | 18.8 |
+| Gate | 11.0 | 3.4 |
+| CS | 12.9 | 6.5 |
+| VCC cap | 6.6 | 3.2 |
+| SS | 6.1 | 3.5 |
+| R311 → J703 | 13.3 | 4.0 |
+| C702 → J703 | 18.3 | 11.2 |
+| FLY_SW node (worse, as proposed) | 3.9 | 7.4 |
+
+The tracked airwire total falls 1323.9 → 1031.6 mm (−22 %; v2 with M8 would have been −30 %).
+
+**Pad-to-pad margins of moved parts:** all inter-part gaps meet the rule (HV48 0.6 mm, otherwise 0.2 mm).
+- Smallest HV margin: R313/C312 at 1.02 mm, i.e. +0.42 over the rule.
+- Next: R307/R308 FB to +48V_RAW at 0.85 mm, i.e. +0.25.
+- U301 (0.20 mm) and JP701 (0.25 mm) are pin-to-pin gaps inside the footprint, not the result of the placement.
+
+**Routability:** a straight path is clear on at least one layer for 31 of the 80 pairs, including R311/C702 → J703 on B.Cu (see `validation/logs/unrouted_corridors.txt`). Routing within the HV48 clearance is still unproven until it is routed.
+
+**Still open (unchanged by this step):**
+- WBA55 supply/clock/RF wiring (needs the ST documents).
+- Transformer (placeholder).
+- 48 V protection and output-switch topology (M8 deferred).
+- FL-3 (AGND/PGND).
+- FL-6 (HV connector rating).
+- The 6 intentional ERC errors.
+- `docs/bom.csv` and `docs/bom_detailed.csv` are stale relative to the committed schematic (last exported at 8241494). A fresh export differs in C104 and the C30x values and status, purely from earlier schematic changes. They were left untouched in this placement-only commit. Re-export after review.
