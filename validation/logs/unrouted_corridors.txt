@@ -1,0 +1,142 @@
+Read-only corridor analysis (scratch script, pcbnew 10.0.3) of the 35 unconnected pairs in validation/drc/pump_v2-drc.json, board at commit e8d141c (md5 eb5b4bcd...). For each pair: foreign pads/tracks/vias within 0.6 mm of the straight line between the endpoints, per outer layer. Zones/planes are not listed. Indicative only: a crossing means the straight path is blocked, not that no path exists.
+
+== SW48_GATE  Pad 1 [/48V flyback/SW48_GATE] of R309 on F.Cu  ->  Track [/48V flyback/SW48_GATE] on F.Cu, length 0.9899 mm
+   A=(193.2,144.8) B=(171.5,147.0) len=21.8
+   F.Cu: pads of ['C308', 'R310']; tracks of 4 nets ['FLY_CLAMP', 'GND', 'SW48_DRV', 'VBAT']; vias 1
+   B.Cu: pads of []; tracks of 2 nets ['+48V_RAW', 'FLY_CLAMP']; vias 1
+== +48V_MOT  Track [+48V_MOT] on F.Cu, length 1.1457 mm  ->  Pad 2 [+48V_MOT] of J703 on F.Cu
+   A=(192.3,142.2) B=(204.5,147.5) len=13.3
+   F.Cu: pads of ['D302', 'J703', 'TP302']; tracks of 1 nets ['FLY_SW']; vias 0
+   B.Cu: pads of []; tracks of 1 nets ['FLY_CLAMP']; vias 0
+== +48V_MOT  Track [+48V_MOT] on B.Cu, length 1.6808 mm  ->  Pad 2 [+48V_MOT] of J703 on F.Cu
+   A=(195.3,165.2) B=(204.5,147.5) len=19.9
+   F.Cu: pads of ['J703']; tracks of 0 nets []; vias 0
+   B.Cu: pads of []; tracks of 0 nets []; vias 0
+== +3V3  Via [+3V3] on F.Cu - B.Cu  ->  Track [+3V3] on F.Cu, length 1.0000 mm
+   A=(147.2,159.5) B=(164.6,157.5) len=17.6
+   F.Cu: pads of ['R301', 'R302', 'U601']; tracks of 9 nets ['CON_SUP_TX', 'ENC_B_S', 'FLY_FB', 'FLY_PGOOD', 'GND', 'HB_M2S', 'HB_S2M', 'SUP_SWDIO', 'SUP_VETO']; vias 2
+   B.Cu: pads of []; tracks of 3 nets ['FLY_FB', 'SUP_PARK', 'SUP_SWCLK']; vias 2
+== VBAT_SENSE  Track [VBAT_SENSE] on F.Cu, length 2.3500 mm  ->  Track [VBAT_SENSE] on F.Cu, length 0.4370 mm
+   A=(117.7,125.3) B=(145.7,124.4) len=28.0
+   F.Cu: pads of ['R108', 'TP101', 'TP102']; tracks of 4 nets ['GND', 'HB_S2M', 'VBAT', 'VBAT_FUSED']; vias 2
+   B.Cu: pads of []; tracks of 1 nets ['MAIN_SWCLK']; vias 2
+== ENC_I  Pad 1 [/PMD401 & encoder interface/ENC_I] of J705 on F.Cu  ->  Track [/PMD401 & encoder interface/ENC_I] on F.Cu, length 0.
+   A=(204.5,141.5) B=(182.4,106.2) len=41.6
+   F.Cu: pads of ['J705', 'R705', 'R714', 'U701']; tracks of 9 nets ['+3V3', 'ENC_A_M', 'ENC_B', 'ENC_VCC', 'GND', 'PMD_AEN', 'PMD_AEN_DRV', 'PMD_FAULT_M', 'RS485_A']; vias 3
+   B.Cu: pads of []; tracks of 7 nets ['ENC_A', 'ENC_A_M', 'ENC_B', 'PMD_FAULT_M', 'PMD_MOSI', 'RS485_A', 'RS485_B']; vias 3
+== ENC_VCC  Track [/PMD401 & encoder interface/ENC_VCC] on F.Cu, length   ->  Track [/PMD401 & encoder interface/ENC_VCC] on F.Cu, length 
+   A=(171.8,104.3) B=(187.1,108.7) len=15.9
+   F.Cu: pads of ['D707', 'R704', 'R705']; tracks of 9 nets ['ENC_A', 'ENC_B', 'ENC_I', 'PMD_5V', 'PMD_AEN', 'PMD_AEN_DRV', 'PMD_MOSI', 'PMD_SCLK', 'PMD_SS']; vias 2
+   B.Cu: pads of []; tracks of 4 nets ['ENC_A', 'ENC_I', 'PMD_5V', 'PMD_MOSI']; vias 2
+== ENC_A_S  Pad 17 [ENC_A_S] of U601 on F.Cu  ->  Pad 1 [ENC_A_S] of R711 on F.Cu
+   A=(149.2,164.2) B=(176.7,109.8) len=60.9
+   F.Cu: pads of ['C304', 'C309', 'Q402', 'R510', 'U601']; tracks of 12 nets ['+3V3', '+48V_RAW', 'CON_SUP_TX', 'ENC_B', 'ENC_B_S', 'FLY_FB', 'GND', 'HB_M2S', 'SUP_PARK', 'SUP_SWDIO']; vias 2
+   B.Cu: pads of []; tracks of 10 nets ['+48V_RAW', 'ENC_A_M', 'MCU_48V_EN', 'PMD_FAULT_M', 'RS485_DE', 'RS485_DI', 'RS485_RO', 'SUP_SWCLK', 'SUP_SWDIO', 'SUP_VETO']; vias 2
+== VBAT_FUSED  Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu  ->  Pad 1 [/Power input & charger/VBAT_FUSED] of C102 on F.Cu
+   A=(118.2,113.2) B=(112.7,117.8) len=7.2
+   F.Cu: pads of ['C102', 'U101']; tracks of 4 nets ['CHG_SYS', 'CHG_TS', 'GND', 'I2C_SCL']; vias 0
+   B.Cu: pads of []; tracks of 0 nets []; vias 0
+== FLY_SS  Pad 1 [/48V flyback/FLY_SS] of C305 on F.Cu  ->  Pad 9 [/48V flyback/FLY_SS] of U301 on F.Cu
+   A=(163.0,146.5) B=(164.9,152.2) len=6.1
+   F.Cu: pads of ['U301']; tracks of 5 nets ['FLY_COMP_RC', 'FLY_EN', 'FLY_FB', 'FLY_PGOOD', 'FLY_RT']; vias 0
+   B.Cu: pads of []; tracks of 1 nets ['FLY_COMP']; vias 0
+== FLY_PGOOD  Pad 28 [FLY_PGOOD] of U501 on F.Cu  ->  Pad 11 [FLY_PGOOD] of U301 on F.Cu
+   A=(151.4,120.2) B=(164.9,151.2) len=33.8
+   F.Cu: pads of ['C305', 'C309', 'C508', 'C516', 'C517', 'R501', 'U301', 'U501']; tracks of 14 nets ['+48V_RAW', 'ENC_B_S', 'FLY_COMP_RC', 'FLY_EN', 'FLY_RT', 'GND', 'LED_MAIN_A', 'MAIN_BOOT0', 'MAIN_NRST', 'MAIN_SWDIO']; vias 2
+   B.Cu: pads of []; tracks of 10 nets ['+48V_RAW', 'ENC_A_M', 'FLY_COMP', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_MOSI_M', 'RF_ANT', 'RS485_RO', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 2
+== FLY_PGOOD  Track [FLY_PGOOD] on F.Cu, length 2.1538 mm  ->  Pad 1 [FLY_PGOOD] of TP302 on F.Cu
+   A=(166.7,152.8) B=(197.5,145.0) len=31.8
+   F.Cu: pads of ['C302', 'R309']; tracks of 8 nets ['+48V_RAW', 'FLY_EN', 'FLY_RT', 'FLY_SW', 'GND', 'SW48_DRV', 'SW48_GATE', 'VBAT']; vias 2
+   B.Cu: pads of []; tracks of 1 nets ['+48V_RAW']; vias 2
+== LSE_IN  Pad 17 [/Main MCU STM32WBA55/LSE_IN] of U501 on F.Cu  ->  Pad 1 [/Main MCU STM32WBA55/LSE_IN] of Y502 on F.Cu
+   A=(147.2,122.4) B=(133.3,130.2) len=16.0
+   F.Cu: pads of ['C502', 'C510', 'U501']; tracks of 6 nets ['+3V3', 'HB_S2M', 'LSE_OUT', 'PMD_MOSI_M', 'VBAT_SENSE', 'WBA_VDDHPA']; vias 2
+   B.Cu: pads of []; tracks of 5 nets ['LSE_OUT', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_MOSI_M', 'WBA_VDDHPA']; vias 2
+== LSE_IN  Pad 1 [/Main MCU STM32WBA55/LSE_IN] of C518 on F.Cu  ->  Pad 17 [/Main MCU STM32WBA55/LSE_IN] of U501 on F.Cu
+   A=(160.0,132.0) B=(147.2,122.4) len=15.9
+   F.Cu: pads of ['C508', 'R501', 'U501']; tracks of 9 nets ['+3V3', 'ENC_A_M', 'GND', 'HB_M2S', 'LED_MAIN_A', 'LSE_OUT', 'MAIN_BOOT0', 'MAIN_SWO', 'MCU_48V_EN']; vias 1
+   B.Cu: pads of []; tracks of 7 nets ['ENC_A_M', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_MOSI_M', 'RF_ANT', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 1
+== RF_MCU  Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.9977 m  ->  Pad 37 [/Main MCU STM32WBA55/RF_MCU] of U501 on F.Cu
+   A=(149.5,132.0) B=(150.8,115.6) len=16.5
+   F.Cu: pads of ['C506', 'C513', 'U501']; tracks of 7 nets ['+3V3', 'GND', 'HB_M2S', 'MAIN_SWO', 'PMD_FAULT_M', 'RF_ANT', 'WBA_VDDHPA']; vias 3
+   B.Cu: pads of []; tracks of 10 nets ['ENC_A_M', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_MOSI_M', 'PMD_SS_M', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 3
+== WBA_VDDRFPA  Pad 43 [/Main MCU STM32WBA55/WBA_VDDRFPA] of U501 on F.Cu  ->  Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.2
+   A=(147.8,115.6) B=(148.8,128.7) len=13.2
+   F.Cu: pads of ['C506', 'U501']; tracks of 4 nets ['+3V3', 'ENC_A_M', 'HB_M2S', 'MCU_48V_EN']; vias 4
+   B.Cu: pads of []; tracks of 8 nets ['ENC_A_M', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_MOSI_M', 'PMD_SS_M', 'WBA_VDDHPA']; vias 4
+== CON_SUP_TX  PTH pad 3 [CON_SUP_TX] of J503  ->  Track [CON_SUP_TX] on F.Cu, length 0.9260 mm
+   A=(164.3,104.5) B=(152.6,159.0) len=55.7
+   F.Cu: pads of ['C517', 'R307', 'R502', 'U601']; tracks of 11 nets ['ENC_B_S', 'ENC_I_M', 'FLY_FB', 'GND', 'HB_M2S', 'LED_MAIN', 'LED_MAIN_A', 'RF_ANT', 'SUP_PARK', 'SUP_SWDIO']; vias 2
+   B.Cu: pads of []; tracks of 13 nets ['+48V_RAW', 'ENC_A_M', 'ENC_B_M', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_SS_M', 'RF_ANT', 'RS485_DE', 'RS485_DI', 'RS485_RO']; vias 2
+== CON_SUP_RX  Pad 32 [CON_SUP_RX] of U601 on F.Cu  ->  PTH pad 4 [CON_SUP_RX] of J503
+   A=(154.2,159.2) B=(166.8,104.5) len=56.2
+   F.Cu: pads of ['C304', 'C309', 'C518', 'R502', 'U601']; tracks of 12 nets ['+48V_RAW', 'ENC_B_S', 'ENC_I_M', 'FLY_FB', 'GND', 'LED_MAIN_A', 'RF_ANT', 'SUP_PARK', 'SUP_SWCLK', 'SUP_SWDIO']; vias 4
+   B.Cu: pads of []; tracks of 14 nets ['+48V_RAW', 'ENC_A_M', 'ENC_B_M', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_SS_M', 'RF_ANT', 'RS485_DE', 'RS485_DI', 'RS485_RO']; vias 4
+== WBA_VDD11  Pad 2 [/Main MCU STM32WBA55/WBA_VDD11] of L501 on F.Cu  ->  Pad 45 [/Main MCU STM32WBA55/WBA_VDD11] of U501 on F.Cu
+   A=(141.2,114.1) B=(146.8,115.6) len=5.7
+   F.Cu: pads of ['U501']; tracks of 1 nets ['+3V3']; vias 0
+   B.Cu: pads of []; tracks of 6 nets ['CON_MAIN_TX', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_SS_M']; vias 0
+== WBA_VDD11  Pad 45 [/Main MCU STM32WBA55/WBA_VDD11] of U501 on F.Cu  ->  Pad 1 [/Main MCU STM32WBA55/WBA_VDD11] of C509 on F.Cu
+   A=(146.8,115.6) B=(155.1,114.1) len=8.5
+   F.Cu: pads of ['U501']; tracks of 6 nets ['+3V3', 'MAIN_NRST', 'MAIN_SWO', 'RF_ANT', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 1
+   B.Cu: pads of []; tracks of 3 nets ['ENC_B_M', 'MAIN_NRST', 'PMD_SS_M']; vias 1
+== WBA_VDDRF  Track [/Main MCU STM32WBA55/WBA_VDDRF] on F.Cu, length 1.828  ->  Pad 40 [/Main MCU STM32WBA55/WBA_VDDRF] of U501 on F.Cu
+   A=(142.5,131.1) B=(149.2,115.6) len=16.9
+   F.Cu: pads of ['C504', 'U501']; tracks of 6 nets ['+3V3', 'GND', 'HB_S2M', 'LSE_OUT', 'PMD_MOSI_M', 'VBAT_SENSE']; vias 3
+   B.Cu: pads of []; tracks of 8 nets ['ENC_B_M', 'LSE_OUT', 'MAIN_NRST', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_MOSI_M', 'PMD_SS_M', 'WBA_VDDHPA']; vias 3
+== PMD_MOSI_M  Track [PMD_MOSI_M] on B.Cu, length 6.7670 mm  ->  Pad 1 [PMD_MOSI_M] of R702 on F.Cu
+   A=(151.1,123.3) B=(170.2,105.8) len=26.0
+   F.Cu: pads of ['R709', 'U501']; tracks of 10 nets ['ENC_B_M', 'LED_MAIN', 'MAIN_BOOT0', 'MAIN_NRST', 'MAIN_SWDIO', 'MAIN_SWO', 'PMD_FAULT_M', 'RF_ANT', 'RS485_RO', 'WBA_VDDHPA']; vias 1
+   B.Cu: pads of []; tracks of 6 nets ['ENC_B_M', 'MAIN_SWDIO', 'PMD_FAULT_M', 'PMD_SS_M', 'RS485_DE', 'RS485_DI']; vias 1
+== MAIN_SWCLK  Track [/Main MCU STM32WBA55/MAIN_SWCLK] on B.Cu, length 0.77  ->  Pad 26 [/Main MCU STM32WBA55/MAIN_SWCLK] of U501 on F.Cu
+   A=(145.1,124.2) B=(151.4,121.2) len=7.0
+   F.Cu: pads of ['U501']; tracks of 10 nets ['+3V3', 'ENC_A_M', 'HB_M2S', 'HB_S2M', 'LSE_OUT', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_MOSI_M', 'VBAT_SENSE']; vias 1
+   B.Cu: pads of []; tracks of 2 nets ['MAIN_SWDIO', 'PMD_MOSI_M']; vias 1
+== RS485_B  Pad 2 [/PMD401 & encoder interface/RS485_B] of R714 on F.Cu  ->  Track [/PMD401 & encoder interface/RS485_B] on B.Cu, length 
+   A=(186.3,109.8) B=(194.5,129.4) len=21.2
+   F.Cu: pads of ['U701']; tracks of 3 nets ['+3V3', 'ENC_VCC', 'PMD_FAULT_M']; vias 1
+   B.Cu: pads of []; tracks of 3 nets ['ENC_A_M', 'ENC_B', 'PMD_FAULT_M']; vias 1
+== PMD_SCLK_M  Pad 13 [PMD_SCLK_M] of U501 on F.Cu  ->  Pad 1 [PMD_SCLK_M] of R704 on F.Cu
+   A=(145.2,122.4) B=(178.2,107.3) len=36.3
+   F.Cu: pads of ['R703', 'R710', 'U501']; tracks of 16 nets ['ENC_A', 'ENC_B', 'ENC_I', 'ENC_I_M', 'HB_S2M', 'LED_MAIN', 'LSE_OUT', 'MAIN_BOOT0', 'MAIN_NRST', 'MAIN_SWO']; vias 2
+   B.Cu: pads of []; tracks of 7 nets ['ENC_A', 'ENC_B_M', 'ENC_I', 'MAIN_SWDIO', 'PMD_SS_M', 'RS485_DE', 'RS485_DI']; vias 2
+== I2C_SDA  Pad C1 [I2C_SDA] of U101 on F.Cu  ->  Pad 1 [I2C_SDA] of R105 on F.Cu
+   A=(117.8,113.2) B=(125.7,122.8) len=12.4
+   F.Cu: pads of ['U101']; tracks of 4 nets ['CHG_SYS', 'CHG_TS', 'GND', 'I2C_SCL']; vias 1
+   B.Cu: pads of []; tracks of 1 nets ['CHG_INT_N']; vias 1
+== I2C_SDA  Pad 1 [I2C_SDA] of R105 on F.Cu  ->  Pad 6 [I2C_SDA] of U501 on F.Cu
+   A=(125.7,122.8) B=(144.6,118.8) len=19.3
+   F.Cu: pads of ['R105', 'U501', 'Y501']; tracks of 4 nets ['+3V3', 'ENC_B_M', 'GND', 'I2C_SCL']; vias 2
+   B.Cu: pads of []; tracks of 4 nets ['CHG_INT_N', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_SS_M']; vias 2
+== CHG_INT_N  Pad A1 [CHG_INT_N] of U101 on F.Cu  ->  Track [CHG_INT_N] on F.Cu, length 1.9163 mm
+   A=(117.8,112.4) B=(109.0,119.9) len=11.6
+   F.Cu: pads of ['C102', 'U101']; tracks of 4 nets ['CHG_SYS', 'I2C_SCL', 'USB_CC1', 'VBUS_CHG']; vias 0
+   B.Cu: pads of []; tracks of 1 nets ['USB_CC2']; vias 0
+== PMD_READY_M  Pad 33 [PMD_READY_M] of U501 on F.Cu  ->  Pad 1 [PMD_READY_M] of R706 on F.Cu
+   A=(151.4,117.8) B=(186.2,107.3) len=36.3
+   F.Cu: pads of ['R705', 'R710', 'R711', 'R712', 'U501']; tracks of 12 nets ['+3V3', 'ENC_A', 'ENC_B', 'ENC_I_M', 'MAIN_BOOT0', 'MAIN_NRST', 'MAIN_SWO', 'PMD_AEN', 'PMD_AEN_DRV', 'RF_ANT']; vias 0
+   B.Cu: pads of []; tracks of 3 nets ['ENC_A', 'ENC_B_M', 'PMD_SS_M']; vias 0
+== WBA_VDDANA  Track [/Main MCU STM32WBA55/WBA_VDDANA] on F.Cu, length 1.76  ->  Pad 39 [/Main MCU STM32WBA55/WBA_VDDANA] of U501 on F.Cu
+   A=(138.5,131.0) B=(149.8,115.6) len=19.1
+   F.Cu: pads of ['C502', 'U501']; tracks of 3 nets ['GND', 'HB_S2M', 'WBA_VDDHPA']; vias 1
+   B.Cu: pads of []; tracks of 7 nets ['ENC_B_M', 'LSE_OUT', 'MAIN_NRST', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_SS_M', 'WBA_VDDHPA']; vias 1
+== HSE_OUT  Pad 41 [/Main MCU STM32WBA55/HSE_OUT] of U501 on F.Cu  ->  Pad 3 [/Main MCU STM32WBA55/HSE_OUT] of Y501 on F.Cu
+   A=(148.8,115.6) B=(140.8,117.6) len=8.2
+   F.Cu: pads of ['U501']; tracks of 6 nets ['+3V3', 'CON_MAIN_TX', 'GND', 'MAIN_NRST', 'WBA_VDDRFPA', 'WBA_VLXSMPS']; vias 2
+   B.Cu: pads of []; tracks of 6 nets ['CON_MAIN_TX', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_SS_M']; vias 2
+== HSE_OUT  Pad 1 [/Main MCU STM32WBA55/HSE_OUT] of C517 on F.Cu  ->  Pad 41 [/Main MCU STM32WBA55/HSE_OUT] of U501 on F.Cu
+   A=(157.5,132.0) B=(148.8,115.6) len=18.6
+   F.Cu: pads of ['C508', 'R501', 'U501']; tracks of 8 nets ['LED_MAIN', 'LED_MAIN_A', 'MAIN_BOOT0', 'MAIN_NRST', 'MAIN_SWDIO', 'MAIN_SWO', 'RS485_RO', 'WBA_VDDHPA']; vias 2
+   B.Cu: pads of []; tracks of 11 nets ['ENC_A_M', 'ENC_B_M', 'MAIN_NRST', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_MOSI_M', 'PMD_SS_M', 'RF_ANT', 'RS485_RO', 'WBA_VDDHPA']; vias 2
+== HSE_IN  Pad 42 [/Main MCU STM32WBA55/HSE_IN] of U501 on F.Cu  ->  Pad 1 [/Main MCU STM32WBA55/HSE_IN] of Y501 on F.Cu
+   A=(148.2,115.6) B=(139.4,118.7) len=9.4
+   F.Cu: pads of ['U501', 'Y501']; tracks of 5 nets ['+3V3', 'CON_MAIN_TX', 'GND', 'WBA_VDDRFPA', 'WBA_VLXSMPS']; vias 2
+   B.Cu: pads of []; tracks of 7 nets ['CHG_INT_N', 'CON_MAIN_TX', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_SS_M']; vias 2
+== HSE_IN  Pad 1 [/Main MCU STM32WBA55/HSE_IN] of C516 on F.Cu  ->  Pad 42 [/Main MCU STM32WBA55/HSE_IN] of U501 on F.Cu
+   A=(155.0,132.0) B=(148.2,115.6) len=17.8
+   F.Cu: pads of ['D501', 'U501']; tracks of 5 nets ['LED_MAIN_A', 'MAIN_BOOT0', 'MAIN_SWDIO', 'MAIN_SWO', 'WBA_VDDRFPA']; vias 1
+   B.Cu: pads of []; tracks of 11 nets ['ENC_A_M', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_MOSI_M', 'PMD_SS_M', 'RF_ANT', 'WBA_VDDHPA']; vias 1
+== ENC_I_M  Pad 48 [ENC_I_M] of U501 on F.Cu  ->  Track [ENC_I_M] on F.Cu, length 13.3926 mm
+   A=(145.2,115.6) B=(160.1,118.7) len=15.1
+   F.Cu: pads of ['U501']; tracks of 7 nets ['+3V3', 'MAIN_BOOT0', 'MAIN_NRST', 'MAIN_SWO', 'RF_ANT', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 1
+   B.Cu: pads of []; tracks of 5 nets ['ENC_B_M', 'MAIN_NRST', 'PMD_SS_M', 'RS485_DE', 'RS485_DI']; vias 1
