@@ -589,7 +589,7 @@ def export_dsn(out):
     print("DSN export:", ok, out)
 
 
-def remove_dangling(board, rounds=4):
+def remove_dangling(board, rounds=1):
     """Delete vias and track segments with an unconnected end (autorouter leftovers)."""
     removed = 0
     for _ in range(rounds):
@@ -617,7 +617,10 @@ def import_ses(ses):
     ok = pcbnew.ImportSpecctraSES(board, ses)
     print("SES import:", ok)
     fill(board)
-    remove_dangling(board)
+    try:
+        remove_dangling(board)
+    except Exception as e:          # cleanup is best-effort; never lose the imported routing
+        log("dangling cleanup skipped: " + repr(e))
     pcbnew.SaveBoard(BOARD, board)
 
 
