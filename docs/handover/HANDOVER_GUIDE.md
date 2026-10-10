@@ -124,9 +124,10 @@ python scripts/gen_library.py                     # project symbols/footprints
 python scripts/gen_schematic.py                   # .kicad_sch + .kicad_pro net classes
 kicad-cli sch export netlist --format kicadsexpr -o hardware/kicad/pump_v2.net hardware/kicad/pump_v2.kicad_sch
 "C:\Program Files\KiCad\10.0\bin\python.exe" scripts/gen_pcb.py place          # board, placement, planes
-"C:\Program Files\KiCad\10.0\bin\python.exe" scripts/gen_pcb.py dsn  <file.dsn> # Specctra export (outer pours excluded)
-#   then edit the DSN: (layer In1.Cu (type power)) and In2.Cu likewise, and run Freerouting 2.1.0 (Java 21):
-#   java -jar freerouting-2.1.0.jar -de file.dsn -do file.ses -mp 25 --gui.enabled=false
+"C:\Program Files\KiCad\10.0\bin\python.exe" scripts/gen_pcb.py dsn  <file.dsn> # Specctra export (outer pours excluded, inner layers marked 'power')
+#   Freerouting 2.1.0 (Java 21); disable telemetry in freerouting.json first:
+#   java -jar freerouting-2.1.0.jar -de file.dsn -do file.ses --gui.enabled=false --router.job_timeout=00:12:00
+#   (2.1.0 ignores -mp; repeat dsn -> route -> ses for incremental passes)
 "C:\Program Files\KiCad\10.0\bin\python.exe" scripts/gen_pcb.py ses  <file.ses> # import routes, refill zones
 kicad-cli sch erc --format report --severity-all -o validation/erc/pump_v2-erc.rpt hardware/kicad/pump_v2.kicad_sch
 kicad-cli pcb drc --format report --severity-all --schematic-parity --refill-zones --save-board -o validation/drc/pump_v2-drc.rpt hardware/kicad/pump_v2.kicad_pcb
