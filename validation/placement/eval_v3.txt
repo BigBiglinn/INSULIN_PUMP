@@ -1,0 +1,83 @@
+## airwire MST length (mm), base -> proposal
+  +48V_MOT        96.2 ->    44.2  (-52.0)
+  FLY_SS           6.1 ->     3.5  (-2.6)
+  FLY_PGOOD       73.5 ->    47.9  (-25.7)
+  CON_SUP_TX      57.2 ->     4.6  (-52.5)
+  CON_SUP_RX      56.2 ->     3.4  (-52.7)
+  CON_MAIN_TX     21.7 ->    24.5  (+2.8)
+  ENC_A_S         60.9 ->    46.8  (-14.1)
+  ENC_B_S         62.6 ->    48.9  (-13.7)
+  ENC_VCC         54.6 ->     9.9  (-44.7)
+  PMD_5V          41.8 ->    22.5  (-19.3)
+  SW48_GATE       55.5 ->    12.0  (-43.5)
+  SW48_DRV        36.4 ->    29.4  (-6.9)
+  +48V_RAW        98.6 ->    72.0  (-26.6)
+  FLY_SW          32.1 ->     7.5  (-24.5)
+  FLY_CLAMP       23.3 ->    10.0  (-13.4)
+  FLY_SEC          8.6 ->     5.3  (-3.3)
+  FLY_SNUB         4.2 ->     2.8  (-1.4)
+  FLY_GATE        11.0 ->     3.4  (-7.6)
+  FLY_CS          15.2 ->     9.6  (-5.6)
+  FLY_FB          26.2 ->     6.4  (-19.8)
+  FLY_RT           9.0 ->     3.6  (-5.5)
+  FLY_COMP        13.4 ->     6.1  (-7.4)
+  FLY_COMP_RC     12.0 ->     2.4  (-9.6)
+  FLY_EN          58.6 ->    58.0  (-0.6)
+  HB_M2S          41.8 ->    25.3  (-16.5)
+  HB_S2M          42.5 ->    26.1  (-16.4)
+  SUP_VETO        47.9 ->    36.5  (-11.5)
+  SUP_PARK        45.3 ->    31.3  (-14.0)
+  TOTAL tracked 1323.9 -> 815.4
+## loop path metrics (straight pad-to-pad, mm), base -> proposal
+  clamp: Q301.D-D302.A, D302.K-C308, C308.VBAT-T301.1          59.7 ->   13.9
+  FLY_SW node: Q301.D-T301.2                                    3.9 ->    7.4
+  secondary: T301.4-D301.A, D301.K-C309.+, C309.GND-T301.3     73.1 ->   18.8
+  gate: U301.GATE-Q301.G                                       11.0 ->    3.4
+  CS: U301.CS-R305.1                                           12.9 ->    6.5
+  VCC cap: U301.VBAT-C304                                       6.6 ->    3.2
+  SS: U301.SS-C305                                              6.1 ->    3.5
+  +48V_MOT: R311.2-J703.2                                      13.3 ->    4.0
+  +48V_MOT: C702.1-J703.2                                      18.3 ->   11.2
+## moved parts: pads
+  T301 1:VBAT@(179.00,152.50) 2:FLY_SW@(179.00,159.50) 3:GND@(188.00,152.50) 4:FLY_SEC@(188.00,159.50)
+  D302 1:FLY_CLAMP@(175.20,156.00) 2:FLY_SW@(175.20,158.80)
+  C308 1:FLY_CLAMP@(175.20,154.25) 2:VBAT@(175.20,152.35)
+  R306 1:FLY_CLAMP@(179.04,147.00) 2:VBAT@(184.96,147.00)
+  D301 1:+48V_RAW@(194.00,159.50) 2:FLY_SEC@(191.20,159.50)
+  C309 1:+48V_RAW@(193.78,152.50) 2:GND@(190.82,152.50)
+  C310 1:+48V_RAW@(193.78,156.00) 2:GND@(190.82,156.00)
+  R313 1:FLY_SEC@(191.20,161.64) 2:FLY_SNUB@(191.20,164.56)
+  C312 1:FLY_SNUB@(194.00,164.57) 2:+48V_RAW@(194.00,161.62)
+  U301 1:VBAT@(166.55,160.25) 2:VBAT@(166.55,159.75) 3:FLY_GATE@(166.55,159.25) 4:GND@(166.55,158.75) 5:FLY_CS@(166.55,158.25) 6:FLY_COMP@(166.55,157.75) 7:GND@(164.65,157.75) 8:FLY_FB@(164.65,158.25) 9:FLY_SS@(164.65,158.75) 10:FLY_RT@(164.65,159.25) 11:FLY_PGOOD@(164.65,159.75) 12:FLY_EN@(164.65,160.25) 13:GND@(165.60,159.00)
+  C304 1:VBAT@(164.82,162.90) 2:GND@(166.38,162.90)
+  R307 1:+48V_RAW@(161.18,154.60) 2:FLY_FB@(162.82,154.60)
+  R308 1:FLY_FB@(161.18,156.40) 2:GND@(162.82,156.40)
+  C305 1:FLY_SS@(161.22,158.20) 2:GND@(162.78,158.20)
+  R301 1:FLY_RT@(161.18,160.00) 2:GND@(162.82,160.00)
+  R302 1:FLY_PGOOD@(161.18,161.80) 2:+3V3@(162.82,161.80)
+  TP302 1:FLY_PGOOD@(159.00,161.80)
+  R303 1:FLY_COMP@(165.38,155.60) 2:FLY_COMP_RC@(167.03,155.60)
+  C306 1:FLY_COMP_RC@(165.43,153.80) 2:GND@(166.97,153.80)
+  C307 1:FLY_COMP@(165.43,152.00) 2:GND@(166.97,152.00)
+  R311 1:+48V_RAW@(198.04,149.50) 2:+48V_MOT@(200.96,149.50)
+  C702 1:+48V_MOT@(200.50,158.00) 2:GND@(205.50,158.00)
+  TP301 1:+48V_MOT@(201.50,145.00)
+  R312 1:+48V_MOT@(192.54,145.80) 2:GND@(198.46,145.80)
+  Q302 1:SW48_GATE@(190.35,169.20) 2:+48V_RAW@(190.35,171.50) 2:+48V_RAW@(196.65,171.50) 3:+48V_MOT@(190.35,173.80)
+  R309 1:SW48_GATE@(190.18,177.20) 2:+48V_RAW@(191.82,177.20)
+  R310 1:SW48_GATE@(194.18,177.20) 2:SW48_DRV@(195.82,177.20)
+  J503 1:GND@(157.50,136.00) 2:CON_MAIN_TX@(157.50,138.54) 3:CON_SUP_TX@(157.50,141.08) 4:CON_SUP_RX@(157.50,143.62)
+  JP701 1:+3V3@(198.20,134.50) 2:ENC_VCC@(199.50,134.50) 3:PMD_5V@(200.80,134.50)
+  C701 1:ENC_VCC@(198.72,138.50) 2:GND@(200.28,138.50)
+  U601 1:unconnected-(U601-PC13-Pad1)@(145.84,140.75) 2:unconnected-(U601-PC14-Pad2)@(145.84,141.25) 3:unconnected-(U601-PC15-Pad3)@(145.84,141.75) 4:unconnected-(U601-PF3-Pad4)@(145.84,142.25) 5:+3V3@(145.84,142.75) 6:+3V3@(145.84,143.25) 7:GND@(145.84,143.75) 8:unconnected-(U601-PF0-Pad8)@(145.84,144.25) 9:unconnected-(U601-PF1-Pad9)@(145.84,144.75) 10:SUP_NRST@(145.84,145.25) 11:unconnected-(U601-PA0-Pad11)@(145.84,145.75) 12:unconnected-(U601-PA1-Pad12)@(145.84,146.25) 13:HB_S2M@(147.25,147.66) 14:HB_M2S@(147.75,147.66) 15:unconnected-(U601-PA4-Pad15)@(148.25,147.66) 16:unconnected-(U601-PA5-Pad16)@(148.75,147.66) 17:ENC_A_S@(149.25,147.66) 18:ENC_B_S@(149.75,147.66) 19:SUP_VETO@(150.25,147.66) 20:SUP_PARK@(150.75,147.66) 21:LED_SUP@(151.25,147.66) 22:unconnected-(U601-PB10-Pad22)@(151.75,147.66) 23:unconnected-(U601-PB11-Pad23)@(152.25,147.66) 24:unconnected-(U601-PB12-Pad24)@(152.75,147.66) 25:unconnected-(U601-PB13-Pad25)@(154.16,146.25) 26:unconnected-(U601-PB14-Pad26)@(154.16,145.75) 27:unconnected-(U601-PB15-Pad27)@(154.16,145.25) 28:unconnected-(U601-PA8-Pad28)@(154.16,144.75) 29:CON_SUP_TX@(154.16,144.25) 30:unconnected-(U601-PC6-Pad30)@(154.16,143.75) 31:unconnected-(U601-PC7-Pad31)@(154.16,143.25) 32:CON_SUP_RX@(154.16,142.75) 33:unconnected-(U601-PA11-Pad33)@(154.16,142.25) 34:unconnected-(U601-PA12-Pad34)@(154.16,141.75) 35:SUP_SWDIO@(154.16,141.25) 36:SUP_SWCLK@(154.16,140.75) 37:unconnected-(U601-PA15-Pad37)@(152.75,139.34) 38:unconnected-(U601-PD0-Pad38)@(152.25,139.34) 39:unconnected-(U601-PD1-Pad39)@(151.75,139.34) 40:unconnected-(U601-PD2-Pad40)@(151.25,139.34) 41:unconnected-(U601-PD3-Pad41)@(150.75,139.34) 42:unconnected-(U601-PB3-Pad42)@(150.25,139.34) 43:unconnected-(U601-PB4-Pad43)@(149.75,139.34) 44:unconnected-(U601-PB5-Pad44)@(149.25,139.34) 45:unconnected-(U601-PB6-Pad45)@(148.75,139.34) 46:unconnected-(U601-PB7-Pad46)@(148.25,139.34) 47:unconnected-(U601-PB8-Pad47)@(147.75,139.34) 48:unconnected-(U601-PB9-Pad48)@(147.25,139.34)
+  C601 1:+3V3@(140.32,134.60) 2:GND@(141.88,134.60)
+  C602 1:+3V3@(141.32,152.40) 2:GND@(142.88,152.40)
+  C603 1:+3V3@(145.32,134.60) 2:GND@(146.88,134.60)
+  C604 1:SUP_NRST@(146.32,152.40) 2:GND@(147.88,152.40)
+  D601 1:GND@(140.71,160.30) 2:LED_SUP_A@(142.29,160.30)
+  R601 1:LED_SUP@(144.68,160.30) 2:LED_SUP_A@(146.32,160.30)
+  J601 1:+3V3@(136.40,150.00) 2:SUP_SWDIO@(137.67,150.00) 3:GND@(136.40,151.27) 4:SUP_SWCLK@(137.67,151.27) 5:GND@(136.40,152.54) 6:unconnected-(J601-SWO{slash}TDO-Pad6)@(137.67,152.54) 7:unconnected-(J601-KEY-Pad7)@(136.40,153.81) 8:unconnected-(J601-NC{slash}TDI-Pad8)@(137.67,153.81) 9:GND@(136.40,155.08) 10:SUP_NRST@(137.67,155.08)
+## kicad-cli DRC on the scratch proposal copy (tracks removed, zones refilled, project rules):
+   {'silk_edge_clearance': 3, 'lib_footprint_issues': 2, 'silk_overlap': 83, 'silk_over_copper': 76, 'nonmirrored_text_on_back_layer': 2}
+   courtyards_overlap/clearance/shorting/edge:  0
+   lib_footprint_issues = scratch-folder artefact (no project fp-lib-table there)
