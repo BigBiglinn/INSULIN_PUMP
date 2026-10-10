@@ -327,6 +327,7 @@ def add_zone(board, net, layer, poly, prio=0, clearance=0.3, name=""):
     z.SetThermalReliefGap(MM(0.3))
     z.SetThermalReliefSpokeWidth(MM(0.35))
     z.SetIsFilled(False)
+    z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)   # no floating copper islands
     if name:
         z.SetZoneName(name)
     o = z.Outline()
