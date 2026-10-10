@@ -9,3 +9,10 @@
 (rule "J703_vendor_connector_pitch"
 	(condition "A.memberOfFootprint('J703') && B.memberOfFootprint('J703')")
 	(constraint clearance (min 0.35mm)))
+
+# Q301 (TI CSD16340Q3, KiCad VSON-8 3.3x3.3 NexFET land pattern): source pad 3 to gate pad 4 is 0.14 mm
+# by footprint geometry (0.65 mm pitch). Scoped to pads of Q301 only; 0.127 mm (5 mil) is a common 4-layer
+# fab minimum - confirm with the chosen fab (OPEN B.7) and against the TI DQG0008 land pattern (U-12/U-17).
+(rule "Q301_nexfet_pad_pitch"
+	(condition "A.memberOfFootprint('Q301') && B.memberOfFootprint('Q301')")
+	(constraint clearance (min 0.127mm)))
