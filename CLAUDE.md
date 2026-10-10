@@ -10,7 +10,9 @@ Design a reliable, manufacturable, battery-powered STM32 PCB with Bluetooth conn
 Optimize for electrical correctness, battery life, reliability, manufacturability, serviceability, testability, and reasonable cost.
 
 ## Project status
-As of 2026-10-10 the repository is only a folder structure: no requirements, design files, or scripts exist yet and git has no commits. Work starts at Phase 0. Update this section as phases complete.
+Project: Piezo Insulin Pump v2 (bench-only, water/saline, never on a person or animal). Handoff documents are in `PROJECT_OVERVIEW.md`, `decisions/`, `requirements/`, `docs/SOURCE_DOCUMENTS.md` (they use upper-case file names, not the names in the deliverables list below).
+
+10 Oct 2026: the owner changed the objective to a **digital Rev B handover design** (no fabrication or bench validation before handover; see `decisions/DECISION_LOG.md` section 6). A generated KiCad 10 project now exists in `hardware/kicad/` (schematic, 4-layer PCB, project library), built from `scripts/design.py` by `scripts/gen_*.py`. It is NOT fabrication-approved: TBD/PLACEHOLDER parts, ST datasheet items and owner decisions are open. Start with `docs/handover/HANDOVER_GUIDE.md`, `ASSUMPTIONS_AND_DEVIATIONS.md` and `UNRESOLVED_ISSUES.md`. Regenerating overwrites the KiCad files, so commit before running the generators.
 
 ## Non-negotiable rules
 1. Never invent hardware requirements, component specifications, datasheet values, pin mappings, package dimensions, or validation results.

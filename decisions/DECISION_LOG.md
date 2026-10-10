@@ -108,3 +108,16 @@ Written by Claude in the 10 Oct report. The owner was asked to accept, change or
 ## 5. Decisions nobody has made yet
 
 Board size and outline, fab house, connector types, MCU pin assignment, flyback transformer, cell size for Rev B, charge current, battery-life target, link-loss behaviour, CGM message format. See `OPEN_QUESTIONS.md`.
+
+## 6. Decisions recorded in the Claude Code session of 10 Oct 2026 (digital handover objective)
+
+Added after the handoff snapshot. Source: the owner's messages and answers in this session.
+
+| Date | Decision | Rationale | Status |
+| --- | --- | --- | --- |
+| 10 Oct | Project objective changed: produce a reasonably complete, digitally usable KiCad schematic and PCB for v2 as a **handover prototype**. Fabrication and hardware validation are NOT required before handover. Rev A physical tests are no longer a prerequisite for starting digital design | The owner is leaving the project before completion | DECIDED (owner). Supersedes the "Rev A before Rev B design work" sequencing for the digital design only; K-7 still applies to any fabrication |
+| 10 Oct | Supervisor veto gate default (OPEN item 3 / CF-9): place footprints for BOTH a 10 k pull-up and a 10 k pull-down, both DNP, and leave the choice unresolved | Owner chose not to decide in this session | DECIDED (owner) as "unresolved, both footprints". Build is NOT acceptable until one is chosen |
+| 10 Oct | BLE RF: U.FL connector with a 3-element pi-match placeholder instead of an antenna | ST RF reference documents unavailable; avoids unverified antenna geometry | DECIDED (owner) |
+| 10 Oct | 48 V: K-10 kill network drives LM51551 UVLO/EN; K-12 "switched output" high-side switch and E-11 bleeder placed as DNP placeholders only | A flyback has no DC input-to-output path, so EN low de-energises the rail; switch not designed | DECIDED (owner) |
+| 10 Oct | Approved additions: 4-layer stack-up (P-02) and encoder A/B to the C031 supervisor timer (S-07) | Owner selection | DECIDED (owner). P-02 and S-07 move from PROPOSED to DECIDED |
+| 10 Oct | Not added to the Rev B board: buzzer + STOP button (S-12) and the INA219 current monitor | Owner did not select them | DECIDED (owner). INA219 omission is a deviation from P-01 ("Rev B carries the Rev A circuit"); battery-voltage sensing for S-13 is therefore OPEN (DNP divider placeholder R107/R108) |

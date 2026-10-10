@@ -1,0 +1,19 @@
+Plane-net SMD pads NOT fanned out to a plane (left for the router):
+J703.1(no room)
+U601.5
+U601.6
+C603.1
+C602.1
+C601.1
+R306.2
+R302.2
+C304.1
+C302.1
+U201.6(no room)
+U201.8
+TP201.1
+L201.2
+C202.1
+R106.2
+R105.2
+R104.2

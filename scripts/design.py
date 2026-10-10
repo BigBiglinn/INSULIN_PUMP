@@ -204,11 +204,13 @@ def build():
       note="Vout = 1.0 V x (1 + 470k/10k) = 48.0 V (VREF 1 V +/-1 %, SNVSB75E). Tolerance stack not verified vs 45.6-50.4 V")
     R(s, "R308", "10k 1%", "FLY_FB", "GND", status="CALC", note="see R307")
     # --- K-12 switched output: placeholder only
-    s.add("Q302", "pump_v2:Q_PMOS_SOT23_TBD", "PMOS_TBD", {"1": "SW48_GATE", "2": "+48V_RAW", "3": "+48V_MOT"}, dnp=True,
+    s.add("Q302", "pump_v2:Q_PMOS_SOT23_TBD", "PMOS_TBD", {"1": "SW48_GATE", "2": "+48V_RAW", "3": "+48V_MOT"},
+          footprint="Package_TO_SOT_SMD:SOT-223-3_TabPin2", dnp=True,
           status="PLACEHOLDER", note="K-12 'switched output' high-side switch NOT DESIGNED (owner 10 Oct: placeholder). >=100 V class")
     R(s, "R309", "TBD", "SW48_GATE", "+48V_RAW", dnp=True, status="PLACEHOLDER", note="Q302 gate-source pull-up placeholder")
     R(s, "R310", "TBD", "SW48_GATE", "SW48_DRV", dnp=True, status="PLACEHOLDER", note="Q302 gate drive placeholder")
-    s.add("Q303", "pump_v2:Q_NMOS_SOT23_TBD", "NMOS_TBD", {"1": "FLY_EN", "2": "GND", "3": "SW48_DRV"}, dnp=True,
+    s.add("Q303", "pump_v2:Q_NMOS_SOT23_TBD", "NMOS_TBD", {"1": "FLY_EN", "2": "GND", "3": "SW48_DRV"},
+          footprint="Package_TO_SOT_SMD:SOT-223-3_TabPin2", dnp=True,
           status="PLACEHOLDER", note="Level-shift placeholder driven by FLY_EN. >=100 V class (BSS138 50 V fails the 80 % rule)")
     R(s, "R311", "0R", "+48V_RAW", "+48V_MOT", FP_R1206, status="ASSUMED",
       note="Bypass of the undesigned output switch Q302 so the rail is usable. Remove if Q302 is designed in")

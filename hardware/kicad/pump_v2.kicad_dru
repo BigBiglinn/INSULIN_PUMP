@@ -1,0 +1,11 @@
+(version 1)
+
+# Piezo Insulin Pump v2 - project DRC rules (generic; replace/extend with the fab's rules, OPEN B.7)
+
+# J703 is the PMD401 48 V power connector chosen by PiezoMotor (JST SH SM02B-SRSS-TB, 1.0 mm pitch,
+# PMD401 manual 150025-01 sec.3.4). Its own pad pitch gives 0.4 mm between +48V and GND, below the
+# 0.6 mm HV48 net-class clearance. Exception is scoped to pad-to-pad inside J703 ONLY. See
+# docs/handover/UNRESOLVED_ISSUES.md U-17 (confirm JST SH ratings for this use).
+(rule "J703_vendor_connector_pitch"
+	(condition "A.memberOfFootprint('J703') && B.memberOfFootprint('J703')")
+	(constraint clearance (min 0.35mm)))

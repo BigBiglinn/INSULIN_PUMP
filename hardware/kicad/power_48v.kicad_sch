@@ -4434,7 +4434,7 @@
 			(at 330.2 111.02 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
 			(at 330.2 106.68 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -4605,7 +4605,7 @@
 			(at 38.1 161.82 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
 			(at 38.1 157.48 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

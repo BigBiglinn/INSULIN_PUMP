@@ -293,8 +293,10 @@ def main():
           len(glob_nets), "global nets")
 
 
-HV_NETS = ["+48V_RAW", "+48V_MOT", "FLY_SEC", "SW48_GATE", "SW48_DRV"]
-PWR_NETS = ["VBAT", "VBAT_RAW", "VBAT_FUSED", "FLY_SW", "FLY_CS", "FLY_CLAMP", "BUCK_SW", "VBUS_CHG", "+3V3", "GND"]
+HV_NETS = ["+48V_RAW", "+48V_MOT", "FLY_SEC"]
+# Nets carried by planes (GND, VBAT, +3V3) and nets landing on fine-pitch pads stay Default;
+# wide tracks only where every pad on the net can accept them.
+PWR_NETS = ["VBAT_RAW", "FLY_SW", "FLY_CLAMP"]
 RF_NETS = ["RF_MCU", "RF_ANT"]
 
 
@@ -317,14 +319,14 @@ def write_project_files(root_uuid, sheets, sheet_uuids):
         "classes": [
             netclass("Default", 0.15, 0.2, prio=2147483647),
             netclass("HV48", 0.6, 0.4, prio=0, color="rgb(255, 0, 0)"),
-            netclass("PWR", 0.2, 0.6, via_d=0.7, via_drill=0.35, prio=1, color="rgb(255, 153, 0)"),
+            netclass("PWR", 0.2, 0.8, via_d=0.7, via_drill=0.35, prio=1, color="rgb(255, 153, 0)"),
             netclass("RF", 0.2, 0.3, prio=2, color="rgb(0, 194, 255)"),
         ],
         "meta": {"version": 5},
         "netclass_assignments": None,
-        "netclass_patterns": ([{"netclass": "HV48", "pattern": n} for n in HV_NETS] +
-                              [{"netclass": "PWR", "pattern": n} for n in PWR_NETS] +
-                              [{"netclass": "RF", "pattern": n} for n in RF_NETS]),
+        "netclass_patterns": ([{"netclass": "HV48", "pattern": "*" + n} for n in HV_NETS] +
+                              [{"netclass": "PWR", "pattern": "*" + n} for n in PWR_NETS] +
+                              [{"netclass": "RF", "pattern": "*" + n} for n in RF_NETS]),
     }
     erc = pro.setdefault("erc", {})
     erc.setdefault("erc_exclusions", [])
