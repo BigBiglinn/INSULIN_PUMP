@@ -41,19 +41,20 @@ Read these alongside this guide:
 1S protected cell -> J101 XT30 -> F101 5 A -> J102 (off-board master switch) -> VBAT
    VBAT_FUSED -> U101 BQ25188 BAT (charging only; SYS unloaded, E-09) <- J103 USB-C VBUS
    VBAT -> U201 TPS62840 -> +3V3 -> U501 WBA55, U601 C031, U701 MAX3485, encoder (JP701 default)
-   VBAT -> U301 LM51551 non-isolated flyback (T301/Q301/D301 TBD) -> +48V_RAW -> R311 0R (switch bypass) -> +48V_MOT -> J703 -> PMD401
+   VBAT -> U301 LM51551 non-isolated flyback (Q301 CSD16340Q3, D301 PNE20010ER + snubber; T301 PLACEHOLDER) -> +48V_RAW -> R311 0R (switch bypass) -> +48V_MOT -> J703 -> PMD401
 Kill path (sheet "Kill path"): FLY_EN = LM51551 UVLO/EN
    R401 4.7k to GND (default OFF) | U501 PB7 -> R402 1k -> FLY_EN | Q401 BSS138 (gate = U601 PB0 SUP_VETO) shorts FLY_EN
-   Gate default R403 (pull-up) / R404 (pull-down): BOTH DNP - OWNER DECISION REQUIRED (U-01)
+   Gate default: R403 10k PULL-UP fitted (owner 10 Oct) -> veto ON unless U601 drives PB0 LOW
 PMD401 servo connector J701 (SPI mode 3 <=500 kbit/s, SS, AEN) and status connector J702 (Ready, Fault):
-   TVS + 100R on every line. AEN driven by the SUPERVISOR (U601 PB1); pull-down R713 DNP (U-02)
+   TVS + 100R on every line. AEN driven OPEN-DRAIN by Q402 BSS138 (gate = U601 PB1 SUP_PARK, R405 10k pull-up):
+   parked by default; supervisor drives PB1 LOW to unpark (owner 10 Oct)
 LL06 encoder J705 -> TVS -> 100R -> U501 TIM2 (PB6/PA8) and separately 100R -> U601 TIM3 (PA6/PA7) (S-07)
 RS-485 setup link: U501 USART2 + DE -> U701 MAX3485 -> J704
 Heartbeat / supervisor link: U501 LPUART1 (PB5 TX / PA1 RX) <-> U601 USART2 (PA3 RX / PA2 TX)
 BLE: U501 RF -> pi-match placeholder (C514/L502/C515) -> J501 U.FL
 ```
 
-## 4. MCU pin map (DERIVED from the ST pin data in the KiCad 10 symbols; NOT CubeMX-verified)
+## 4. MCU pin map (functions VERIFIED against the STM32CubeMX 6.18.1 database: validation/logs/pinmap_check.md)
 
 ### U501 STM32WBA55CGUx (UFQFPN48)
 
@@ -92,8 +93,8 @@ BLE: U501 RF -> pi-match placeholder (C514/L502/C515) -> J501 U.FL
 
 | Pin | Port | Net | Function |
 | --- | --- | --- | --- |
-| 19 | PB0 | SUP_VETO | GPIO out → Q401 BSS138 gate (veto) |
-| 20 | PB1 | PMD_AEN_S | GPIO out → PMD401 AEN (low = park) |
+| 19 | PB0 | SUP_VETO | GPIO out → Q401 gate (HIGH or high-Z = veto ON via R403; drive LOW to permit 48 V) |
+| 20 | PB1 | SUP_PARK | GPIO out → Q402 gate (HIGH or high-Z = AEN low = PARK; drive LOW to unpark) |
 | 17 | PA6 | ENC_A_S | TIM3_CH1 own encoder count (S-07) |
 | 18 | PA7 | ENC_B_S | TIM3_CH2 |
 | 13 | PA2 | HB_S2M | USART2_TX → main |
