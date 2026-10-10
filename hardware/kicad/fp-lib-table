@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "pump_v2")(type "KiCad")(uri "${KIPRJMOD}/pump_v2.pretty")(options "")(descr "Piezo Insulin Pump v2 project footprints and placeholders"))
+)

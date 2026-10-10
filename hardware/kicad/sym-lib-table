@@ -1,0 +1,4 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "pump_v2")(type "KiCad")(uri "${KIPRJMOD}/pump_v2.kicad_sym")(options "")(descr "Piezo Insulin Pump v2 project symbols"))
+)

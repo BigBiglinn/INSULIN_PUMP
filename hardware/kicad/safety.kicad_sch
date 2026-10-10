@@ -1,0 +1,1357 @@
+(kicad_sch
+	(version 20250610)
+	(generator "pump_v2_gen")
+	(generator_version "10.0")
+	(uuid "696e866a-8095-5179-9a77-76dbec0d07de")
+	(paper "A3")
+	(title_block
+		(title "48 V enable kill path: main MCU enable, supervisor veto")
+		(date "2026-10-10")
+		(rev "B-draft-handover")
+		(company "Piezo Insulin Pump v2 - BENCH ONLY (water/saline), never on a person or animal")
+		(comment 1 "NOT fabrication-approved. Contains TBD / PLACEHOLDER parts - see Status field and docs/handover")
+		(comment 2 "ERC/DRC clean status does not prove electrical correctness")
+		(comment 3 "Sheet 5: Kill path (fail-off)")
+	)
+	(lib_symbols
+		(symbol "Connector:TestPoint"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.762)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Transistor_FET:BSS138"
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "Q"
+				(at 5.08 1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "BSS138"
+				(at 5.08 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 5.08 -1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(justify left)
+				)
+			)
+			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BSS138-D.PDF"
+				(at 5.08 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Description" "50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "N-Channel MOSFET"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "BSS138_0_1"
+				(polyline
+					(pts
+						(xy 0.254 1.905)
+						(xy 0.254 -1.905)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.254 0)
+						(xy -2.54 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 2.286)
+						(xy 0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 0.508)
+						(xy 0.762 -0.508)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.27)
+						(xy 0.762 -2.286)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.778)
+						(xy 3.302 -1.778)
+						(xy 3.302 1.778)
+						(xy 0.762 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0)
+						(xy 2.032 0.381)
+						(xy 2.032 -0.381)
+						(xy 1.016 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 1.651 0)
+					(radius 2.794)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54)
+						(xy 2.54 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -2.54)
+						(xy 2.54 0)
+						(xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.921 0.381)
+						(xy 3.683 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.302 0.381)
+						(xy 2.921 -0.254)
+						(xy 3.683 -0.254)
+						(xy 3.302 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "BSS138_1_1"
+				(pin input line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "G"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 -5.08 90)
+					(length 2.54)
+					(name "S"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(text "K-10 DECIDED (fail-off): 4.7 k pull-down on the enable, main MCU drives it through 1 k, supervisor veto via one BSS138.\nOn Rev B the enable node is LM51551 UVLO/EN (FLY_EN). EN rising threshold 0.4-0.7 V, UVLO 1.425-1.575 V (SNVSB75E).\nMCU high: 3.3 V x 4.7/(4.7+1) = 2.72 V -> run.  Pull-down only: 0 V -> shutdown.  BSS138 on: ~0 V -> shutdown.\nUNRESOLVED (OPEN item 3 / CF-9): BSS138 gate default. R403 (pull-UP, veto on by default) and R404 (pull-DOWN,\nas wired on Rev A) are BOTH placed DNP. Owner decision required before build. With neither fitted the gate floats\nwhile the supervisor is in reset - this is NOT an acceptable build state. SG-03 must be run after the decision."
+		(exclude_from_sim no)
+		(at 15 20 0)
+		(effects (font (size 1.5 1.5)) (justify left top))
+		(uuid "47defa30-ab2e-5209-b527-c42273a11db6")
+	)
+	(wire
+		(pts
+			(xy 17.78 64.77) (xy 17.78 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cdfe9bf3-cf42-5e7b-8653-2568365d1358")
+	)
+	(global_label "FLY_EN"
+		(shape passive)
+		(at 17.78 62.23 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "6c1b1aad-2c63-53aa-b54c-02be3c1e3792")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 17.78 62.23 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 17.78 72.39) (xy 17.78 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7a2cd058-d595-5a37-a4af-9ec985c6c978")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 17.78 74.93 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "a39328c1-1a37-5fd6-92d6-2fe1ef9b282c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 17.78 74.93 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 69.85) (xy 43.18 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb608892-c44a-5f7a-85c9-363d7a8e7541")
+	)
+	(global_label "MCU_48V_EN"
+		(shape passive)
+		(at 43.18 67.31 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "e1d0b7ae-5717-5a9e-b6a2-e3a80b337d7d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.18 67.31 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 77.47) (xy 43.18 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b02820a1-9b05-557b-a3f9-3ad2ae55e08a")
+	)
+	(global_label "FLY_EN"
+		(shape passive)
+		(at 43.18 80.01 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "a9b6abb2-a872-5ff5-b949-cc99e624a57d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.18 80.01 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 81.28 71.12) (xy 78.74 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "258c765a-d606-59df-a33c-fb2999d4ed72")
+	)
+	(global_label "SUP_VETO"
+		(shape passive)
+		(at 78.74 71.12 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "471add5f-8de1-5beb-9d7d-daf13141a0d4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.74 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 88.9 76.2) (xy 88.9 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "015e7d24-f1af-511a-bc87-b23accebf114")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 88.9 78.74 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "c79ccfec-d303-5704-b722-0fb58c2a4831")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 88.9 78.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 88.9 66.04) (xy 88.9 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a056f052-60c7-58fd-97fa-89b99a83debe")
+	)
+	(global_label "FLY_EN"
+		(shape passive)
+		(at 88.9 63.5 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "146b883d-b67c-5dfa-9d89-384ebf31ae6c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 88.9 63.5 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 96.52 67.31) (xy 96.52 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cec0f114-e55a-52ee-acc1-4a30f2644bcb")
+	)
+	(global_label "SUP_VETO"
+		(shape passive)
+		(at 96.52 64.77 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "2c3a98f8-d121-5ed4-91d2-bb304abc4c03")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 96.52 64.77 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 96.52 74.93) (xy 96.52 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3ba2547-bbcf-5a47-9a6d-5cfdeff7f4ac")
+	)
+	(global_label "+3V3"
+		(shape passive)
+		(at 96.52 77.47 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "8823e031-df33-52dd-87fa-70de98bfaeac")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 96.52 77.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 119.38 67.31) (xy 119.38 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d3246b2a-6162-51c4-b1cd-4f183055737b")
+	)
+	(global_label "SUP_VETO"
+		(shape passive)
+		(at 119.38 64.77 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "535266cf-3306-5b82-93cb-e0d900a3ac40")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 119.38 64.77 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 119.38 74.93) (xy 119.38 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d66d02c-8c42-5190-9cb6-4f0965cc33dc")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 119.38 77.47 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "e11fcbd5-35bc-5ac9-b28e-fe42142b2931")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 119.38 77.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 144.78 55.88) (xy 144.78 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f7f1ae5-f546-5b19-b3be-c9ac55fc6671")
+	)
+	(global_label "FLY_EN"
+		(shape passive)
+		(at 144.78 58.42 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "8ebae0b7-99d9-5e57-aa7d-b5ef3bba5ed8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 144.78 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 167.64 55.88) (xy 167.64 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "550ba307-ed83-5dfb-8e83-4847a4d0a20f")
+	)
+	(global_label "SUP_VETO"
+		(shape passive)
+		(at 167.64 58.42 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "4505b654-ae17-5658-b25a-8b7b5f8f42d6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 167.64 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 190.5 55.88) (xy 190.5 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe4b59c5-c9f9-5754-9fde-4c0e14b7ea30")
+	)
+	(global_label "PMD_AEN"
+		(shape passive)
+		(at 190.5 58.42 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "560f3e86-f97a-54b2-9e82-2ae577705145")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 190.5 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 17.78 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ef8ee08f-8622-5967-accc-c828544c9fa9")
+		(property "Reference" "R401"
+			(at 20.35 67.31 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "4.7k"
+			(at 20.35 69.85 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 17.78 68.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 17.78 68.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Resistor"
+			(at 17.78 68.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 17.78 68.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "DECIDED"
+			(at 20.35 72.08 0)
+			(effects (font (size 1 1)) (justify left) (hide yes))
+		)
+		(property "Note" "K-10 enable pull-down (fail-off default)"
+			(at 17.78 68.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "bcaced09-2482-50e8-8912-24d962ffa7b5")
+		)
+		(pin "2"
+			(uuid "2d22ce15-5ec6-5e19-ae68-dfbef208da2a")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/a78675ae-ba4d-5e6f-a6c5-257aabdd15e4"
+					(reference "R401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 43.18 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f8f2febe-fdda-5647-a19b-0f46054d0bc4")
+		(property "Reference" "R402"
+			(at 45.75 72.39 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "1k"
+			(at 45.75 74.93 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 43.18 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 43.18 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Resistor"
+			(at 43.18 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 43.18 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "DECIDED"
+			(at 45.75 77.16 0)
+			(effects (font (size 1 1)) (justify left) (hide yes))
+		)
+		(property "Note" "K-10 main MCU drive resistor so the supervisor can overpower it"
+			(at 43.18 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "e4864b25-1e3d-549d-a440-bc9ca2ab8f8e")
+		)
+		(pin "2"
+			(uuid "47fabb57-b2b9-5f4e-a879-894fb9aabd96")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/a78675ae-ba4d-5e6f-a6c5-257aabdd15e4"
+					(reference "R402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:BSS138")
+		(at 86.36 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6e021caf-a249-5963-8218-1ac27d87cbb2")
+		(property "Reference" "Q401"
+			(at 86.36 66.78 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "BSS138"
+			(at 86.36 75.46 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 86.36 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BSS138-D.PDF"
+			(at 86.36 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"
+			(at 86.36 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "BSS138"
+			(at 86.36 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "DECIDED"
+			(at 86.36 77.66 0)
+			(effects (font (size 1 1)) (hide yes))
+		)
+		(property "Note" "K-10 supervisor veto FET (drain to EN, source to GND)"
+			(at 86.36 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "6489d1e7-5c21-5683-a210-87680c921d5c")
+		)
+		(pin "2"
+			(uuid "f210dc90-b39a-5172-933e-78aa990828a1")
+		)
+		(pin "3"
+			(uuid "d50abacb-b625-5924-ad5f-acd394d03726")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/a78675ae-ba4d-5e6f-a6c5-257aabdd15e4"
+					(reference "Q401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 96.52 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(uuid "082d1ba7-266e-567f-9131-04799f9401a2")
+		(property "Reference" "R403"
+			(at 99.09 69.85 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "10k"
+			(at 99.09 72.39 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 96.52 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 96.52 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Resistor"
+			(at 96.52 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 96.52 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "PLACEHOLDER"
+			(at 99.09 74.62 0)
+			(effects (font (size 1 1)) (justify left))
+		)
+		(property "Note" "OPEN item 3 option A: pull-up -> veto ON by default (proposed 10 Oct report). Owner decision pending"
+			(at 96.52 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "38da6384-fea3-5135-a16c-d88e6bc6f266")
+		)
+		(pin "2"
+			(uuid "045889b3-8e85-5317-8078-19ba0988b37e")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/a78675ae-ba4d-5e6f-a6c5-257aabdd15e4"
+					(reference "R403")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 119.38 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(uuid "58cb3cf2-9079-580d-b9da-4022efefddc6")
+		(property "Reference" "R404"
+			(at 121.95 69.85 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "10k"
+			(at 121.95 72.39 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 119.38 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 119.38 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Resistor"
+			(at 119.38 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 119.38 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "PLACEHOLDER"
+			(at 121.95 74.62 0)
+			(effects (font (size 1 1)) (justify left))
+		)
+		(property "Note" "OPEN item 3 option B: pull-down as wired on Rev A (K-10). Breaks S-01 with a dead supervisor. Owner decision pending"
+			(at 119.38 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "8cda68e3-82aa-5cf4-b718-aedd60b1db84")
+		)
+		(pin "2"
+			(uuid "bbdc6c6e-8f69-5dac-a2dc-a317816260d1")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/a78675ae-ba4d-5e6f-a6c5-257aabdd15e4"
+					(reference "R404")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 144.78 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "c2906c3d-10e7-5d56-b775-b4c5565f99b8")
+		(property "Reference" "TP401"
+			(at 147.35 54.61 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "FLY_EN"
+			(at 147.35 57.15 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 144.78 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 144.78 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "test point"
+			(at 144.78 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 144.78 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "ASSUMED"
+			(at 147.35 59.38 0)
+			(effects (font (size 1 1)) (justify left) (hide yes))
+		)
+		(property "Note" "Test point (P-07 proposed; added for bring-up access)"
+			(at 144.78 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b828da4c-f32d-5db7-832e-47d8b4dbf43c")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/a78675ae-ba4d-5e6f-a6c5-257aabdd15e4"
+					(reference "TP401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 167.64 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "306bc768-fd36-5a42-a0f3-3eda1023b31d")
+		(property "Reference" "TP402"
+			(at 170.21 54.61 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "SUP_VETO"
+			(at 170.21 57.15 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 167.64 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 167.64 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "test point"
+			(at 167.64 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 167.64 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "ASSUMED"
+			(at 170.21 59.38 0)
+			(effects (font (size 1 1)) (justify left) (hide yes))
+		)
+		(property "Note" "Test point (P-07 proposed; added for bring-up access)"
+			(at 167.64 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "98dbf1ad-d63b-5b85-bde6-852135b7d3bd")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/a78675ae-ba4d-5e6f-a6c5-257aabdd15e4"
+					(reference "TP402")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 190.5 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "044ce352-9e80-5b13-aeb1-723f72da034e")
+		(property "Reference" "TP403"
+			(at 193.07 54.61 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "PMD_AEN"
+			(at 193.07 57.15 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
+			(at 190.5 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 190.5 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "test point"
+			(at 190.5 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 190.5 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "ASSUMED"
+			(at 193.07 59.38 0)
+			(effects (font (size 1 1)) (justify left) (hide yes))
+		)
+		(property "Note" "Test point (P-07 proposed; added for bring-up access)"
+			(at 190.5 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "cefe16e3-8a4d-5b5e-890a-db78fef64538")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/a78675ae-ba4d-5e6f-a6c5-257aabdd15e4"
+					(reference "TP403")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(embedded_fonts no)
+)

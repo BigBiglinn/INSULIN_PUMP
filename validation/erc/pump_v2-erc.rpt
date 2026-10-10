@@ -1,0 +1,47 @@
+ERC report (2026-10-10T13:22:51, Encoding UTF8)
+Report includes: Errors, Warnings, Exclusions
+
+***** Sheet /
+[lib_symbol_mismatch]: Symbol 'MAX3485' doesn't match copy in library 'Interface_UART'
+    ; warning
+    @(137.16 mm, 190.50 mm): Symbol U701 [MAX3485]
+
+***** Sheet /Power input & charger/
+
+***** Sheet /3V3 buck/
+
+***** Sheet /48V flyback/
+
+***** Sheet /Kill path (fail-off)/
+
+***** Sheet /Main MCU STM32WBA55/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(33.02 mm, 81.28 mm): Symbol U501 Pin 3 [VLXSMPS, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(58.42 mm, 68.58 mm): Symbol U501 Pin 45 [VDD11, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(63.50 mm, 68.58 mm): Symbol U501 Pin 39 [VDDANA, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(66.04 mm, 68.58 mm): Symbol U501 Pin 38 [VDDHPA, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(68.58 mm, 68.58 mm): Symbol U501 Pin 40 [VDDRF, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(71.12 mm, 68.58 mm): Symbol U501 Pin 43 [VDDRFPA, Power input, Line]
+
+***** Sheet /Supervisor STM32C031/
+
+***** Sheet /PMD401 & encoder interface/
+
+ ** ERC messages: 7  Errors 6  Warnings 1
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters

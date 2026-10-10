@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "filename": "pump_v2.kicad_pro",
+    "version": 3
+  },
+  "sheets": [
+    [
+      "f846824e-fe00-58de-b74d-a87eb7212abb",
+      "Root"
+    ],
+    [
+      "f8fa8286-6c9a-5d52-842c-31e7bce57f7e",
+      "Power input & charger"
+    ],
+    [
+      "b57e4263-b484-5d36-a2c0-38fbd1537d1d",
+      "3V3 buck"
+    ],
+    [
+      "a64da770-1253-5f60-8552-f7b0565ef615",
+      "48V flyback"
+    ],
+    [
+      "a78675ae-ba4d-5e6f-a6c5-257aabdd15e4",
+      "Kill path (fail-off)"
+    ],
+    [
+      "f4dee5ce-a01c-5847-851e-e3550b03254c",
+      "Main MCU STM32WBA55"
+    ],
+    [
+      "3d779b94-7c84-531d-9a88-e8c7ccc34958",
+      "Supervisor STM32C031"
+    ],
+    [
+      "24800ffa-d018-5d4e-8f8c-c763c6d216c0",
+      "PMD401 & encoder interface"
+    ]
+  ],
+  "net_settings": {
+    "classes": [
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Default",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2147483647,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.6,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "HV48",
+        "pcb_color": "rgb(255, 0, 0)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.4,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "PWR",
+        "pcb_color": "rgb(255, 153, 0)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.6,
+        "tuning_profile": "",
+        "via_diameter": 0.7,
+        "via_drill": 0.35,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "RF",
+        "pcb_color": "rgb(0, 194, 255)",
+        "priority": 2,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.3,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      }
+    ],
+    "meta": {
+      "version": 5
+    },
+    "netclass_assignments": null,
+    "netclass_patterns": [
+      {
+        "netclass": "HV48",
+        "pattern": "+48V_RAW"
+      },
+      {
+        "netclass": "HV48",
+        "pattern": "+48V_MOT"
+      },
+      {
+        "netclass": "HV48",
+        "pattern": "FLY_SEC"
+      },
+      {
+        "netclass": "HV48",
+        "pattern": "SW48_GATE"
+      },
+      {
+        "netclass": "HV48",
+        "pattern": "SW48_DRV"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "VBAT"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "VBAT_RAW"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "VBAT_FUSED"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "FLY_SW"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "FLY_CS"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "FLY_CLAMP"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "BUCK_SW"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "VBUS_CHG"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "+3V3"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "GND"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "RF_MCU"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "RF_ANT"
+      }
+    ]
+  },
+  "erc": {
+    "erc_exclusions": []
+  }
+}
