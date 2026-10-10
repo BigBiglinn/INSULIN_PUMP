@@ -6,3 +6,4 @@ fp-info-cache
 _autosave-*
 *.bak
 __pycache__/
+hardware/kicad/pump_v2.net

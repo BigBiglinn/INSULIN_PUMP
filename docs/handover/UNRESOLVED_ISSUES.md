@@ -35,6 +35,8 @@ IDs in brackets refer to `requirements/OPEN_QUESTIONS.md`. None of these is reso
 | U-18 | Battery connector, cell, fuse part, master switch part and charger input connector not decided (B.19, B.20) | Owner |
 | U-19 | No thermal or power calculations for the flyback / FET / transformer (CLAUDE.md Phase 5) | After U-04 |
 | U-20 | RF trace not impedance-controlled; U.FL placed next to the MCU | Stack-up, 50 Ω coplanar geometry, ST reference |
+| U-21 | **PCB routing incomplete:** 63 unconnected items on 55 nets after autorouting, plus 10 dangling vias and 3 starved thermals (`validation/logs/unrouted_nets.txt`). Autorouted tracks have not been reviewed for loop area, current capacity or signal integrity | Hand-route the remainder in pcbnew. Re-route the flyback power loop and the 48 V path by hand once U-04 is designed |
+| U-22 | Freerouting ran with its default telemetry and analytics enabled for the first runs in this session (disabled afterwards). Board data was processed locally; whether anonymous usage statistics were sent was not verified | Note only; disable telemetry in `freerouting.json` before any reuse |
 
 ## Minor
 
@@ -43,5 +45,5 @@ IDs in brackets refer to `requirements/OPEN_QUESTIONS.md`. None of these is reso
 | U-30 | ERC warning `lib_symbol_mismatch` on U701 (MAX3485): the generator's flattening of the derived library symbol differs cosmetically from KiCad's. Fix: in Eeschema, Tools → Update Symbols from Library (U701 only) |
 | U-31 | Schematic drawn label-style (every pin has a net label, few wires). Electrically complete, but a human redraw would read better |
 | U-32 | Silkscreen reference/value text overlaps on dense areas; cosmetic, check before any fab |
-| U-33 | Several DRC items listed in `validation/drc/` are consequences of placeholders (see the DRC section of HANDOVER_GUIDE.md) |
+| U-33 | Silkscreen overlaps (65), silk over copper (47), unmirrored bottom text (2): cosmetic DRC items |
 | U-34 | Many vendor datasheets still missing (SOURCE_DOCUMENTS.md section 4): LL06, MAX3485, BSS138, connectors, Molicel cell |

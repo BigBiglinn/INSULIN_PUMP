@@ -130,7 +130,7 @@ kicad-cli sch export netlist --format kicadsexpr -o hardware/kicad/pump_v2.net h
 "C:\Program Files\KiCad\10.0\bin\python.exe" scripts/gen_pcb.py ses  <file.ses> # import routes, refill zones
 kicad-cli sch erc --format report --severity-all -o validation/erc/pump_v2-erc.rpt hardware/kicad/pump_v2.kicad_sch
 kicad-cli pcb drc --format report --severity-all --schematic-parity --refill-zones --save-board -o validation/drc/pump_v2-drc.rpt hardware/kicad/pump_v2.kicad_pcb
-kicad-cli sch export bom ... (see the commands in section 8)
+bash scripts/run_checks.sh                        # ERC, DRC (+parity), BOMs
 ```
 
 Freerouting and the Java runtime were used from a temporary folder and are **not** part of the repository.
@@ -145,6 +145,52 @@ Freerouting and the Java runtime were used from a temporary folder and are **not
 6. Re-route by hand where the autorouter is weak: 48 V loop, flyback switching loop (P-03/L-5 proposed), RF trace, battery path width (IPC-2152 for 2.1 A).
 7. Only then: Rev A bench results (DA, OC, SG, FT groups), engineering review, release checks, then Gerbers (CLAUDE.md Phase 6).
 
-## 8. Final run results
+## 8. Final run results (kicad-cli 10.0.3, 10 Oct 2026)
 
-(Filled in from the final kicad-cli runs; see below.)
+Reproduce with `bash scripts/run_checks.sh`. The reports are `validation/erc/pump_v2-erc.rpt` and `validation/drc/pump_v2-drc.rpt`.
+
+### ERC: 6 errors, 1 warning (none excluded or suppressed)
+
+| Count | Type | Cause | Action |
+| --- | --- | --- | --- |
+| 6 | `power_pin_not_driven` (error) | U501 VLXSMPS, VDD11, VDDANA, VDDHPA, VDDRF and VDDRFPA sit on their own placeholder nets because their correct connection is unknown without the ST datasheet | **Intentional and genuine.** Resolve per U-05, not by adding PWR_FLAGs |
+| 1 | `lib_symbol_mismatch` (warning) | U701 MAX3485: the generator's flattening of the derived library symbol | Cosmetic (U-30). In Eeschema use *Update Symbols from Library* |
+
+### DRC (with `--schematic-parity --refill-zones`)
+
+| Count | Type | Meaning |
+| --- | --- | --- |
+| 0 | clearance / shorting / hole / edge / courtyard | **No copper rule violations.** HV48 nets hold 0.6 mm everywhere except inside J703, under the scoped rule in `pump_v2.kicad_dru` (vendor JST SH 1.0 mm pitch, U-17) |
+| 0 | schematic parity | Footprints, values, fields and DNP/BOM attributes match the schematic |
+| 63 | `unconnected_items` | **Routing is incomplete**: 63 connections on 55 nets (list in `validation/logs/unrouted_nets.txt`). Mostly MCU signal escapes, the flyback control nets and the PMD401 interface (U-21) |
+| 10 | `via_dangling` | Router leftover vias; delete or reuse during hand routing |
+| 3 | `starved_thermal` | Thermal relief with fewer than 2 spokes (USB-C shield pad, two fine-pitch GND pads); review |
+| 65 / 47 / 3 | silkscreen overlap / over copper / edge | Cosmetic; tidy before any fabrication |
+| 2 | `nonmirrored_text_on_back_layer` | The two bottom-silk disclaimer lines; mirror them in pcbnew |
+
+### Routing method and limits
+
+- **Planes:** In1.Cu is a solid GND plane. In2.Cu is split: VBAT under the battery strip, along a bottom band and under the 48 V block; +3V3 everywhere else. F.Cu and B.Cu carry GND pours.
+- **Fan-out:** 143 of 148 SMD plane-net pads were fanned out by script to vias into their plane (`validation/logs/fanout_unconnected.txt` lists the rest).
+- **Signal routing:** Freerouting 2.1.0 ran three passes (one full, two incremental) with a 12-minute job limit each. Its own counts plateaued at about 40–65 unrouted. Freerouting telemetry and analytics were switched off after the first runs (its defaults had them enabled).
+- **Not done by any automated step:**
+  - Impedance control: the RF trace is not 50 Ω controlled.
+  - Switching-loop minimisation for the flyback.
+  - IPC-2152 current-width checks on the battery path.
+  - Length or skew checks.
+  - Hand review of every routed segment.
+
+  **The routing is a starting point, not a reviewed layout.**
+
+### BOM
+
+- `docs/bom.csv`: 74 grouped lines.
+- `docs/bom_detailed.csv`: 131 placed references, each with its Status and a source/justification note.
+- Status breakdown: DECIDED 23, DS 14, CALC 2, ASSUMED 34, TBD 27, PLACEHOLDER 31. 24 references are DNP.
+- Test points, mounting holes and PWR_FLAGs are excluded from the BOM.
+
+### Images and PDF
+
+- `images/pcb_placement_fab.png`: placement and courtyards.
+- `images/pcb_routed_top_bottom.png`: F.Cu and B.Cu copper with silkscreen.
+- `pump_v2_schematic.pdf`: all 8 schematic sheets.
