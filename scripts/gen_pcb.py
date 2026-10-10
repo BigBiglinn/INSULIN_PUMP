@@ -95,7 +95,7 @@ ANCHORS = {
     # 3V3 buck
     "U201": (122.0, 140.0, 0), "L201": (125.5, 140.0, 90),
     # main MCU (U.FL at top edge)
-    "U501": (148.0, 120.0, 0), "J501": (148.0, 103.5, 0), "Y501": (157.0, 114.0, 0),
+    "U501": (148.0, 119.0, 0), "J501": (148.0, 103.5, 0),
     "J502": (134.0, 107.0, 0), "J503": (163.0, 104.5, 90),
     # supervisor
     "U601": (150.0, 160.0, 0), "J601": (137.0, 169.0, 0),
@@ -120,7 +120,7 @@ EDGE_FACING = {"J701": "+x", "J702": "+x", "J703": "+x", "J704": "+x", "J705": "
 REGIONS = {
     "/Power input & charger/": (109.0, 122.0, 131.0, 132.0),
     "/3V3 buck/": (117.0, 145.0, 131.0, 152.0),
-    "/Main MCU STM32WBA55/": (132.0, 131.0, 165.0, 142.0),
+    "/Main MCU STM32WBA55/": (130.0, 129.0, 168.0, 143.0),
     "/Supervisor STM32C031/": (156.0, 152.0, 164.0, 158.0),
     "/Kill path (fail-off)/": (166.0, 126.0, 184.0, 140.0),
     "/PMD401 & encoder interface/": (168.0, 101.5, 199.0, 123.0),
@@ -133,9 +133,7 @@ REGIONS2 = {
 }
 # Small support parts that should hug their IC instead of the region
 NEAR = {
-    "U501": ["C501", "C502", "C503", "C504", "C505", "C506", "C507", "C508", "L501", "C509", "C510", "C511",
-             "C512", "C513", "R510", "R511", "R512", "R513", "C514", "L502", "C515", "C516", "C517", "Y502",
-             "C518", "C519", "R501"],
+    "U501": ["C501", "C502", "C503", "C504", "C505", "C506", "C507", "C508", "L501", "C509", "Y501"],
     "U601": ["C601", "C602", "C603", "C604"],
     "U101": ["C101", "C102", "C103", "R101"],
     "U201": ["R201", "C201", "C202"],
@@ -240,7 +238,7 @@ def near_pack(anchor, parts, occupied):
     ring = 0
     todo = list(parts)
     while todo and ring < 12:
-        x0, y0, x1, y1 = ab[0] - 1.6 * (ring + 1), ab[1] - 1.6 * (ring + 1), ab[2] + 1.6 * (ring + 1), ab[3] + 1.6 * (ring + 1)
+        x0, y0, x1, y1 = ab[0] - 1.2 - 2.2 * ring, ab[1] - 1.2 - 2.2 * ring, ab[2] + 1.2 + 2.2 * ring, ab[3] + 1.2 + 2.2 * ring
         cand = []
         step = 1.0
         x = x0
@@ -257,7 +255,7 @@ def near_pack(anchor, parts, occupied):
             w, h = size_mm(fp)
             ok = False
             for (cx, cy) in cand:
-                rect = (cx - w / 2 - 0.25, cy - h / 2 - 0.25, cx + w / 2 + 0.25, cy + h / 2 + 0.25)
+                rect = (cx - w / 2 - 0.6, cy - h / 2 - 0.6, cx + w / 2 + 0.6, cy + h / 2 + 0.6)
                 if rect[0] < X0 + 1 or rect[1] < Y0 + 1 or rect[2] > X1 - 1 or rect[3] > Y1 - 1:
                     continue
                 if any(not (rect[2] <= o[0] or rect[0] >= o[2] or rect[3] <= o[1] or rect[1] >= o[3]) for o in occupied):
@@ -544,10 +542,12 @@ def build():
     add_zone(board, gnd, pcbnew.In1_Cu, full, 0, 0.3, "GND_L2")
     add_zone(board, gnd, pcbnew.F_Cu, full, 0, 0.3, "GND_TOP")
     add_zone(board, gnd, pcbnew.B_Cu, full, 0, 0.3, "GND_BOT")
-    add_zone(board, vbat, pcbnew.In2_Cu, [(X0 + inset, Y0 + inset), (131.5, Y0 + inset), (131.5, 150.5),
-                                          (X1 - inset, 150.5), (X1 - inset, Y1 - inset), (X0 + inset, Y1 - inset)],
-             2, 0.3, "VBAT_L3")
-    add_zone(board, v33, pcbnew.In2_Cu, rect(131.5, Y0 + inset, X1 - inset, 150.5), 1, 0.3, "3V3_L3")
+    # L3 split: VBAT under the battery strip (x < 116) and the 48 V block (x > 155, y > 140.5),
+    # joined by a band along the bottom edge; +3V3 everywhere else (both MCUs, buck output, pull-ups).
+    vb_poly = [(X0 + inset, Y0 + inset), (116.0, Y0 + inset), (116.0, 177.0), (155.0, 177.0), (155.0, 140.5),
+               (X1 - inset, 140.5), (X1 - inset, Y1 - inset), (X0 + inset, Y1 - inset)]
+    add_zone(board, vbat, pcbnew.In2_Cu, vb_poly, 2, 0.3, "VBAT_L3")
+    add_zone(board, v33, pcbnew.In2_Cu, full, 1, 0.3, "3V3_L3")
     # silkscreen warnings
     add_text(board, "PIEZO INSULIN PUMP v2 REV B - HANDOVER PROTOTYPE, NOT FAB-APPROVED", 112.0, 182.0, pcbnew.B_SilkS, 1.0)
     add_text(board, "BENCH ONLY - WATER/SALINE - NEVER ON A PERSON OR ANIMAL", 112.0, 180.0, pcbnew.B_SilkS, 1.0)
@@ -589,11 +589,35 @@ def export_dsn(out):
     print("DSN export:", ok, out)
 
 
+def remove_dangling(board, rounds=4):
+    """Delete vias and track segments with an unconnected end (autorouter leftovers)."""
+    removed = 0
+    for _ in range(rounds):
+        board.BuildConnectivity()
+        conn = board.GetConnectivity()
+        dead = []
+        for tr in board.GetTracks():
+            if tr.Type() == pcbnew.PCB_VIA_T:
+                if len(conn.GetConnectedItems(tr)) < 2 and not any(
+                        z.GetNetCode() == tr.GetNetCode() and z.IsOnLayer(lyr) and z.HitTestFilledArea(lyr, tr.GetPosition())
+                        for z in board.Zones() for lyr in (pcbnew.In1_Cu, pcbnew.In2_Cu, pcbnew.F_Cu, pcbnew.B_Cu)):
+                    dead.append(tr)
+            elif conn.TestTrackEndpointDangling(tr, False):
+                dead.append(tr)
+        if not dead:
+            break
+        for d in dead:
+            board.Remove(d)
+        removed += len(dead)
+    log(f"removed {removed} dangling vias/segments")
+
+
 def import_ses(ses):
     board = pcbnew.LoadBoard(BOARD)
     ok = pcbnew.ImportSpecctraSES(board, ses)
     print("SES import:", ok)
     fill(board)
+    remove_dangling(board)
     pcbnew.SaveBoard(BOARD, board)
 
 
