@@ -2690,7 +2690,7 @@
 			(at 124.46 59.88 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "K-12. Pinout TI SLUSFJ3 Table 5-1. Footprint pitch UNVERIFIED (see footprint descr)"
+		(property "Note" "K-12. Pinout SLUSFJ3 Table 5-1. Register defaults (SLUSFJ3 7.5): VBATREG code 70 -> 4.20 V (meets E-09); ICHG code 5 -> 10 mA (firmware must set charge current, OPEN B.19); I2C watchdog ON by default and resets registers on expiry. Footprint pitch UNVERIFIED (see footprint descr)"
 			(at 124.46 50.8 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2908,7 +2908,7 @@
 			(at 233.71 59.69 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "10k_TBD"
+		(property "Value" "10k"
 			(at 233.71 62.23 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -2928,11 +2928,11 @@
 			(at 231.14 60.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 233.71 64.46 0)
-			(effects (font (size 1 1)) (justify left))
+			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "TS/MR: pack NTC not defined (OPEN B.20). Fixed 10k stands in for a 10k NTC at 25 C; TS can be disabled via TS_EN. WARNING: TS/MR held low enters ship mode"
+		(property "Note" "SLUSFJ3: 'For devices where the TS function is not needed, tie a 10-k resistor to the TS/MR pin.' 10k x ITSMR 38 uA = 0.38 V >> VTSMR 90 mV button threshold, so no false ship-mode press. Replace with the pack NTC if the cell has one (OPEN B.20)"
 			(at 231.14 60.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3309,13 +3309,13 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "97c5e048-7906-5273-81eb-071316cb5517")
 		(property "Reference" "R107"
 			(at 45.75 113.03 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "TBD"
+		(property "Value" "1M 1%"
 			(at 45.75 115.57 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -3335,11 +3335,11 @@
 			(at 43.18 114.3 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "PLACEHOLDER"
+		(property "Status" "CALC"
 			(at 45.75 117.8 0)
-			(effects (font (size 1 1)) (justify left))
+			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "VBAT sense divider for S-13 3.4 V cut-off. INA219 omitted on Rev B by owner (10 Oct 2026); sensing method OPEN"
+		(property "Note" "S-13 VBAT sense (INA219 dropped; BQ25188 has no ADC). Ratio 1/2: 4.2 V -> 2.1 V < VDDA min 3.0 V. Drain ~2.1 uA at 4.2 V. Firmware must use VREFINT (VDDA follows VBAT in buck dropout). ADC pin leakage/sampling time to be checked in the ST datasheet (500k source + C104 reservoir)"
 			(at 43.18 114.3 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3365,13 +3365,13 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "d6ce7b86-8f6a-53a5-a3fa-cb90f35a1918")
 		(property "Reference" "R108"
 			(at 68.61 118.11 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "TBD"
+		(property "Value" "1M 1%"
 			(at 68.61 120.65 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -3391,9 +3391,9 @@
 			(at 66.04 119.38 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "PLACEHOLDER"
+		(property "Status" "CALC"
 			(at 68.61 122.88 0)
-			(effects (font (size 1 1)) (justify left))
+			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "see R107"
 			(at 66.04 119.38 0)
@@ -3421,7 +3421,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "25ce3de7-a2ae-509d-bf22-619573edb724")
 		(property "Reference" "C104"
 			(at 91.47 118.11 0)
@@ -3447,11 +3447,11 @@
 			(at 88.9 119.38 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "PLACEHOLDER"
+		(property "Status" "CALC"
 			(at 91.47 122.88 0)
-			(effects (font (size 1 1)) (justify left))
+			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "see R107"
+		(property "Note" "Charge reservoir for ADC sampling from the 500k divider (tau 50 ms; sample <= a few Hz)"
 			(at 88.9 119.38 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

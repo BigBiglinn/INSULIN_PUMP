@@ -2348,7 +2348,7 @@
 		)
 		(uuid "c1ec8fee-ef1d-5fb5-8e45-799850678e8d")
 	)
-	(global_label "PMD_AEN_S"
+	(global_label "SUP_PARK"
 		(shape passive)
 		(at 58.42 111.76 0)
 		(fields_autoplaced yes)

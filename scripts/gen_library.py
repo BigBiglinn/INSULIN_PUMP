@@ -112,6 +112,10 @@ def symbols():
         "PLACEHOLDER high-side P-MOSFET (>=100 V class), part and package TBD",
         True, ["1"], ["2"], ["3"]))
     out.append(mosfet_symbol(
+        "CSD16340Q3", "CSD16340Q3", "Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET",
+        "TI CSD16340Q3 25 V N-channel NexFET, SON 3.3x3.3 (pins 1-3 S, 4 G, 5-8 D = pad 5)",
+        False, ["4"], ["1", "2", "3"], ["5"]))
+    out.append(mosfet_symbol(
         "Q_NMOS_SOT23_TBD", "NMOS_TBD", "Package_TO_SOT_SMD:SOT-23",
         "PLACEHOLDER level-shift N-MOSFET (>=100 V class), part and package TBD",
         False, ["1"], ["2"], ["3"]))

@@ -352,7 +352,6 @@
     "meta": {
       "version": 5
     },
-    "net_colors": null,
     "netclass_assignments": null,
     "netclass_patterns": [
       {

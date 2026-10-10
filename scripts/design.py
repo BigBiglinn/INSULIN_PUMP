@@ -115,14 +115,17 @@ def build():
     s.add("U101", "pump_v2:BQ25188", "BQ25188YBGR",
           {"A2": "VBUS_CHG", "B1": "I2C_SCL", "C1": "I2C_SDA", "A1": "CHG_INT_N", "D1": "CHG_TS",
            "B2": "CHG_SYS", "C2": "VBAT_FUSED", "D2": "GND"},
-          status="DECIDED", mpn="BQ25188YBGR", note="K-12. Pinout TI SLUSFJ3 Table 5-1. Footprint pitch UNVERIFIED (see footprint descr)")
+          status="DECIDED", mpn="BQ25188YBGR", note="K-12. Pinout SLUSFJ3 Table 5-1. Register defaults (SLUSFJ3 7.5): VBATREG code 70 -> 4.20 V (meets E-09); "
+               "ICHG code 5 -> 10 mA (firmware must set charge current, OPEN B.19); I2C watchdog ON by default and resets "
+               "registers on expiry. Footprint pitch UNVERIFIED (see footprint descr)")
     C(s, "C101", "2.2uF/25V", "VBUS_CHG", "GND", FP_C0805, status="DS",
       note="IN: >=1 uF effective after DC bias (SLUSFJ3 Table 5-1); 25 V for 5 V USB + margin")
     C(s, "C102", "1uF/10V", "VBAT_FUSED", "GND", status="DS", note="BAT: >=1 uF ceramic (SLUSFJ3 Table 5-1)")
     C(s, "C103", "10uF/10V", "CHG_SYS", "GND", FP_C0805, status="DS", note="SYS: >=10 uF ceramic (SLUSFJ3 Table 5-1); SYS otherwise unloaded (E-09)")
-    R(s, "R101", "10k_TBD", "CHG_TS", "GND", status="TBD",
-      note="TS/MR: pack NTC not defined (OPEN B.20). Fixed 10k stands in for a 10k NTC at 25 C; TS can be disabled via TS_EN. "
-           "WARNING: TS/MR held low enters ship mode")
+    R(s, "R101", "10k", "CHG_TS", "GND", status="DS",
+      note="SLUSFJ3: 'For devices where the TS function is not needed, tie a 10-k resistor to the TS/MR pin.' "
+           "10k x ITSMR 38 uA = 0.38 V >> VTSMR 90 mV button threshold, so no false ship-mode press. "
+           "Replace with the pack NTC if the cell has one (OPEN B.20)")
     s.add("J103", "Connector:USB_C_Receptacle_PowerOnly_6P", "USB_C_PWR",
           {"A9": "VBUS_CHG", "B9": "VBUS_CHG", "A5": "USB_CC1", "B5": "USB_CC2", "A12": "GND", "B12": "GND", "SH": "GND"},
           "Connector_USB:USB_C_Receptacle_GCT_USB4125-xx-x_6P_TopMnt_Horizontal", status="ASSUMED", mpn="GCT USB4125",
@@ -132,10 +135,13 @@ def build():
     R(s, "R104", "10k", "I2C_SCL", "+3V3", status="DS", note="SCL pull-up to logic rail, 10k per SLUSFJ3 Table 5-1")
     R(s, "R105", "10k", "I2C_SDA", "+3V3", status="DS", note="SDA pull-up to logic rail, 10k per SLUSFJ3 Table 5-1")
     R(s, "R106", "10k", "CHG_INT_N", "+3V3", status="DS", note="/INT open drain, 1-20k pull-up allowed (SLUSFJ3)")
-    R(s, "R107", "TBD", "VBAT", "VBAT_SENSE", dnp=True, status="PLACEHOLDER",
-      note="VBAT sense divider for S-13 3.4 V cut-off. INA219 omitted on Rev B by owner (10 Oct 2026); sensing method OPEN")
-    R(s, "R108", "TBD", "VBAT_SENSE", "GND", dnp=True, status="PLACEHOLDER", note="see R107")
-    C(s, "C104", "100nF", "VBAT_SENSE", "GND", dnp=True, status="PLACEHOLDER", note="see R107")
+    R(s, "R107", "1M 1%", "VBAT", "VBAT_SENSE", status="CALC",
+      note="S-13 VBAT sense (INA219 dropped; BQ25188 has no ADC). Ratio 1/2: 4.2 V -> 2.1 V < VDDA min 3.0 V. "
+           "Drain ~2.1 uA at 4.2 V. Firmware must use VREFINT (VDDA follows VBAT in buck dropout). "
+           "ADC pin leakage/sampling time to be checked in the ST datasheet (500k source + C104 reservoir)")
+    R(s, "R108", "1M 1%", "VBAT_SENSE", "GND", status="CALC", note="see R107")
+    C(s, "C104", "100nF", "VBAT_SENSE", "GND", status="CALC",
+      note="Charge reservoir for ADC sampling from the 500k divider (tau 50 ms; sample <= a few Hz)")
     FLAG(s, "#FLG101", "GND")
     FLAG(s, "#FLG102", "VBAT")
     FLAG(s, "#FLG103", "VBUS_CHG")
@@ -165,39 +171,63 @@ def build():
     sheets.append(s)
     s.notes.append("K-12 / DECIDED 29 Sep: Rev B 48 V stage is an LM51551 flyback (plain boost hits the 93 % duty limit).\n"
                    "Topology follows TI SNVSB75E Figure 10-12 'Typical Non-Isolated Flyback'; BIAS tied to VCC for 1S start (>=2.97 V).\n"
-                   "POWER STAGE NOT DESIGNED: transformer, FET, diode, sense resistor, clamp, RT, SS and compensation are TBD (OPEN B.16).\n"
+                   "Design calculations: docs/handover/FLYBACK_DESIGN.md (fsw ~300 kHz, n = Ns/Np = 5, Lp ~7 uH, Ipk ~3.1 A at 3.0 V / 100 mA).\n"
+                   "TRANSFORMER T301 IS STILL A PLACEHOLDER (no verifiable off-the-shelf part found); RCD clamp values depend on it.\n"
+                   "Compensation values are PRELIMINARY (depend on T301 and the PMD401 cable/bulk capacitance) - simulate/bench before use.\n"
                    "Kill path: UVLO/EN driven by FLY_EN (sheet 'Kill path'). EN < 0.4 V min (SNVSB75E) = shutdown. A flyback has no DC path\n"
                    "from VBAT to the output, so EN low de-energises the rail. K-12 'switched output' + E-11 bleeder: DNP PLACEHOLDERS only.\n"
                    "E-06: every 48 V capacitor rated >= 100 V. E-03: 45.6-50.4 V at the PMD401.")
     CP(s, "C301", "220uF/16V", "VBAT", "GND", "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm", status="DECIDED",
        note="Bulk at converter input, carried from Rev A item 25 (220 uF/16 V low-ESR); adequacy for flyback TBD")
-    C(s, "C302", "10uF/10V", "VBAT", "GND", FP_C0805, status="TBD", note="Input ceramic, value TBD with power-stage design")
-    C(s, "C303", "10uF/10V", "VBAT", "GND", FP_C0805, status="TBD", note="Input ceramic, value TBD with power-stage design")
+    C(s, "C302", "10uF/10V X5R", "VBAT", "GND", FP_C0805, status="CALC",
+      note="Input ceramic. Primary ripple ~1.1 A rms at 3.0 V (FLYBACK_DESIGN.md); 2 x 10 uF; check part ripple rating")
+    C(s, "C303", "10uF/10V X5R", "VBAT", "GND", FP_C0805, status="CALC", note="see C302")
     s.add("U301", "pump_v2:LM51551", "LM51551DSSR",
           {"1": "VBAT", "2": "VBAT", "12": "FLY_EN", "10": "FLY_RT", "9": "FLY_SS", "11": "FLY_PGOOD",
            "3": "FLY_GATE", "5": "FLY_CS", "8": "FLY_FB", "6": "FLY_COMP", "4": "GND", "7": "GND", "13": "GND"},
           status="DECIDED", mpn="LM51551DSSR",
           note="K-12. Pinout SNVSB75E Table 7-1. BIAS=VCC (SNVSB75E sec.1: 2.97-16 V). UVLO/EN max = VBIAS+0.3 V; FLY_EN <= 0.82 x 3V3 <= VBAT")
-    C(s, "C304", "1uF/10V", "VBAT", "GND", status="TBD", note="BIAS/VCC bypass to PGND (SNVSB75E Table 7-1); value TBD")
-    R(s, "R301", "TBD", "FLY_RT", "GND", status="TBD", note="RT sets fsw 100 kHz-2.2 MHz; TBD with transformer")
-    C(s, "C305", "TBD", "FLY_SS", "GND", status="TBD", note="Soft-start cap (10 uA source); TBD")
+    C(s, "C304", "2.2uF/10V", "VBAT", "GND", status="DS",
+      note="VCC/BIAS bypass to PGND: SNVSB75E 'recommended VCC capacitor value is from 1 uF to 4.7 uF'")
+    R(s, "R301", "73.2k 1%", "FLY_RT", "GND", status="CALC",
+      note="RT = 2.21e10/fsw - 955 (SNVSB75E Eq.5): 73.2k -> fsw = 298 kHz (+/-15 %). DMAX >= ~90 % at this fsw (Fig 8-16)")
+    C(s, "C305", "47nF", "FLY_SS", "GND", status="CALC", note="tSS = CSS x VREF / ISS = 47 nF x 1 V / 10 uA = 4.7 ms (SNVSB75E 9.3.3)")
     R(s, "R302", "100k", "FLY_PGOOD", "+3V3", status="ASSUMED", note="PGOOD open-drain pull-up to 3V3 (<= VBIAS)")
-    R(s, "R303", "TBD", "FLY_COMP", "FLY_COMP_RC", status="TBD", note="Compensation Rc; TBD")
-    C(s, "C306", "TBD", "FLY_COMP_RC", "GND", status="TBD", note="Compensation Cc; TBD")
-    C(s, "C307", "TBD", "FLY_COMP", "GND", dnp=True, status="TBD", note="Optional HF compensation pole; TBD")
-    s.add("Q301", "pump_v2:Q_NMOS_TDSON8_TBD", "NMOS_TBD", {"4": "FLY_GATE", "5": "FLY_SW", "1": "FLY_CS", "2": "FLY_CS", "3": "FLY_CS"},
-          status="PLACEHOLDER", note="Flyback switch: logic-level (gate drive = VBAT 3.0-4.2 V), Vds/Id/Rds TBD. Footprint is a placeholder")
-    R(s, "R305", "TBD", "FLY_CS", "GND", FP_R2512, status="TBD", note="Current sense (100 mV limit threshold, SNVSB75E); value TBD")
+    R(s, "R303", "3.01k 1%", "FLY_COMP", "FLY_COMP_RC", status="CALC",
+      note="PRELIMINARY type-II compensation for fc ~3 kHz < fRHPZ/5 (FLYBACK_DESIGN.md). Depends on T301 Lp and output capacitance")
+    C(s, "C306", "180nF", "FLY_COMP_RC", "GND", status="CALC", note="PRELIMINARY: compensation zero ~300 Hz (FLYBACK_DESIGN.md)")
+    C(s, "C307", "3.3nF", "FLY_COMP", "GND", status="CALC", note="PRELIMINARY: HF pole ~16 kHz (FLYBACK_DESIGN.md)")
+    s.add("Q301", "pump_v2:CSD16340Q3", "CSD16340Q3", {"4": "FLY_GATE", "5": "FLY_SW", "1": "FLY_CS", "2": "FLY_CS", "3": "FLY_CS"},
+          "Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET", status="DS", mpn="TI CSD16340Q3",
+          note="25 V NexFET, RDS(on) rated at VGS = 2.5 V (6.1 mohm typ), Qg 6.5 nC (TI datasheet in docs/datasheets). "
+               "Gate drive = VBAT 3.0-4.2 V. Vds = 4.2 V + 48.7/5 = 13.9 V + leakage spike: RCD clamp must hold <= 20 V "
+               "(80 % rule). Footprint is KiCad's TI NexFET 3.3x3.3 pattern - VERIFY against TI DQG0008 drawing")
+    R(s, "R305", "22m 1% 1W", "FLY_CS", "GND", FP_R2512, status="CALC",
+      note="Ilim = VCLTH/Rs = 93..107 mV / 22 mohm = 4.2..4.9 A (SNVSB75E). Peak at 3.0 V / 100 mA ~3.1 A. P ~0.12 W (Irms ~2.3 A)")
     s.add("T301", "pump_v2:XFMR_FLYBACK_TBD", "XFMR_TBD", {"1": "VBAT", "2": "FLY_SW", "3": "GND", "4": "FLY_SEC"},
-          status="PLACEHOLDER", note="Flyback transformer part/turns ratio OPEN B.16. Dot polarity per standard flyback (opposite windings)")
-    s.add("D301", "Device:D_Schottky", "D_TBD_100V", {"2": "FLY_SEC", "1": "+48V_RAW"}, "Diode_SMD:D_SMA",
-          status="TBD", note="Output rectifier >= 100 V class; part TBD")
-    s.add("D302", "Device:D_Schottky", "D_CLAMP_TBD", {"2": "FLY_SW", "1": "FLY_CLAMP"}, "Diode_SMD:D_SMA",
-          status="TBD", note="Primary RCD clamp diode; need and values TBD with transformer leakage")
-    R(s, "R306", "TBD", "FLY_CLAMP", "VBAT", FP_R1206, status="TBD", note="RCD clamp resistor TBD")
-    C(s, "C308", "TBD", "FLY_CLAMP", "VBAT", FP_C0805, status="TBD", note="RCD clamp capacitor TBD")
-    C(s, "C309", "2.2uF/100V", "+48V_RAW", "GND", FP_C1210, status="TBD", note="Output ceramic; >=100 V rating per E-06 DECIDED; value TBD")
-    C(s, "C310", "2.2uF/100V", "+48V_RAW", "GND", FP_C1210, status="TBD", note="Output ceramic; >=100 V per E-06; value TBD")
+          status="PLACEHOLDER",
+          note="SPECIFICATION (FLYBACK_DESIGN.md): Ns/Np = 5, Lp 5-10 uH (7.3 uH calc), primary Isat >= 5 A (above max current limit 4.9 A), "
+               "primary Irms >= 2.5 A, secondary Irms >= 0.3 A, leakage <= 2 % of Lp, secondary rated >= 100 V. "
+               "No verifiable off-the-shelf part found; footprint is a 12x12 mm placeholder. Dot polarity per standard flyback")
+    s.add("D301", "Device:D", "PNE20010ER", {"2": "FLY_SEC", "1": "+48V_RAW"}, "Diode_SMD:Nexperia_CFP3_SOD-123W",
+          status="DS", mpn="Nexperia PNE20010ER",
+          note="200 V / 1 A hyperfast (trr 25 ns) rectifier, Nexperia datasheet in docs/datasheets. Steady-state VR = 48 + 5 x 4.2 = 69 V, "
+               "but open-loop simulation (validation/sim) shows leakage ringing: 200 V breakdown without snubber, 88-97 V with "
+               "R313/C312 (49 % of rating). A 100 V Schottky was rejected for this reason. Avg 0.1 A, peak ~0.7 A")
+    R(s, "R313", "220R 1206", "FLY_SEC", "FLY_SNUB", FP_R1206, status="CALC",
+      note="D301 RC snubber (sim run 3): 0.14-0.17 W at 100 mA -> 1206 >= 0.25 W. Value depends on real T301 leakage: re-tune on bench")
+    C(s, "C312", "100pF/250V C0G", "FLY_SNUB", "+48V_RAW", "Capacitor_SMD:C_1206_3216Metric", status="CALC",
+      note="D301 RC snubber capacitor; sees ~100 V peak -> 250 V C0G")
+    s.add("D302", "Device:D_Schottky", "PMEG10020ELR", {"2": "FLY_SW", "1": "FLY_CLAMP"}, "Diode_SMD:Nexperia_CFP3_SOD-123W",
+          status="DS", mpn="Nexperia PMEG10020ELR",
+          note="RCD clamp diode (100 V/2 A Schottky; sees ~18.5 V). Clamp values R306/C308 from sim run 3")
+    R(s, "R306", "390R 1W", "FLY_CLAMP", "VBAT", FP_R2512, status="CALC",
+      note="RCD clamp (sim run 3, 2 % leakage assumed): Vds peak 18.5 V = 74 % of 25 V; dissipation 0.35-0.42 W -> 2512 1 W. "
+           "Re-tune once T301 leakage is known")
+    C(s, "C308", "22nF/50V X7R", "FLY_CLAMP", "VBAT", FP_C0805, status="CALC", note="RCD clamp capacitor (sees ~15 V)")
+    C(s, "C309", "2.2uF/100V X7R", "+48V_RAW", "GND", FP_C1210, status="CALC",
+      note="Ripple: dV = Iout x D / (fsw x C) -> needs >= 1.1 uF effective at 48 V for 0.24 V; 2 parts allow ~60 % DC-bias loss. E-06 >= 100 V")
+    C(s, "C310", "2.2uF/100V X7R", "+48V_RAW", "GND", FP_C1210, status="CALC", note="see C309")
     CP(s, "C311", "47uF/100V", "+48V_RAW", "GND", "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm", status="DECIDED",
        note="47 uF/100 V carried from Rev A item 23 (DC2628A output). Series/size TBD")
     R(s, "R307", "470k 1%", "+48V_RAW", "FLY_FB", status="CALC",
@@ -225,17 +255,22 @@ def build():
     s.notes.append("K-10 DECIDED (fail-off): 4.7 k pull-down on the enable, main MCU drives it through 1 k, supervisor veto via one BSS138.\n"
                    "On Rev B the enable node is LM51551 UVLO/EN (FLY_EN). EN rising threshold 0.4-0.7 V, UVLO 1.425-1.575 V (SNVSB75E).\n"
                    "MCU high: 3.3 V x 4.7/(4.7+1) = 2.72 V -> run.  Pull-down only: 0 V -> shutdown.  BSS138 on: ~0 V -> shutdown.\n"
-                   "UNRESOLVED (OPEN item 3 / CF-9): BSS138 gate default. R403 (pull-UP, veto on by default) and R404 (pull-DOWN,\n"
-                   "as wired on Rev A) are BOTH placed DNP. Owner decision required before build. With neither fitted the gate floats\n"
-                   "while the supervisor is in reset - this is NOT an acceptable build state. SG-03 must be run after the decision.")
+                   "Veto default (owner decision 10 Oct 2026, OPEN item 3 closed): R403 10k PULL-UP fitted -> veto ON whenever the supervisor\n"
+                   "is in reset, crashed with its pin high/high-Z, or not running; firmware must drive PB0 LOW to permit 48 V. (R404 removed.)\n"
+                   "PMD401 park (owner decision 10 Oct 2026, OPEN item 4): open-drain Q402 BSS138 with R405 10k gate PULL-UP -> AEN held LOW\n"
+                   "(parked) by default; the PMD401's own 22k pull-up provides the run level, so no 3.3/5 V level question. Supervisor drives\n"
+                   "PB1 (SUP_PARK) LOW to unpark. BSS138 VGS(th) 0.9-1.5 V (Nexperia BSS138P datasheet). SG-03/SG-05 still required on hardware.")
     R(s, "R401", "4.7k", "FLY_EN", "GND", status="DECIDED", note="K-10 enable pull-down (fail-off default)")
     R(s, "R402", "1k", "MCU_48V_EN", "FLY_EN", status="DECIDED", note="K-10 main MCU drive resistor so the supervisor can overpower it")
     s.add("Q401", "Transistor_FET:BSS138", "BSS138", {"1": "SUP_VETO", "2": "GND", "3": "FLY_EN"},
           "Package_TO_SOT_SMD:SOT-23", status="DECIDED", mpn="BSS138", note="K-10 supervisor veto FET (drain to EN, source to GND)")
-    R(s, "R403", "10k", "SUP_VETO", "+3V3", dnp=True, status="PLACEHOLDER",
-      note="OPEN item 3 option A: pull-up -> veto ON by default (proposed 10 Oct report). Owner decision pending")
-    R(s, "R404", "10k", "SUP_VETO", "GND", dnp=True, status="PLACEHOLDER",
-      note="OPEN item 3 option B: pull-down as wired on Rev A (K-10). Breaks S-01 with a dead supervisor. Owner decision pending")
+    R(s, "R403", "10k", "SUP_VETO", "+3V3", status="DECIDED",
+      note="Owner 10 Oct 2026: gate pull-UP, veto ON by default (closes OPEN item 3 / CF-9; deviation DV-3 from Rev A pull-down)")
+    s.add("Q402", "Transistor_FET:BSS138", "BSS138", {"1": "SUP_PARK", "2": "GND", "3": "PMD_AEN_DRV"},
+          "Package_TO_SOT_SMD:SOT-23", status="DECIDED", mpn="BSS138 (e.g. Nexperia BSS138P)",
+          note="Owner 10 Oct 2026: open-drain AEN driver. ON (gate high) = AEN low = motor parked. Sinks only the PMD401 22k pull-up")
+    R(s, "R405", "10k", "SUP_PARK", "+3V3", status="DECIDED",
+      note="Owner 10 Oct 2026: Q402 gate pull-UP -> parked by default; supervisor PB1 LOW unparks")
     TP(s, "TP401", "FLY_EN")
     TP(s, "TP402", "SUP_VETO")
     TP(s, "TP403", "PMD_AEN")
@@ -312,7 +347,7 @@ def build():
                    "Package LQFP48 (C6T6) ASSUMED; the C031C6 also exists in UFQFPN48 (C6U6).")
     nm = {"6": "+3V3", "5": "+3V3", "7": "GND", "10": "SUP_NRST", "35": "SUP_SWDIO", "36": "SUP_SWCLK",
           "13": "HB_S2M", "14": "HB_M2S", "29": "CON_SUP_TX", "32": "CON_SUP_RX",
-          "19": "SUP_VETO", "20": "PMD_AEN_S", "17": "ENC_A_S", "18": "ENC_B_S", "21": "LED_SUP"}
+          "19": "SUP_VETO", "20": "SUP_PARK", "17": "ENC_A_S", "18": "ENC_B_S", "21": "LED_SUP"}
     used = set(nm)
     nc = [str(i) for i in range(1, 49) if str(i) not in used]
     s.add("U601", "MCU_ST_STM32C0:STM32C031C6Tx", "STM32C031C6Tx", nm, status="DECIDED",
@@ -332,7 +367,7 @@ def build():
                    "Servo connector = the PMD401 6-pole sensor connector in servo mode; the LL06 encoder therefore connects to THIS board (J705).\n"
                    "J705 mirrors the PMD401 sensor-connector pinout so the kit encoder cable can plug in - VERIFY against the delivered cable.\n"
                    "E-07: TVS + 100 R on every PMD401 signal line. PMD401 inputs have internal pull-ups (10k/~20k/22k) to an UNSTATED rail (IF-02).\n"
-                   "AEN has a 22k internal pull-up (manual): a dead supervisor leaves the motor ENABLED unless R706 is fitted (OPEN item 4).\n"
+                   "AEN has a 22k internal pull-up (manual); it is driven open-drain by Q402 (sheet Kill path): parked unless the supervisor unparks.\n"
                    "Encoder supply (OPEN item 12): JP701 default 3V3 (logic rail, survives 48 V switching); alternative PMD401 5V Out.")
     s.add("J701", "Connector_Generic_MountingPin:Conn_01x06_MountingPin", "PMD401_SERVO",
           {"1": "PMD_MOSI", "2": "GND", "3": "PMD_5V", "4": "PMD_SS", "5": "PMD_SCLK", "6": "PMD_AEN", "MP": "GND"},
@@ -359,7 +394,7 @@ def build():
           "Jumper:SolderJumper-3_P1.3mm_Bridged12_RoundedPad1.0x1.5mm_NumberLabels", status="ASSUMED",
           note="OPEN item 12: default 1-2 = 3V3. Encoder supply range not confirmed (vendor: output 3.3-5 V). PMD_5V dies with the 48 V rail")
     C(s, "C701", "100nF", "ENC_VCC", "GND", status="ASSUMED", note="Encoder supply decoupling")
-    lines = [("PMD_MOSI", "PMD_MOSI_M"), ("PMD_SS", "PMD_SS_M"), ("PMD_SCLK", "PMD_SCLK_M"), ("PMD_AEN", "PMD_AEN_S"),
+    lines = [("PMD_MOSI", "PMD_MOSI_M"), ("PMD_SS", "PMD_SS_M"), ("PMD_SCLK", "PMD_SCLK_M"), ("PMD_AEN", "PMD_AEN_DRV"),
              ("PMD_READY", "PMD_READY_M"), ("PMD_FAULT", "PMD_FAULT_M"), ("ENC_A", "ENC_A_M"), ("ENC_B", "ENC_B_M"),
              ("ENC_I", "ENC_I_M")]
     for i, (ext, mcu) in enumerate(lines):
@@ -367,8 +402,6 @@ def build():
         R(s, f"R{702 + i}", "100R", mcu, ext, status="DECIDED", note="E-07 series resistor ('about 100 ohm', value to confirm)")
     R(s, "R711", "100R", "ENC_A_S", "ENC_A", status="DECIDED", note="S-07: supervisor's own series resistor on encoder A")
     R(s, "R712", "100R", "ENC_B_S", "ENC_B", status="DECIDED", note="S-07: supervisor's own series resistor on encoder B")
-    R(s, "R713", "TBD", "PMD_AEN", "GND", dnp=True, status="PLACEHOLDER",
-      note="OPEN item 4: AEN pull-down to beat the PMD401 22k internal pull-up; value after IF-02 measurement. Owner decision")
     CP(s, "C702", "100uF/100V", "+48V_MOT", "GND", "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm", status="DECIDED",
        note="Rev A item 24: 100 uF/100 V low-ESR bulk at the PMD401 input. Series/size TBD")
     s.add("U701", "Interface_UART:MAX3485", "MAX3485", {"1": "RS485_RO", "2": "RS485_DE", "3": "RS485_DE", "4": "RS485_DI",

@@ -1,0 +1,100 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\flyback_openloop.cir
+Start Time: Sat Oct 10 15:57:08 2026
+
+.step case=1 snub=0
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Per .tran options, skipping operating point for transient analysis.
+
+.step case=2 snub=0
+
+.step case=1 snub=1
+
+.step case=2 snub=1
+Total elapsed time: 178.391 seconds.
+Total iterations: 2906707
+
+Files loaded:
+C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\flyback_openloop.cir
+
+
+Measurement: vout_avg
+  step	AVG(V(out))	FROM	TO
+     1	48.4363444838	0.005	0.006
+     2	49.3721197799	0.005	0.006
+     3	48.4790219551	0.005	0.006
+     4	49.9319626524	0.005	0.006
+
+Measurement: vout_pp
+  step	PP(V(out))	FROM	TO
+     1	0.141574859619	0.005	0.006
+     2	0.105442047119	0.005	0.006
+     3	0.137775421143	0.005	0.006
+     4	0.144195556641	0.005	0.006
+
+Measurement: ipri_pk
+  step	MAX(I(Lp))	FROM	TO
+     1	3.32484221458	0.005	0.006
+     2	2.71737861633	0.005	0.006
+     3	3.38685417175	0.005	0.006
+     4	2.73603367805	0.005	0.006
+
+Measurement: vds_max
+  step	MAX(V(sw))	FROM	TO
+     1	20.0419445038	0.005	0.006
+     2	20.0047550201	0.005	0.006
+     3	18.4889297485	0.005	0.006
+     4	18.508687973	0.005	0.006
+
+Measurement: vd1_rev_max
+  step	MAX(V(out)-V(sec))	FROM	TO
+     1	200.516155243	0.005	0.006
+     2	200.51732254	0.005	0.006
+     3	88.4719619751	0.005	0.006
+     4	97.0855102539	0.005	0.006
+
+Measurement: pclamp
+  step	AVG((V(clamp)-V(vin))*(V(clamp)-V(vin))/390)	FROM	TO
+     1	0.495322441905	0.005	0.006
+     2	0.425942138028	0.005	0.006
+     3	0.415042903342	0.005	0.006
+     4	0.352487226031	0.005	0.006
+
+Measurement: psnub
+  step	AVG(I(Rsn)*I(Rsn)*220)	FROM	TO
+     1	4.746802528e-08	0.005	0.006
+     2	5.09030313799e-08	0.005	0.006
+     3	0.137734495593	0.005	0.006
+     4	0.167536024409	0.005	0.006
+
+Measurement: iin_avg
+  step	AVG(-I(V1))	FROM	TO
+     1	2.00649793888	0.005	0.006
+     2	1.4069990864	0.005	0.006
+     3	2.02702955207	0.005	0.006
+     4	1.47484788235	0.005	0.006
+
+Measurement: pout
+  step	AVG(V(out)*V(out)/480)	FROM	TO
+     1	4.88766795868	0.005	0.006
+     2	5.07834814393	0.005	0.006
+     3	4.89628478378	0.005	0.006
+     4	5.19417100056	0.005	0.006
+
+Measurement: pin
+  step	AVG(-V(vin)*I(V1))	FROM	TO
+     1	5.93221172408	0.005	0.006
+     2	5.86406796514	0.005	0.006
+     3	5.99219076618	0.005	0.006
+     4	6.14486527375	0.005	0.006
+
+Measurement: eff
+  step	Pout/Pin
+     1	0.823920012639
+     2	0.866011133247
+     3	0.817110965729
+     4	0.845286392649
