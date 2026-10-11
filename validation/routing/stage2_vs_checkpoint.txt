@@ -1,0 +1,31 @@
+## DRC violations (checkpoint -> now)
+  nonmirrored_text_on_back_layer      2 ->    2
+  silk_edge_clearance                 3 ->    3
+  silk_over_copper                   73 ->   73
+  silk_overlap                       82 ->   82
+  track_dangling                      1 ->    1
+  via_dangling                        6 ->    6
+  unconnected_items                  67 ->   61
+  schematic parity                    0 ->    0
+## Unconnected pairs closed
+  +3V3         R302.2 <-> Via
+  CON_SUP_RX   PTH pad 4 [CON_SUP_R <-> U601.32
+  CON_SUP_TX   PTH pad 3 [CON_SUP_T <-> U601.29
+  ENC_VCC      C701.1 <-> J705.3
+  ENC_VCC      C701.1 <-> JP701.2
+  PMD_5V       J701.3 <-> J702.2
+  PMD_5V       J702.2 <-> JP701.3
+  VBAT_FUSED   C102.1 <-> U101.C2
+  WBA_VDDRF    Track <-> U501.40
+  WBA_VDDRFPA  Track <-> U501.43
+## Unconnected pairs that are new or re-paired
+  +3V3         Track <-> Via
+  VBAT_FUSED   Track <-> U101.C2
+  WBA_VDDRF    C512.1 <-> U501.40
+  WBA_VDDRFPA  Track <-> Track
+## Copper changes by net (removed / added items)
+  CON_SUP_RX   -  0 +  6
+  CON_SUP_TX   -  0 +  5
+  ENC_VCC      -  0 +  5
+  PMD_5V       -  0 + 13
+nets changed outside the stage list: none

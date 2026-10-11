@@ -138,3 +138,48 @@ Pin 11 sits between pin 10 (RT, routed) and pin 12 (FLY_EN, reserved). The only 
 - `validation/logs/unrouted_nets.txt` (older grouping, kept for continuity; it still counts RS485_B as genuine)
 - `validation/logs/unrouted_corridors.txt`
 - `validation/routing/stage1_fcu_controller.png` (F.Cu around U301/Q301; the F.Cu GND pour is shown filled)
+
+## 2. Stage 2: encoder supply, PMD401 5 V, supervisor console (11 Oct 2026)
+
+**Checkpoints:**
+- `route-stage2-before` (= `route-stage1-done` copper; the docs commit 4510a91 is in between);
+- `route-stage2-done`.
+
+**Route specification:** `validation/routing/stage2_hand.json`, applied with `scripts/route_stage.py hand`. Full comparison: `validation/routing/stage2_vs_checkpoint.txt`.
+
+**Scope change:** +3V3 to R302 was taken out of Stage 2. The approved D1 rotation of R302 moves the pad it lands on, so it is routed in the D1 milestone.
+
+**Freerouting:** I tried it once more, with the restriction set in its own settings file (`ignore_net_classes`, `max_passes`, `job_timeout`). It ignored all three: 51 passes, no timeout, and every net routed. I stopped it, discarded its output and restored the settings file. Every Stage 2 route is explicit.
+
+### 2.1 Routes
+
+| Net | Path | Width | Layers / vias |
+|---|---|---|---|
+| ENC_VCC | JP701.2 → C701.1 → J705.3. C701 sits in series on the path, so the decoupling capacitor is between the jumper and the connector. | 0.3 mm | F.Cu, 0 vias |
+| PMD_5V | JP701.3 → via → B.Cu under the ENC_A/ENC_SHLD F.Cu wall, east of the RS-485 B.Cu run → J702.2 → B.Cu between the PMD_MOSI via and the J702.MP GND via → J701.3 | 0.3 mm | F/B, 3 vias |
+| CON_SUP_RX | U601.32 → corridor between the U601 right-hand pins and SUP_VETO (0.25 / 0.26 mm gaps) → via → B.Cu under HB_M2S → J503.4 | 0.2 mm | F/B, 1 via |
+| CON_SUP_TX | U601.29 → east below the SUP_VETO via → north at x = 157.85, between SUP_PARK and the flyback controller parts → via → B.Cu north of the J503 row → J503.3 | 0.2 mm | F/B, 1 via |
+
+**Review notes:**
+- **CON_SUP_TX** runs about 32 mm, partly past the edge of the flyback controller area (about 2.0 mm edge to edge from the FB via at (160.2, 156.4), about 2.8 mm from the R308 pad). It is a low-speed console UART, so this is acceptable for a bench prototype.
+- **CON_SUP_RX** squeezes between the U601 pins and the SUP_VETO track with 0.25 mm gaps. That is legal under the generic rules (0.15 mm), but tight.
+- **PMD_5V** is a long B.Cu run along the connector edge. Its current is small: the PMD401 "5V Out" feeds only the encoder, and only when JP701 is set to 2–3.
+
+### 2.2 Results against `route-stage2-before`
+
+| Check | route-stage2-before | route-stage2-done |
+|---|---|---|
+| ERC | 6 intentional U501 errors + 1 cosmetic U701 warning | identical (schematic not modified) |
+| DRC copper (clearance, short, crossing, hole, edge) | 0 | 0 |
+| Schematic parity | 0 | 0 |
+| via_dangling / track_dangling | 6 / 1 | 6 / 1 (same items) |
+| Silkscreen warnings | 82 / 73 / 3 / 2 | identical |
+| Unconnected pairs | 67 | **61** |
+| Nets whose copper changed | n/a | ENC_VCC, PMD_5V, CON_SUP_TX, CON_SUP_RX only (29 items added, 0 removed) |
+| BOM re-export | n/a | byte-identical |
+
+**Pairs closed (6):** ENC_VCC ×2, PMD_5V ×2, CON_SUP_TX, CON_SUP_RX.
+
+**Relabelled pairs:** +3V3, VBAT_FUSED, WBA_VDDRF and WBA_VDDRFPA each show one pair with different reported endpoints after the zone refill. No copper on these nets changed and the per-net counts are unchanged. **No regressions.**
+
+**Electrical testing:** none performed. Copper continuity is not functional verification.

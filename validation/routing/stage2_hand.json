@@ -1,0 +1,23 @@
+{
+ "_comment": "Stage 2 explicit routes (mm). ENC_VCC, PMD_5V, CON_SUP_TX, CON_SUP_RX. +3V3 to R302 deferred to the D1 milestone (R302 rotation moves that pad). See docs/handover/ROUTING_STAGES.md section 2.",
+ "tracks": [
+  {"net": "ENC_VCC",    "layer": "F", "w": 0.30, "pts": [[199.50, 134.50], [199.50, 136.50], [198.72, 137.30], [198.72, 138.50]], "why": "JP701.2 (jumper common) to C701.1"},
+  {"net": "ENC_VCC",    "layer": "F", "w": 0.30, "pts": [[198.72, 138.50], [198.72, 139.50], [204.47, 139.50]], "why": "C701.1 to J705.3, passing under C701.2 and its GND via"},
+  {"net": "PMD_5V",     "layer": "F", "w": 0.30, "pts": [[200.80, 134.50], [201.00, 132.90]], "why": "JP701.3 to via W (west of the ENC_A / ENC_SHLD verticals)"},
+  {"net": "PMD_5V",     "layer": "B", "w": 0.30, "pts": [[201.00, 132.90], [206.00, 132.90], [206.00, 121.83], [206.33, 121.50]], "why": "under the ENC_A/ENC_SHLD wall and east of the RS485 B.Cu run, up to J702"},
+  {"net": "PMD_5V",     "layer": "F", "w": 0.30, "pts": [[206.33, 121.50], [204.47, 121.50]], "why": "via N into J702.2"},
+  {"net": "PMD_5V",     "layer": "B", "w": 0.30, "pts": [[206.33, 121.50], [206.33, 116.71], [206.60, 114.85], [202.60, 114.80], [202.60, 112.50]], "why": "J702 to J701 on B.Cu, threading between the PMD_MOSI via and the J702.MP GND via"},
+  {"net": "PMD_5V",     "layer": "F", "w": 0.30, "pts": [[202.60, 112.50], [204.47, 112.50]], "why": "via S into J701.3"},
+  {"net": "CON_SUP_RX", "layer": "F", "w": 0.20, "pts": [[154.16, 159.25], [155.25, 159.25], [155.25, 154.60], [154.30, 153.80]], "why": "U601.32 out through the corridor between the right-hand pins and SUP_VETO"},
+  {"net": "CON_SUP_RX", "layer": "B", "w": 0.20, "pts": [[154.30, 153.80], [150.60, 147.00], [148.62, 147.00]], "why": "under HB_M2S to J503.4 (PTH), entering from the east"},
+  {"net": "CON_SUP_TX", "layer": "F", "w": 0.20, "pts": [[154.16, 160.75], [157.85, 160.75], [157.85, 145.50]], "why": "U601.29 east below the SUP_VETO via, north between SUP_PARK and the flyback controller parts"},
+  {"net": "CON_SUP_TX", "layer": "B", "w": 0.20, "pts": [[157.85, 145.50], [146.08, 145.50], [146.08, 147.00]], "why": "north of the J503 row, dropping into J503.3 (PTH), so it does not cross CON_SUP_RX"}
+ ],
+ "vias": [
+  {"net": "PMD_5V",     "at": [201.00, 132.90]},
+  {"net": "PMD_5V",     "at": [206.33, 121.50]},
+  {"net": "PMD_5V",     "at": [202.60, 112.50]},
+  {"net": "CON_SUP_RX", "at": [154.30, 153.80]},
+  {"net": "CON_SUP_TX", "at": [157.85, 145.50]}
+ ]
+}

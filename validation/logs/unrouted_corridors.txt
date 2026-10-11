@@ -1,4 +1,4 @@
-Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of the 67 unconnected pairs in validation/drc/pump_v2-drc.json, branch placement-opt after routing Stage 1 (board md5 73811c06...). For each pair: foreign pads/tracks/vias within 0.6 mm of the straight line between the endpoints, per outer layer. Zones/planes are not listed. Indicative only: a crossing means the straight path is blocked, not that no path exists.
+Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of the 61 unconnected pairs in validation/drc/pump_v2-drc.json, branch placement-opt after routing Stage 2 (board md5 ff288330...). For each pair: foreign pads/tracks/vias within 0.6 mm of the straight line between the endpoints, per outer layer. Zones/planes are not listed. Indicative only: a crossing means the straight path is blocked, not that no path exists.
 
 == SW48_GATE  Pad 1 [/48V flyback/SW48_GATE] of R309 on F.Cu  ->  Track [/48V flyback/SW48_GATE] on F.Cu, length 0.9899 mm
    A=(193.2,144.8) B=(171.5,147.0) len=21.8
@@ -60,9 +60,9 @@ Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of th
    A=(204.5,147.5) B=(201.5,145.0) len=3.9
    F.Cu: pads of ['J703']; tracks of 0 nets []; vias 0
    B.Cu: pads of []; tracks of 0 nets []; vias 0
-== +3V3  Pad 2 [+3V3] of R302 on F.Cu  ->  Via [+3V3] on F.Cu - B.Cu
+== +3V3  Track [+3V3] on F.Cu, length 1.0000 mm  ->  Via [+3V3] on F.Cu - B.Cu
    A=(162.8,161.8) B=(147.2,159.5) len=15.8
-   F.Cu: pads of ['R302', 'TP302', 'U601']; tracks of 4 nets ['FLY_PGOOD', 'GND', 'HB_M2S', 'SUP_SWDIO']; vias 0
+   F.Cu: pads of ['R302', 'TP302', 'U601']; tracks of 5 nets ['CON_SUP_TX', 'FLY_PGOOD', 'GND', 'HB_M2S', 'SUP_SWDIO']; vias 0
    B.Cu: pads of []; tracks of 3 nets ['SUP_PARK', 'SUP_SWCLK', 'SUP_VETO']; vias 0
 == VBAT_SENSE  Track [VBAT_SENSE] on F.Cu, length 2.3500 mm  ->  Track [VBAT_SENSE] on F.Cu, length 0.4370 mm
    A=(117.7,125.3) B=(145.7,124.4) len=28.0
@@ -70,16 +70,8 @@ Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of th
    B.Cu: pads of []; tracks of 1 nets ['MAIN_SWCLK']; vias 2
 == ENC_I  Pad 1 [/PMD401 & encoder interface/ENC_I] of J705 on F.Cu  ->  Track [/PMD401 & encoder interface/ENC_I] on F.Cu, length 0.
    A=(204.5,141.5) B=(182.4,106.2) len=41.6
-   F.Cu: pads of ['J705', 'JP701', 'R705', 'R714', 'U701']; tracks of 7 nets ['+3V3', 'ENC_A_M', 'GND', 'PMD_AEN', 'PMD_AEN_DRV', 'PMD_FAULT_M', 'RS485_A']; vias 3
+   F.Cu: pads of ['J705', 'JP701', 'R705', 'R714', 'U701']; tracks of 9 nets ['+3V3', 'ENC_A_M', 'ENC_VCC', 'GND', 'PMD_5V', 'PMD_AEN', 'PMD_AEN_DRV', 'PMD_FAULT_M', 'RS485_A']; vias 3
    B.Cu: pads of []; tracks of 6 nets ['ENC_A', 'ENC_A_M', 'PMD_FAULT_M', 'PMD_MOSI', 'RS485_A', 'RS485_B']; vias 3
-== ENC_VCC  Pad 1 [/PMD401 & encoder interface/ENC_VCC] of C701 on F.Cu  ->  Pad 3 [/PMD401 & encoder interface/ENC_VCC] of J705 on F.Cu
-   A=(198.7,138.5) B=(204.5,139.5) len=5.8
-   F.Cu: pads of ['C701', 'J705']; tracks of 1 nets ['GND']; vias 1
-   B.Cu: pads of []; tracks of 0 nets []; vias 1
-== ENC_VCC  Pad 2 [/PMD401 & encoder interface/ENC_VCC] of JP701 on F.Cu  ->  Pad 1 [/PMD401 & encoder interface/ENC_VCC] of C701 on F.Cu
-   A=(199.5,134.5) B=(198.7,138.5) len=4.1
-   F.Cu: pads of []; tracks of 0 nets []; vias 0
-   B.Cu: pads of []; tracks of 0 nets []; vias 0
 == ENC_B  Pad 1 [/PMD401 & encoder interface/ENC_B] of D708 on F.Cu  ->  Pad 2 [/PMD401 & encoder interface/ENC_B] of R709 on F.Cu
    A=(179.6,105.0) B=(170.3,108.3) len=9.8
    F.Cu: pads of ['D707', 'R703']; tracks of 5 nets ['ENC_A', 'ENC_I_M', 'GND', 'PMD_SS', 'PMD_SS_M']; vias 2
@@ -90,12 +82,12 @@ Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of th
    B.Cu: pads of []; tracks of 3 nets ['ENC_A', 'ENC_I', 'PMD_MOSI']; vias 1
 == ENC_B  Pad 4 [/PMD401 & encoder interface/ENC_B] of J705 on F.Cu  ->  Pad 2 [/PMD401 & encoder interface/ENC_B] of R712 on F.Cu
    A=(204.5,138.5) B=(182.3,109.8) len=36.3
-   F.Cu: pads of ['J705', 'JP701', 'U701']; tracks of 6 nets ['+3V3', 'ENC_A', 'PMD_AEN', 'PMD_AEN_DRV', 'PMD_FAULT_M', 'RS485_A']; vias 2
-   B.Cu: pads of []; tracks of 4 nets ['ENC_A_M', 'PMD_FAULT_M', 'RS485_A', 'RS485_B']; vias 2
+   F.Cu: pads of ['J705', 'JP701', 'U701']; tracks of 7 nets ['+3V3', 'ENC_A', 'PMD_5V', 'PMD_AEN', 'PMD_AEN_DRV', 'PMD_FAULT_M', 'RS485_A']; vias 2
+   B.Cu: pads of []; tracks of 5 nets ['ENC_A_M', 'PMD_5V', 'PMD_FAULT_M', 'RS485_A', 'RS485_B']; vias 2
 == ENC_A_S  Pad 17 [ENC_A_S] of U601 on F.Cu  ->  Pad 1 [ENC_A_S] of R711 on F.Cu
    A=(149.2,164.2) B=(176.7,109.8) len=60.9
-   F.Cu: pads of ['Q402', 'R510', 'U601']; tracks of 6 nets ['+3V3', 'GND', 'HB_M2S', 'SUP_PARK', 'SUP_SWDIO', 'SUP_VETO']; vias 2
-   B.Cu: pads of []; tracks of 9 nets ['ENC_A_M', 'MCU_48V_EN', 'PMD_FAULT_M', 'RS485_DE', 'RS485_DI', 'RS485_RO', 'SUP_SWCLK', 'SUP_SWDIO', 'SUP_VETO']; vias 2
+   F.Cu: pads of ['Q402', 'R510', 'U601']; tracks of 8 nets ['+3V3', 'CON_SUP_RX', 'CON_SUP_TX', 'GND', 'HB_M2S', 'SUP_PARK', 'SUP_SWDIO', 'SUP_VETO']; vias 3
+   B.Cu: pads of []; tracks of 10 nets ['CON_SUP_RX', 'ENC_A_M', 'MCU_48V_EN', 'PMD_FAULT_M', 'RS485_DE', 'RS485_DI', 'RS485_RO', 'SUP_SWCLK', 'SUP_SWDIO', 'SUP_VETO']; vias 3
 == FLY_SEC  Pad 2 [/48V flyback/FLY_SEC] of D301 on F.Cu  ->  Pad 4 [/48V flyback/FLY_SEC] of T301 on F.Cu
    A=(191.2,159.5) B=(188.0,159.5) len=3.2
    F.Cu: pads of []; tracks of 0 nets []; vias 0
@@ -108,10 +100,10 @@ Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of th
    A=(191.2,164.6) B=(194.0,164.6) len=2.8
    F.Cu: pads of []; tracks of 0 nets []; vias 0
    B.Cu: pads of []; tracks of 0 nets []; vias 0
-== VBAT_FUSED  Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu  ->  Pad 1 [/Power input & charger/VBAT_FUSED] of C102 on F.Cu
-   A=(118.2,113.2) B=(112.7,117.8) len=7.2
-   F.Cu: pads of ['C102', 'U101']; tracks of 4 nets ['CHG_SYS', 'CHG_TS', 'GND', 'I2C_SCL']; vias 0
-   B.Cu: pads of []; tracks of 0 nets []; vias 0
+== VBAT_FUSED  Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu  ->  Track [/Power input & charger/VBAT_FUSED] on F.Cu, length 2.
+   A=(118.2,113.2) B=(114.5,119.6) len=7.4
+   F.Cu: pads of ['U101']; tracks of 4 nets ['CHG_SYS', 'CHG_TS', 'GND', 'I2C_SCL']; vias 1
+   B.Cu: pads of []; tracks of 2 nets ['CHG_INT_N', 'USB_CC2']; vias 1
 == FLY_PGOOD  Track [FLY_PGOOD] on F.Cu, length 2.1800 mm  ->  Pad 11 [FLY_PGOOD] of U301 on F.Cu
    A=(161.2,161.8) B=(164.7,159.8) len=4.0
    F.Cu: pads of ['R301', 'R302', 'U301']; tracks of 2 nets ['FLY_RT', 'GND']; vias 1
@@ -148,10 +140,10 @@ Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of th
    A=(160.0,132.0) B=(147.2,122.4) len=15.9
    F.Cu: pads of ['C508', 'R501', 'U501']; tracks of 9 nets ['+3V3', 'ENC_A_M', 'GND', 'HB_M2S', 'LED_MAIN_A', 'LSE_OUT', 'MAIN_BOOT0', 'MAIN_SWO', 'MCU_48V_EN']; vias 1
    B.Cu: pads of []; tracks of 7 nets ['ENC_A_M', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_MOSI_M', 'RF_ANT', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 1
-== RF_MCU  Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.9977 m  ->  Pad 37 [/Main MCU STM32WBA55/RF_MCU] of U501 on F.Cu
-   A=(149.5,132.0) B=(150.8,115.6) len=16.5
-   F.Cu: pads of ['C506', 'C513', 'U501']; tracks of 7 nets ['+3V3', 'GND', 'HB_M2S', 'MAIN_SWO', 'PMD_FAULT_M', 'RF_ANT', 'WBA_VDDHPA']; vias 3
-   B.Cu: pads of []; tracks of 10 nets ['ENC_A_M', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_MOSI_M', 'PMD_SS_M', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 3
+== RF_MCU  Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.6840 m  ->  Pad 37 [/Main MCU STM32WBA55/RF_MCU] of U501 on F.Cu
+   A=(148.8,131.3) B=(150.8,115.6) len=15.9
+   F.Cu: pads of ['C506', 'C513', 'L502', 'U501']; tracks of 7 nets ['+3V3', 'GND', 'HB_M2S', 'MCU_48V_EN', 'PMD_FAULT_M', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 4
+   B.Cu: pads of []; tracks of 9 nets ['ENC_A_M', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_MOSI_M', 'PMD_SS_M', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 4
 == FLY_CLAMP  Pad 1 [/48V flyback/FLY_CLAMP] of C308 on F.Cu  ->  Pad 1 [/48V flyback/FLY_CLAMP] of D302 on F.Cu
    A=(175.2,154.2) B=(175.2,156.0) len=1.8
    F.Cu: pads of []; tracks of 0 nets []; vias 0
@@ -168,26 +160,18 @@ Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of th
    A=(179.0,159.5) B=(175.2,158.8) len=3.9
    F.Cu: pads of []; tracks of 1 nets ['SW48_DRV']; vias 0
    B.Cu: pads of []; tracks of 0 nets []; vias 0
-== WBA_VDDRFPA  Pad 43 [/Main MCU STM32WBA55/WBA_VDDRFPA] of U501 on F.Cu  ->  Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.2
-   A=(147.8,115.6) B=(148.8,128.7) len=13.2
-   F.Cu: pads of ['C506', 'U501']; tracks of 4 nets ['+3V3', 'ENC_A_M', 'HB_M2S', 'MCU_48V_EN']; vias 4
-   B.Cu: pads of []; tracks of 8 nets ['ENC_A_M', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_MOSI_M', 'PMD_SS_M', 'WBA_VDDHPA']; vias 4
+== WBA_VDDRFPA  Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.7  ->  Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.2
+   A=(147.8,114.8) B=(148.8,128.7) len=13.9
+   F.Cu: pads of ['C506', 'U501']; tracks of 4 nets ['+3V3', 'ENC_A_M', 'HB_M2S', 'MCU_48V_EN']; vias 5
+   B.Cu: pads of []; tracks of 8 nets ['ENC_A_M', 'ENC_B_M', 'MAIN_NRST', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_MOSI_M', 'PMD_SS_M', 'WBA_VDDHPA']; vias 5
 == HB_S2M  Pad 12 [HB_S2M] of U501 on F.Cu  ->  Pad 13 [HB_S2M] of U601 on F.Cu
    A=(144.6,121.8) B=(147.2,164.2) len=42.5
    F.Cu: pads of ['C504', 'C512', 'C603', 'J503', 'R513', 'U501', 'U601']; tracks of 6 nets ['+3V3', 'GND', 'HB_M2S', 'SUP_NRST', 'VBAT_SENSE', 'WBA_VDDRFPA']; vias 1
-   B.Cu: pads of ['J503']; tracks of 5 nets ['LSE_OUT', 'MAIN_SWCLK', 'MAIN_SWDIO', 'SUP_SWDIO', 'WBA_VDDHPA']; vias 1
+   B.Cu: pads of ['J503']; tracks of 6 nets ['CON_SUP_TX', 'LSE_OUT', 'MAIN_SWCLK', 'MAIN_SWDIO', 'SUP_SWDIO', 'WBA_VDDHPA']; vias 1
 == ENC_B_S  Pad 18 [ENC_B_S] of U601 on F.Cu  ->  Pad 1 [ENC_B_S] of R712 on F.Cu
    A=(149.8,164.2) B=(180.7,109.8) len=62.6
-   F.Cu: pads of ['R401', 'U601']; tracks of 5 nets ['PMD_AEN_DRV', 'SUP_PARK', 'SUP_SWCLK', 'SUP_SWDIO', 'SUP_VETO']; vias 1
+   F.Cu: pads of ['R401', 'U601']; tracks of 7 nets ['CON_SUP_RX', 'CON_SUP_TX', 'PMD_AEN_DRV', 'SUP_PARK', 'SUP_SWCLK', 'SUP_SWDIO', 'SUP_VETO']; vias 1
    B.Cu: pads of []; tracks of 9 nets ['ENC_A_M', 'MCU_48V_EN', 'PMD_FAULT_M', 'RS485_DE', 'RS485_DI', 'RS485_RO', 'SUP_SWCLK', 'SUP_SWDIO', 'SUP_VETO']; vias 1
-== CON_SUP_TX  PTH pad 3 [CON_SUP_TX] of J503  ->  Pad 29 [CON_SUP_TX] of U601 on F.Cu
-   A=(146.1,147.0) B=(154.2,160.8) len=15.9
-   F.Cu: pads of ['U601']; tracks of 3 nets ['GND', 'HB_M2S', 'SUP_SWDIO']; vias 1
-   B.Cu: pads of []; tracks of 1 nets ['SUP_SWCLK']; vias 1
-== CON_SUP_RX  PTH pad 4 [CON_SUP_RX] of J503  ->  Pad 32 [CON_SUP_RX] of U601 on F.Cu
-   A=(148.6,147.0) B=(154.2,159.2) len=13.4
-   F.Cu: pads of ['U601']; tracks of 2 nets ['HB_M2S', 'SUP_SWDIO']; vias 0
-   B.Cu: pads of []; tracks of 1 nets ['SUP_SWCLK']; vias 0
 == CON_MAIN_TX  PTH pad 2 [/Main MCU STM32WBA55/CON_MAIN_TX] of J503  ->  Pad 4 [/Main MCU STM32WBA55/CON_MAIN_TX] of U501 on F.Cu
    A=(143.5,147.0) B=(144.6,117.8) len=29.3
    F.Cu: pads of ['C504', 'C512', 'R513', 'U501']; tracks of 8 nets ['+3V3', 'CHG_INT_N', 'ENC_B_M', 'I2C_SCL', 'PMD_SS_M', 'WBA_VDDRF', 'WBA_VDDRFPA', 'WBA_VLXSMPS']; vias 0
@@ -200,22 +184,14 @@ Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of th
    A=(146.8,115.6) B=(155.1,114.1) len=8.5
    F.Cu: pads of ['U501']; tracks of 6 nets ['+3V3', 'MAIN_NRST', 'MAIN_SWO', 'RF_ANT', 'WBA_VDDHPA', 'WBA_VDDRFPA']; vias 1
    B.Cu: pads of []; tracks of 3 nets ['ENC_B_M', 'MAIN_NRST', 'PMD_SS_M']; vias 1
-== WBA_VDDRF  Track [/Main MCU STM32WBA55/WBA_VDDRF] on F.Cu, length 1.828  ->  Pad 40 [/Main MCU STM32WBA55/WBA_VDDRF] of U501 on F.Cu
-   A=(142.5,131.1) B=(149.2,115.6) len=16.9
-   F.Cu: pads of ['C504', 'U501']; tracks of 5 nets ['+3V3', 'GND', 'LSE_OUT', 'PMD_MOSI_M', 'VBAT_SENSE']; vias 3
+== WBA_VDDRF  Pad 1 [/Main MCU STM32WBA55/WBA_VDDRF] of C512 on F.Cu  ->  Pad 40 [/Main MCU STM32WBA55/WBA_VDDRF] of U501 on F.Cu
+   A=(143.8,129.8) B=(149.2,115.6) len=15.2
+   F.Cu: pads of ['C504', 'U501']; tracks of 4 nets ['+3V3', 'LSE_OUT', 'PMD_MOSI_M', 'VBAT_SENSE']; vias 3
    B.Cu: pads of []; tracks of 8 nets ['ENC_B_M', 'LSE_OUT', 'MAIN_NRST', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_MOSI_M', 'PMD_SS_M', 'WBA_VDDHPA']; vias 3
 == PMD_MOSI_M  Track [PMD_MOSI_M] on B.Cu, length 6.7670 mm  ->  Pad 1 [PMD_MOSI_M] of R702 on F.Cu
    A=(151.1,123.3) B=(170.2,105.8) len=26.0
    F.Cu: pads of ['R709', 'U501']; tracks of 10 nets ['ENC_B_M', 'LED_MAIN', 'MAIN_BOOT0', 'MAIN_NRST', 'MAIN_SWDIO', 'MAIN_SWO', 'PMD_FAULT_M', 'RF_ANT', 'RS485_RO', 'WBA_VDDHPA']; vias 1
    B.Cu: pads of []; tracks of 6 nets ['ENC_B_M', 'MAIN_SWDIO', 'PMD_FAULT_M', 'PMD_SS_M', 'RS485_DE', 'RS485_DI']; vias 1
-== PMD_5V  Pad 3 [/PMD401 & encoder interface/PMD_5V] of JP701 on F.Cu  ->  Pad 2 [/PMD401 & encoder interface/PMD_5V] of J702 on F.Cu
-   A=(200.8,134.5) B=(204.5,121.5) len=13.5
-   F.Cu: pads of ['J702', 'JP701']; tracks of 3 nets ['ENC_A', 'ENC_SHLD', 'GND']; vias 1
-   B.Cu: pads of []; tracks of 2 nets ['RS485_A', 'RS485_B']; vias 1
-== PMD_5V  Pad 2 [/PMD401 & encoder interface/PMD_5V] of J702 on F.Cu  ->  Pad 3 [/PMD401 & encoder interface/PMD_5V] of J701 on F.Cu
-   A=(204.5,121.5) B=(204.5,112.5) len=9.0
-   F.Cu: pads of ['J701', 'J702']; tracks of 4 nets ['GND', 'PMD_FAULT', 'PMD_MOSI', 'PMD_READY']; vias 0
-   B.Cu: pads of []; tracks of 1 nets ['PMD_MOSI']; vias 0
 == MAIN_SWCLK  Track [/Main MCU STM32WBA55/MAIN_SWCLK] on B.Cu, length 0.77  ->  Pad 26 [/Main MCU STM32WBA55/MAIN_SWCLK] of U501 on F.Cu
    A=(145.1,124.2) B=(151.4,121.2) len=7.0
    F.Cu: pads of ['U501']; tracks of 9 nets ['+3V3', 'ENC_A_M', 'HB_M2S', 'LSE_OUT', 'MAIN_SWDIO', 'MCU_48V_EN', 'PMD_FAULT_M', 'PMD_MOSI_M', 'VBAT_SENSE']; vias 1
@@ -236,10 +212,10 @@ Read-only corridor analysis (scripts/unrouted_corridors.py, pcbnew 10.0.3) of th
    A=(125.7,122.8) B=(144.6,118.8) len=19.3
    F.Cu: pads of ['R105', 'U501', 'Y501']; tracks of 4 nets ['+3V3', 'ENC_B_M', 'GND', 'I2C_SCL']; vias 2
    B.Cu: pads of []; tracks of 4 nets ['CHG_INT_N', 'MAIN_SWCLK', 'MAIN_SWDIO', 'PMD_SS_M']; vias 2
-== CHG_INT_N  Pad A1 [CHG_INT_N] of U101 on F.Cu  ->  Track [CHG_INT_N] on B.Cu, length 28.5360 mm
-   A=(117.8,112.4) B=(110.3,118.5) len=9.6
+== CHG_INT_N  Pad A1 [CHG_INT_N] of U101 on F.Cu  ->  Track [CHG_INT_N] on F.Cu, length 1.9163 mm
+   A=(117.8,112.4) B=(109.0,119.9) len=11.6
    F.Cu: pads of ['C102', 'U101']; tracks of 4 nets ['CHG_SYS', 'I2C_SCL', 'USB_CC1', 'VBUS_CHG']; vias 0
-   B.Cu: pads of []; tracks of 0 nets []; vias 0
+   B.Cu: pads of []; tracks of 1 nets ['USB_CC2']; vias 0
 == PMD_READY_M  Pad 33 [PMD_READY_M] of U501 on F.Cu  ->  Pad 1 [PMD_READY_M] of R706 on F.Cu
    A=(151.4,117.8) B=(186.2,107.3) len=36.3
    F.Cu: pads of ['R705', 'R710', 'R711', 'R712', 'U501']; tracks of 11 nets ['+3V3', 'ENC_A', 'ENC_I_M', 'MAIN_BOOT0', 'MAIN_NRST', 'MAIN_SWO', 'PMD_AEN', 'PMD_AEN_DRV', 'RF_ANT', 'RS485_DI']; vias 0
