@@ -1,6 +1,6 @@
 # Piezo Insulin Pump v2 Rev B: current status and handoff (living document)
 
-**Updated:** 11 Oct 2026, after routing Stage 4 (tag `route-stage4-done`, branch `placement-opt`).
+**Updated:** 11 Oct 2026, after Stage 5a (no copper change; board = tag `route-stage4-done`, branch `placement-opt`).
 
 **Board status:**
 - Digital design only. **NOT fully connected, NOT electrically verified, NOT fabrication-ready.**
@@ -22,7 +22,8 @@
 | `route-stage3-before` | = 6a4367b |
 | `route-stage3-done` | Stage 3 complete (commit a6fd898) |
 | `route-stage4-before` | = a6fd898 |
-| `route-stage4-done` | Stage 4 complete |
+| `route-stage4-done` | Stage 4 complete (commit a3ef25b) |
+| `route-stage5a-before` | = a3ef25b. Stage 5a made no copper change. |
 
 ## 1. Completed work
 
@@ -38,13 +39,14 @@
 | Stage 2: ENC_VCC, PMD_5V, CON_SUP_TX/RX | 3f7ba36 | `ROUTING_STAGES.md` §2 |
 | D1: R301/R302/C305/R308 rotated 180°; FB/SS/RT re-routed; FLY_PGOOD U301.11–R302 and +3V3 to R302 | 6a4367b | `ROUTING_STAGES.md` §3 |
 | Stage 3: FLY_EN (without the DNP Q303) and HB_S2M | a6fd898 | `ROUTING_STAGES.md` §4 |
-| Stage 4: ENC_B ×3, ENC_I, ENC_A_S, ENC_B_S (new `grid_route.py`) | Stage 4 commit | `ROUTING_STAGES.md` §5 |
+| Stage 4: ENC_B ×3, ENC_I, ENC_A_S, ENC_B_S (new `grid_route.py`) | a3ef25b | `ROUTING_STAGES.md` §5 |
+| Stage 5a: verification of MAIN_SWCLK, PMD_READY_M and FLY_PGOOD → U501.28. **All three left open (blockers)**; no copper change | Stage 5a docs commit | `ROUTING_STAGES.md` §6 |
 
 ## 2. Test results
 
 **Only software checks have been run.** No electrical, bench or manufacturing test has been performed. Nothing below is evidence that the circuit works.
 
-| Check (kicad-cli 10.0.3) | Result at `route-stage4-done` |
+| Check (kicad-cli 10.0.3) | Result at `route-stage4-done` (unchanged by Stage 5a) |
 |---|---|
 | ERC | 6 `power_pin_not_driven` on U501 pins 3, 38, 39, 40, 43 and 45. These are intentional: the WBA55 supply wiring waits for the ST documents and they are not suppressed. Plus 1 cosmetic `lib_symbol_mismatch` on U701. |
 | DRC copper (clearance, short, crossing, hole, edge) | 0 |
@@ -179,7 +181,7 @@ Each stage gets the same procedure:
 | **D1 milestone (done)** | Rotated R301, R302, C305 and R308 by 180°; re-routed FB, SS, RT and the GND fan-outs; FLY_PGOOD U301.11 – R302; +3V3 to R302 (2 pairs closed) | Approved (option 1) | ⛔ stopped for review |
 | **3 (done)** | FLY_EN ×4 (not Q303), HB_S2M (5) | Safety-control nets get their own stage and review. The intended pads and levels are in ROUTING_STAGES.md §0.2. A routed net proves continuity only, not fail-off behaviour (SG-03/SG-05 are bench tests). | ⛔ separate safety review |
 | **4 (done)** | ENC_B ×3, ENC_B_S, ENC_A_S, ENC_I (6). RS485_B → R714 still waits for the owner (D3) | Encoder and supervisor signals, away from U501's supply sides | ⛔ |
-| **5a** | MAIN_SWCLK, PMD_READY_M, FLY_PGOOD U301.11 – U501.28 (3) | U501 side 25–36 has no supply or oscillator pins. **Owner: only where the pin assignment and supply requirements are verified.** The pins are CubeMX-checked; the supply requirements are still unread (U-05), so each net is checked for independence from the supply layout before routing. | ⛔ |
+| **5a (attempted: 0 routed, 3 blocked)** | MAIN_SWCLK (crystal-layout dependent, D5), PMD_READY_M (U-10 / D8), FLY_PGOOD U301.11 – U501.28 (pin 28 boxed in by the RS485_RO / LED_MAIN escapes, D7) | U501 side 25–36 has no supply or oscillator pins. **Owner: only where the pin assignment and supply requirements are verified.** The pins are CubeMX-checked; the supply requirements are still unread (U-05), so each net is checked for independence from the supply layout before routing. | ⛔ |
 | **5b** | I2C_SDA (R105–U501), PMD_SCLK_M, PMD_MOSI_M, VBAT_SENSE, CON_MAIN_TX, ENC_I_M (6) | Next to the SMPS, VDDA, LSE and RF pins. **Recommend waiting for the ST documents (D5)** to avoid rework | ⛔ D5 |
 | **6** | VBAT_FUSED, CHG_INT_N, I2C_SDA (U101–R105) (3) | Needs D4 (unverified BGA footprint) | ⛔ D4 |
 | Blocked | 12 WBA55 + 5 flyback + 8 48 V output + 11 placeholder or DNP (36; 35 if D3 routes R714) | Need documents or design decisions (§5) | n/a |
@@ -195,6 +197,11 @@ Each stage gets the same procedure:
 - **D4:** wait for the BQ25188 footprint documentation.
 - **D5:** wait for the ST documents before the crystal and RF connections. Stage 5a only where the pin assignments and supply requirements are verified.
 - **D6:** no grounding-topology change, and no grounding-dependent layout change, without owner review.
+
+**New decisions from Stage 5a (open):**
+- **D7, FLY_PGOOD at U501.28.** The pin is boxed in by the pre-existing RS485_RO (pin 29) and LED_MAIN (pin 30) escapes. Option (a): approve re-routing those two escapes so that they leave pin 28 a path east. That changes copper on RS485_RO and LED_MAIN only, with no schematic change. Option (b): wait for the ST documents and re-plan the whole U501 fan-out once.
+- **D8, PMD_READY_M and U-10.** Is U501 PB15 5 V-tolerant, or is the PMD401 Ready pull-up to 3.3 V? This needs DS14127 or a PiezoMotor confirmation. The same question applies to the PMD401- and encoder-facing nets that are already routed.
+- **MAIN_SWCLK.** Completion needs either the crystal layout (D5) or approval to re-route the existing J502 SWD stub.
 
 The table below is the original proposal, kept for the record.
 
@@ -230,7 +237,7 @@ The table below is the original proposal, kept for the record.
 | Kelvin sense (U301.5 → R305.1) | Separate 0.2 mm trace with no shared copper | Lands on the outer half of R305.1, not the inner edge. The return side goes through the plane (FL-3). It runs parallel to the 0.5 mm power track for about 3.3 mm. |
 | Gate drive (U301.3 → Q301.4) | 4.67 mm, 2 vias | The via pair is forced by the topology. The B.Cu segment references In2 (VBAT), not GND. |
 | FLY_EN (Stage 3) | Routed; tightest gap 0.224 mm (FLY_PGOOD); at least 1.79 mm from gate, CS and switch copper | B.Cu run over the In2 VBAT polygon (pulsed primary current); the UVLO/SYNC pin treats falling edges as sync. Coupling not analysed. Fail-off behaviour needs SG-03 / SG-05 on hardware. |
-| HB_S2M (Stage 3) | Routed around the WBA55 supply-placeholder block (64.9 mm) | Long heartbeat line; 0.199 mm to SUP_NRST at the U601 corner; heartbeat and timeout behaviour untested (firmware). **Found in Stage 4:** it passes 0.60 mm from the LSE crystal Y502 pad 1 and crosses the LSE_OUT B.Cu trace (two planes between). This may conflict with the pending LSE layout (D5); re-route when the crystal layout is fixed. |
+| HB_S2M (Stage 3) | Routed around the WBA55 supply-placeholder block (64.9 mm) | Long heartbeat line; 0.199 mm to SUP_NRST at the U601 corner; heartbeat and timeout behaviour untested (firmware). **Found in Stage 4:** it passes 0.60 mm from the LSE crystal Y502 pad 1 and crosses the LSE_OUT B.Cu trace (two planes between). **Outstanding layout issue, pending the ST crystal-layout documentation; the owner instructed not to re-route yet.** Revisit after the crystal placement and routing constraints are settled. |
 | Encoder lines (Stage 4) | ENC_A_S / ENC_B_S are 68–72 mm with 4 vias each; three vias under the U601 body; pre-existing 0.151 mm ENC_I via to PMD_MOSI gap | Signal integrity and 48 V switching susceptibility not analysed; tenting under U601 to be confirmed (U-16); J705 pinout assumed (U-14); TVS parts TBD (U-15) |
 | Exposed-pad grounding (U301.13) | PGND pin 4 joins the pad directly; the pad has 1 plane via | Fewer vias than the SNVSB75E thermal guidance suggests (D6). The AGND/PGND strategy is open (FL-3). |
 | SW48_GATE crossing | A placeholder-net track runs between the Q301 source and drain pads. DRC passes. | **Owner deferred the copper change (D2).** Open concern: SW48_GATE and SW48_DRV have only DNP endpoints, so their tracks are floating conductors. One runs on F.Cu at x = 170.33, between the Q301 source pads (CS) and the drain pad (FLY_SW switch node, about 0 to 25 V at 300 kHz). That invites capacitive coupling of switching noise and is a needless antenna. Resolve with U-06 / M8, by removing the tracks or re-routing them away from the switch node. |

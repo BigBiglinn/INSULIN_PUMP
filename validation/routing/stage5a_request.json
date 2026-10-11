@@ -1,0 +1,9 @@
+{
+ "_comment": "Stage 5a grid-router request: FLY_PGOOD U501.28 (PA12) -> existing FLY_PGOOD copper at TP302. Keep-outs: U501 body + left/top/bottom WBA55 supply/crystal region (right-hand pin row left free for escape), RF/SWD/VDD11-decoupling area above, crystal/RF capacitor row below, flyback/48 V block.",
+ "grid": 0.05, "clr": 0.20, "hv_clr": 0.70, "via_cost": 40,
+ "keepout": [[129.5, 100.5, 150.95, 134.0], [150.95, 100.5, 162.5, 116.0], [146.0, 128.8, 162.5, 134.0], [159.6, 140.5, 200.0, 168.0]],
+ "avoid_nets": {"RF_ANT": 1.0, "RF_MCU": 1.0, "LSE_OUT": 0.8, "LSE_IN": 0.8},
+ "routes": [
+  {"net": "FLY_PGOOD", "w": 0.2, "from": [151.44, 120.25, "F"], "to": [159.00, 161.80, "F"], "why": "U501.28 (PA12) to TP302 / R302 (LM51551 PGOOD, 100 k pull-up to +3V3)"}
+ ]
+}

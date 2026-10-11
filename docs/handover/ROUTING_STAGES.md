@@ -419,3 +419,41 @@ Its output is an ordinary explicit route specification (pad-centre endpoints, 45
 - **J705 pinout and TVS parts.** J705's pinout is assumed (U-14) and the TVS parts are TBD (U-15).
 
 **Electrical testing:** none performed. Routing checks are not evidence of electrical operation.
+
+## 6. Stage 5a: U501 side 25–36 connections (11 Oct 2026). Result: **no copper changed, three blockers**
+
+**Checkpoint:** `route-stage5a-before` (= commit a3ef25b, `route-stage4-done`). The board and all KiCad files are identical to that checkpoint.
+
+**Freerouting:** not used.
+
+**HB_S2M:** not re-routed (owner instruction). See §6.3.
+
+### 6.1 Verification of the three connections
+
+| Net (open pair) | Pin (STM32CubeMX 6.18.1, `pinmap_check.md`) | Electrical level and supply evidence | Copper / corridor finding | Decision |
+|---|---|---|---|---|
+| **FLY_PGOOD** (U501.28 ↔ R302/TP302 copper) | U501.28 = PA12, GPIO: confirmed | LM51551 PGOOD is open-drain (SNVSB75E), pulled up to +3V3 by R302 100 k. Pin voltage ≤ VBIAS + 0.3 V holds for VBAT ≥ 3.0 V. A 3.3 V level on a VDD-domain pin needs no 5 V tolerance. **Electrically confirmed.** | **Pin 28 cannot be escaped.** The pre-existing escapes of pin 29 (RS485_RO, diagonal from (151.84, 119.75) to (153.04, 120.96)) and pin 30 (LED_MAIN, diagonal from (151.91, 119.25) to (153.6, 120.94)) cross directly in front of pin 28 on F.Cu. MAIN_SWDIO (pin 27) turns down beside it. A 0.15 mm track straight east from pin 28 would hit RS485_RO and LED_MAIN. There is no room for a via between the pad end (x = 151.88) and those tracks. `scripts/grid_route.py` (0.05 mm grid, `validation/routing/stage5a_request.json`) found no exit from the pad. | **Left open. Blocker: needs re-routing of pre-existing RS485_RO and LED_MAIN copper (approval D7).** |
+| **PMD_READY_M** (R706.1 ↔ U501.33) | U501.33 = PB15, GPIO: confirmed | The PMD401 manual (150025-01, §3.5) gives Ready as an output with a "~20k pull-up" but **does not state the pull-up rail** (3.3 V or 5 V). If it is 5 V, PB15 must be 5 V-tolerant: **U-10, which needs DS14127 (unread).** | not attempted | **Left open: depends on an unresolved electrical property (D8).** |
+| **MAIN_SWCLK** (existing stub ↔ U501.26) | U501.26 = PA14 SWCLK: confirmed; 3.3 V internal SWD | Level fine | The existing B.Cu stub from J502 ends at (145.91, 124.19), south-west of U501 and beside the LSE pins 16/17 and the LSE_OUT escape. Pin 26 is on the opposite (right) side. Under the QFN, B.Cu is blocked by the MAIN_SWDIO run along the bottom pin row, and F.Cu is the exposed pad. Any completion must cross the LSE pin-escape area, or replace the approved SWD copper. | **Left open: depends on the crystal layout (D5) or on re-routing existing SWD copper (approval).** |
+
+**Consistency note.** The 5 V-tolerance question behind PMD_READY_M (U-10) applies equally to the PMD401- and encoder-facing nets that were already routed at the baseline and in Stage 4 (PMD_FAULT_M, PMD_SCLK_M side, ENC_A_M/B_M/I_M and so on). It is a **schematic-level** risk: leaving one track open does not remove it. It is resolved only by the ST datasheet (FT pin list), by PiezoMotor confirming the pull-up rail, or by a schematic change.
+
+### 6.2 Checks (no copper change)
+
+| Check | route-stage4-done | after Stage 5a |
+|---|---|---|
+| ERC | 6 power_pin_not_driven (intentional) + 1 lib_symbol_mismatch | identical |
+| DRC copper | 0 | 0 |
+| Schematic parity | 0 | 0 |
+| Unconnected pairs | 48 | **48** (unchanged) |
+| Warnings | 6 / 1 / 3 / 83 / 71 / 2 | identical |
+
+**Regressions: none.** Nothing was routed.
+
+### 6.3 Outstanding layout issue: HB_S2M near the LSE crystal (recorded; owner instruction not to re-route yet)
+
+The Stage 3 HB_S2M F.Cu run at x = 134.5 passes **0.60 mm from Y502 pad 1 (LSE_IN)**, just outside the Y502 courtyard (x ≤ 134.07). It also **crosses the LSE_OUT B.Cu trace** at (134.5, 128.46), with In1 (GND) and In2 between the layers. It passes DRC. The 32.768 kHz crystal layout is pending the ST crystal and layout documentation (D5).
+
+**Action:** revisit and re-route HB_S2M once the LSE crystal placement and routing constraints are settled.
+
+**Electrical testing:** none performed.
