@@ -1,0 +1,13 @@
+{
+ "tracks": [
+  {"net": "RS485_DE",  "layer": "F", "w": 0.20, "pts": [[151.44, 118.75], [154.60, 118.75]], "why": "pin 31 escape east to the moved via"},
+  {"net": "RS485_DE",  "layer": "B", "w": 0.20, "pts": [[154.60, 118.75], [155.21, 119.36], [156.00, 119.36]], "why": "join the shortened existing RS485_DE B.Cu run"},
+  {"net": "LED_MAIN",  "layer": "F", "w": 0.20, "pts": [[151.44, 119.25], [153.90, 119.25], [157.37, 122.72], [158.54, 122.72]], "why": "pin 30 escape east then 45 deg to the kept LED_MAIN via (no via)"},
+  {"net": "RS485_RO",  "layer": "F", "w": 0.20, "pts": [[151.44, 119.75], [153.45, 119.75], [153.45, 124.70], [153.23, 124.89]], "why": "pin 29 escape east then south to the kept RS485_RO via"},
+  {"net": "FLY_PGOOD", "layer": "F", "w": 0.20, "pts": [[151.44, 120.25], [152.50, 120.25], [152.75, 120.50]], "why": "pin 28 escape to a via inside the RS485_RO turn"}
+ ],
+ "vias": [
+  {"net": "RS485_DE",  "at": [154.60, 118.75]},
+  {"net": "FLY_PGOOD", "at": [152.75, 120.50]}
+ ]
+}

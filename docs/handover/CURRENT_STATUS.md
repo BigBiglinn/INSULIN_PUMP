@@ -1,6 +1,6 @@
 # Piezo Insulin Pump v2 Rev B: current status and handoff (living document)
 
-**Updated:** 11 Oct 2026, after Stage 5a (no copper change; board = tag `route-stage4-done`, branch `placement-opt`).
+**Updated:** 11 Oct 2026, after the D7 investigation (no copper change; board = tag `route-stage4-done` = `route-stage5a-done`, branch `placement-opt`).
 
 **Board status:**
 - Digital design only. **NOT fully connected, NOT electrically verified, NOT fabrication-ready.**
@@ -40,7 +40,8 @@
 | D1: R301/R302/C305/R308 rotated 180°; FB/SS/RT re-routed; FLY_PGOOD U301.11–R302 and +3V3 to R302 | 6a4367b | `ROUTING_STAGES.md` §3 |
 | Stage 3: FLY_EN (without the DNP Q303) and HB_S2M | a6fd898 | `ROUTING_STAGES.md` §4 |
 | Stage 4: ENC_B ×3, ENC_I, ENC_A_S, ENC_B_S (new `grid_route.py`) | a3ef25b | `ROUTING_STAGES.md` §5 |
-| Stage 5a: verification of MAIN_SWCLK, PMD_READY_M and FLY_PGOOD → U501.28. **All three left open (blockers)**; no copper change | Stage 5a docs commit | `ROUTING_STAGES.md` §6 |
+| Stage 5a: verification of MAIN_SWCLK, PMD_READY_M and FLY_PGOOD → U501.28. **All three left open (blockers)**; no copper change | b4230ea | `ROUTING_STAGES.md` §6 |
+| D7 investigation (scratch only): re-routing pins 29/30 cannot free pin 28; recommendation to fold D7 into the U501 fan-out review | D7 docs commit | `ROUTING_STAGES.md` §7; evidence in `validation/routing/d7_investigation/` |
 
 ## 2. Test results
 
@@ -198,7 +199,12 @@ Each stage gets the same procedure:
 - **D5:** wait for the ST documents before the crystal and RF connections. Stage 5a only where the pin assignments and supply requirements are verified.
 - **D6:** no grounding-topology change, and no grounding-dependent layout change, without owner review.
 
-**New decisions from Stage 5a (open):**
+**Owner rulings after Stage 5a:**
+- **D7:** investigate re-routing the pin 29 and pin 30 escapes, without copper changes until the proposal is approved. **Investigated: not feasible within that scope** (ROUTING_STAGES.md §7). Recommended: fold into the U501 fan-out review with D5 and D9.
+- **D8:** PMD_READY_M and other possibly voltage-incompatible MCU inputs stay unrouted until official pin-tolerance documentation and the PMD401 output-voltage specification are verified.
+- **D9:** MAIN_SWCLK is deferred until the crystal layout and the existing SWD stub can be reviewed together.
+
+**Decisions from Stage 5a (original wording, kept for the record):**
 - **D7, FLY_PGOOD at U501.28.** The pin is boxed in by the pre-existing RS485_RO (pin 29) and LED_MAIN (pin 30) escapes. Option (a): approve re-routing those two escapes so that they leave pin 28 a path east. That changes copper on RS485_RO and LED_MAIN only, with no schematic change. Option (b): wait for the ST documents and re-plan the whole U501 fan-out once.
 - **D8, PMD_READY_M and U-10.** Is U501 PB15 5 V-tolerant, or is the PMD401 Ready pull-up to 3.3 V? This needs DS14127 or a PiezoMotor confirmation. The same question applies to the PMD401- and encoder-facing nets that are already routed.
 - **MAIN_SWCLK.** Completion needs either the crystal layout (D5) or approval to re-route the existing J502 SWD stub.

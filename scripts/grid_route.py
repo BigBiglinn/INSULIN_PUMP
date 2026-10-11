@@ -128,10 +128,14 @@ def build_obstacles(b, grid, net, w, req, extra_tracks):
         elif L:
             mark_capsule(grid, T[L], ax, ay, bx, by, hw + c + w / 2)
             mark_capsule(grid, VIA, ax, ay, bx, by, hw + c + vr)
-        if n in avoid:                               # extra margin on every layer (e.g. RF lines)
-            for LL in ("F", "B"):
-                mark_capsule(grid, T[LL], ax, ay, bx, by, hw + avoid[n])
-            mark_capsule(grid, VIA, ax, ay, bx, by, hw + avoid[n])
+        if n in avoid:                               # extra margin (e.g. RF lines)
+            a = avoid[n]
+            m_, same = (a, False) if not isinstance(a, dict) else (a["m"], a.get("same_layer", False))
+            # same_layer: margin only on the copper's own layer (and for vias), so the other outer layer
+            # may cross beneath it with the inner planes in between; otherwise on every layer
+            for LL in ((L,) if same and L else ("F", "B")):
+                mark_capsule(grid, T[LL], ax, ay, bx, by, hw + m_)
+            mark_capsule(grid, VIA, ax, ay, bx, by, hw + m_)
     for (x0, y0, x1, y1) in req.get("keepout", []):
         for LL in ("F", "B"):
             mark_rect(grid, T[LL], x0, y0, x1, y1, 0)

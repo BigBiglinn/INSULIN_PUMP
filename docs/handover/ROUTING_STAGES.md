@@ -457,3 +457,72 @@ The Stage 3 HB_S2M F.Cu run at x = 134.5 passes **0.60 mm from Y502 pad 1 (LSE_I
 **Action:** revisit and re-route HB_S2M once the LSE crystal placement and routing constraints are settled.
 
 **Electrical testing:** none performed.
+
+## 7. D7 investigation: freeing U501 pin 28 (FLY_PGOOD) by re-routing the pin 29 and pin 30 escapes (11 Oct 2026). Result: **not feasible within the approved scope; no copper changed**
+
+**Owner decisions:**
+- **D7:** investigate a controlled re-route of RS485_RO (pin 29) and LED_MAIN (pin 30) only. Present the proposal before any copper change.
+- **D8:** PMD_READY_M and other possibly voltage-incompatible inputs stay unrouted.
+- **D9:** MAIN_SWCLK is deferred to a joint review with the crystal layout and the SWD stub.
+
+**Method.** Everything was done on scratch copies of the board at `route-stage5a-done`. The project PCB is unchanged (`git diff route-stage5a-done -- hardware/kicad/` is empty). Evidence is in `validation/routing/d7_investigation/`. Freerouting was not used.
+
+### 7.1 Current geometry at pin 28 (measured, F.Cu edge to edge)
+
+| Neighbour | Gap from the pin 28 pad |
+|---|---|
+| RS485_RO diagonal (151.84, 119.75) → (153.04, 120.96), crossing in front of pin 28 | **0.163 mm** |
+| MAIN_SWDIO escape (pin 27) | 0.274 mm |
+| RS485_RO stub at pin 29 | 0.274 mm |
+| LED_MAIN diagonal (153.60, 120.94) → (151.91, 119.25), also crossing in front | 0.565 mm |
+| **0.6 mm via anywhere on y = 120.25 between x = 151.93 and 153.33** | **no legal position** (rule 0.15 mm) |
+
+**Pre-existing leftovers found on these two nets:**
+- LED_MAIN's pin 30 stub has duplicated, overlapping segments: (151.44, 119.25)–(151.57, 119.25) appears twice.
+- RS485_RO has a zero-length segment at (151.44, 119.75).
+
+### 7.2 Why pins 29 and 30 alone cannot free pin 28
+
+The F.Cu region to the right of pins 26–33 is a pocket only about **2.2 mm wide**:
+- It runs from the pin ends at x = 151.88 to a wall of F.Cu verticals: MAIN_BOOT0 at x = 154.15, MAIN_NRST at 154.53, **WBA_VDDHPA (a WBA55 supply placeholder) at 155.16**, and MAIN_SWO at 155.81.
+- Its top is taken by the MAIN_BOOT0 (pin 34) and MAIN_NRST (pin 36) escape diagonals.
+
+Inside the pocket, the escape vias of **pin 32 (RS485_DI, at (152.68, 118.12))** and **pin 31 (RS485_DE, at (152.81, 119.36))** sit directly in front of pins 30 and 29. Each lower pin's escape is therefore pushed down one row, and pin 28 is the one left without an exit. Re-routing pins 29 and 30 cannot change that while the pin 31 and 32 vias stay.
+
+The pocket is also enclosed by the **RF_ANT placeholder feed** (L502 → J501):
+- F.Cu up x = 162.15, then diagonally north-west to J501;
+- B.Cu along y = 131.1, beside the crystal/RF capacitor row.
+
+Any route out of U501's right-hand side must therefore cross **under RF_ANT on B.Cu**. Nine existing nets already do so: RS485_RO, RS485_DE, RS485_DI, MCU_48V_EN, PMD_FAULT_M, ENC_A_M, ENC_B_M, PMD_SS_M and WBA_VDDHPA.
+
+### 7.3 Scratch variants
+
+| Variant | Scope | Result |
+|---|---|---|
+| A | RS485_RO and LED_MAIN escapes removed. FLY_PGOOD first, RF_ANT avoided on all layers. | FLY_PGOOD: **no route**. It cannot leave the pocket without crossing RF_ANT. |
+| A′ | As A, but RF_ANT avoided on its own layer only (B.Cu crossing allowed) | FLY_PGOOD routes (70.8 mm, 4 vias), but its escape then **blocks RS485_RO and LED_MAIN: no route for either** |
+| C | **Expanded scope:** pins 28–31 hand fan-out, RS485_DE via moved to (154.6, 118.75) | DRC **fails**: new escapes cross MAIN_NRST, MAIN_BOOT0, MAIN_SWO and WBA_VDDHPA (6 tracks_crossing, 1 clearance, 1 short with MAIN_NRST). The moved via sits beyond the wall. |
+| D | **Expanded scope:** RS485_DI and RS485_DE vias also freed; two routing orders | One of RS485_RO / LED_MAIN always left **unroutable** |
+
+### 7.4 Expected consequences of any eventual fix (for the decision)
+
+**Copper changed.** A fix would have to re-fan the right and top escapes of U501 pins 24–38 together:
+- RS485_DI, RS485_DE, LED_MAIN, RS485_RO, FLY_PGOOD and MAIN_SWDIO;
+- probably MAIN_BOOT0, MAIN_NRST and MAIN_SWO;
+- and the **WBA_VDDHPA placeholder**, a WBA55 supply that D5 defers.
+
+No schematic change would be needed for the re-fan itself.
+
+**FLY_PGOOD itself.** Even with an escape, its route crosses under the RF_ANT placeholder feed on B.Cu and runs about 70 mm, with 4 vias, through the kill-path cluster area. In the scratch result it is at least 2.98 mm from SUP_PARK, does not cross FLY_EN, and comes down x = 159.55, just outside the flyback keep-out, to TP302.
+
+**RF.** RF_ANT itself is a placeholder (U-20, AN5948 pending). A B.Cu crossing under an F.Cu line with In1 GND as its reference is normal practice, but the RF feed will be re-laid once the ST documents arrive. That reshapes this whole pocket.
+
+### 7.5 Recommendation (owner decision)
+
+1. **Do not re-route pins 29 and 30 alone.** It cannot free pin 28, and it would touch two nets for no gain.
+2. **Fold D7 into the U501 fan-out review together with D5 and D9.** Once DS14127 and AN5948 define the VDDHPA, RF feed and crystal layout, re-fan U501 pins 24–38 once, in a single approved change.
+3. **Alternative, not evaluated and needing owner, firmware and CubeMX review:** assigning FLY_PGOOD to a different free U501 GPIO with better access is a **schematic and pin-map change**. I have not proposed a specific pin.
+
+**Board status.** Unchanged since `route-stage5a-done`: 48 unconnected pairs; ERC 6 + 1; DRC 0 copper violations, 0 parity. Electrically untested, incomplete, NOT fabrication-ready.
+
+**Tool change.** `scripts/grid_route.py` now accepts `{"m": margin, "same_layer": true}` for avoid-nets, which allows crossing beneath an outer-layer line on the opposite outer layer. It was used only on scratch boards here.
