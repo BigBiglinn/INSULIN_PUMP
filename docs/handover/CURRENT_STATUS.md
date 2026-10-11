@@ -1,6 +1,6 @@
 # Piezo Insulin Pump v2 Rev B: current status and handoff (living document)
 
-**Updated:** 11 Oct 2026, after the D7 investigation (no copper change; board = tag `route-stage4-done` = `route-stage5a-done`, branch `placement-opt`).
+**Updated:** 11 Oct 2026, after the D7 deferral ruling (no copper change; board = tag `route-stage4-done` = `route-stage5a-done`, branch `placement-opt`).
 
 **Board status:**
 - Digital design only. **NOT fully connected, NOT electrically verified, NOT fabrication-ready.**
@@ -24,6 +24,7 @@
 | `route-stage4-before` | = a6fd898 |
 | `route-stage4-done` | Stage 4 complete (commit a3ef25b) |
 | `route-stage5a-before` | = a3ef25b. Stage 5a made no copper change. |
+| `route-stage5a-done` | = b4230ea (docs only). The board is identical to `route-stage4-done`. Commits 9d0146b (D7 investigation) and the D7 deferral commit are documentation only. |
 
 ## 1. Completed work
 
@@ -41,7 +42,8 @@
 | Stage 3: FLY_EN (without the DNP Q303) and HB_S2M | a6fd898 | `ROUTING_STAGES.md` §4 |
 | Stage 4: ENC_B ×3, ENC_I, ENC_A_S, ENC_B_S (new `grid_route.py`) | a3ef25b | `ROUTING_STAGES.md` §5 |
 | Stage 5a: verification of MAIN_SWCLK, PMD_READY_M and FLY_PGOOD → U501.28. **All three left open (blockers)**; no copper change | b4230ea | `ROUTING_STAGES.md` §6 |
-| D7 investigation (scratch only): re-routing pins 29/30 cannot free pin 28; recommendation to fold D7 into the U501 fan-out review | D7 docs commit | `ROUTING_STAGES.md` §7; evidence in `validation/routing/d7_investigation/` |
+| D7 investigation (scratch only): re-routing pins 29/30 cannot free pin 28; recommendation to fold D7 into the U501 fan-out review | 9d0146b | `ROUTING_STAGES.md` §7; evidence in `validation/routing/d7_investigation/` |
+| D7 ruling: FLY_PGOOD → U501.28 deferred into a coordinated pin 24–38 fan-out review; review plan, leftover-segment cleanup plan, and the documents still needed | D7 deferral docs commit | `ROUTING_STAGES.md` §8 |
 
 ## 2. Test results
 
@@ -147,7 +149,7 @@ The gaps are straight-line distances between the reported endpoints.
 | FLY_EN **[routed, Stage 3]** | Q401.3 – U301.12 | 25.6 | As above. U301 pin 12 escapes south-west to a via at about (164.2, 161.0) that was kept free in Stage 1. Runs past the COMP/FB area on B.Cu. |
 | HB_S2M **[routed, Stage 3]** | U501.12 – U601.13 | 42.5 | **Stage 3 safety gate.** U501.12 is on the pin 1–12 side, near the SMPS pins 1–3, so the route must leave room for the ST layout (D5) |
 | FLY_PGOOD **[routed, D1]** | U301.11 – R302.1 (local) | 4.0 | Resolved by the D1 rotation (ROUTING_STAGES.md §3) |
-| FLY_PGOOD | U301.11 – U501.28 | 41.7 | After D1. U501.28 is on side 25–36 (no supply or oscillator pins) |
+| FLY_PGOOD **[deferred, D7]** | U301.11 – U501.28 | 41.7 | No legal escape at pin 28. Deferred into the U501 pin 24–38 fan-out review after DS14127 and AN5948 (ROUTING_STAGES.md §7–§8) |
 | ENC_B **[routed, Stage 4]** | R712.2 – D708.1 | 5.5 | Encoder input protection area |
 | ENC_B **[routed, Stage 4]** | D708.1 – R709.2 | 9.8 | As above |
 | ENC_B **[routed, Stage 4]** | J705.4 – R712.2 | 36.3 | Long run from J705 (moved earlier) |
@@ -163,8 +165,8 @@ The gaps are straight-line distances between the reported endpoints.
 | VBAT_SENSE | track – track (R108 to U501.14 path) | 28.0 | G (D5): U501.14, LSE side |
 | CON_MAIN_TX | J503.2 (PTH) – U501.4 | 29.3 | G (D5): U501.4 is next to the SMPS pins |
 | ENC_I_M | U501.48 – track | 15.1 | G (D5): U501.48 is next to the VDD11 / RF pins 43–45 |
-| MAIN_SWCLK | track – U501.26 | 7.0 | Side 25–36. Can go with Stage 5a |
-| PMD_READY_M | U501.33 – R706.1 | 36.3 | Side 25–36. Stage 5a |
+| MAIN_SWCLK **[blocked, D9]** | track – U501.26 | 7.0 | Needs a joint crystal-layout and SWD-stub review (ROUTING_STAGES.md §8.1) |
+| PMD_READY_M **[blocked, D8]** | U501.33 – R706.1 | 36.3 | Needs the PB15 voltage tolerance (DS14127) and the PMD401 Ready output level (ROUTING_STAGES.md §8.1) |
 
 ## 4. Proposed routing order
 
@@ -200,9 +202,15 @@ Each stage gets the same procedure:
 - **D6:** no grounding-topology change, and no grounding-dependent layout change, without owner review.
 
 **Owner rulings after Stage 5a:**
-- **D7:** investigate re-routing the pin 29 and pin 30 escapes, without copper changes until the proposal is approved. **Investigated: not feasible within that scope** (ROUTING_STAGES.md §7). Recommended: fold into the U501 fan-out review with D5 and D9.
-- **D8:** PMD_READY_M and other possibly voltage-incompatible MCU inputs stay unrouted until official pin-tolerance documentation and the PMD401 output-voltage specification are verified.
-- **D9:** MAIN_SWCLK is deferred until the crystal layout and the existing SWD stub can be reviewed together.
+- **D7:** investigate re-routing the pin 29 and pin 30 escapes, without copper changes until the proposal is approved. **Investigated: not feasible within that scope** (ROUTING_STAGES.md §7).
+  - **Owner ruling, 11 Oct: DEFERRED.** Fold it into a coordinated U501 pin 24–38 fan-out review after the ST datasheet and RF layout documentation arrive (ROUTING_STAGES.md §8).
+  - A B.Cu crossing under RF_ANT is **not** assumed acceptable.
+  - The duplicate LED_MAIN and zero-length RS485_RO segments are cleaned up only in a reviewed change.
+  - Moving FLY_PGOOD to another pin needs explicit owner approval of the schematic and firmware/CubeMX change.
+- **D8 (blocked):** PMD_READY_M and other possibly voltage-incompatible MCU inputs stay unrouted until official pin-tolerance documentation (PB15, DS14127) and the PMD401 output-voltage specification are verified.
+- **D9 (blocked):** MAIN_SWCLK is deferred until the crystal layout and the existing SWD stub can be reviewed together.
+
+**Documents and decisions still needed for D7, D8 and D9:** see ROUTING_STAGES.md §8.6. In short: DS14127; AN5948 together with the stack-up (U-20); the PMD401 Ready output level from PiezoMotor; and the owner's approval of the fan-out geometry, of any B.Cu crossing under the RF feed, of the cleanup, and of the D9 SWD-stub re-route.
 
 **Decisions from Stage 5a (original wording, kept for the record):**
 - **D7, FLY_PGOOD at U501.28.** The pin is boxed in by the pre-existing RS485_RO (pin 29) and LED_MAIN (pin 30) escapes. Option (a): approve re-routing those two escapes so that they leave pin 28 a path east. That changes copper on RS485_RO and LED_MAIN only, with no schematic change. Option (b): wait for the ST documents and re-plan the whole U501 fan-out once.

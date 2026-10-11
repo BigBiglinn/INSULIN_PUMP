@@ -526,3 +526,109 @@ No schematic change would be needed for the re-fan itself.
 **Board status.** Unchanged since `route-stage5a-done`: 48 unconnected pairs; ERC 6 + 1; DRC 0 copper violations, 0 parity. Electrically untested, incomplete, NOT fabrication-ready.
 
 **Tool change.** `scripts/grid_route.py` now accepts `{"m": margin, "same_layer": true}` for avoid-nets, which allows crossing beneath an outer-layer line on the opposite outer layer. It was used only on scratch boards here.
+
+## 8. D7 ruling: FLY_PGOOD → U501.28 deferred into a coordinated U501 fan-out review (11 Oct 2026; no copper change)
+
+**Owner ruling (summary of the 11 Oct instruction):**
+- Defer the FLY_PGOOD → U501.28 fix, and fold it into a complete review of the U501 fan-out for pins 24–38.
+- Make no copper change now. Preserve the current PCB and every routing checkpoint.
+- Keep FLY_PGOOD → U501.28, PMD_READY_M and MAIN_SWCLK unconnected.
+- Wait for the official ST MCU datasheet and the relevant RF application and layout documentation before redesigning the fan-out.
+- Do not assume that a B.Cu crossing under RF_ANT is acceptable. It needs an electromagnetic and layout review first.
+- Remove the duplicated LED_MAIN segments and the zero-length RS485_RO segment only as part of a controlled, reviewed cleanup.
+- Do not move FLY_PGOOD to another MCU pin without explicit owner approval of the schematic and firmware/CubeMX change, after the alternatives have been reviewed.
+- D8 stays blocked until PB15 voltage tolerance and the PMD401 output voltage are confirmed. D9 stays blocked until the crystal and SWD layout review.
+
+The board is unchanged from `route-stage5a-done`, and its status is unchanged (§7.5): incomplete, electrically untested, NOT fabrication-ready.
+
+### 8.1 Deferred connections
+
+| Connection | Ratsnest gap (mm) | Blocker | Needed to unblock |
+|---|---|---|---|
+| FLY_PGOOD U301.11 – U501.28 | 41.7 | Pin 28 has no legal escape in the current fan-out (§7). The only scratch route found crosses under RF_ANT on B.Cu (not accepted without review), is about 70 mm long and uses 4 vias. | DS14127 and the ST RF layout guidance (AN5948), then the §8.3 review and owner approval of the proposed geometry |
+| PMD_READY_M U501.33 – R706.1 | 36.3 | **D8:** PB15 voltage tolerance not verified (U-10). The PMD401 Ready output has a "~20k pull-up", but the manual does not state the rail. | DS14127 PB15 I/O structure, **and** a PiezoMotor statement of the Ready output high level or pull-up rail |
+| MAIN_SWCLK track – U501.26 | 7.0 | **D9:** completion depends on the crystal layout and the existing J502 SWD stub | Crystal (HSE/LSE) layout from the ST documents, then a joint crystal and SWD review |
+
+### 8.2 Scope: U501 pins 24–38 (nets read from the PCB at `route-stage5a-done`)
+
+| Pin | Net | Current state (PCB) | Point to settle in the review |
+|---|---|---|---|
+| 24 | MAIN_SWO | Routed; F.Cu vertical at x ≈ 155.81 forms the pocket's outer wall | Whether its run can move outward to widen the pocket |
+| 25 | (PA15, no connection) | Unused | Free space only; using it for a signal is a pin-map change (see §8.5) |
+| 26 | MAIN_SWCLK | **Unconnected** at the pin; a J502 SWD stub exists | D9 |
+| 27 | MAIN_SWDIO | Routed; escape passes 0.274 mm from the pin 28 pad | Escape order next to pin 28 |
+| 28 | FLY_PGOOD | **Unconnected** (D7) | Escape, via position, layer change, and route past or under the RF feed |
+| 29 | RS485_RO | Routed: F.Cu diagonal to x = 153.045, via at about (153.23, 124.89), then B.Cu along y = 124.93 under RF_ANT | Re-fan; review the existing RF crossing |
+| 30 | LED_MAIN | Routed: F.Cu diagonal to x = 153.60, via at about (153.60, 121.93), B.Cu, then F.Cu at x = 159.7 | Re-fan |
+| 31 | RS485_DE | Routed; escape via at (152.81, 119.36), directly in front of pin 29 | Via position (root cause, §7.2) |
+| 32 | RS485_DI | Routed; escape via at (152.68, 118.12), directly in front of pin 30 | Via position (root cause, §7.2) |
+| 33 | PMD_READY_M | **Unconnected** (D8) | Reserve an escape path even while D8 is blocked |
+| 34 | MAIN_BOOT0 | Routed; diagonal, then F.Cu vertical at x ≈ 154.15 | Part of the pocket's top and wall |
+| 35 | +3V3 | Supply pin | Decoupling placement per DS14127; must not be lengthened by the re-fan |
+| 36 | MAIN_NRST | Routed; diagonal, then F.Cu vertical at x ≈ 154.53 | Part of the pocket's top and wall |
+| 37 | RF_MCU | **Unconnected** at the pin (placeholder RF match L502 → J501, U-20) | RF feed geometry from AN5948 and the stack-up |
+| 38 | WBA_VDDHPA | Routed placeholder; F.Cu vertical at x ≈ 155.16 | Supply topology from DS14127 (D5) |
+
+Pins 39 (WBA_VDDANA) and 40 (WBA_VDDRF) are outside the requested range, but they sit beside pins 37 and 38 and share the same supply blocker. The review should look at them at the same time.
+
+### 8.3 Review method (to be run when the documents arrive)
+
+Evaluate everything together, not net by net:
+1. **Pin escape order.** Choose one order for pins 24–38 that gives every pin, including 28 and 33, an exit. Treat the RS485_DE and RS485_DI escape vias in front of pins 29 and 30 as movable.
+2. **Via placement.** Keep vias out of the pin fronts and out of pads. Check each against the 0.15 mm rule and against the planes (In1 GND, In2 +3V3 in this area).
+3. **Layer transitions.** Count the vias per net. Every transition must keep a continuous reference plane.
+4. **RF clearances.** Lay out the RF feed (RF_MCU → match → J501) to AN5948 and the stack-up (U-20) **first**, then route around it.
+   - Do not assume a B.Cu crossing under RF_ANT is acceptable. Look at the crossing angle, the distance to the matching network, the reference-plane continuity, and the ST guidance on routing near the RF line.
+   - The **nine existing B.Cu crossings** under RF_ANT (§7.2) go into the same review. They have not been accepted either.
+5. **Switching-sensitive routes.** Check against:
+   - the kill-path nets (FLY_PGOOD, FLY_EN, SUP_PARK);
+   - the WBA55 SMPS inductor and supply placeholders (L501, VDD11);
+   - the HSE and LSE crystals;
+   - HB_S2M, which already passes 0.60 mm from Y502 pad 1 (§5 note).
+6. **Deliverable before any copper change:**
+   - the proposed geometry, the affected nets and the clearance measurements;
+   - a DRC (with parity) of a scratch copy;
+   - `compare_stage.py` against `route-stage5a-done`.
+
+   The owner approves this before anything goes onto the project PCB. It is applied under new `route-u501fanout-before` / `-done` tags.
+
+### 8.4 Controlled cleanup of leftover segments (part of the reviewed change, not applied)
+
+The PCB at `route-stage5a-done` contains these segments:
+
+| Net | Layer | Segment | Length | Note |
+|---|---|---|---|---|
+| LED_MAIN | F.Cu | (151.438, 119.25) → (151.57, 119.25) | 0.132 mm | Duplicate pair: the same segment also exists reversed, (151.57, 119.25) → (151.438, 119.25). Both lie on the pin 30 stub. |
+| RS485_RO | F.Cu | (151.438, 119.75) → (151.438, 119.75) | about 0.001 mm | Zero-length segment at the pin 29 pad centre |
+| RS485_RO | F.Cu / B.Cu | 0.017 mm and 0.052 mm jogs at the via near (153.23, 124.89) | — | Functional short jogs, not duplicates. Listed for review only. |
+
+**Procedure:**
+1. `route_stage.py remove_tracks` asserts exactly one match per segment, so it cannot remove one copy of an identical pair. A duplicate-aware removal mode, matching either direction and removing one copy, is needed. That script change is itself part of the review.
+2. After removal, verify that U501.29 and U501.30 still connect to their nets, that the unconnected count is still 48, and that DRC still shows 0 copper violations and 0 parity issues.
+3. Run `compare_stage.py` against `route-stage5a-done`.
+4. Commit separately, or inside the fan-out change, as the owner prefers.
+
+### 8.5 Moving FLY_PGOOD to another pin
+
+Not done and not evaluated. It would change the schematic and the pin map, and it would need:
+- a written list of the alternative pins;
+- a CubeMX check (`scripts/verify_pinmap.py`);
+- firmware review;
+- explicit owner approval.
+
+PA15 (pin 25) is the only unused pin in this range. It is mentioned here as a fact, not as a proposal.
+
+### 8.6 Documents and decisions still needed
+
+**Documents:**
+- **DS14127 (STM32WBA55 datasheet):** PB15 I/O structure (D8); supply requirements for pins 35, 38, 39 and 40 (D5, U-05); HSE/LSE pin and crystal requirements (D9).
+- **AN5948 (ST RF application and layout guidance) and the stack-up (U-20):** RF feed geometry, and whether and how signals may cross or run near it.
+- **RM0493, ES0592, the NUCLEO schematic and UM3301:** for the remaining WBA55 supply and RF items (U-05). Not needed for the escape order itself.
+- **PiezoMotor:** the PMD401 Ready output high level or pull-up rail (D8).
+
+**Owner decisions after the documents arrive:**
+- approve or reject the proposed pin 24–38 fan-out geometry (§8.3);
+- accept or reject any B.Cu crossing under the RF feed, existing or new;
+- approve the leftover-segment cleanup and the `remove_tracks` duplicate mode (§8.4);
+- D9: whether the J502 SWD stub may be re-routed;
+- optionally, a decision on reviewing alternative FLY_PGOOD pins (§8.5).
