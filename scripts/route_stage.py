@@ -48,6 +48,25 @@ def hand(spec_path):
         for t in vias + stubs:
             b.Delete(t)
         print(f"removed {r['net']} via at ({x}, {y}) and {len(stubs)} stub(s)")
+    for r in spec.get("remove_tracks", []):    # exact segments, given as a polyline of existing vertices
+        n = 0
+        for (x0, y0), (x1, y1) in zip(r["pts"], r["pts"][1:]):
+            a, c = V(x0, y0), V(x1, y1)
+            hit = [t for t in b.GetTracks() if t.Type() == pcbnew.PCB_TRACE_T and short(t.GetNetname()) == r["net"]
+                   and LAYER[r.get("layer", "F")] == t.GetLayer()
+                   and {(round(pcbnew.ToMM(t.GetStart().x), 2), round(pcbnew.ToMM(t.GetStart().y), 2)),
+                        (round(pcbnew.ToMM(t.GetEnd().x), 2), round(pcbnew.ToMM(t.GetEnd().y), 2))}
+                   == {(round(x0, 2), round(y0, 2)), (round(x1, 2), round(y1, 2))}]
+            assert len(hit) == 1, f"segment {r['net']} {(x0, y0)}-{(x1, y1)} found {len(hit)} times"
+            b.Delete(hit[0])
+            n += 1
+        print(f"removed {n} {r['net']} segment(s)")
+    for r in spec.get("rotate", []):             # in-place rotation about the footprint anchor
+        fp = b.FindFootprintByReference(r["ref"])
+        old = fp.GetOrientationDegrees()
+        fp.SetOrientationDegrees(r["rot"])
+        print(f"rotated {r['ref']} {old:.0f} -> {r['rot']} deg at ({pcbnew.ToMM(fp.GetPosition().x):.2f}, "
+              f"{pcbnew.ToMM(fp.GetPosition().y):.2f})")
     for t in spec.get("tracks", []):
         ni = netinfo(b, t["net"])
         for (x0, y0), (x1, y1) in zip(t["pts"], t["pts"][1:]):

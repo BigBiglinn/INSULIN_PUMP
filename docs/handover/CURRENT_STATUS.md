@@ -1,6 +1,6 @@
 # Piezo Insulin Pump v2 Rev B: current status and handoff (living document)
 
-**Updated:** 11 Oct 2026, after routing Stage 2 (tag `route-stage2-done`, branch `placement-opt`).
+**Updated:** 11 Oct 2026, after the D1 rotation milestone (tag `route-d1-done`, branch `placement-opt`).
 
 **Board status:**
 - Digital design only. **NOT fully connected, NOT electrically verified, NOT fabrication-ready.**
@@ -16,7 +16,9 @@
 | `route-stage1a-hand` | Stage 1 power-critical routes |
 | `route-stage1-done` | Stage 1 complete |
 | `route-stage2-before` | Before Stage 2 |
-| `route-stage2-done` | Stage 2 complete |
+| `route-stage2-done` | Stage 2 complete (commit 3f7ba36) |
+| `route-d1-before` | = 3f7ba36 |
+| `route-d1-done` | D1 rotation milestone complete |
 
 ## 1. Completed work
 
@@ -29,24 +31,25 @@
 | Pre-routing reconciliation and topology gate | 9710ac7 | `ROUTING_STAGES.md` §0 |
 | Stage 1: LM51551 controller nets | 8c1c80c, 844fa0a | `ROUTING_STAGES.md` §1 |
 | Audit and routing plan; owner rulings on D1–D6 | 4510a91 (and the Stage 2 commit) | this document, §3–5 |
-| Stage 2: ENC_VCC, PMD_5V, CON_SUP_TX/RX | Stage 2 commit | `ROUTING_STAGES.md` §2 |
+| Stage 2: ENC_VCC, PMD_5V, CON_SUP_TX/RX | 3f7ba36 | `ROUTING_STAGES.md` §2 |
+| D1: R301/R302/C305/R308 rotated 180°; FB/SS/RT re-routed; FLY_PGOOD U301.11–R302 and +3V3 to R302 | D1 commit | `ROUTING_STAGES.md` §3 |
 
 ## 2. Test results
 
 **Only software checks have been run.** No electrical, bench or manufacturing test has been performed. Nothing below is evidence that the circuit works.
 
-| Check (kicad-cli 10.0.3) | Result at `route-stage2-done` |
+| Check (kicad-cli 10.0.3) | Result at `route-d1-done` |
 |---|---|
 | ERC | 6 `power_pin_not_driven` on U501 pins 3, 38, 39, 40, 43 and 45. These are intentional: the WBA55 supply wiring waits for the ST documents and they are not suppressed. Plus 1 cosmetic `lib_symbol_mismatch` on U701. |
 | DRC copper (clearance, short, crossing, hole, edge) | 0 |
 | Schematic–PCB parity | 0 |
-| Unconnected pairs | **61** (67 after Stage 1; 80 after placement) |
-| Warnings | 6 via_dangling, 1 track_dangling (pre-existing, on WBA55 and group-G nets); 82 silk_overlap, 73 silk_over_copper, 3 silk_edge, 2 unmirrored text (cosmetic) |
+| Unconnected pairs | **59** (61 after Stage 2; 67 after Stage 1; 80 after placement) |
+| Warnings | 6 via_dangling, 1 track_dangling (pre-existing, on WBA55 and group-G nets); 83 silk_overlap, 71 silk_over_copper, 3 silk_edge, 2 unmirrored text (cosmetic) |
 | Simulation | Flyback open-loop LTspice runs only (`FLYBACK_DESIGN.md`). No control-loop model exists for the LM51551. |
 
 ## 3. Net-by-net audit of the unconnected pairs
 
-This audit was taken at `route-stage1-done` (67 pairs). Stage 2 has since closed 6 of them, marked **[routed, Stage 2]** in §3.5; 61 remain. The current per-pair list is always `validation/logs/unrouted_reconciliation.md`: W 12 / P 11 / R 25 / G 13 = 61.
+This audit was taken at `route-stage1-done` (67 pairs). Stage 2 closed 6 (**[routed, Stage 2]**) and D1 closed 2 (**[routed, D1]**); 59 remain. The current per-pair list is always `validation/logs/unrouted_reconciliation.md`: W 12 / P 11 / R 24 / G 12 = 59.
 
 **Sources:**
 - `validation/drc/pump_v2-drc.json` (DRC at `route-stage1-done`);
@@ -128,13 +131,13 @@ The gaps are straight-line distances between the reported endpoints.
 | PMD_5V **[routed, Stage 2]** | J702.2 – J701.3 | 9.0 | Between the two PMD401 connectors; F.Cu crosses PMD_FAULT, MOSI and READY. Likely B.Cu |
 | CON_SUP_TX **[routed, Stage 2]** | J503.3 (PTH) – U601.29 | 15.9 | Console to supervisor UART. U601 pins checked by CubeMX |
 | CON_SUP_RX **[routed, Stage 2]** | J503.4 (PTH) – U601.32 | 13.4 | As above; corridor nearly clear |
-| +3V3 **[moved to the D1 milestone]** | R302.2 – nearest +3V3 via (147.2, 159.5) | 15.8 | R302 (PGOOD pull-up) sits over the In2 VBAT polygon of the 48 V block, so its +3V3 via has no plane. It needs a track out to the +3V3 plane region (x < 155). |
+| +3V3 **[routed, D1]** | R302.2 – nearest +3V3 via (147.2, 159.5) | 15.8 | R302 (PGOOD pull-up) sits over the In2 VBAT polygon of the 48 V block, so its +3V3 via has no plane. It needs a track out to the +3V3 plane region (x < 155). |
 | FLY_EN | R402.2 – TP401.1 | 3.1 | **Stage 3 safety gate.** Kill-path node (K-10) |
 | FLY_EN | R401.1 – TP401.1 | 5.2 | As above |
 | FLY_EN | TP401.1 – Q401.3 | 7.0 | As above |
 | FLY_EN | Q401.3 – U301.12 | 25.6 | As above. U301 pin 12 escapes south-west to a via at about (164.2, 161.0) that was kept free in Stage 1. Runs past the COMP/FB area on B.Cu. |
 | HB_S2M | U501.12 – U601.13 | 42.5 | **Stage 3 safety gate.** U501.12 is on the pin 1–12 side, near the SMPS pins 1–3, so the route must leave room for the ST layout (D5) |
-| FLY_PGOOD | U301.11 – R302.1 (local) | 4.0 | **G (D1):** pin 11 escape blocked (ROUTING_STAGES.md §1.3) |
+| FLY_PGOOD **[routed, D1]** | U301.11 – R302.1 (local) | 4.0 | Resolved by the D1 rotation (ROUTING_STAGES.md §3) |
 | FLY_PGOOD | U301.11 – U501.28 | 41.7 | After D1. U501.28 is on side 25–36 (no supply or oscillator pins) |
 | ENC_B | R712.2 – D708.1 | 5.5 | Encoder input protection area |
 | ENC_B | D708.1 – R709.2 | 9.8 | As above |
@@ -167,7 +170,7 @@ Each stage gets the same procedure:
 | Stage | Nets (pairs) | Why this order | Gate |
 |---|---|---|---|
 | **2 (done)** | ENC_VCC ×2, PMD_5V ×2, CON_SUP_TX, CON_SUP_RX (6). +3V3 to R302 moved to D1 | Short, fully defined, away from U501 and the flyback | ⛔ stopped for review |
-| **D1 milestone** | Rotate R301, R302, C305 and R308 by 180°; re-route their Stage 1 nets (FB, SS, RT) and GND fan-outs; FLY_PGOOD U301.11 – R302; +3V3 to R302 (3 pairs) | Approved (option 1). Needs its own checkpoint, because it changes Stage 1 geometry | ⛔ ask before starting |
+| **D1 milestone (done)** | Rotated R301, R302, C305 and R308 by 180°; re-routed FB, SS, RT and the GND fan-outs; FLY_PGOOD U301.11 – R302; +3V3 to R302 (2 pairs closed) | Approved (option 1) | ⛔ stopped for review |
 | **3** | FLY_EN ×4 (not Q303), HB_S2M (5) | Safety-control nets get their own stage and review. The intended pads and levels are in ROUTING_STAGES.md §0.2. A routed net proves continuity only, not fail-off behaviour (SG-03/SG-05 are bench tests). | ⛔ separate safety review |
 | **4** | ENC_B ×3, ENC_B_S, ENC_A_S, ENC_I; RS485_B to R714 if D3 is approved (6–7) | Encoder and supervisor signals, away from U501's supply sides | ⛔ |
 | **5a** | MAIN_SWCLK, PMD_READY_M, FLY_PGOOD U301.11 – U501.28 (3) | U501 side 25–36 has no supply or oscillator pins. **Owner: only where the pin assignment and supply requirements are verified.** The pins are CubeMX-checked; the supply requirements are still unread (U-05), so each net is checked for independence from the supply layout before routing. | ⛔ |
@@ -180,7 +183,7 @@ Each stage gets the same procedure:
 ## 5. Outstanding approvals and decision gates
 
 **Owner rulings, 11 Oct 2026:**
-- **D1:** approved, option 1 (rotate R301, R302, C305 and R308), subject to clearance and connectivity checks. Not yet applied.
+- **D1:** approved, option 1, subject to clearance and connectivity checks. **Applied at `route-d1-done`:** DRC 0 copper violations, parity 0, no regressions, grounding topology unchanged (ROUTING_STAGES.md §3).
 - **D2:** copper changes deferred. The concern is documented in §6.
 - **D3:** keep the undefined placeholder circuitry unrouted. **Ask the owner before connecting RS485_B to R714.**
 - **D4:** wait for the BQ25188 footprint documentation.
@@ -229,5 +232,5 @@ The table below is the original proposal, kept for the record.
 - **Board rules are generic 4-layer values.** No fab has been chosen (U-16).
 - **Stage 1 VCC decoupling:** U301 VCC/BIAS is fed through C304, and three plane vias were removed. C305.2 shares R308.2's GND via. These are routing choices; the schematic is unchanged.
 - **R312 is not moved.** It keeps its baseline position because the v2 spot collided with R309 once M8 was deferred.
-- **Stage 1 does not use Freerouting.** Freerouting 2.1.0 did not honour the net-class restriction or the pass limit.
+- **Stage 1, Stage 2 and D1 do not use Freerouting.** Freerouting 2.1.0 did not honour the net-class restriction or the pass limit.
 - **BOM CALC values are calculations and simulations.** None has been bench-verified.

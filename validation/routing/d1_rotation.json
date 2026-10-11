@@ -1,0 +1,39 @@
+{
+ "_comment": "D1 milestone (owner-approved option 1): rotate R301, R302, C305 and R308 by 180 deg in place, so their signal pads face U301; re-route the affected Stage 1 copper; FLY_PGOOD U301.11 - R302 - TP302; +3V3 to R302. GND pads keep their own plane via each (no grounding-topology change). See docs/handover/ROUTING_STAGES.md section 3.",
+ "remove": [
+  {"net": "GND",    "via": [162.82, 157.47], "why": "shared R308.2 / C305.2 fan-out via; after rotation it would sit between the FB and SS pads"},
+  {"net": "GND",    "via": [163.82, 160.00], "why": "R301.2 fan-out via; after rotation its stub would land on the RT pad"},
+  {"net": "+3V3",   "via": [163.82, 161.80], "why": "R302.2 fan-out via (never reached a +3V3 plane: In2 is VBAT here); after rotation its stub would land on the PGOOD pad"},
+  {"net": "FLY_FB", "via": [163.75, 156.40], "why": "Stage 1b B.Cu hop to the old R308.1 position; no longer needed"},
+  {"net": "FLY_FB", "via": [160.20, 156.40], "why": "as above"}
+ ],
+ "remove_tracks": [
+  {"net": "FLY_SS",    "pts": [[164.65, 158.75], [163.90, 158.75], [163.72, 158.93], [161.22, 158.93], [161.22, 158.40]], "why": "Stage 1b SS route to the old C305.1 position"},
+  {"net": "FLY_RT",    "pts": [[164.65, 159.25], [161.18, 159.25], [161.18, 159.70]], "why": "Stage 1b RT route to the old R301.1 position"},
+  {"net": "FLY_PGOOD", "pts": [[161.18, 161.80], [159.00, 161.80]], "why": "Stage 1b TP302 link to the old R302.1 position"}
+ ],
+ "rotate": [
+  {"ref": "R308", "rot": 180},
+  {"ref": "C305", "rot": 180},
+  {"ref": "R301", "rot": 180},
+  {"ref": "R302", "rot": 180}
+ ],
+ "tracks": [
+  {"net": "FLY_FB",    "layer": "F", "w": 0.15, "pts": [[163.55, 156.70], [163.55, 156.40], [163.55, 156.10]], "why": "close the FB vertical where the via jog was removed"},
+  {"net": "FLY_FB",    "layer": "F", "w": 0.15, "pts": [[163.55, 156.40], [162.82, 156.40]], "why": "FB node to R308.1 (now on the U301 side); no via"},
+  {"net": "FLY_SS",    "layer": "F", "w": 0.15, "pts": [[164.65, 158.75], [163.00, 158.75], [162.85, 158.40]], "why": "U301.9 SS to C305.1 (into the pad from below), passing under the FB corner"},
+  {"net": "FLY_RT",    "layer": "F", "w": 0.15, "pts": [[164.65, 159.25], [162.82, 159.25], [162.82, 159.70]], "why": "U301.10 RT to R301.1"},
+  {"net": "FLY_PGOOD", "layer": "F", "w": 0.15, "pts": [[164.65, 159.75], [164.10, 159.75], [163.60, 160.25], [163.60, 161.00], [163.00, 161.50]], "why": "U301.11 PGOOD to R302.1; keeps the FLY_EN escape via site (164.2, 161.0) free"},
+  {"net": "FLY_PGOOD", "layer": "F", "w": 0.20, "pts": [[159.00, 161.80], [159.70, 160.90], [162.60, 160.90], [162.82, 161.50]], "why": "TP302 to R302.1 through the channel between the R301 and R302 rows"},
+  {"net": "GND",       "layer": "F", "w": 0.30, "pts": [[161.18, 156.40], [160.20, 156.40]], "why": "R308.2 to its own GND plane via (west side)"},
+  {"net": "GND",       "layer": "F", "w": 0.30, "pts": [[161.22, 158.20], [160.20, 158.20]], "why": "C305.2 to its own GND plane via (west side)"},
+  {"net": "GND",       "layer": "F", "w": 0.30, "pts": [[161.18, 160.00], [160.20, 160.00]], "why": "R301.2 to its own GND plane via (west side)"},
+  {"net": "+3V3",      "layer": "F", "w": 0.25, "pts": [[161.18, 161.80], [161.18, 162.90], [155.60, 162.90], [154.60, 163.60]], "why": "R302.2 pull-up supply out of the In2 VBAT block to a via over the In2 +3V3 region (x < 155)"}
+ ],
+ "vias": [
+  {"net": "GND",  "at": [160.20, 156.40]},
+  {"net": "GND",  "at": [160.20, 158.20]},
+  {"net": "GND",  "at": [160.20, 160.00]},
+  {"net": "+3V3", "at": [154.60, 163.60]}
+ ]
+}

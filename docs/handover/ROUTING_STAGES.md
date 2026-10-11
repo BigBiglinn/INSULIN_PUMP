@@ -109,7 +109,7 @@ Full comparison: `validation/routing/stage1_vs_checkpoint.txt`, from `scripts/co
 | RT, SS, COMP, COMP_RC | 3.4–7.2 mm, F.Cu, no vias | Short and direct; the AGND-side parts keep their own plane vias. |
 | C305.2 (SS cap) ground | Its fan-out via was removed. It now shares R308.2's existing GND plane via (0.73 mm track). | Still a direct plane connection. This was needed to open the pin 8 (FB) escape. |
 
-### 1.3 Blocker found in Stage 1 (**needs approval**)
+### 1.3 Blocker found in Stage 1 (resolved by D1 option 1, see §3)
 
 **FLY_PGOOD U301.11 → R302.1 is not routed.**
 
@@ -181,5 +181,81 @@ Pin 11 sits between pin 10 (RT, routed) and pin 12 (FLY_EN, reserved). The only 
 **Pairs closed (6):** ENC_VCC ×2, PMD_5V ×2, CON_SUP_TX, CON_SUP_RX.
 
 **Relabelled pairs:** +3V3, VBAT_FUSED, WBA_VDDRF and WBA_VDDRFPA each show one pair with different reported endpoints after the zone refill. No copper on these nets changed and the per-net counts are unchanged. **No regressions.**
+
+**Electrical testing:** none performed. Copper continuity is not functional verification.
+
+## 3. D1 milestone: R301 / R302 / C305 / R308 rotation (11 Oct 2026)
+
+**Approval:** owner-approved option 1, subject to clearance and connectivity checks.
+
+**Checkpoints:**
+- `route-d1-before` (= commit 3f7ba36, `route-stage2-done`);
+- `route-d1-done`.
+
+**Route specification:** `validation/routing/d1_rotation.json`, applied with `scripts/route_stage.py hand`, which gained `rotate` and exact-segment `remove_tracks` support. Full comparison: `validation/routing/d1_vs_checkpoint.txt`. Render: `validation/routing/d1_fcu_controller.png`.
+
+**Freerouting:** not used.
+
+### 3.1 What the rotation affected (inspected before any change)
+
+Rotating each part 180° in place swaps its pad positions. Eight copper items landed on the four parts. All of them came from Stage 1 or the original plane fan-out; **no Stage 2 copper was affected.**
+
+| Pad (before) | Copper on it | Action |
+|---|---|---|
+| R308.2 GND, C305.2 GND | Stubs to a shared GND via at (162.82, 157.47) | Via and stubs removed. After rotation that via would sit between the FB and SS pads. |
+| R301.2 GND | Stub to a GND via at (163.82, 160.0) | Removed. It would have landed on the RT pad, and it was the via blocking the U301.11 escape. |
+| R302.2 +3V3 | Stub to a +3V3 via at (163.82, 161.8) | Removed. It would have landed on the PGOOD pad, and it never reached a +3V3 plane, because In2 is the VBAT polygon there. |
+| R308.1 FB | B.Cu hop with 2 vias from the FB node | Removed. R308.1 now faces U301, so no via is needed. |
+| C305.1 SS, R301.1 RT | Stage 1b SS and RT routes | Replaced by shorter direct routes |
+| R302.1 PGOOD | Stage 1b TP302 link | Replaced |
+
+### 3.2 New copper
+
+| Net | Route | Width | Vias |
+|---|---|---|---|
+| FLY_FB | FB vertical closed at the old via jog. Stub (163.55, 156.4) → R308.1. The U301.8 → R307.2 section from Stage 1 is unchanged. | 0.15 mm | **0** (was 2) |
+| FLY_SS | U301.9 → under the FB corner → C305.1 | 0.15 mm | 0 |
+| FLY_RT | U301.10 → R301.1 | 0.15 mm | 0 |
+| FLY_PGOOD | U301.11 → (164.1, 159.75) → x = 163.6 → R302.1. TP302 → channel between the R301 and R302 rows → R302.1. | 0.15 / 0.2 mm | 0 |
+| GND | R308.2, C305.2 and R301.2 each get their **own** stub and GND plane via on the west side (x = 160.2) | 0.3 mm | 3 |
+| +3V3 | R302.2 → south → west along y = 162.9 → via at (154.6, 163.6), over the In2 +3V3 region (x < 155) | 0.25 mm | 1 |
+
+**Grounding topology unchanged.** Every GND pad still has its own direct plane via, as before. The only difference is which side of the part the via sits on. No local AGND copper, no new GND-to-GND links, and no AGND/PGND change (FL-3 untouched).
+
+### 3.3 Results against commit 3f7ba36 (`route-stage2-done`)
+
+| Check | 3f7ba36 | route-d1-done |
+|---|---|---|
+| ERC | 6 intentional U501 errors + 1 cosmetic U701 warning | identical (schematic not modified) |
+| DRC copper (clearance, short, crossing, hole, edge) | 0 | 0 |
+| Schematic parity | 0 | 0 |
+| via_dangling / track_dangling | 6 / 1 | 6 / 1 (same items) |
+| silk_overlap / silk_over_copper | 82 / 73 | **83 / 71** (see below) |
+| silk_edge / unmirrored text | 3 / 2 | 3 / 2 |
+| Unconnected pairs | 61 | **59** |
+| Footprints changed | n/a | R301, R302, C305 and R308 only: orientation 0° → 180°, positions unchanged |
+| Nets whose copper changed | n/a | FLY_FB, FLY_SS, FLY_RT, FLY_PGOOD, GND (local stubs and vias), +3V3 (R302 only). Nothing else. |
+| BOM re-export | n/a | byte-identical |
+
+**Pairs closed (2):**
+- FLY_PGOOD U301.11 ↔ R302 (local part now complete);
+- +3V3 to R302.
+
+**Relabelled pairs, with no copper change on the net:**
+- FLY_PGOOD's remaining U501.28 gap is now reported from a track end. It is Stage 5a.
+- RS485_B, SW48_GATE, VBAT_FUSED, WBA_VDDRF and WBA_VDDRFPA each show different endpoints after the zone refill. Their per-net counts are unchanged.
+
+**Silkscreen changes:** every one involves the reference text of a rotated part, which rotated with it: 15 items removed, 14 added. They are cosmetic, to be cleaned up with U-32.
+
+**Regressions: none.**
+
+### 3.4 Checks specific to this milestone
+
+| Item | Result |
+|---|---|
+| HV48 clearance near R307.1 (+48V_RAW) | DRC 0. The nearest new copper is the GND via at (160.2, 156.4), about 1.15 mm from the R307.1 pad (rule 0.6 mm). |
+| FLY_EN escape for Stage 3 (pin 12 → via site (164.2, 161.0)) | Still free. The via site is 0.223 mm from the new PGOOD track and the stub path is at least 0.273 mm from foreign copper (rule 0.15 mm). This is only checked at the escape; the full FLY_EN route is Stage 3. |
+| FB node | Now 0 vias and shorter. The high-impedance node stays on F.Cu, away from switching copper. |
+| CON_SUP_TX (Stage 2) | Unchanged. The nearest D1 copper is the GND vias at x = 160.2, about 1.9 mm away. |
 
 **Electrical testing:** none performed. Copper continuity is not functional verification.
