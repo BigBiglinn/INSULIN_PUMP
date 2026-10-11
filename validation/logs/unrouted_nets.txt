@@ -1,7 +1,7 @@
 Unrouted connections - kicad-cli 10.0.3 DRC --schematic-parity --refill-zones, branch placement-opt,
-after the approved v2 placement change, routing Stages 1-2 and the D1 rotation milestone. Board NOT fully connected.
-Total unconnected items: 59 (baseline e8d141c: 35).
-Groups: A=12 (baseline 12), B=1 (baseline 1), C=13 (baseline 14), D=33 (baseline 8)
+after the approved v2 placement change, routing Stages 1-3 and the D1 milestone. Board NOT fully connected.
+Total unconnected items: 54 (baseline e8d141c: 35).
+Groups: A=12 (baseline 12), B=1 (baseline 1), C=13 (baseline 14), D=28 (baseline 8)
 Baseline D items are the baseline gaps on nets that have since been ripped (they were group C there).
 KiCad connectivity includes filled zones, so plane connections are already counted.
 
@@ -17,13 +17,13 @@ A. Placeholder nets awaiting the ST WBA55 documents (unchanged by placement): 12
   WBA_VDD11      gap   8.5 mm : Pad 45 [/Main MCU STM32WBA55/WBA_VDD11] of U501 on F.Cu  <->  Pad 1 [/Main MCU STM32WBA55/WBA_VDD11] of C509 on F.Cu
   WBA_VDDANA     gap  19.1 mm : Track [/Main MCU STM32WBA55/WBA_VDDANA] on F.Cu, length 1.7678 mm  <->  Pad 39 [/Main MCU STM32WBA55/WBA_VDDANA] of U501 on F.Cu
   WBA_VDDRF      gap  16.9 mm : Track [/Main MCU STM32WBA55/WBA_VDDRF] on F.Cu, length 1.8286 mm  <->  Pad 40 [/Main MCU STM32WBA55/WBA_VDDRF] of U501 on F.Cu
-  WBA_VDDRFPA    gap  13.0 mm : Pad 43 [/Main MCU STM32WBA55/WBA_VDDRFPA] of U501 on F.Cu  <->  Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
+  WBA_VDDRFPA    gap  13.7 mm : Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.7572 mm  <->  Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
 
 B. Net between DNP placeholder parts only (48 V output switch, M8 not applied): 1
-  SW48_GATE      gap  21.1 mm : Pad 1 [/48V flyback/SW48_GATE] of R309 on F.Cu  <->  Pad 1 [/48V flyback/SW48_GATE] of R310 on F.Cu
+  SW48_GATE      gap  21.8 mm : Pad 1 [/48V flyback/SW48_GATE] of R309 on F.Cu  <->  Track [/48V flyback/SW48_GATE] on F.Cu, length 0.9899 mm
 
 C. GENUINE connections still to route, on nets NOT touched by the placement change: 13
-  CHG_INT_N      gap  11.6 mm : Pad A1 [CHG_INT_N] of U101 on F.Cu  <->  Track [CHG_INT_N] on F.Cu, length 1.9163 mm
+  CHG_INT_N      gap   9.6 mm : Pad A1 [CHG_INT_N] of U101 on F.Cu  <->  Via [CHG_INT_N] on F.Cu - B.Cu
   ENC_A_S        gap  60.9 mm : Pad 17 [ENC_A_S] of U601 on F.Cu  <->  Pad 1 [ENC_A_S] of R711 on F.Cu
   ENC_I          gap  41.6 mm : Pad 1 [/PMD401 & encoder interface/ENC_I] of J705 on F.Cu  <->  Track [/PMD401 & encoder interface/ENC_I] on F.Cu, length 0.8810 mm
   ENC_I_M        gap  15.1 mm : Pad 48 [ENC_I_M] of U501 on F.Cu  <->  Track [ENC_I_M] on F.Cu, length 13.3926 mm
@@ -34,10 +34,10 @@ C. GENUINE connections still to route, on nets NOT touched by the placement chan
   PMD_READY_M    gap  36.3 mm : Pad 33 [PMD_READY_M] of U501 on F.Cu  <->  Pad 1 [PMD_READY_M] of R706 on F.Cu
   PMD_SCLK_M     gap  36.3 mm : Pad 13 [PMD_SCLK_M] of U501 on F.Cu  <->  Pad 1 [PMD_SCLK_M] of R704 on F.Cu
   RS485_B        gap  21.2 mm : Pad 2 [/PMD401 & encoder interface/RS485_B] of R714 on F.Cu  <->  Track [/PMD401 & encoder interface/RS485_B] on B.Cu, length 10.0000 mm
-  VBAT_FUSED     gap   7.2 mm : Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu  <->  Pad 1 [/Power input & charger/VBAT_FUSED] of C102 on F.Cu
+  VBAT_FUSED     gap   7.4 mm : Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu  <->  Track [/Power input & charger/VBAT_FUSED] on F.Cu, length 2.6092 mm
   VBAT_SENSE     gap  28.0 mm : Track [VBAT_SENSE] on F.Cu, length 2.3500 mm  <->  Track [VBAT_SENSE] on F.Cu, length 0.4370 mm
 
-D. Connections OPENED by the placement rip-up (ripped nets), pending the staged re-route: 33
+D. Connections OPENED by the placement rip-up (ripped nets), pending the staged re-route: 28
   +48V_MOT       gap   3.9 mm : Pad 2 [+48V_MOT] of J703 on F.Cu  <->  Pad 1 [+48V_MOT] of TP301 on F.Cu
   +48V_MOT       gap   4.0 mm : Pad 2 [+48V_MOT] of R311 on F.Cu  <->  Pad 2 [+48V_MOT] of J703 on F.Cu
   +48V_MOT       gap   8.5 mm : PTH pad 1 [+48V_MOT] of C702  <->  Pad 2 [+48V_MOT] of R311 on F.Cu
@@ -59,15 +59,10 @@ D. Connections OPENED by the placement rip-up (ripped nets), pending the staged 
   ENC_B_S        gap  62.6 mm : Pad 18 [ENC_B_S] of U601 on F.Cu  <->  Pad 1 [ENC_B_S] of R712 on F.Cu
   FLY_CLAMP      gap   1.8 mm : Pad 1 [/48V flyback/FLY_CLAMP] of C308 on F.Cu  <->  Pad 1 [/48V flyback/FLY_CLAMP] of D302 on F.Cu
   FLY_CLAMP      gap   8.2 mm : Pad 1 [/48V flyback/FLY_CLAMP] of R306 on F.Cu  <->  Pad 1 [/48V flyback/FLY_CLAMP] of C308 on F.Cu
-  FLY_EN         gap   3.1 mm : Pad 2 [FLY_EN] of R402 on F.Cu  <->  Pad 1 [FLY_EN] of TP401 on F.Cu
-  FLY_EN         gap   5.2 mm : Pad 1 [FLY_EN] of R401 on F.Cu  <->  Pad 1 [FLY_EN] of TP401 on F.Cu
-  FLY_EN         gap   7.0 mm : Pad 1 [FLY_EN] of TP401 on F.Cu  <->  Pad 3 [FLY_EN] of Q401 on F.Cu
-  FLY_EN         gap  17.2 mm : Pad 12 [FLY_EN] of U301 on F.Cu  <->  Pad 1 [FLY_EN] of Q303 on F.Cu
-  FLY_EN         gap  25.6 mm : Pad 3 [FLY_EN] of Q401 on F.Cu  <->  Pad 12 [FLY_EN] of U301 on F.Cu
+  FLY_EN         gap  16.5 mm : Track [FLY_EN] on F.Cu, length 0.8746 mm  <->  Pad 1 [FLY_EN] of Q303 on F.Cu
   FLY_PGOOD      gap  41.7 mm : Pad 28 [FLY_PGOOD] of U501 on F.Cu  <->  Track [FLY_PGOOD] on F.Cu, length 0.5500 mm
   FLY_SEC        gap   2.1 mm : Pad 1 [/48V flyback/FLY_SEC] of R313 on F.Cu  <->  Pad 2 [/48V flyback/FLY_SEC] of D301 on F.Cu
   FLY_SEC        gap   3.2 mm : Pad 2 [/48V flyback/FLY_SEC] of D301 on F.Cu  <->  Pad 4 [/48V flyback/FLY_SEC] of T301 on F.Cu
   FLY_SNUB       gap   2.8 mm : Pad 2 [/48V flyback/FLY_SNUB] of R313 on F.Cu  <->  Pad 1 [/48V flyback/FLY_SNUB] of C312 on F.Cu
   FLY_SW         gap   3.7 mm : Pad 2 [/48V flyback/FLY_SW] of D302 on F.Cu  <->  Pad 5 [/48V flyback/FLY_SW] of Q301 on F.Cu
   FLY_SW         gap   3.9 mm : Pad 2 [/48V flyback/FLY_SW] of T301 on F.Cu  <->  Pad 2 [/48V flyback/FLY_SW] of D302 on F.Cu
-  HB_S2M         gap  42.5 mm : Pad 12 [HB_S2M] of U501 on F.Cu  <->  Pad 13 [HB_S2M] of U601 on F.Cu

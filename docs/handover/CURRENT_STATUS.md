@@ -1,6 +1,6 @@
 # Piezo Insulin Pump v2 Rev B: current status and handoff (living document)
 
-**Updated:** 11 Oct 2026, after the D1 rotation milestone (tag `route-d1-done`, branch `placement-opt`).
+**Updated:** 11 Oct 2026, after routing Stage 3 (tag `route-stage3-done`, branch `placement-opt`).
 
 **Board status:**
 - Digital design only. **NOT fully connected, NOT electrically verified, NOT fabrication-ready.**
@@ -18,7 +18,9 @@
 | `route-stage2-before` | Before Stage 2 |
 | `route-stage2-done` | Stage 2 complete (commit 3f7ba36) |
 | `route-d1-before` | = 3f7ba36 |
-| `route-d1-done` | D1 rotation milestone complete |
+| `route-d1-done` | D1 rotation milestone complete (commit 6a4367b) |
+| `route-stage3-before` | = 6a4367b |
+| `route-stage3-done` | Stage 3 complete |
 
 ## 1. Completed work
 
@@ -32,24 +34,25 @@
 | Stage 1: LM51551 controller nets | 8c1c80c, 844fa0a | `ROUTING_STAGES.md` §1 |
 | Audit and routing plan; owner rulings on D1–D6 | 4510a91 (and the Stage 2 commit) | this document, §3–5 |
 | Stage 2: ENC_VCC, PMD_5V, CON_SUP_TX/RX | 3f7ba36 | `ROUTING_STAGES.md` §2 |
-| D1: R301/R302/C305/R308 rotated 180°; FB/SS/RT re-routed; FLY_PGOOD U301.11–R302 and +3V3 to R302 | D1 commit | `ROUTING_STAGES.md` §3 |
+| D1: R301/R302/C305/R308 rotated 180°; FB/SS/RT re-routed; FLY_PGOOD U301.11–R302 and +3V3 to R302 | 6a4367b | `ROUTING_STAGES.md` §3 |
+| Stage 3: FLY_EN (without the DNP Q303) and HB_S2M | Stage 3 commit | `ROUTING_STAGES.md` §4 |
 
 ## 2. Test results
 
 **Only software checks have been run.** No electrical, bench or manufacturing test has been performed. Nothing below is evidence that the circuit works.
 
-| Check (kicad-cli 10.0.3) | Result at `route-d1-done` |
+| Check (kicad-cli 10.0.3) | Result at `route-stage3-done` |
 |---|---|
 | ERC | 6 `power_pin_not_driven` on U501 pins 3, 38, 39, 40, 43 and 45. These are intentional: the WBA55 supply wiring waits for the ST documents and they are not suppressed. Plus 1 cosmetic `lib_symbol_mismatch` on U701. |
 | DRC copper (clearance, short, crossing, hole, edge) | 0 |
 | Schematic–PCB parity | 0 |
-| Unconnected pairs | **59** (61 after Stage 2; 67 after Stage 1; 80 after placement) |
+| Unconnected pairs | **54** (59 after D1; 61 after Stage 2; 67 after Stage 1; 80 after placement) |
 | Warnings | 6 via_dangling, 1 track_dangling (pre-existing, on WBA55 and group-G nets); 83 silk_overlap, 71 silk_over_copper, 3 silk_edge, 2 unmirrored text (cosmetic) |
 | Simulation | Flyback open-loop LTspice runs only (`FLYBACK_DESIGN.md`). No control-loop model exists for the LM51551. |
 
 ## 3. Net-by-net audit of the unconnected pairs
 
-This audit was taken at `route-stage1-done` (67 pairs). Stage 2 closed 6 (**[routed, Stage 2]**) and D1 closed 2 (**[routed, D1]**); 59 remain. The current per-pair list is always `validation/logs/unrouted_reconciliation.md`: W 12 / P 11 / R 24 / G 12 = 59.
+This audit was taken at `route-stage1-done` (67 pairs). Stage 2 closed 6 (**[routed, Stage 2]**), D1 closed 2 (**[routed, D1]**) and Stage 3 closed 5 (**[routed, Stage 3]**); 54 remain. The current per-pair list is always `validation/logs/unrouted_reconciliation.md`: W 12 / P 11 / R 19 / G 12 = 54.
 
 **Sources:**
 - `validation/drc/pump_v2-drc.json` (DRC at `route-stage1-done`);
@@ -132,11 +135,11 @@ The gaps are straight-line distances between the reported endpoints.
 | CON_SUP_TX **[routed, Stage 2]** | J503.3 (PTH) – U601.29 | 15.9 | Console to supervisor UART. U601 pins checked by CubeMX |
 | CON_SUP_RX **[routed, Stage 2]** | J503.4 (PTH) – U601.32 | 13.4 | As above; corridor nearly clear |
 | +3V3 **[routed, D1]** | R302.2 – nearest +3V3 via (147.2, 159.5) | 15.8 | R302 (PGOOD pull-up) sits over the In2 VBAT polygon of the 48 V block, so its +3V3 via has no plane. It needs a track out to the +3V3 plane region (x < 155). |
-| FLY_EN | R402.2 – TP401.1 | 3.1 | **Stage 3 safety gate.** Kill-path node (K-10) |
-| FLY_EN | R401.1 – TP401.1 | 5.2 | As above |
-| FLY_EN | TP401.1 – Q401.3 | 7.0 | As above |
-| FLY_EN | Q401.3 – U301.12 | 25.6 | As above. U301 pin 12 escapes south-west to a via at about (164.2, 161.0) that was kept free in Stage 1. Runs past the COMP/FB area on B.Cu. |
-| HB_S2M | U501.12 – U601.13 | 42.5 | **Stage 3 safety gate.** U501.12 is on the pin 1–12 side, near the SMPS pins 1–3, so the route must leave room for the ST layout (D5) |
+| FLY_EN **[routed, Stage 3]** | R402.2 – TP401.1 | 3.1 | **Stage 3 safety gate.** Kill-path node (K-10) |
+| FLY_EN **[routed, Stage 3]** | R401.1 – TP401.1 | 5.2 | As above |
+| FLY_EN **[routed, Stage 3]** | TP401.1 – Q401.3 | 7.0 | As above |
+| FLY_EN **[routed, Stage 3]** | Q401.3 – U301.12 | 25.6 | As above. U301 pin 12 escapes south-west to a via at about (164.2, 161.0) that was kept free in Stage 1. Runs past the COMP/FB area on B.Cu. |
+| HB_S2M **[routed, Stage 3]** | U501.12 – U601.13 | 42.5 | **Stage 3 safety gate.** U501.12 is on the pin 1–12 side, near the SMPS pins 1–3, so the route must leave room for the ST layout (D5) |
 | FLY_PGOOD **[routed, D1]** | U301.11 – R302.1 (local) | 4.0 | Resolved by the D1 rotation (ROUTING_STAGES.md §3) |
 | FLY_PGOOD | U301.11 – U501.28 | 41.7 | After D1. U501.28 is on side 25–36 (no supply or oscillator pins) |
 | ENC_B | R712.2 – D708.1 | 5.5 | Encoder input protection area |
@@ -171,7 +174,7 @@ Each stage gets the same procedure:
 |---|---|---|---|
 | **2 (done)** | ENC_VCC ×2, PMD_5V ×2, CON_SUP_TX, CON_SUP_RX (6). +3V3 to R302 moved to D1 | Short, fully defined, away from U501 and the flyback | ⛔ stopped for review |
 | **D1 milestone (done)** | Rotated R301, R302, C305 and R308 by 180°; re-routed FB, SS, RT and the GND fan-outs; FLY_PGOOD U301.11 – R302; +3V3 to R302 (2 pairs closed) | Approved (option 1) | ⛔ stopped for review |
-| **3** | FLY_EN ×4 (not Q303), HB_S2M (5) | Safety-control nets get their own stage and review. The intended pads and levels are in ROUTING_STAGES.md §0.2. A routed net proves continuity only, not fail-off behaviour (SG-03/SG-05 are bench tests). | ⛔ separate safety review |
+| **3 (done)** | FLY_EN ×4 (not Q303), HB_S2M (5) | Safety-control nets get their own stage and review. The intended pads and levels are in ROUTING_STAGES.md §0.2. A routed net proves continuity only, not fail-off behaviour (SG-03/SG-05 are bench tests). | ⛔ separate safety review |
 | **4** | ENC_B ×3, ENC_B_S, ENC_A_S, ENC_I; RS485_B to R714 if D3 is approved (6–7) | Encoder and supervisor signals, away from U501's supply sides | ⛔ |
 | **5a** | MAIN_SWCLK, PMD_READY_M, FLY_PGOOD U301.11 – U501.28 (3) | U501 side 25–36 has no supply or oscillator pins. **Owner: only where the pin assignment and supply requirements are verified.** The pins are CubeMX-checked; the supply requirements are still unread (U-05), so each net is checked for independence from the supply layout before routing. | ⛔ |
 | **5b** | I2C_SDA (R105–U501), PMD_SCLK_M, PMD_MOSI_M, VBAT_SENSE, CON_MAIN_TX, ENC_I_M (6) | Next to the SMPS, VDDA, LSE and RF pins. **Recommend waiting for the ST documents (D5)** to avoid rework | ⛔ D5 |
@@ -223,6 +226,8 @@ The table below is the original proposal, kept for the record.
 | Switch node (FLY_SW: Q301.5, D302.2, T301.2) | Not routed (blocked, U-04). The clamp loop is placed compactly (straight path 14 mm). | The final loop area cannot be judged until T301 exists. The node is 7.4 mm, a deliberate trade for the smaller clamp loop. |
 | Kelvin sense (U301.5 → R305.1) | Separate 0.2 mm trace with no shared copper | Lands on the outer half of R305.1, not the inner edge. The return side goes through the plane (FL-3). It runs parallel to the 0.5 mm power track for about 3.3 mm. |
 | Gate drive (U301.3 → Q301.4) | 4.67 mm, 2 vias | The via pair is forced by the topology. The B.Cu segment references In2 (VBAT), not GND. |
+| FLY_EN (Stage 3) | Routed; tightest gap 0.224 mm (FLY_PGOOD); at least 1.79 mm from gate, CS and switch copper | B.Cu run over the In2 VBAT polygon (pulsed primary current); the UVLO/SYNC pin treats falling edges as sync. Coupling not analysed. Fail-off behaviour needs SG-03 / SG-05 on hardware. |
+| HB_S2M (Stage 3) | Routed around the WBA55 supply-placeholder block (64.9 mm) | Long heartbeat line; 0.199 mm to SUP_NRST at the U601 corner; heartbeat and timeout behaviour untested (firmware). |
 | Exposed-pad grounding (U301.13) | PGND pin 4 joins the pad directly; the pad has 1 plane via | Fewer vias than the SNVSB75E thermal guidance suggests (D6). The AGND/PGND strategy is open (FL-3). |
 | SW48_GATE crossing | A placeholder-net track runs between the Q301 source and drain pads. DRC passes. | **Owner deferred the copper change (D2).** Open concern: SW48_GATE and SW48_DRV have only DNP endpoints, so their tracks are floating conductors. One runs on F.Cu at x = 170.33, between the Q301 source pads (CS) and the drain pad (FLY_SW switch node, about 0 to 25 V at 300 kHz). That invites capacitive coupling of switching noise and is a needless antenna. Resolve with U-06 / M8, by removing the tracks or re-routing them away from the switch node. |
 | HV48 clearance | 0.6 mm rule enforced. Two scoped exceptions inside the J703 and Q301 footprints only. | The rule value itself is unapproved (FL-6 / CF-6) |
@@ -232,5 +237,5 @@ The table below is the original proposal, kept for the record.
 - **Board rules are generic 4-layer values.** No fab has been chosen (U-16).
 - **Stage 1 VCC decoupling:** U301 VCC/BIAS is fed through C304, and three plane vias were removed. C305.2 shares R308.2's GND via. These are routing choices; the schematic is unchanged.
 - **R312 is not moved.** It keeps its baseline position because the v2 spot collided with R309 once M8 was deferred.
-- **Stage 1, Stage 2 and D1 do not use Freerouting.** Freerouting 2.1.0 did not honour the net-class restriction or the pass limit.
+- **Stages 1–3 and D1 do not use Freerouting.** Freerouting 2.1.0 did not honour the net-class restriction or the pass limit.
 - **BOM CALC values are calculations and simulations.** None has been bench-verified.

@@ -259,3 +259,76 @@ Rotating each part 180° in place swaps its pad positions. Eight copper items la
 | CON_SUP_TX (Stage 2) | Unchanged. The nearest D1 copper is the GND vias at x = 160.2, about 1.9 mm away. |
 
 **Electrical testing:** none performed. Copper continuity is not functional verification.
+
+## 4. Stage 3: safety-control nets FLY_EN and HB_S2M (11 Oct 2026)
+
+**Checkpoints:**
+- `route-stage3-before` (= commit 6a4367b, `route-d1-done`);
+- `route-stage3-done`.
+
+**Route specification:** `validation/routing/stage3_hand.json`, applied with `scripts/route_stage.py hand`. Full comparison and clearance margins: `validation/routing/stage3_vs_checkpoint.txt`.
+
+**Freerouting:** not used.
+
+### 4.1 Pre-routing review (owner items 2–4)
+
+| Item | Evidence | Conclusion |
+|---|---|---|
+| FLY_EN intent | `scripts/design.py`, sheet "Kill path" (K-10): U301.12 UVLO/EN, R401 4.7 k to GND (fail-off), R402 1 k from MCU_48V_EN, Q401 drain, TP401 | Connect U301.12, R401.1, R402.2, Q401.3 and TP401.1 |
+| LM51551 pin 12 (TI SNVSB75E, Rev E, Aug 2023: pin table, §7 electrical characteristics, §9.3.1, §9.3.5) | UVLO/EN/SYNC. Enable 0.4 / 0.52 / 0.7 V; UVLO rising 1.425 / 1.5 / 1.575 V; below VEN, shutdown after about 35 µs. "Must not be left floating." Falling edges on this pin act as a **sync input**. 5 µA UVLO hysteresis current. | Levels as designed: 2.72 V when the MCU drives it, about 0 V with the pull-down or the veto. The 5 µA × 825 Ω gives about 4 mV, which is negligible. **Layout consequence:** keep FLY_EN away from the switch node, so coupled negative glitches cannot act as sync pulses. |
+| Q401 pinout (Nexperia BSS138, `docs/datasheets/bss138_nexperia.pdf`, Table 2) | 1 = G, 2 = S, 3 = D | Matches the schematic: G = SUP_VETO, S = GND, D = FLY_EN |
+| HB_S2M intent | `scripts/design.py`; `validation/logs/pinmap_check.md` (STM32CubeMX 6.18.1 database) | U601.13 = PA2 USART2_TX (supervisor) → U501.12 = PA1 LPUART1_RX (main). Point to point, no other parts. |
+| Q303 (on FLY_EN) | DNP PLACEHOLDER level shifter for the undesigned K-12 output switch (U-06) | **Not connected.** It depends on the unresolved output-switch design. FLY_EN – Q303.1 stays an unconnected P item by design. |
+| FLY_EN escape (the 0.223 mm item from D1) | Re-measured along the **full** route after routing (§4.3) | Legal everywhere (rule 0.15 mm). Tightest gap 0.224 mm, at the escape. |
+
+### 4.2 Routes
+
+| Net | Path | Length / vias |
+|---|---|---|
+| FLY_EN | **Local tree, F.Cu 0.2 mm:**<br>- R402.2 → TP401;<br>- R401.1 → (between the R401/R402 and R405 rows) → TP401;<br>- TP401 → Q401.3, entering from above, clear of the SUP_VETO diagonal.<br>**Long run:** via at (173.4, 133.0), then one straight B.Cu run to the Stage 1 escape via (164.2, 161.0), then U301.12. | 47.4 mm, 2 vias |
+| HB_S2M | U501.12 → escape south-west past the pin 11 +3V3 via → F.Cu west at y = 122.3 → south at x = 134.5 → via at (134.5, 161.3) → B.Cu east at y = 161.3 → via under the U601 body at (147.25, 161.3), between SUP_NRST and HB_M2S → U601.13 from its inner end | 64.9 mm, 2 vias |
+
+**Why HB_S2M is long.** U501.12 sits at the corner next to the WBA55 supply-placeholder block (C510–C513, R511–R513, their VDDRF / VDDRFPA F.Cu tracks, and the LSE_OUT / VDDHPA / VDDRFPA B.Cu runs at y ≈ 127.8–128.5). A direct southward route would need a via in that block, and there is no legal space for one on either layer. It would also pre-empt the WBA55 supply layout that D5 defers until the ST documents arrive. The chosen route goes around the block's west edge and touches none of that circuitry.
+
+### 4.3 Clearance margins along the full routes (edge to edge; rule 0.15 mm, HV48 0.6 mm)
+
+| Net | Tightest foreign copper | Next | Switching copper (FLY_SW / GATE / CS / CLAMP / SEC) |
+|---|---|---|---|
+| FLY_EN | 0.224 mm FLY_PGOOD track (U301 escape) | 0.274 mm U301.11; 0.349 mm U301 EP (GND); 0.423 mm GND via (B.Cu); 0.516 mm SUP_VETO | nearest is the U301.3 gate pin at 1.79 mm. The B.Cu run is at least 2.7 mm from the gate B.Cu segment and about 5 mm from the switch node. |
+| HB_S2M | 0.199 mm SUP_NRST (U601 corner) | 0.249 mm U601.14 (HB_M2S); 0.274 mm U501.11 / +3V3 stub | none within 3 mm |
+
+No HV48 net is within the 0.6 mm class clearance of either route.
+
+### 4.4 Results against `route-d1-done`
+
+| Check | route-d1-done | route-stage3-done |
+|---|---|---|
+| ERC | 6 intentional U501 errors + 1 cosmetic U701 warning | identical (schematic not modified) |
+| DRC copper (clearance, short, crossing, hole, edge) | 0 | 0 |
+| Schematic parity | 0 | 0 |
+| via_dangling / track_dangling | 6 / 1 | 6 / 1 (same items) |
+| Silkscreen (overlap / over copper / edge / mirrored) | 83 / 71 / 3 / 2 | identical |
+| Unconnected pairs | 59 | **54** |
+| Footprints changed | n/a | none |
+| Nets whose copper changed | n/a | FLY_EN (+13 items) and HB_S2M (+8 items) only; 0 removed anywhere |
+| BOM re-export | n/a | byte-identical |
+
+**Pairs closed (5):**
+- FLY_EN R402.2–TP401, R401.1–TP401, TP401–Q401.3 and Q401.3–U301.12;
+- HB_S2M U501.12–U601.13.
+
+**Remaining FLY_EN pair:** the DNP placeholder Q303.1 only, which is intentional.
+
+**Relabelled pairs, with no copper change on the net:** CHG_INT_N, SW48_GATE, VBAT_FUSED and WBA_VDDRFPA.
+
+**Regressions: none.**
+
+### 4.5 Safety-control review notes (not resolved by routing)
+
+- **Continuity is not behaviour.** A routed FLY_EN proves only copper continuity. Fail-off behaviour (pull-down default, veto overriding the MCU, shutdown below VEN) needs **SG-03 / SG-05 on hardware**. Neither has been performed.
+- **FLY_EN and the VBAT plane.** The FLY_EN B.Cu run lies under the controller area, over the In2 VBAT polygon, which carries the pulsed flyback primary current. The node impedance is about 825 Ω (1 k ∥ 4.7 k). Coupled ripple is expected to be small but has **not been analysed or measured**. The UVLO/SYNC pin interprets falling edges as sync pulses, which is why this needs bench confirmation.
+- **HB_S2M length.** HB_S2M is long (64.9 mm) and runs parallel to the board's west region. It is a low-speed UART heartbeat. Its timeout and fault behaviour are firmware, untested.
+- **Tight gaps.** HB_S2M passes 0.199 mm from SUP_NRST and 0.249 mm from HB_M2S at the U601 corner. That is legal under the generic rules; a fab rule check is still needed (U-16).
+- **Q303 is unconnected.** If the output switch (U-06) is designed with this level shifter, FLY_EN's routing must be revisited.
+
+**Electrical testing:** none performed.

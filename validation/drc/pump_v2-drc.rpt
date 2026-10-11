@@ -1,5 +1,5 @@
 ** Drc report for pump_v2.kicad_pcb **
-** Created on 2026-10-11T09:59:02 **
+** Created on 2026-10-11T10:13:01 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 166 DRC violations **
@@ -659,11 +659,11 @@
     Local override; warning
     @(112.0000 mm, 182.0000 mm): PCB text 'PIEZO INSULIN PUMP v2 REV B - HANDOVER PROTOTYPE, NOT FAB-APPROVED' on B.Silkscreen
 
-** Found 59 unconnected pads **
+** Found 54 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
     @(193.2000 mm, 144.7750 mm): Pad 1 [/48V flyback/SW48_GATE] of R309 on F.Cu
-    @(172.2000 mm, 146.2750 mm): Pad 1 [/48V flyback/SW48_GATE] of R310 on F.Cu
+    @(171.5000 mm, 146.9750 mm): Track [/48V flyback/SW48_GATE] on F.Cu, length 0.9899 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(157.2950 mm, 179.6450 mm): Pad 2 [/48V flyback/+48V_RAW] of Q302 on F.Cu
@@ -766,24 +766,8 @@
     @(164.6500 mm, 159.7500 mm): Track [FLY_PGOOD] on F.Cu, length 0.5500 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(164.6500 mm, 160.2500 mm): Pad 12 [FLY_EN] of U301 on F.Cu
+    @(173.4000 mm, 133.0000 mm): Track [FLY_EN] on B.Cu, length 29.4727 mm
     @(166.7950 mm, 177.3450 mm): Pad 1 [FLY_EN] of Q303 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(171.2000 mm, 126.7750 mm): Pad 1 [FLY_EN] of R401 on F.Cu
-    @(175.5476 mm, 129.5463 mm): Pad 1 [FLY_EN] of TP401 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(172.9375 mm, 136.0000 mm): Pad 3 [FLY_EN] of Q401 on F.Cu
-    @(164.6500 mm, 160.2500 mm): Pad 12 [FLY_EN] of U301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(175.5476 mm, 129.5463 mm): Pad 1 [FLY_EN] of TP401 on F.Cu
-    @(172.9375 mm, 136.0000 mm): Pad 3 [FLY_EN] of Q401 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(176.8500 mm, 126.7750 mm): Pad 2 [FLY_EN] of R402 on F.Cu
-    @(175.5476 mm, 129.5463 mm): Pad 1 [FLY_EN] of TP401 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
     @(147.2500 mm, 122.4375 mm): Pad 17 [/Main MCU STM32WBA55/LSE_IN] of U501 on F.Cu
@@ -794,7 +778,7 @@
     @(147.2500 mm, 122.4375 mm): Pad 17 [/Main MCU STM32WBA55/LSE_IN] of U501 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(148.8000 mm, 131.2990 mm): Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.6840 mm
+    @(149.5050 mm, 132.0050 mm): Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.9977 mm
     @(150.7500 mm, 115.5625 mm): Pad 37 [/Main MCU STM32WBA55/RF_MCU] of U501 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
@@ -815,11 +799,7 @@
 [unconnected_items]: Missing connection between items
     Local override; error
     @(147.7500 mm, 114.8053 mm): Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.7572 mm
-    @(148.8130 mm, 128.4760 mm): Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(144.5625 mm, 121.7500 mm): Pad 12 [HB_S2M] of U501 on F.Cu
-    @(147.2500 mm, 164.1625 mm): Pad 13 [HB_S2M] of U601 on F.Cu
+    @(148.8190 mm, 128.4820 mm): Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on B.Cu, length 0.0085 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(149.7500 mm, 164.1625 mm): Pad 18 [ENC_B_S] of U601 on F.Cu
@@ -851,7 +831,7 @@
 [unconnected_items]: Missing connection between items
     Local override; error
     @(186.3500 mm, 109.7750 mm): Pad 2 [/PMD401 & encoder interface/RS485_B] of R714 on F.Cu
-    @(194.4750 mm, 129.3650 mm): Pad 7 [/PMD401 & encoder interface/RS485_B] of U701 on F.Cu
+    @(194.4750 mm, 129.3650 mm): Via [/PMD401 & encoder interface/RS485_B] on F.Cu - B.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
     @(145.2500 mm, 122.4375 mm): Pad 13 [PMD_SCLK_M] of U501 on F.Cu

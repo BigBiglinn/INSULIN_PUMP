@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-11T09:59:10",
+    "date": "2026-10-11T10:13:09",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -45,12 +45,12 @@
                     "uuid": "8c918755-5748-479d-ae3e-9110d075afb1"
                 },
                 {
-                    "description": "Pad 1 [/48V flyback/SW48_GATE] of R310 on F.Cu",
+                    "description": "Track [/48V flyback/SW48_GATE] on F.Cu, length 0.9899 mm",
                     "pos": {
-                        "x": 172.2,
-                        "y": 146.275
+                        "x": 171.5,
+                        "y": 146.975
                     },
-                    "uuid": "d2a58341-1921-488a-9715-93b83135241b"
+                    "uuid": "9aa82502-c4b7-448a-be37-832eb8f81a75"
                 }
             ],
             "severity": "error",
@@ -597,12 +597,12 @@
                     "uuid": "d68b3813-8eb9-4fd6-94f4-b73a4a331f6e"
                 },
                 {
-                    "description": "Pad 1 [/Power input & charger/VBAT_FUSED] of C102 on F.Cu",
+                    "description": "Track [/Power input & charger/VBAT_FUSED] on F.Cu, length 2.6092 mm",
                     "pos": {
-                        "x": 112.68,
-                        "y": 117.795
+                        "x": 114.525,
+                        "y": 119.64
                     },
-                    "uuid": "adfcfc7f-256e-44c1-b015-7e21d40f54e8"
+                    "uuid": "7952e228-ba03-4087-b274-f2b2644e8225"
                 }
             ],
             "severity": "error",
@@ -635,12 +635,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 12 [FLY_EN] of U301 on F.Cu",
+                    "description": "Track [FLY_EN] on F.Cu, length 0.8746 mm",
                     "pos": {
-                        "x": 164.65,
-                        "y": 160.25
+                        "x": 164.2,
+                        "y": 161.0
                     },
-                    "uuid": "4e4394a9-d89e-42df-942f-7aec286256c4"
+                    "uuid": "927c9909-26c4-445c-9149-14d80672ad02"
                 },
                 {
                     "description": "Pad 1 [FLY_EN] of Q303 on F.Cu",
@@ -649,98 +649,6 @@
                         "y": 177.345
                     },
                     "uuid": "1cee9a9e-5a46-4240-ab0f-8f3b15ffc387"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [FLY_EN] of R401 on F.Cu",
-                    "pos": {
-                        "x": 171.2,
-                        "y": 126.775
-                    },
-                    "uuid": "520a20d2-bf2f-4eca-bdfb-ce2326ad8756"
-                },
-                {
-                    "description": "Pad 1 [FLY_EN] of TP401 on F.Cu",
-                    "pos": {
-                        "x": 175.5476,
-                        "y": 129.5463
-                    },
-                    "uuid": "7b439b4e-f4a3-465f-b560-61e1572c455c"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 3 [FLY_EN] of Q401 on F.Cu",
-                    "pos": {
-                        "x": 172.9375,
-                        "y": 136.0
-                    },
-                    "uuid": "d254b25f-ad09-4c01-ae07-a764c8f851b7"
-                },
-                {
-                    "description": "Pad 12 [FLY_EN] of U301 on F.Cu",
-                    "pos": {
-                        "x": 164.65,
-                        "y": 160.25
-                    },
-                    "uuid": "4e4394a9-d89e-42df-942f-7aec286256c4"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [FLY_EN] of TP401 on F.Cu",
-                    "pos": {
-                        "x": 175.5476,
-                        "y": 129.5463
-                    },
-                    "uuid": "7b439b4e-f4a3-465f-b560-61e1572c455c"
-                },
-                {
-                    "description": "Pad 3 [FLY_EN] of Q401 on F.Cu",
-                    "pos": {
-                        "x": 172.9375,
-                        "y": 136.0
-                    },
-                    "uuid": "d254b25f-ad09-4c01-ae07-a764c8f851b7"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 2 [FLY_EN] of R402 on F.Cu",
-                    "pos": {
-                        "x": 176.85,
-                        "y": 126.775
-                    },
-                    "uuid": "63f3de11-28d7-4a2c-9d9c-06263cc00ca0"
-                },
-                {
-                    "description": "Pad 1 [FLY_EN] of TP401 on F.Cu",
-                    "pos": {
-                        "x": 175.5476,
-                        "y": 129.5463
-                    },
-                    "uuid": "7b439b4e-f4a3-465f-b560-61e1572c455c"
                 }
             ],
             "severity": "error",
@@ -911,12 +819,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 43 [/Main MCU STM32WBA55/WBA_VDDRFPA] of U501 on F.Cu",
+                    "description": "Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.7572 mm",
                     "pos": {
                         "x": 147.75,
-                        "y": 115.5625
+                        "y": 114.8053
                     },
-                    "uuid": "5fe8439f-59a4-4f8f-a2ab-ca41bb341dc9"
+                    "uuid": "092c16af-2daa-4dff-a05d-f7bd795e47b2"
                 },
                 {
                     "description": "Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu",
@@ -925,29 +833,6 @@
                         "y": 128.476
                     },
                     "uuid": "cde82ab0-0ab9-409d-bf5e-94f3432b698c"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 12 [HB_S2M] of U501 on F.Cu",
-                    "pos": {
-                        "x": 144.5625,
-                        "y": 121.75
-                    },
-                    "uuid": "a71169f6-1be6-46ef-9a83-4c2e6a1cc105"
-                },
-                {
-                    "description": "Pad 13 [HB_S2M] of U601 on F.Cu",
-                    "pos": {
-                        "x": 147.25,
-                        "y": 164.1625
-                    },
-                    "uuid": "76fe6c6e-6c00-4879-a2ad-4beb64cffa3c"
                 }
             ],
             "severity": "error",
@@ -1218,12 +1103,12 @@
                     "uuid": "2d011653-f04d-4328-a168-c5679f7c7def"
                 },
                 {
-                    "description": "Track [CHG_INT_N] on F.Cu, length 1.9163 mm",
+                    "description": "Via [CHG_INT_N] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 108.995,
-                        "y": 119.877
+                        "x": 110.35,
+                        "y": 118.522
                     },
-                    "uuid": "73ec20c6-c06b-4cad-ac9c-a404c51a4626"
+                    "uuid": "675907e4-deaa-4d07-ba36-b86ab41574b6"
                 }
             ],
             "severity": "error",

@@ -1,0 +1,20 @@
+{
+ "_comment": "Stage 3 explicit routes (mm): FLY_EN (K-10 kill path, without the DNP placeholder Q303) and HB_S2M (U601 PA2 USART2_TX -> U501 PA1 LPUART1_RX). See docs/handover/ROUTING_STAGES.md section 4.",
+ "tracks": [
+  {"net": "FLY_EN", "layer": "F", "w": 0.20, "pts": [[176.85, 126.78], [176.85, 128.25], [175.55, 129.55]], "why": "R402.2 (1 k from MCU_48V_EN) to TP401"},
+  {"net": "FLY_EN", "layer": "F", "w": 0.20, "pts": [[171.20, 126.78], [171.20, 128.00], [174.60, 128.00], [175.55, 129.55]], "why": "R401.1 (4.7 k fail-off pull-down) to TP401, between the R401/R402 and R405 rows"},
+  {"net": "FLY_EN", "layer": "F", "w": 0.20, "pts": [[175.55, 129.55], [173.40, 131.70], [173.40, 133.00]], "why": "TP401 towards Q401"},
+  {"net": "FLY_EN", "layer": "F", "w": 0.20, "pts": [[173.40, 133.00], [173.40, 135.20], [172.94, 135.85]], "why": "into Q401.3 (BSS138 drain), entering from above, clear of the SUP_VETO diagonal"},
+  {"net": "FLY_EN", "layer": "B", "w": 0.20, "pts": [[173.40, 133.00], [164.20, 161.00]], "why": "kill-path node to U301 UVLO/EN: one straight B.Cu run, at least 2.7 mm from the gate-drive B.Cu and about 5 mm from the switch node"},
+  {"net": "FLY_EN", "layer": "F", "w": 0.20, "pts": [[164.20, 161.00], [164.65, 160.25]], "why": "escape via (kept free since Stage 1) into U301.12"},
+  {"net": "HB_S2M", "layer": "F", "w": 0.20, "pts": [[144.56, 121.75], [144.15, 121.75], [143.60, 122.30], [134.50, 122.30], [134.50, 161.30]], "why": "U501.12 escape SW past the +3V3 via, west, then south outside the west edge of the WBA55 supply-placeholder block"},
+  {"net": "HB_S2M", "layer": "B", "w": 0.20, "pts": [[134.50, 161.30], [147.25, 161.30]], "why": "east, south of the Stage 2 console runs and north of the SUP_SWDIO/SWCLK B.Cu runs"},
+  {"net": "HB_S2M", "layer": "F", "w": 0.20, "pts": [[147.25, 161.30], [147.25, 164.16]], "why": "via under the U601 body, between SUP_NRST and HB_M2S, into U601.13 from its inner end"}
+ ],
+ "vias": [
+  {"net": "FLY_EN", "at": [173.40, 133.00]},
+  {"net": "FLY_EN", "at": [164.20, 161.00]},
+  {"net": "HB_S2M", "at": [134.50, 161.30]},
+  {"net": "HB_S2M", "at": [147.25, 161.30]}
+ ]
+}
