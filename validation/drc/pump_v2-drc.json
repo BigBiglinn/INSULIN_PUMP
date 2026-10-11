@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-11T01:17:03",
+    "date": "2026-10-11T09:09:03",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -45,12 +45,12 @@
                     "uuid": "8c918755-5748-479d-ae3e-9110d075afb1"
                 },
                 {
-                    "description": "Pad 1 [/48V flyback/SW48_GATE] of R310 on F.Cu",
+                    "description": "Track [/48V flyback/SW48_GATE] on F.Cu, length 0.9899 mm",
                     "pos": {
-                        "x": 172.2,
-                        "y": 146.275
+                        "x": 171.5,
+                        "y": 146.975
                     },
-                    "uuid": "d2a58341-1921-488a-9715-93b83135241b"
+                    "uuid": "9aa82502-c4b7-448a-be37-832eb8f81a75"
                 }
             ],
             "severity": "error",
@@ -405,12 +405,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 1 [VBAT_SENSE] of R108 on F.Cu",
+                    "description": "Track [VBAT_SENSE] on F.Cu, length 2.3500 mm",
                     "pos": {
                         "x": 117.7,
                         "y": 125.275
                     },
-                    "uuid": "66c398da-7b49-43a8-8439-98efe6dbe475"
+                    "uuid": "5e086205-7ba4-4243-b98a-c858030ea6a3"
                 },
                 {
                     "description": "Track [VBAT_SENSE] on F.Cu, length 0.4370 mm",
@@ -658,29 +658,6 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 1 [/48V flyback/FLY_RT] of R301 on F.Cu",
-                    "pos": {
-                        "x": 161.175,
-                        "y": 160.0
-                    },
-                    "uuid": "9e874821-42ab-491e-aa00-cd2951da8bc5"
-                },
-                {
-                    "description": "Pad 10 [/48V flyback/FLY_RT] of U301 on F.Cu",
-                    "pos": {
-                        "x": 164.65,
-                        "y": 159.25
-                    },
-                    "uuid": "55e17b78-9363-4b09-9432-1cc1e104578c"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
                     "description": "Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu",
                     "pos": {
                         "x": 118.2,
@@ -689,12 +666,12 @@
                     "uuid": "d68b3813-8eb9-4fd6-94f4-b73a4a331f6e"
                 },
                 {
-                    "description": "Track [/Power input & charger/VBAT_FUSED] on F.Cu, length 2.6092 mm",
+                    "description": "Pad 1 [/Power input & charger/VBAT_FUSED] of C102 on F.Cu",
                     "pos": {
-                        "x": 114.525,
-                        "y": 119.64
+                        "x": 112.68,
+                        "y": 117.795
                     },
-                    "uuid": "7952e228-ba03-4087-b274-f2b2644e8225"
+                    "uuid": "adfcfc7f-256e-44c1-b015-7e21d40f54e8"
                 }
             ],
             "severity": "error",
@@ -704,265 +681,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 3 [/48V flyback/FLY_GATE] of U301 on F.Cu",
+                    "description": "Track [FLY_PGOOD] on F.Cu, length 2.1800 mm",
                     "pos": {
-                        "x": 166.55,
-                        "y": 159.25
-                    },
-                    "uuid": "19078f66-5497-45a4-97a7-620ee586ea19"
-                },
-                {
-                    "description": "Pad 4 [/48V flyback/FLY_GATE] of Q301 on F.Cu",
-                    "pos": {
-                        "x": 169.76,
-                        "y": 160.47
-                    },
-                    "uuid": "aebbc490-ad25-460d-91b7-ec0c89db305d"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_CS] of R305 on F.Cu",
-                    "pos": {
-                        "x": 168.0375,
-                        "y": 164.6
-                    },
-                    "uuid": "019d9b79-0121-4677-8f2a-64ec2f0e914b"
-                },
-                {
-                    "description": "Pad 3 [/48V flyback/FLY_CS] of Q301 on F.Cu",
-                    "pos": {
-                        "x": 169.76,
-                        "y": 159.83
-                    },
-                    "uuid": "15485685-3b64-41d8-8cdc-582e22b92f24"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_CS] of Q301 on F.Cu",
-                    "pos": {
-                        "x": 169.76,
-                        "y": 158.53
-                    },
-                    "uuid": "40739398-90cc-47b3-9579-14bbad217159"
-                },
-                {
-                    "description": "Pad 5 [/48V flyback/FLY_CS] of U301 on F.Cu",
-                    "pos": {
-                        "x": 166.55,
-                        "y": 158.25
-                    },
-                    "uuid": "039eb9e2-2d4f-4098-b3da-4d1699276f87"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 2 [/48V flyback/FLY_CS] of Q301 on F.Cu",
-                    "pos": {
-                        "x": 169.76,
-                        "y": 159.17
-                    },
-                    "uuid": "4b4bbc25-f68b-4027-aa75-a4c35c6ee5c3"
-                },
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_CS] of Q301 on F.Cu",
-                    "pos": {
-                        "x": 169.76,
-                        "y": 158.53
-                    },
-                    "uuid": "40739398-90cc-47b3-9579-14bbad217159"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 3 [/48V flyback/FLY_CS] of Q301 on F.Cu",
-                    "pos": {
-                        "x": 169.76,
-                        "y": 159.83
-                    },
-                    "uuid": "15485685-3b64-41d8-8cdc-582e22b92f24"
-                },
-                {
-                    "description": "Pad 2 [/48V flyback/FLY_CS] of Q301 on F.Cu",
-                    "pos": {
-                        "x": 169.76,
-                        "y": 159.17
-                    },
-                    "uuid": "4b4bbc25-f68b-4027-aa75-a4c35c6ee5c3"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_COMP] of R303 on F.Cu",
-                    "pos": {
-                        "x": 165.375,
-                        "y": 155.6
-                    },
-                    "uuid": "7f55cc21-b8c6-4e4b-9552-eda978c6cc24"
-                },
-                {
-                    "description": "Pad 6 [/48V flyback/FLY_COMP] of U301 on F.Cu",
-                    "pos": {
-                        "x": 166.55,
-                        "y": 157.75
-                    },
-                    "uuid": "360e1e51-67eb-48b3-950a-c27935177139"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_COMP] of C307 on F.Cu",
-                    "pos": {
-                        "x": 165.425,
-                        "y": 152.0
-                    },
-                    "uuid": "71eddd7a-f5c4-404e-b0ca-76ae401d92b2"
-                },
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_COMP] of R303 on F.Cu",
-                    "pos": {
-                        "x": 165.375,
-                        "y": 155.6
-                    },
-                    "uuid": "7f55cc21-b8c6-4e4b-9552-eda978c6cc24"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_FB] of R308 on F.Cu",
-                    "pos": {
-                        "x": 161.175,
-                        "y": 156.4
-                    },
-                    "uuid": "387226a5-067e-4fec-bb86-35cec6555a1e"
-                },
-                {
-                    "description": "Pad 8 [/48V flyback/FLY_FB] of U301 on F.Cu",
-                    "pos": {
-                        "x": 164.65,
-                        "y": 158.25
-                    },
-                    "uuid": "680f0c21-42ed-422d-8549-48352de4c9eb"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 2 [/48V flyback/FLY_FB] of R307 on F.Cu",
-                    "pos": {
-                        "x": 162.825,
-                        "y": 154.6
-                    },
-                    "uuid": "4552f4ab-6afc-45ed-b46e-5a9f45dc28e0"
-                },
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_FB] of R308 on F.Cu",
-                    "pos": {
-                        "x": 161.175,
-                        "y": 156.4
-                    },
-                    "uuid": "387226a5-067e-4fec-bb86-35cec6555a1e"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_SS] of C305 on F.Cu",
-                    "pos": {
-                        "x": 161.225,
-                        "y": 158.2
-                    },
-                    "uuid": "5b42d02b-af90-4ce7-8964-c3b661630b22"
-                },
-                {
-                    "description": "Pad 9 [/48V flyback/FLY_SS] of U301 on F.Cu",
-                    "pos": {
-                        "x": 164.65,
-                        "y": 158.75
-                    },
-                    "uuid": "66a823c9-d250-433a-a3c6-5f001da31ad5"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [FLY_PGOOD] of TP302 on F.Cu",
-                    "pos": {
-                        "x": 159.0,
+                        "x": 161.18,
                         "y": 161.8
                     },
-                    "uuid": "5512823d-83d4-44cf-a01a-08f7986fa80a"
-                },
-                {
-                    "description": "Pad 1 [FLY_PGOOD] of R302 on F.Cu",
-                    "pos": {
-                        "x": 161.175,
-                        "y": 161.8
-                    },
-                    "uuid": "f6ae55a9-acb6-4a25-be21-170944120ba0"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [FLY_PGOOD] of R302 on F.Cu",
-                    "pos": {
-                        "x": 161.175,
-                        "y": 161.8
-                    },
-                    "uuid": "f6ae55a9-acb6-4a25-be21-170944120ba0"
+                    "uuid": "3562111c-8afd-4ddd-96dd-72f458510c0c"
                 },
                 {
                     "description": "Pad 11 [FLY_PGOOD] of U301 on F.Cu",
@@ -1287,12 +1011,12 @@
                     "uuid": "5fe8439f-59a4-4f8f-a2ab-ca41bb341dc9"
                 },
                 {
-                    "description": "Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu",
+                    "description": "Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.2360 mm",
                     "pos": {
                         "x": 148.813,
-                        "y": 128.476
+                        "y": 128.712
                     },
-                    "uuid": "cde82ab0-0ab9-409d-bf5e-94f3432b698c"
+                    "uuid": "6352bfd3-e509-4678-93b1-c6d6c6eb61f0"
                 }
             ],
             "severity": "error",
@@ -1408,29 +1132,6 @@
                         "y": 117.75
                     },
                     "uuid": "b0d0c33a-b449-4e20-91b2-562e16d348df"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [/48V flyback/FLY_COMP_RC] of C306 on F.Cu",
-                    "pos": {
-                        "x": 165.425,
-                        "y": 153.8
-                    },
-                    "uuid": "d0ec1c2c-a0dc-4d6c-858d-947691ee2a64"
-                },
-                {
-                    "description": "Pad 2 [/48V flyback/FLY_COMP_RC] of R303 on F.Cu",
-                    "pos": {
-                        "x": 167.025,
-                        "y": 155.6
-                    },
-                    "uuid": "ff669b3f-def8-41f1-9c37-264a0e803440"
                 }
             ],
             "severity": "error",
@@ -1701,12 +1402,12 @@
                     "uuid": "2d011653-f04d-4328-a168-c5679f7c7def"
                 },
                 {
-                    "description": "Track [CHG_INT_N] on F.Cu, length 1.9163 mm",
+                    "description": "Track [CHG_INT_N] on B.Cu, length 28.5360 mm",
                     "pos": {
-                        "x": 108.995,
-                        "y": 119.877
+                        "x": 110.35,
+                        "y": 118.522
                     },
-                    "uuid": "73ec20c6-c06b-4cad-ac9c-a404c51a4626"
+                    "uuid": "977e8e8f-52bb-47b9-ab72-fae6ba42903d"
                 }
             ],
             "severity": "error",

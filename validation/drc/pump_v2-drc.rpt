@@ -1,5 +1,5 @@
 ** Drc report for pump_v2.kicad_pcb **
-** Created on 2026-10-11T01:16:55 **
+** Created on 2026-10-11T09:08:55 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 167 DRC violations **
@@ -663,7 +663,7 @@
     Local override; warning
     @(112.0000 mm, 182.0000 mm): PCB text 'PIEZO INSULIN PUMP v2 REV B - HANDOVER PROTOTYPE, NOT FAB-APPROVED' on B.Silkscreen
 
-** Found 80 unconnected pads **
+** Found 67 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
     @(193.2000 mm, 144.7750 mm): Pad 1 [/48V flyback/SW48_GATE] of R309 on F.Cu
@@ -731,11 +731,11 @@
 [unconnected_items]: Missing connection between items
     Local override; error
     @(117.7000 mm, 125.2750 mm): Track [VBAT_SENSE] on F.Cu, length 2.3500 mm
-    @(145.3890 mm, 124.7360 mm): Via [VBAT_SENSE] on F.Cu - B.Cu
+    @(145.6980 mm, 124.4270 mm): Track [VBAT_SENSE] on F.Cu, length 0.4370 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(204.4750 mm, 141.5000 mm): Pad 1 [/PMD401 & encoder interface/ENC_I] of J705 on F.Cu
-    @(182.3960 mm, 106.1940 mm): Track [/PMD401 & encoder interface/ENC_I] on F.Cu, length 0.8810 mm
+    @(183.5950 mm, 104.9950 mm): Track [/PMD401 & encoder interface/ENC_I] on F.Cu, length 1.6956 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(198.7250 mm, 138.5000 mm): Pad 1 [/PMD401 & encoder interface/ENC_VCC] of C701 on F.Cu
@@ -774,59 +774,11 @@
     @(194.0000 mm, 164.5750 mm): Pad 1 [/48V flyback/FLY_SNUB] of C312 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(161.1750 mm, 160.0000 mm): Pad 1 [/48V flyback/FLY_RT] of R301 on F.Cu
-    @(164.6500 mm, 159.2500 mm): Pad 10 [/48V flyback/FLY_RT] of U301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
     @(118.2000 mm, 113.2000 mm): Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu
     @(114.5250 mm, 119.6400 mm): Track [/Power input & charger/VBAT_FUSED] on F.Cu, length 2.6092 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(166.5500 mm, 159.2500 mm): Pad 3 [/48V flyback/FLY_GATE] of U301 on F.Cu
-    @(169.7600 mm, 160.4700 mm): Pad 4 [/48V flyback/FLY_GATE] of Q301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(168.0375 mm, 164.6000 mm): Pad 1 [/48V flyback/FLY_CS] of R305 on F.Cu
-    @(169.7600 mm, 159.8300 mm): Pad 3 [/48V flyback/FLY_CS] of Q301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(169.7600 mm, 158.5300 mm): Pad 1 [/48V flyback/FLY_CS] of Q301 on F.Cu
-    @(166.5500 mm, 158.2500 mm): Pad 5 [/48V flyback/FLY_CS] of U301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(169.7600 mm, 159.1700 mm): Pad 2 [/48V flyback/FLY_CS] of Q301 on F.Cu
-    @(169.7600 mm, 158.5300 mm): Pad 1 [/48V flyback/FLY_CS] of Q301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(169.7600 mm, 159.8300 mm): Pad 3 [/48V flyback/FLY_CS] of Q301 on F.Cu
-    @(169.7600 mm, 159.1700 mm): Pad 2 [/48V flyback/FLY_CS] of Q301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(165.3750 mm, 155.6000 mm): Pad 1 [/48V flyback/FLY_COMP] of R303 on F.Cu
-    @(166.5500 mm, 157.7500 mm): Pad 6 [/48V flyback/FLY_COMP] of U301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(165.4250 mm, 152.0000 mm): Pad 1 [/48V flyback/FLY_COMP] of C307 on F.Cu
-    @(165.3750 mm, 155.6000 mm): Pad 1 [/48V flyback/FLY_COMP] of R303 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(161.1750 mm, 156.4000 mm): Pad 1 [/48V flyback/FLY_FB] of R308 on F.Cu
-    @(164.6500 mm, 158.2500 mm): Pad 8 [/48V flyback/FLY_FB] of U301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(162.8250 mm, 154.6000 mm): Pad 2 [/48V flyback/FLY_FB] of R307 on F.Cu
-    @(161.1750 mm, 156.4000 mm): Pad 1 [/48V flyback/FLY_FB] of R308 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(161.2250 mm, 158.2000 mm): Pad 1 [/48V flyback/FLY_SS] of C305 on F.Cu
-    @(164.6500 mm, 158.7500 mm): Pad 9 [/48V flyback/FLY_SS] of U301 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(159.0000 mm, 161.8000 mm): Pad 1 [FLY_PGOOD] of TP302 on F.Cu
-    @(161.1750 mm, 161.8000 mm): Pad 1 [FLY_PGOOD] of R302 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(161.1750 mm, 161.8000 mm): Pad 1 [FLY_PGOOD] of R302 on F.Cu
+    @(161.1800 mm, 161.8000 mm): Track [FLY_PGOOD] on F.Cu, length 2.1800 mm
     @(164.6500 mm, 159.7500 mm): Pad 11 [FLY_PGOOD] of U301 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
@@ -862,7 +814,7 @@
     @(147.2500 mm, 122.4375 mm): Pad 17 [/Main MCU STM32WBA55/LSE_IN] of U501 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(148.8000 mm, 131.2990 mm): Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.6840 mm
+    @(149.5050 mm, 132.0050 mm): Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.9977 mm
     @(150.7500 mm, 115.5625 mm): Pad 37 [/Main MCU STM32WBA55/RF_MCU] of U501 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
@@ -883,7 +835,7 @@
 [unconnected_items]: Missing connection between items
     Local override; error
     @(147.7500 mm, 114.8053 mm): Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.7572 mm
-    @(148.8190 mm, 128.4820 mm): Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on B.Cu, length 0.0085 mm
+    @(148.8130 mm, 128.7120 mm): Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu, length 0.2360 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(144.5625 mm, 121.7500 mm): Pad 12 [HB_S2M] of U501 on F.Cu
@@ -904,10 +856,6 @@
     Local override; error
     @(143.5400 mm, 147.0000 mm): PTH pad 2 [/Main MCU STM32WBA55/CON_MAIN_TX] of J503
     @(144.5625 mm, 117.7500 mm): Pad 4 [/Main MCU STM32WBA55/CON_MAIN_TX] of U501 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(165.4250 mm, 153.8000 mm): Pad 1 [/48V flyback/FLY_COMP_RC] of C306 on F.Cu
-    @(167.0250 mm, 155.6000 mm): Pad 2 [/48V flyback/FLY_COMP_RC] of R303 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
     @(141.1875 mm, 114.1250 mm): Pad 2 [/Main MCU STM32WBA55/WBA_VDD11] of L501 on F.Cu
@@ -983,7 +931,7 @@
 [unconnected_items]: Missing connection between items
     Local override; error
     @(145.2500 mm, 115.5625 mm): Pad 48 [ENC_I_M] of U501 on F.Cu
-    @(160.0550 mm, 118.7480 mm): Via [ENC_I_M] on F.Cu - B.Cu
+    @(160.0550 mm, 118.7480 mm): Track [ENC_I_M] on F.Cu, length 13.3926 mm
 
 ** Found 0 Footprint errors **
 

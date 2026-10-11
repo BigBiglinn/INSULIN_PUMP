@@ -55,3 +55,86 @@ A completed route proves only copper continuity. It does not prove fail-off beha
 **HB_S2M** (supervisor to main heartbeat): U601.13 (STM32C031 PA2, USART2_TX) to U501.12 (STM32WBA55 PA1, LPUART1_RX), point to point, with no other parts. The pins were checked against the STM32CubeMX 6.18.1 database (`validation/logs/pinmap_check.md`). Routing it does not prove the heartbeat or timeout logic, which is firmware and needs bench verification.
 
 Neither net is routed in Stage 1.
+
+## 1. Stage 1: LM51551 controller nets (11 Oct 2026)
+
+**Checkpoints:**
+- `route-stage1-before`: tag, before Stage 1;
+- `route-stage1a-hand`: tag, after the power-critical hand routes.
+
+**Route specifications:** `validation/routing/stage1_hand.json` (1a) and `validation/routing/stage1_hand_b.json` (1b), applied with `scripts/route_stage.py hand`.
+
+**Why not Freerouting:** Freerouting 2.1.0 ignored both `-inc` (ignore net classes) and `-mp` (maximum passes). It routed nets outside the stage and did not stop, so I stopped it and used none of its output. Every Stage 1 route is an explicit, reviewable geometry that was checked by DRC.
+
+### 1.1 Results against `route-stage1-before`
+
+Full comparison: `validation/routing/stage1_vs_checkpoint.txt`, from `scripts/compare_stage.py`.
+
+| Check | route-stage1-before | Stage 1 done |
+|---|---|---|
+| ERC | 6 power_pin_not_driven (U501, intentional) + 1 lib_symbol_mismatch | identical (schematic not modified) |
+| DRC copper (clearance, short, crossing, hole, edge) | 0 | 0 |
+| Schematic parity | 0 | 0 |
+| via_dangling / track_dangling | 6 / 1 | 6 / 1 (same items) |
+| Silkscreen warnings (overlap / over copper / edge / mirrored) | 82 / 73 / 3 / 2 | identical |
+| Unconnected pairs | 80 | **67** |
+| Nets whose copper changed | n/a | FLY_GATE, FLY_CS, FLY_FB, FLY_SS, FLY_RT, FLY_COMP, FLY_COMP_RC, FLY_PGOOD, plus GND and VBAT plane stubs at U301 and C305; **nothing outside this list** |
+| BOM re-export | n/a | byte-identical to the committed BOM |
+
+**The 13 net closures:**
+- FLY_COMP ×2
+- FLY_COMP_RC
+- FLY_CS ×4
+- FLY_FB ×2
+- FLY_GATE
+- FLY_PGOOD R302.1–TP302.1
+- FLY_RT
+- FLY_SS
+
+**Explanation of every changed or "new" unconnected pair:**
+- **FLY_PGOOD:** the pair `R302.1–U301.11` is now reported as `Track–U301.11`. The R302/TP302 part is routed; U301.11 is still not connected (blocked, see §1.3). `U301.11–U501.28` is unchanged; it belongs to the signal stage.
+- **SW48_GATE, VBAT_FUSED, VBAT_SENSE, WBA_VDDRFPA:** one pair each was relabelled by KiCad after the zone refill, which chose a different nearest endpoint. No copper on these nets changed, and the per-net pair counts are unchanged. These are not new gaps.
+
+### 1.2 Check against the LM51551 layout guidance (SNVSB75E section 10.5.1)
+
+| Item | As routed | Assessment |
+|---|---|---|
+| Gate drive U301.3 → Q301.4 | 4.67 mm, 0.3 mm wide, **2 vias**. The B.Cu segment is 2.9 mm. | Short, but not ideal. The vias are forced because the gate path must cross the Q301 → R305 current path (the Q301 gate pin faces R305). The B.Cu segment references In2 (VBAT polygon), not the In1 GND plane, so its return path couples through the VBAT plane and its decoupling. **Review item.** |
+| Switch current path Q301 source (pads 1–3) → R305.1 | about 6.3 mm, 0.5 mm wide (bar over the source pads), F.Cu, no vias | Meets the "small loop" intent for its part of the loop. 0.5 mm on 1 oz copper is adequate for about 1.1 A rms (FLYBACK_DESIGN.md), with 3.1 A peaks. A wider pour is preferable when the clamp and transformer area is finalised. |
+| Kelvin sense U301.5 → R305.1 | 6.8 mm, 0.2 mm wide, F.Cu, no vias. Lands on R305.1 separately from the power track, about 0.6 mm from it. | The sense trace shares no copper with the power path, so the 0.5 mm power track's resistance is outside the measurement. Remaining items: the sense lands at the outer (left) half of the pad rather than its inner edge; the CS return side (R305.2 → GND) goes through the plane, not a Kelvin trace to U301 PGND (this is **FL-3**); and the sense trace runs parallel to the power track for about 3.3 mm. **Review items.** |
+| VCC / BIAS (U301.1, .2) → C304.1 | Pins 1 and 2 joined, then 3.9 mm, 0.3 mm wide, to C304.1. C304.1 and C304.2 each keep their own plane via. The 3 old VCC/PGND plane vias next to U301 were removed. | Follows "CVCC near the device": the capacitor is now in the direct VCC path instead of being reached only through the plane. C304's ground returns through a plane via (2.2 µF, 1.6 mm from the pins). |
+| PGND (U301.4) → exposed pad | 0.7 mm direct, 0.25 mm wide | Pin 4 now joins the exposed pad directly. |
+| Exposed pad (U301.13) to the GND plane | One stub plus 1 via (from the earlier fan-out) | **Review item:** only one via. SNVSB75E's thermal guidance favours several vias under or around the pad. Adding thermal vias is a layout addition I have not made. |
+| FB node (U301.8, R307.2, R308.1) | 9.5 mm, 0.15 mm wide, 2 vias, B.Cu hop of 3.55 mm under the R/C column. At least 3.7 mm from the gate segment; nowhere near FLY_SW (x ≥ 170). | The top-layer paths are blocked by the 0.6 mm HV48 clearance around R307.1 (+48V_RAW) and by a GND via. Routing it longer than ideal is a deliberate trade for keeping the high-impedance node away from switching copper. |
+| RT, SS, COMP, COMP_RC | 3.4–7.2 mm, F.Cu, no vias | Short and direct; the AGND-side parts keep their own plane vias. |
+| C305.2 (SS cap) ground | Its fan-out via was removed. It now shares R308.2's existing GND plane via (0.73 mm track). | Still a direct plane connection. This was needed to open the pin 8 (FB) escape. |
+
+### 1.3 Blocker found in Stage 1 (**needs approval**)
+
+**FLY_PGOOD U301.11 → R302.1 is not routed.**
+
+Pin 11 sits between pin 10 (RT, routed) and pin 12 (FLY_EN, reserved). The only direct escape to the west is blocked by R301.2's GND fan-out via at (163.82, 160.0). Moving that via is not possible without one of these:
+
+1. **Rotate R301, R302, C305 and R308 by 180°**, so that their signal pads face U301 and their GND pads face away. This is the cleanest fix but is a component move.
+2. **Tie the RT, SS and FB-bottom grounds to the U301 AGND pin or exposed pad with local copper.** This is the SNVSB75E AGND recommendation, but it is the **FL-3** grounding decision.
+3. **Give pin 11 the escape via reserved for FLY_EN** (about (164.2, 161.0)). This would push FLY_EN onto a worse path, so it needs a FLY_EN decision first.
+
+### 1.4 Not routed in Stage 1, by design
+
+- FLY_EN (Stage 2, safety review);
+- HB_S2M;
+- FLY_PGOOD U301.11 → U501.28 (signal stage);
+- FLY_SW, FLY_SEC, FLY_CLAMP and FLY_SNUB (T301 placeholder);
+- +48V_RAW and +48V_MOT (OVP, output switch, J703 rating);
+- all WBA55-dependent nets.
+
+**Pre-existing item noted:** the SW48_GATE autorouted track (a DNP placeholder net) runs on F.Cu at x = 170.33, between Q301's source and drain pads. It passes DRC. It should be removed or re-routed when the output switch (U-06 / M8) is decided, because it lies next to the switch node.
+
+### 1.5 Updated reports
+
+- `validation/drc/pump_v2-drc.rpt` and `.json`
+- `validation/erc/pump_v2-erc.rpt`
+- `validation/logs/unrouted_reconciliation.md` (W 12 / P 11 / R 31 / G 13 = 67)
+- `validation/logs/unrouted_nets.txt` (older grouping, kept for continuity; it still counts RS485_B as genuine)
+- `validation/logs/unrouted_corridors.txt`
+- `validation/routing/stage1_fcu_controller.png` (F.Cu around U301/Q301; the F.Cu GND pour is shown filled)
