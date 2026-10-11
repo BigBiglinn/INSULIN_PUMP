@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-11T10:13:09",
+    "date": "2026-10-11T10:33:40",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -405,121 +405,6 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 1 [/PMD401 & encoder interface/ENC_I] of J705 on F.Cu",
-                    "pos": {
-                        "x": 204.475,
-                        "y": 141.5
-                    },
-                    "uuid": "4b008770-9bf8-4233-9faf-126044ef3360"
-                },
-                {
-                    "description": "Track [/PMD401 & encoder interface/ENC_I] on F.Cu, length 0.8810 mm",
-                    "pos": {
-                        "x": 182.396,
-                        "y": 106.194
-                    },
-                    "uuid": "f2c186fa-8e35-4c75-9e96-8b87e67767d1"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [/PMD401 & encoder interface/ENC_B] of D708 on F.Cu",
-                    "pos": {
-                        "x": 179.595,
-                        "y": 104.995
-                    },
-                    "uuid": "ff4bd783-3353-44ce-a249-2c08456454a9"
-                },
-                {
-                    "description": "Pad 2 [/PMD401 & encoder interface/ENC_B] of R709 on F.Cu",
-                    "pos": {
-                        "x": 170.35,
-                        "y": 108.275
-                    },
-                    "uuid": "4933952f-f590-4fad-9f09-e5dbdcc22399"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 2 [/PMD401 & encoder interface/ENC_B] of R712 on F.Cu",
-                    "pos": {
-                        "x": 182.35,
-                        "y": 109.775
-                    },
-                    "uuid": "f6bb2e43-001d-4744-b4dc-bd0642ec2f52"
-                },
-                {
-                    "description": "Pad 1 [/PMD401 & encoder interface/ENC_B] of D708 on F.Cu",
-                    "pos": {
-                        "x": 179.595,
-                        "y": 104.995
-                    },
-                    "uuid": "ff4bd783-3353-44ce-a249-2c08456454a9"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 4 [/PMD401 & encoder interface/ENC_B] of J705 on F.Cu",
-                    "pos": {
-                        "x": 204.475,
-                        "y": 138.5
-                    },
-                    "uuid": "295f3ae5-17b3-421e-a76a-dc65e3387864"
-                },
-                {
-                    "description": "Pad 2 [/PMD401 & encoder interface/ENC_B] of R712 on F.Cu",
-                    "pos": {
-                        "x": 182.35,
-                        "y": 109.775
-                    },
-                    "uuid": "f6bb2e43-001d-4744-b4dc-bd0642ec2f52"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 17 [ENC_A_S] of U601 on F.Cu",
-                    "pos": {
-                        "x": 149.25,
-                        "y": 164.1625
-                    },
-                    "uuid": "5c882554-2d27-4f03-8fee-da2bcbf1a2c2"
-                },
-                {
-                    "description": "Pad 1 [ENC_A_S] of R711 on F.Cu",
-                    "pos": {
-                        "x": 176.7,
-                        "y": 109.775
-                    },
-                    "uuid": "6dd04606-b9d5-4208-bb2e-26500ac1c265"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
                     "description": "Pad 2 [/48V flyback/FLY_SEC] of D301 on F.Cu",
                     "pos": {
                         "x": 191.2,
@@ -620,12 +505,12 @@
                     "uuid": "d7ea42c4-34ca-4659-b530-b7b8fb07c1ed"
                 },
                 {
-                    "description": "Track [FLY_PGOOD] on F.Cu, length 0.5500 mm",
+                    "description": "Track [FLY_PGOOD] on F.Cu, length 0.7071 mm",
                     "pos": {
-                        "x": 164.65,
+                        "x": 164.1,
                         "y": 159.75
                     },
-                    "uuid": "537dc4a3-24da-4dc9-9b5f-de01cf11fe54"
+                    "uuid": "af9f45f6-9ace-460f-8a08-66c266f1c00f"
                 }
             ],
             "severity": "error",
@@ -635,12 +520,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [FLY_EN] on F.Cu, length 0.8746 mm",
+                    "description": "Track [FLY_EN] on B.Cu, length 29.4727 mm",
                     "pos": {
-                        "x": 164.2,
-                        "y": 161.0
+                        "x": 173.4,
+                        "y": 133.0
                     },
-                    "uuid": "927c9909-26c4-445c-9149-14d80672ad02"
+                    "uuid": "4311355e-3d65-4d40-8be4-db54aa7c710b"
                 },
                 {
                     "description": "Pad 1 [FLY_EN] of Q303 on F.Cu",
@@ -827,35 +712,12 @@
                     "uuid": "092c16af-2daa-4dff-a05d-f7bd795e47b2"
                 },
                 {
-                    "description": "Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu",
+                    "description": "Track [/Main MCU STM32WBA55/WBA_VDDRFPA] on B.Cu, length 0.0085 mm",
                     "pos": {
-                        "x": 148.813,
-                        "y": 128.476
+                        "x": 148.819,
+                        "y": 128.482
                     },
-                    "uuid": "cde82ab0-0ab9-409d-bf5e-94f3432b698c"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 18 [ENC_B_S] of U601 on F.Cu",
-                    "pos": {
-                        "x": 149.75,
-                        "y": 164.1625
-                    },
-                    "uuid": "300e0679-37eb-42f7-a877-a15198bd0b05"
-                },
-                {
-                    "description": "Pad 1 [ENC_B_S] of R712 on F.Cu",
-                    "pos": {
-                        "x": 180.7,
-                        "y": 109.775
-                    },
-                    "uuid": "6823b015-fb51-49d8-a2ba-5d9fd5eb0ac7"
+                    "uuid": "67156731-75fd-453f-af2c-fbea1e2543a8"
                 }
             ],
             "severity": "error",
@@ -1103,12 +965,12 @@
                     "uuid": "2d011653-f04d-4328-a168-c5679f7c7def"
                 },
                 {
-                    "description": "Via [CHG_INT_N] on F.Cu - B.Cu",
+                    "description": "Track [CHG_INT_N] on F.Cu, length 1.9163 mm",
                     "pos": {
-                        "x": 110.35,
-                        "y": 118.522
+                        "x": 108.995,
+                        "y": 119.877
                     },
-                    "uuid": "675907e4-deaa-4d07-ba36-b86ab41574b6"
+                    "uuid": "73ec20c6-c06b-4cad-ac9c-a404c51a4626"
                 }
             ],
             "severity": "error",
@@ -1264,12 +1126,12 @@
                     "uuid": "9fb7856a-2228-4f6c-8c97-6afbfc04875d"
                 },
                 {
-                    "description": "Track [ENC_I_M] on F.Cu, length 13.3926 mm",
+                    "description": "Via [ENC_I_M] on F.Cu - B.Cu",
                     "pos": {
                         "x": 160.055,
                         "y": 118.748
                     },
-                    "uuid": "82e6d8ea-fa9d-4d61-9094-b71ca1fcc0cc"
+                    "uuid": "526b66c2-665f-4d46-aabe-029859d91b13"
                 }
             ],
             "severity": "error",

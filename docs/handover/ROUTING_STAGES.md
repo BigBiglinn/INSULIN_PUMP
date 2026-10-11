@@ -332,3 +332,90 @@ No HV48 net is within the 0.6 mm class clearance of either route.
 - **Q303 is unconnected.** If the output switch (U-06) is designed with this level shifter, FLY_EN's routing must be revisited.
 
 **Electrical testing:** none performed.
+
+## 5. Stage 4: encoder connections (11 Oct 2026)
+
+**Checkpoints:**
+- `route-stage4-before` (= commit a6fd898, `route-stage3-done`);
+- `route-stage4-done`.
+
+**Route specification:** `validation/routing/stage4_hand.json`, applied with `scripts/route_stage.py hand`. Full comparison and margins: `validation/routing/stage4_vs_checkpoint.txt`.
+
+**Freerouting:** not used.
+
+### 5.1 Pre-routing verification (owner item 2)
+
+| Net | Endpoints (board = schematic, parity 0) | Intent (source) |
+|---|---|---|
+| ENC_B | J705.4, D708.1, R709.2, R712.2 | Encoder B from J705 → TVS D708 (E-07) → R709 100 Ω to the main MCU (ENC_B_M, U501 PA8 TIM2_CH2) and R712 100 Ω to the supervisor (S-07). `scripts/design.py` |
+| ENC_B_S | R712.1, U601.18 | Supervisor encoder B: U601 PA7 TIM3_CH2 (CubeMX check, `pinmap_check.md`) |
+| ENC_A_S | R711.1, U601.17 | Supervisor encoder A: U601 PA6 TIM3_CH1 (CubeMX check) |
+| ENC_I | J705.1, R710.2, D709.1 | Encoder index → TVS D709 → R710 to the main MCU (ENC_I_M). R710.2 and D709.1 were already joined; only J705.1 was missing. |
+
+**Caveats recorded, not resolved by routing:**
+- J705's pinout is **ASSUMED**: it mirrors the PMD401 sensor connector, "VERIFY vs LL06 encoder cable" (U-14). ENC_A, ENC_VCC and GND were already routed to it on the same assumption.
+- D707–D709 are **TBD** TVS parts (U-15). The SOD-323 footprint and the shunt connection are defined; if the chosen part changes the footprint, the pad connections must be re-checked.
+
+**Not touched:** RS485_B → R714, which waits for the owner decision (D3).
+
+### 5.2 Routing method: `scripts/grid_route.py` (new)
+
+Freerouting is not used. I wrote a small, deterministic, two-layer grid router (A\*, 8-directional, via cost 4 mm) that routes **one named connection at a time**:
+- All existing copper is a fixed obstacle, at rule clearance + 0.05 mm margin (0.2 mm; 0.7 mm to HV48 nets).
+- RF_ANT and RF_MCU get 1 mm extra on every layer; LSE_IN and LSE_OUT get 0.8 mm.
+- No via inside any pad.
+- **Owner keep-outs:**
+  - the WBA55 / U501 / RF / crystal / SWD region, x 129.5–162.5, y 100.5–134 (D5);
+  - the flyback / 48 V block, x 159.6–200, y 140.5–168.
+
+Its output is an ordinary explicit route specification (pad-centre endpoints, 45° geometry), which then goes through the same apply, DRC and compare steps.
+
+**Bug found and fixed during this stage.** In the first ENC_A_S / ENC_B_S run, the keep-out rectangles were not applied: a zero-radius rectangle marked no cells. ENC_A_S came out under C518 (the LSE load-capacitor placeholder) inside the WBA55 keep-out. That output was discarded and the router fixed. The Stage 4a routes (ENC_B and ENC_I) were then checked point by point and lie wholly outside both keep-outs. The two supervisor lines were routed on a 0.05 mm grid, so the 0.5 mm-pitch U601 pins sit on grid. One generated ENC_B overlap (duplicated same-net copper at x = 179.1) was merged by hand before applying.
+
+### 5.3 Routes
+
+| Net | Length (net copper) | Vias | Path summary |
+|---|---|---|---|
+| ENC_B | 58.1 mm | 2 | R712.2 → D708.1 → R709.2 on F.Cu, in the encoder-interface row. J705.4 → north-west on F.Cu along x = 201.6, then diagonally → B.Cu hop → R712.2. |
+| ENC_I | 60.8 mm (including pre-existing copper) | 4 (2 new) | J705.1 → via → B.Cu diagonal and vertical at x = 192.6 → via → D709.1 |
+| ENC_A_S | 68.0 mm | 4 | U601.17 → via under the U601 body → B.Cu north-east, then north at x = 159.0 in the corridor between the two keep-outs → x = 162.55 along the keep-out edge → F.Cu up x = 168.25 → R711.1 |
+| ENC_B_S | 71.8 mm | 4 | U601.18 → via under the U601 body → B.Cu around the ENC_A_S via (small hook) → F.Cu north at x = 153.1 (between HB_M2S and SUP_VETO) → along the keep-out edge → B.Cu → F.Cu up x = 169.1 → R712.1 |
+
+### 5.4 Clearance margins (edge to edge; rule 0.15 mm)
+
+| Net | Tightest foreign copper | Switching or 48 V copper within 3 mm |
+|---|---|---|
+| ENC_B | 0.199 mm (ENC_A_S via, JP701.3, PMD_5V via); 0.249 mm R704.2, R710.1 | none |
+| ENC_I | **0.151 mm PMD_MOSI (B.Cu)**. **Pre-existing:** it is the old ENC_I via at (181.08, 106.63), identical at `route-stage4-before`. Next: 0.189 mm R703.1, then 0.199 mm R705.1 | none |
+| ENC_A_S | 0.199 mm ENC_B; 0.209 mm HB_M2S; 0.220 mm SUP_SWCLK (B.Cu) | none |
+| ENC_B_S | 0.199 mm CON_SUP_RX (B.Cu); 0.208 mm SUP_SWDIO; 0.221 mm SUP_VETO | none |
+
+### 5.5 Results against `route-stage3-done`
+
+| Check | route-stage3-done | route-stage4-done |
+|---|---|---|
+| ERC | 6 intentional U501 errors + 1 cosmetic U701 warning | identical (schematic not modified) |
+| DRC copper (clearance, short, crossing, hole, edge) | 0 | 0 |
+| Schematic parity | 0 | 0 |
+| via_dangling / track_dangling | 6 / 1 | 6 / 1 (same items) |
+| Silkscreen | 83 / 71 / 3 / 2 | identical |
+| Unconnected pairs | 54 | **48** |
+| Footprints changed | n/a | none |
+| Nets whose copper changed | n/a | ENC_A_S (+19 items), ENC_B (+21), ENC_B_S (+24), ENC_I (+11); 0 removed anywhere |
+| BOM re-export | n/a | byte-identical |
+
+**Pairs closed (6):** ENC_B ×3, ENC_I (J705.1), ENC_A_S, ENC_B_S.
+
+**Relabelled pairs, with no copper change on the net:** CHG_INT_N, ENC_I_M and WBA_VDDRFPA.
+
+**Regressions: none.**
+
+### 5.6 Concerns
+
+- **New finding about Stage 3 (HB_S2M near the LSE crystal).** The HB_S2M F.Cu run at x = 134.5 passes 0.60 mm from the Y502 pad 1 (LSE_IN), just outside the Y502 courtyard (x ≤ 134.07). It also crosses the LSE_OUT B.Cu trace at (134.5, 128.46), with both inner planes (In1 GND, In2) between them. It passes DRC, but ST oscillator guidance generally keeps signal lines away from the 32.768 kHz crystal and its traces. The crystal layout is still waiting for the ST documents (D5), so this route may **constrain or conflict with** that layout. **Recommendation:** re-route HB_S2M further west or north when the LSE layout is fixed. Not changed in Stage 4, as instructed.
+- **Long supervisor encoder lines.** ENC_A_S and ENC_B_S are 68–72 mm, with 4 vias each. They are slow quadrature inputs, but their signal integrity and their susceptibility to the 48 V switching have not been analysed.
+- **Vias under the U601 body.** Three vias now sit under the U601 LQFP body (HB_S2M, ENC_A_S, ENC_B_S). That is acceptable for a package without an exposed pad if the vias are tented; confirm with the assembler (U-16).
+- **Pre-existing 0.151 mm gap** (ENC_I via to PMD_MOSI), at the rule minimum. Check against the real fab rules.
+- **J705 pinout and TVS parts.** J705's pinout is assumed (U-14) and the TVS parts are TBD (U-15).
+
+**Electrical testing:** none performed. Routing checks are not evidence of electrical operation.

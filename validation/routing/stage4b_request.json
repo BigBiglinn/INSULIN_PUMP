@@ -1,0 +1,59 @@
+{
+ "_comment": "Stage 4b grid-router request (0.05 mm grid, so the 0.5 mm-pitch U601 pins sit on grid). Same keep-outs as Stage 4a; run on the board with Stage 4a applied.",
+ "grid": 0.05,
+ "clr": 0.2,
+ "hv_clr": 0.7,
+ "via_cost": 40,
+ "keepout": [
+  [
+   129.5,
+   100.5,
+   162.5,
+   134.0
+  ],
+  [
+   159.6,
+   140.5,
+   200.0,
+   168.0
+  ]
+ ],
+ "avoid_nets": {
+  "RF_ANT": 1.0,
+  "RF_MCU": 1.0,
+  "LSE_OUT": 0.8,
+  "LSE_IN": 0.8
+ },
+ "routes": [
+  {
+   "net": "ENC_A_S",
+   "w": 0.2,
+   "from": [
+    149.25,
+    164.16,
+    "F"
+   ],
+   "to": [
+    176.7,
+    109.78,
+    "F"
+   ],
+   "why": "U601.17 (PA6 TIM3_CH1) to R711.1"
+  },
+  {
+   "net": "ENC_B_S",
+   "w": 0.2,
+   "from": [
+    149.75,
+    164.16,
+    "F"
+   ],
+   "to": [
+    180.7,
+    109.78,
+    "F"
+   ],
+   "why": "U601.18 (PA7 TIM3_CH2) to R712.1"
+  }
+ ]
+}
