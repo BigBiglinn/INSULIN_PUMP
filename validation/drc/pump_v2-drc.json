@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-31T15:13:45",
+    "date": "2026-10-31T15:41:54",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -97,52 +97,6 @@
                         "y": 122.6
                     },
                     "uuid": "c0254f4d-3a55-40e8-b124-936eec6c0fb9"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_TOP' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 100.5,
-                        "y": 100.5
-                    },
-                    "uuid": "605b6328-1c9e-482a-8efe-8f2c3fbfd6aa"
-                },
-                {
-                    "description": "Zone 'GND_TOP' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 100.5,
-                        "y": 100.5
-                    },
-                    "uuid": "605b6328-1c9e-482a-8efe-8f2c3fbfd6aa"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Zone 'GND_TOP' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 100.5,
-                        "y": 100.5
-                    },
-                    "uuid": "605b6328-1c9e-482a-8efe-8f2c3fbfd6aa"
-                },
-                {
-                    "description": "Zone 'GND_TOP' [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 100.5,
-                        "y": 100.5
-                    },
-                    "uuid": "605b6328-1c9e-482a-8efe-8f2c3fbfd6aa"
                 }
             ],
             "severity": "error",
@@ -681,29 +635,6 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 2 [/PMD401 & encoder interface/RS485_B] of R714 on F.Cu",
-                    "pos": {
-                        "x": 186.35,
-                        "y": 109.775
-                    },
-                    "uuid": "234f2b4e-adfe-4a91-b02b-88e92aaa1fcb"
-                },
-                {
-                    "description": "Pad 7 [/PMD401 & encoder interface/RS485_B] of U701 on F.Cu",
-                    "pos": {
-                        "x": 194.475,
-                        "y": 129.365
-                    },
-                    "uuid": "7eb7b152-7d19-4a40-af50-a0138a4af777"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
                     "description": "Pad C1 [I2C_SDA] of U101 on F.Cu",
                     "pos": {
                         "x": 117.8,
@@ -750,20 +681,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 48 [ENC_I_M] of U501 on F.Cu",
+                    "description": "Pad 1 [ENC_I_M] of R710 on F.Cu",
                     "pos": {
-                        "x": 145.25,
-                        "y": 115.5625
+                        "x": 172.7,
+                        "y": 109.775
                     },
-                    "uuid": "9fb7856a-2228-4f6c-8c97-6afbfc04875d"
+                    "uuid": "02609f16-1fe4-4607-8e68-2cc8ab4f0812"
                 },
                 {
-                    "description": "Track [ENC_I_M] on F.Cu, length 13.3926 mm",
+                    "description": "Track [ENC_I_M] on F.Cu, length 0.4000 mm",
                     "pos": {
-                        "x": 160.055,
-                        "y": 118.748
+                        "x": 145.25,
+                        "y": 114.85
                     },
-                    "uuid": "82e6d8ea-fa9d-4d61-9094-b71ca1fcc0cc"
+                    "uuid": "6683c545-5441-495b-b6dc-b6e79594f809"
                 }
             ],
             "severity": "error",
@@ -887,64 +818,19 @@
     ],
     "violations": [
         {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "Via [VBAT_SENSE] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 145.389,
-                        "y": 124.736
-                    },
-                    "uuid": "c97f412e-3af0-43a6-9206-e56f52d10182"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "Via [/Main MCU STM32WBA55/WBA_VDD11] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 143.85,
-                        "y": 114.85
-                    },
-                    "uuid": "6d2fef92-e18d-4feb-9fda-28b4f7241d4f"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
             "description": "Track has unconnected end",
             "items": [
                 {
-                    "description": "Track [/Main MCU STM32WBA55/MAIN_NRST] on F.Cu, length 0.0500 mm",
+                    "description": "Track [ENC_I_M] on F.Cu, length 0.4000 mm",
                     "pos": {
-                        "x": 152.0,
-                        "y": 115.95
+                        "x": 145.25,
+                        "y": 114.85
                     },
-                    "uuid": "ea713a31-1e5a-46bd-b6f6-2e4ce996cbbf"
+                    "uuid": "6683c545-5441-495b-b6dc-b6e79594f809"
                 }
             ],
             "severity": "warning",
             "type": "track_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "Via [ENC_I_M] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 160.055,
-                        "y": 118.748
-                    },
-                    "uuid": "526b66c2-665f-4d46-aabe-029859d91b13"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
         },
         {
             "description": "Silkscreen clipped by board edge",
@@ -6461,6 +6347,29 @@
                         "y": 115.5625
                     },
                     "uuid": "efeb4edf-fb7b-4b49-85af-6a1ef3ac1467"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of Y501",
+                    "pos": {
+                        "x": 145.4,
+                        "y": 114.975
+                    },
+                    "uuid": "20ced6ab-52e1-404e-833b-dee891e9724e"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 144.95,
+                        "y": 114.15
+                    },
+                    "uuid": "a1e1396b-5b3f-46ad-a30f-a2846f6eed66"
                 }
             ],
             "severity": "warning",

@@ -1,0 +1,15 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\q301\aonr_3p0.cir
+Start Time: Sat Oct 31 15:26:06 2026
+
+.step ipk=3.4 leak=0.06
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Per .tran options, skipping operating point for transient analysis.
+
+.step ipk=4.9 leak=0.06
+
+.step ipk=3.4 leak=0.1

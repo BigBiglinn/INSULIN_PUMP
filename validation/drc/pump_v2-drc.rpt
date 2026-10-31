@@ -1,20 +1,11 @@
 ** Drc report for pump_v2.kicad_pcb **
-** Created on 2026-10-31T15:13:52 **
+** Created on 2026-10-31T15:42:06 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 307 DRC violations **
-[via_dangling]: Via is not connected or connected on only one layer
-    Local override; warning
-    @(145.3890 mm, 124.7360 mm): Via [VBAT_SENSE] on F.Cu - B.Cu
-[via_dangling]: Via is not connected or connected on only one layer
-    Local override; warning
-    @(143.8500 mm, 114.8500 mm): Via [/Main MCU STM32WBA55/WBA_VDD11] on F.Cu - B.Cu
+** Found 305 DRC violations **
 [track_dangling]: Track has unconnected end
     Local override; warning
-    @(152.0000 mm, 115.9500 mm): Track [/Main MCU STM32WBA55/MAIN_NRST] on F.Cu, length 0.0500 mm
-[via_dangling]: Via is not connected or connected on only one layer
-    Local override; warning
-    @(160.0550 mm, 118.7480 mm): Via [ENC_I_M] on F.Cu - B.Cu
+    @(145.2500 mm, 114.8500 mm): Track [ENC_I_M] on F.Cu, length 0.4000 mm
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(100.0000 mm, 100.0000 mm): Segment on Edge.Cuts
@@ -978,6 +969,10 @@
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(145.4000 mm, 114.9750 mm): Reference field of Y501
+    @(144.9500 mm, 114.1500 mm): Rectangle on F.Mask
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(145.4000 mm, 114.9750 mm): Reference field of Y501
     @(145.2500 mm, 115.5625 mm): Pad 48 [ENC_I_M] of U501 on F.Cu
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
@@ -1226,7 +1221,7 @@
     Local override; warning
     @(112.0000 mm, 182.0000 mm): PCB text 'PIEZO INSULIN PUMP v2 REV B - HANDOVER PROTOTYPE, NOT FAB-APPROVED' on B.Silkscreen
 
-** Found 37 unconnected pads **
+** Found 34 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
     @(178.3250 mm, 125.0000 mm): Pad 2 [/48V flyback/OVP_G] of R314 on F.Cu
@@ -1239,14 +1234,6 @@
     Local override; error
     @(180.7625 mm, 118.8500 mm): Pad 1 [/48V flyback/OVP_G] of Q304 on F.Cu
     @(180.6750 mm, 122.6000 mm): Pad 1 [/48V flyback/OVP_G] of R315 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
 [unconnected_items]: Missing connection between items
     Local override; error
     @(182.6375 mm, 119.8000 mm): Pad 3 [FLY_EN] of Q304 on F.Cu
@@ -1341,10 +1328,6 @@
     @(174.7000 mm, 161.0800 mm): Pad 1 [/48V flyback/FLY_DSNB] of C314 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(186.3500 mm, 109.7750 mm): Pad 2 [/PMD401 & encoder interface/RS485_B] of R714 on F.Cu
-    @(194.4750 mm, 129.3650 mm): Track [/PMD401 & encoder interface/RS485_B] on B.Cu, length 10.0000 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
     @(117.8000 mm, 113.2000 mm): Pad C1 [I2C_SDA] of U101 on F.Cu
     @(125.7000 mm, 122.7750 mm): Pad 1 [I2C_SDA] of R105 on F.Cu
 [unconnected_items]: Missing connection between items
@@ -1353,8 +1336,8 @@
     @(110.3500 mm, 118.5220 mm): Track [CHG_INT_N] on B.Cu, length 28.5360 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(145.2500 mm, 115.5625 mm): Pad 48 [ENC_I_M] of U501 on F.Cu
-    @(160.0550 mm, 118.7480 mm): Track [ENC_I_M] on F.Cu, length 13.3926 mm
+    @(172.7000 mm, 109.7750 mm): Pad 1 [ENC_I_M] of R710 on F.Cu
+    @(145.2500 mm, 114.8500 mm): Track [ENC_I_M] on F.Cu, length 0.4000 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(176.6750 mm, 125.0000 mm): Pad 1 [/48V flyback/OVP_K] of R314 on F.Cu

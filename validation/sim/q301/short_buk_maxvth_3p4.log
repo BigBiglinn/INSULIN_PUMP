@@ -1,0 +1,11 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\q301\short_buk_maxvth_3p4.cir
+Start Time: Sat Oct 31 15:50:22 2026
+
+.step ipk=3.4
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Per .tran options, skipping operating point for transient analysis.
