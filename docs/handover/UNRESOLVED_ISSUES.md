@@ -1,6 +1,6 @@
 # Unresolved issues: Rev B digital handover design
 
-Updated 10 Oct 2026 (second session). Severity:
+Updated 10 Oct 2026 (second session); layout items updated 31 Oct 2026 (`LAYOUT_FIXES_2026-10-31.md`). Severity:
 
 - **Critical**: blocks any build, or leaves a safety function without evidence.
 - **Major**: the board will not work as intended until it is resolved.
@@ -42,7 +42,9 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-18 | Battery connector, cell, fuse part number, master switch, charge current not decided (B.19, B.20) | Owner or successor |
 | U-19 | Thermal check: R306 ≈ 0.4 W, R313 ≈ 0.17 W, R305, Q301, D301 | After U-04 |
 | U-20 | RF trace not impedance-controlled | Stack-up, ST reference |
-| U-21 | **Routing incomplete / not reviewed.** See `validation/logs/unrouted_nets.txt` for the current count. The flyback loop is placed compactly but routed by the autorouter around a placeholder transformer, so it is not final | Hand-route and review in pcbnew after U-04/U-05 |
+| U-21 | **Routing incomplete / not reviewed.** 31 Oct: 28 unconnected pairs (12 ST placeholders, 1 DNP switch, 15 genuine; `validation/logs/unrouted_nets_2026-10-31.txt`, pcbcheck.py). +48V_MOT to J703, FLY_SS, CON_SUP_TX/RX and ENC_A_S are now connected; FLY_PGOOD to U501.28 is still open. The flyback loop is still autorouted around a placeholder transformer, so it is not final | Verify the 31 Oct edits in KiCad (U-35), then hand-route and review in pcbnew after U-04/U-05 |
+| U-35 | **31 Oct layout edits not verified by KiCad.** They were made by script and checked with pcbcheck.py only. Stored zone fills are cut-back approximations | Refill zones; run `scripts/run_checks.sh`; compare with `LAYOUT_FIXES_2026-10-31.md` §7 |
+| U-36 | +3V3 at R302.2: its via is in the In2 VBAT region of the 48 V block, so the PGOOD pull-up has no +3V3 connection (pre-existing, made visible by the 31 Oct report) | Short +3V3 track to the 3V3 region, or review the In2 split |
 | U-24 | Input current at full PMD401 speed is about 2.0–2.3 A at 3.0 V (simulation), at or above the E-05 2.1 A budget | Measure PMD401 current at dosing speed (MT-07); re-check the battery-path ratings |
 | U-22 | Freerouting ran with default telemetry during the first session (disabled afterwards) | Note only |
 
@@ -52,5 +54,5 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | --- | --- |
 | U-30 | ERC `lib_symbol_mismatch` on U701 (MAX3485) is cosmetic. Fix with *Update Symbols from Library* in Eeschema |
 | U-31 | Schematic drawn label-style (every pin carries a net label) |
-| U-32 | Silkscreen overlaps; unmirrored bottom-side disclaimer text |
+| U-32 | Silkscreen overlaps. The bottom-side disclaimer texts were mirrored on 31 Oct; J501/J102 edge references moved; D704 reference still at the edge. Counts unverified |
 | U-34 | Datasheets still missing: ST parts, LL06, MAX3485, connectors, Molicel cell, transformer |

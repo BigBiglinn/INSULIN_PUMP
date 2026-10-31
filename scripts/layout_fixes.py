@@ -275,7 +275,9 @@ def place_ref(S, ref, prefer=None):
     s, e = S.t.footprint_span(ref)
     import re
     m = re.search(r'\(property "Reference" "([^"]*)"\n\t\t\t\(at ([-\d.]+) ([-\d.]+)(?: ([-\d.]+))?\)', S.t.txt[s:e])
-    txt, ang = m.group(1), float(m.group(4) or 0)
+    txt, ang = m.group(1), float(m.group(4) or 0) % 360
+    if ang >= 180:                      # keep text upright (a 180 deg part rotation turns it upside down)
+        ang -= 180
     others = [g for (o, k, g) in items if not (o == ref and k == "ref")]
     own_lines = [g for (o, k, g) in items if o == ref and k == "line"]
     mk = [g.buffer(0.1) for (o, g) in masks]
@@ -298,7 +300,7 @@ def place_ref(S, ref, prefer=None):
         log(f"  silk {ref}: no clear position found, reference left where it was")
         return False
     lx, ly = krot(best[1] - X, best[2] - Y, -R)
-    S.t.set_fp_text(ref, "Reference", round(lx, 3), round(ly, 3))
+    S.t.set_fp_text(ref, "Reference", round(lx, 3), round(ly, 3), ang)
     log(f"  silk {ref}: reference text -> ({best[1]:.2f}, {best[2]:.2f})")
     return True
 
@@ -364,7 +366,8 @@ def main():
         u = unconnected(S.b)
         log(f"  -> {sum(len(v) - 1 for v in u.values())} unconnected pairs")
     moved = ["C305", "TP302", "J503"]
-    step_silk(S, ["J501", "J102", "D704"] + moved)
+    # U301 and R302 references are re-placed because the moved C305/TP302 now sit on them
+    step_silk(S, ["J501", "J102", "D704"] + moved + ["U301", "R302"])
     stats = S.t.reclip_zones(lambda b, it: (it.kind in ("track", "via") and uuid_of(it) not in base_uuids)
                              or (it.kind == "pad" and it.ref in moved))
     for x in stats:

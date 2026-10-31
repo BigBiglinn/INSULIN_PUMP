@@ -1,5 +1,7 @@
 # Blocker-resolution report: pump_v2 Rev B digital handover
 
+> **Status 31 Oct 2026.** The category A layout items of section 5 have been carried out, apart from the FL-1/FL-2 flyback loop compaction and FLY_PGOOD to U501.28. See `LAYOUT_FIXES_2026-10-31.md`. The board state described below is the baseline (tag `checkpoint/pre-layout-fixes-2026-10-31`).
+
 10 Oct 2026. Covers the board at commit `e8d141c`; the schematic and PCB were **not modified** while preparing this report. Sources:
 
 - `validation/erc/pump_v2-erc.rpt`

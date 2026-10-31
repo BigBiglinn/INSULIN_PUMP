@@ -1,6 +1,6 @@
 # Piezo Insulin Pump v2: Rev B digital handover guide
 
-Prepared 10 Oct 2026 for the engineer who takes over the project.
+Prepared 10 Oct 2026 for the engineer who takes over the project. Layout-only fixes were added on 31 Oct 2026 without KiCad: see `LAYOUT_FIXES_2026-10-31.md`. **They are not yet verified by kicad-cli.**
 
 > **BENCH-ONLY PROTOTYPE.** Use water or 0.9 % saline only. Never connect it to a person or an animal, and do not use real insulin.
 >
@@ -32,7 +32,9 @@ Read these alongside this guide:
 | `hardware/kicad/pump_v2.kicad_sym`, `pump_v2.pretty/` | Project symbols (LM51551, BQ25188, TPS62840DLC, TBD FETs, transformer) and footprints (transformer placeholder, BQ25188 YBG unverified) |
 | `scripts/design.py` | **Single source of truth**: every part, net, value, status and note |
 | `scripts/gen_library.py`, `gen_schematic.py`, `gen_pcb.py`, `kicadlib.py` | Generators (see section 6) |
-| `validation/erc/`, `validation/drc/` | Real kicad-cli reports |
+| `validation/erc/`, `validation/drc/` | Real kicad-cli reports (10 Oct; they describe the board BEFORE the 31 Oct layout fixes) |
+| `validation/logs/*_2026-10-31.*` | 31 Oct layout-fix log and pcbcheck.py results (pure Python, not kicad-cli) |
+| `scripts/pcbcheck.py`, `pcbedit.py`, `pcbroute.py`, `pcbsilk.py`, `pcbplot.py`, `layout_fixes.py`, `report_unrouted.py` | KiCad-free checker, editor, router and the 31 Oct fix procedure (need `pip install shapely numpy matplotlib`) |
 | `docs/datasheets/` | Datasheets actually used (PMD401 manual 150025-01, TI LM51551, BQ25188, TPS62840, INA219) |
 
 ## 3. Architecture as implemented
@@ -149,6 +151,8 @@ Freerouting and the Java runtime were used from a temporary folder and are **not
 
 ## 8. Final run results (kicad-cli 10.0.3, 10 Oct 2026)
 
+> These are the results for the board **before** the 31 Oct 2026 layout fixes (tag `checkpoint/pre-layout-fixes-2026-10-31`). For the current board only pcbcheck.py results exist: 28 unconnected pairs, 0 copper violations, 0 dangling items (`validation/logs/pcbcheck_2026-10-31.txt`). Re-run `scripts/run_checks.sh` after refilling the zones and replace this section with the real numbers.
+
 Reproduce with `bash scripts/run_checks.sh`. The reports are `validation/erc/pump_v2-erc.rpt` and `validation/drc/pump_v2-drc.rpt`.
 
 ### ERC: 6 errors, 1 warning (none excluded or suppressed)
@@ -194,5 +198,6 @@ Reproduce with `bash scripts/run_checks.sh`. The reports are `validation/erc/pum
 ### Images and PDF
 
 - `images/pcb_placement_fab.png`: placement and courtyards.
-- `images/pcb_routed_top_bottom.png`: F.Cu and B.Cu copper with silkscreen.
+- `images/pcb_routed_top_bottom.png`: F.Cu and B.Cu copper with silkscreen (10 Oct board).
+- `images/fix_2026-10-31_*.png`: plots of the areas changed on 31 Oct (drawn by `scripts/pcbplot.py`, not KiCad).
 - `pump_v2_schematic.pdf`: all 8 schematic sheets.

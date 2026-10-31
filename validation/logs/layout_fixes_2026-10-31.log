@@ -1,0 +1,66 @@
+baseline: 35 unconnected pairs, 9 dangling items
+step 1 +48V_MOT: 9 items, min clearance 0.750 mm (track to J703.1 [GND]; HV48 rule 0.6 mm)
+  -> 33 unconnected pairs
+step 2 soft-start: ripped 20 items (U301 east escapes of FLY_RT/FLY_FB/FLY_PGOOD, AGND via, C305 GND stub+via)
+step 2: C305 -> (164.75, 149.4, 180 deg); 22 items; min clearance 0.150 mm (via to track)
+  -> 32 unconnected pairs
+step 3 TP302 -> pad at (165.75, 155.75) on the FLY_PGOOD trace; min clearance 0.152 mm
+  -> 31 unconnected pairs
+step dangling clean-up: removed 31 dead-end items
+    MAIN_SWCLK track ((145.135, 124.185), (145.911, 124.185))
+    MAIN_SWCLK track ((141.869, 120.918), (145.135, 124.185))
+    MAIN_SWCLK track ((141.869, 120.68), (141.869, 120.918))
+    MAIN_SWCLK track ((141.509, 120.32), (141.869, 120.68))
+    VBAT_SENSE via (145.389, 124.736)
+    VBAT_SENSE track ((145.698, 124.427), (145.389, 124.736))
+    VBAT_SENSE track ((145.698, 122.489), (145.698, 124.427))
+    ENC_VCC via (171.757, 104.422)
+    WBA_VDDRFPA via (155.582, 128.482)
+    WBA_VDDRFPA via (160.676, 128.5935)
+    WBA_VDDRFPA via (148.7722, 113.5215)
+    WBA_VDDRFPA track ((148.7722, 113.5215), (148.7722, 113.7831))
+    WBA_VDDRFPA track ((148.7722, 113.7831), (147.75, 114.8053))
+    WBA_VDDRFPA track ((147.75, 114.8053), (147.75, 115.5625))
+    CON_SUP_TX via (152.621, 159.001)
+    CON_SUP_TX track ((152.621, 159.001), (152.621, 159.927))
+    CON_SUP_TX track ((152.621, 159.927), (153.444, 160.75))
+    PMD_MOSI_M via (158.019, 123.498)
+    PMD_MOSI_M track ((157.821, 123.3), (158.019, 123.498))
+    PMD_MOSI_M track ((151.054, 123.3), (157.821, 123.3))
+    PMD_MOSI_M track ((150.654, 122.901), (151.054, 123.3))
+    PMD_MOSI_M track ((147.092, 122.901), (150.654, 122.901))
+    PMD_MOSI_M track ((146.25, 123.743), (147.092, 122.901))
+    PMD_MOSI_M via (146.25, 123.743)
+    PMD_MOSI_M track ((146.25, 122.438), (146.25, 123.743))
+    ENC_I_M via (160.055, 118.748)
+    ENC_I_M track ((160.055, 118.748), (169.525, 109.278))
+    ENC_I_M track ((169.525, 109.278), (169.525, 107.962))
+    ENC_I_M track ((169.525, 107.962), (169.986, 107.5))
+    ENC_I_M track ((169.986, 107.5), (170.716, 107.5))
+    ENC_I_M track ((170.716, 107.5), (172.7, 109.485))
+  -> 31 unconnected pairs
+step console: ripped 4 B.Cu segments of CON_MAIN_TX (U501-side escape and via kept)
+  J503 -> pin 1 at (133.5, 147.5), same orientation; pad min clearance 2.323 mm
+  CON_SUP_RX: routed 20.9 mm, 1 vias, min clearance 0.200 mm (unconnected-(U601-PA11-Pad33))
+  CON_SUP_TX: routed 30.7 mm, 1 vias, min clearance 0.190 mm (SUP_VETO)
+  CON_MAIN_TX: routed 45.3 mm, 4 vias, min clearance 0.192 mm (MAIN_SWCLK)
+  -> 29 unconnected pairs
+  ENC_A_S (R711.1 -> U601.17 PA6): routed 65.1 mm, 6 vias, min clearance 0.191 mm (ENC_B_S)
+  FLY_PGOOD (U501.28 PA12 -> U301/R302/TP302): NO ROUTE found (left unconnected)
+  -> 28 unconnected pairs
+  silk: B.SilkS text 'BENCH ONLY - WATER/SALIN...' mirrored, centred at x=155, y=180 (wording unchanged)
+  silk: B.SilkS text 'PIEZO INSULIN PUMP v2 RE...' mirrored, centred at x=155, y=182 (wording unchanged)
+  silk J501: reference text -> (144.12, 101.25)
+  silk J102: reference text -> (101.20, 145.04)
+  silk D704: no clear position found, reference left where it was
+  silk C305: reference text -> (162.50, 147.90)
+  silk TP302: reference text -> (162.75, 154.50)
+  silk J503: reference text -> (131.25, 144.00)
+  zone re-clip: In2.Cu VBAT: 1 fill polygons -> 1 (0 islands dropped)
+  zone re-clip: In2.Cu +3V3: 3 fill polygons -> 3 (0 islands dropped)
+  zone re-clip: In1.Cu GND: 3 fill polygons -> 3 (0 islands dropped)
+  zone re-clip: B.Cu GND: 5 fill polygons -> 7 (2 islands dropped)
+  zone re-clip: F.Cu GND: 26 fill polygons -> 28 (4 islands dropped)
+saved /tmp/claude-0/-home-user-INSULIN-PUMP/144ca2f2-10c8-5906-b8d5-21debfac7b81/scratchpad/full.kicad_pcb
+  silk U301: reference text -> (167.00, 154.25)
+  silk R302: reference text -> (167.06, 157.25)

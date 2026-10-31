@@ -1,10 +1,12 @@
 # Piezo Insulin Pump v2: final digital handover
 
-10 Oct 2026. Read this first. Details are in `HANDOVER_GUIDE.md`, `FLYBACK_DESIGN.md`, `UNRESOLVED_ISSUES.md` and `ASSUMPTIONS_AND_DEVIATIONS.md`.
+10 Oct 2026, with the layout-only fixes of 31 Oct 2026 (see `LAYOUT_FIXES_2026-10-31.md`). Read this first. Details are in `HANDOVER_GUIDE.md`, `FLYBACK_DESIGN.md`, `UNRESOLVED_ISSUES.md` and `ASSUMPTIONS_AND_DEVIATIONS.md`.
 
 > **Safety limits.** This is a bench-only prototype for water or 0.9 % saline. Never connect it to a person or an animal, and never use real insulin.
 >
 > **Not fabrication-ready.** No Gerbers have been generated. Nothing has been built or measured. A clean ERC or DRC report does not show that the circuit works.
+>
+> **31 Oct 2026 update.** The board was edited by script without KiCad: +48V_MOT now reaches J703, FLY_SS is connected (C305 moved), TP302, J503 and the console and ENC_A_S nets are fixed, and dead-end stubs were removed. A pure-Python checker counts 28 unconnected pairs (was 35), 0 copper violations and 0 dangling items. **KiCad ERC/DRC have not been run on the modified board.** Refill the zones and run `scripts/run_checks.sh` first. Details: `LAYOUT_FIXES_2026-10-31.md`.
 
 ## 1. Opening the project
 
@@ -53,7 +55,7 @@ Notes:
 
 1. **ST datasheets (U-05):** obtain the STM32WBA55CG and STM32C031C6 datasheets and the WBA RF/hardware design guide; st.com was blocked from the machine used. Then wire VDD11, the SMPS inductor, VDDHPA, VDDANA, VDDRF and VDDRFPA, decoupling, the 32 MHz HSE and the RF pi-match. This removes the 6 intentional ERC errors.
 2. **Flyback transformer (U-04):** choose a part that meets `FLYBACK_DESIGN.md` §4. Replace the placeholder footprint, re-tune the clamp/snubber, and verify the loop (TI LM5155 model or bench).
-3. **Routing (U-21):** finish the remaining unconnected items (`validation/logs/unrouted_nets.txt`). Then hand-review the flyback loop, the 48 V path and the RF trace. The autorouted copper around the placeholder transformer is **not final**.
+3. **Routing (U-21):** first verify the 31 Oct edits in KiCad (`LAYOUT_FIXES_2026-10-31.md` §8). Then finish the remaining unconnected items (`validation/logs/unrouted_nets_2026-10-31.txt`: 28, of which 15 are genuine). Then hand-review the flyback loop, the 48 V path and the RF trace. The autorouted copper around the placeholder transformer is **not final**.
 4. **Open decisions:** 48 V output switch and bleeder (U-06), secondary OVP (U-23), battery connector/cell/fuse and charge current (U-18), TVS parts (U-15).
 5. **Footprint checks:** BQ25188 YBG pitch, CSD16340Q3 DQG, connector orientations (U-12, U-17). Choose a fab and load its rules (U-16).
 6. **Only then:** Rev A bench validation (`requirements/VALIDATION_PLAN.md`), engineering review, and then fabrication outputs.
@@ -75,7 +77,7 @@ See `docs/bom_detailed.csv`, which lists every reference with its status and not
 
 ## 6. Final validation results
 
-Filled in from the last `scripts/run_checks.sh` run (see section 7 of `HANDOVER_GUIDE.md` for how to reproduce).
+Filled in from the last `scripts/run_checks.sh` run (see section 7 of `HANDOVER_GUIDE.md` for how to reproduce). **These kicad-cli reports are from 10 Oct and describe the board before the 31 Oct layout fixes.** For the current board, only the pcbcheck.py results in `validation/logs/pcbcheck_2026-10-31.txt` exist (28 unconnected, 0 copper violations, 0 dangling). They are not a KiCad DRC.
 
 - ERC: see `validation/erc/pump_v2-erc.rpt`.
 - DRC: see `validation/drc/pump_v2-drc.rpt`.

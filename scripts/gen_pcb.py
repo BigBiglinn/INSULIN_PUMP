@@ -96,7 +96,9 @@ ANCHORS = {
     "U201": (122.0, 140.0, 0), "L201": (125.5, 140.0, 90),
     # main MCU (U.FL at top edge)
     "U501": (148.0, 119.0, 0), "J501": (148.0, 103.5, 0),
-    "J502": (134.0, 107.0, 0), "J503": (163.0, 104.5, 90),
+    # J503 console header moved 31 Oct 2026 from the top edge (163.0, 104.5) to the free area between the two
+    # MCUs so CON_SUP_TX/RX (U601) and CON_MAIN_TX (U501) all stay short (layout-only, scripts/layout_fixes.py)
+    "J502": (134.0, 107.0, 0), "J503": (137.31, 147.5, 90),
     # supervisor
     "U601": (150.0, 160.0, 0), "J601": (137.0, 169.0, 0),
     # kill path
@@ -112,6 +114,9 @@ ANCHORS = {
     "C302": (171.5, 151.2, 0), "C303": (171.5, 154.2, 0), "U301": (164.0, 152.0, 0),
     "D301": (190.5, 159.5, 180), "R313": (190.5, 155.5, 0), "C312": (190.5, 152.5, 0),
     "C311": (183.0, 171.0, 0), "C301": (162.0, 170.0, 0),
+    # 31 Oct 2026 (layout only): C305 (soft-start cap) north of U301, FLY_SS via B.Cu to pin 9; TP302 on the
+    # FLY_PGOOD trace beside U301/R302 instead of beside J703. See docs/handover/LAYOUT_FIXES_2026-10-31.md
+    "C305": (164.75, 149.4, 180), "TP302": (165.75, 155.75, 0),
     # mounting holes
     "H901": (X0 + 3.5, Y0 + 3.5, 0), "H902": (X1 - 3.5, Y0 + 3.5, 0),
     "H903": (X0 + 3.5, Y1 - 3.5, 0), "H904": (X1 - 3.5, Y1 - 3.5, 0),
@@ -140,7 +145,7 @@ NEAR = {
     "U601": ["C601", "C602", "C603", "C604"],
     "U101": ["C101", "C102", "C103", "R101"],
     "U201": ["R201", "C201", "C202"],
-    "U301": ["C304", "R301", "C305", "R302", "R303", "C306", "C307", "R307", "R308"],
+    "U301": ["C304", "R301", "R302", "R303", "C306", "C307", "R307", "R308"],   # C305 is an anchor now
 }
 
 
