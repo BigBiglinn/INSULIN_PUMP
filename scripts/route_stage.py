@@ -74,6 +74,8 @@ def hand(spec_path):
                    and {(round(pcbnew.ToMM(t.GetStart().x), 2), round(pcbnew.ToMM(t.GetStart().y), 2)),
                         (round(pcbnew.ToMM(t.GetEnd().x), 2), round(pcbnew.ToMM(t.GetEnd().y), 2))}
                    == {(round(x0, 2), round(y0, 2)), (round(x1, 2), round(y1, 2))}]
+            if r.get("optional") and not hit:
+                continue
             assert len(hit) == 1, f"segment {r['net']} {(x0, y0)}-{(x1, y1)} found {len(hit)} times"
             b.Delete(hit[0])
             n += 1

@@ -23,6 +23,7 @@ FP_C0805 = "Capacitor_SMD:C_0805_2012Metric"
 FP_C1210 = "Capacitor_SMD:C_1210_3225Metric"
 FP_C0402 = "Capacitor_SMD:C_0402_1005Metric"
 FP_C0402_L = "Inductor_SMD:L_0402_1005Metric"
+FP_C0402_R = "Resistor_SMD:R_0402_1005Metric"
 FP_TVS = "Diode_SMD:D_SOD-323"
 FP_LED = "LED_SMD:LED_0603_1608Metric"
 FP_SWD = "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical"
@@ -199,10 +200,15 @@ def build():
       note="PRELIMINARY type-II compensation for fc ~3 kHz < fRHPZ/5 (FLYBACK_DESIGN.md). Depends on T301 Lp and output capacitance")
     C(s, "C306", "180nF", "FLY_COMP_RC", "GND", status="CALC", note="PRELIMINARY: compensation zero ~300 Hz (FLYBACK_DESIGN.md)")
     C(s, "C307", "3.3nF", "FLY_COMP", "GND", status="CALC", note="PRELIMINARY: HF pole ~16 kHz (FLYBACK_DESIGN.md)")
-    s.add("Q301", "pump_v2:CSD16340Q3", "AONR34332C", {"4": "FLY_GATE", "5": "FLY_SW", "1": "FLY_CS", "2": "FLY_CS", "3": "FLY_CS"},
+    s.add("Q301", "pump_v2:CSD16340Q3", "AONR34332C", {"4": "FLY_GATE_Q", "5": "FLY_SW", "1": "FLY_CS", "2": "FLY_CS", "3": "FLY_CS"},
           "Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET", status="DS", mpn="AOS AONR34332C",
           note="ECO2. 30 V, RDS(on) < 2.9 mohm at VGS 2.5 V, VGS(th) 0.5-1.2 V, Qg(4.5 V) 36 nC, pins 1-3 S, 4 G, 5-8 D (AOS datasheet Rev 2.0). "
-               "Replaces the 25 V CSD16340Q3: Vds reaches 26-33 V at the 4.9 A limit without the D304 ceiling. Check land against the AOS outline")
+               "OPEN: 30 V margin is NOT established (ROUTING docs: worst-case estimate 27.9-30.3 V). No part above 30 V is yet verified for 3.0-4.2 V gate drive. Replaces the 25 V CSD16340Q3: Vds reaches 26-33 V at the 4.9 A limit without the D304 ceiling. Check land against the AOS outline")
+    s.add("JP301", "Jumper:SolderJumper_2_Bridged", "BRIDGED", {"1": "FLY_GATE", "2": "FLY_GATE_Q"}, "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm", status="CALC",
+          note="ECO3. Copper bridge that keeps the gate connected while R316 is unfitted, on B.Cu. To tune: cut the bridge and fit R316")
+    R(s, "R316", "TBD", "FLY_GATE", "FLY_GATE_Q", dnp=True, status="PLACEHOLDER", note="ECO3. Optional gate resistor for bench tuning. Unfitted until Vds is measured. Only works after JP301 is cut")
+    R(s, "R317", "TBD", "FLY_SW", "FLY_DSNB", FP_C0402_R, dnp=True, status="PLACEHOLDER", note="ECO3. Optional drain RC snubber resistor. Unfitted until ringing is measured")
+    C(s, "C314", "TBD", "FLY_DSNB", "GND", FP_C0402, dnp=True, status="PLACEHOLDER", note="ECO3. Optional drain RC snubber capacitor, >= 50 V. Unfitted until ringing is measured")
     R(s, "R305", "22m 1% 1W", "FLY_CS", "GND", FP_R2512, status="CALC",
       note="Ilim = VCLTH/Rs = 93..107 mV / 22 mohm = 4.2..4.9 A (SNVSB75E). Peak at 3.0 V / 100 mA ~3.1 A. P ~0.12 W (Irms ~2.3 A)")
     s.add("T301", "pump_v2:HPH6-0090L", "HPH6-0090L",

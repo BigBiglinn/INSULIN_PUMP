@@ -207,6 +207,9 @@ def main(board_path, net_path, plan_path, log_path):
         log.append(f"MOVE {r}: ({mm(p0.x):.2f}, {mm(p0.y):.2f}, {f.GetOrientationDegrees():.0f}) -> ({x}, {y}, {rot})")
         f.SetOrientationDegrees(rot)
         f.SetPosition(gen_pcb.V(x, y))
+    for r in plan.get("flip", []):
+        fps[r].Flip(fps[r].GetPosition(), pcbnew.FLIP_DIRECTION_TOP_BOTTOM)
+        log.append(f"FLIP {r} to B.Cu")
     missing = [r for r in want if fps[r].GetPosition() == gen_pcb.V(150, 90)]
     if missing:
         raise SystemExit("new footprints without a position: " + " ".join(missing))
