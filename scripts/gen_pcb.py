@@ -17,7 +17,7 @@ import pcbnew
 sys.path.insert(0, os.path.dirname(__file__))
 from kicadlib import FP_DIR, PROJECT_DIR, find, find1, parse, unq  # noqa: E402
 
-BOARD = os.path.join(PROJECT_DIR, "pump_v2.kicad_pcb")
+BOARD = os.environ.get("PUMP_BOARD", os.path.join(PROJECT_DIR, "pump_v2.kicad_pcb"))  # scratch copies set PUMP_BOARD
 NETLIST = os.path.join(PROJECT_DIR, "pump_v2.net")
 MM = pcbnew.FromMM
 

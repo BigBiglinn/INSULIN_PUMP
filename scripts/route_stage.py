@@ -48,6 +48,23 @@ def hand(spec_path):
         for t in vias + stubs:
             b.Delete(t)
         print(f"removed {r['net']} via at ({x}, {y}) and {len(stubs)} stub(s)")
+    for r in spec.get("remove_box", []):         # all items of a net with every end inside the box
+        x0, y0, x1, y1 = r["box"]
+        inb = lambda q: x0 <= pcbnew.ToMM(q.x) <= x1 and y0 <= pcbnew.ToMM(q.y) <= y1
+        dead = []
+        for t in b.GetTracks():
+            if short(t.GetNetname()) != r["net"]:
+                continue
+            if t.Type() == pcbnew.PCB_VIA_T:
+                if r.get("vias", True) and inb(t.GetPosition()):
+                    dead.append(t)
+            elif "layer" in r and LAYER[r["layer"]] != t.GetLayer():
+                continue
+            elif inb(t.GetStart()) and inb(t.GetEnd()):
+                dead.append(t)
+        for t in dead:
+            b.Delete(t)
+        print(f"removed {len(dead)} items of {r['net']} in box {r['box']}")
     for r in spec.get("remove_tracks", []):    # exact segments, given as a polyline of existing vertices
         n = 0
         for (x0, y0), (x1, y1) in zip(r["pts"], r["pts"][1:]):
