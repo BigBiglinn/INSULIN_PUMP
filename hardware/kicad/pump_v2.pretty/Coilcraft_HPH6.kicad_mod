@@ -9,7 +9,7 @@
 	(property "Value" "Coilcraft_HPH6" (at 0 14.375 0) (layer "F.Fab")
 		(effects (font (size 1 1) (thickness 0.15))))
 	(fp_rect (start -14.9 -13.375) (end 14.9 13.375) (stroke (width 0.1) (type solid)) (fill no) (layer "F.Fab"))
-	(fp_rect (start -15.15 -13.625) (end 15.15 13.625) (stroke (width 0.05) (type solid)) (fill no) (layer "F.CrtYd"))
+	(fp_rect (start -15 -13.475) (end 15 13.475) (stroke (width 0.05) (type solid)) (fill no) (layer "F.CrtYd"))
 	(fp_circle (center -15.25 -13.375) (end -15.15 -13.375) (stroke (width 0.1) (type solid)) (fill yes) (layer "F.SilkS"))
 	(pad "1" smd rect (at -15.475 -9.375) (size 2.75 2) (layers "F.Cu" "F.Paste" "F.Mask"))
 	(pad "2" smd rect (at -15.475 -5.625) (size 2.75 2) (layers "F.Cu" "F.Paste" "F.Mask"))

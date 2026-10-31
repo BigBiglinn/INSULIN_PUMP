@@ -206,12 +206,12 @@ def write_ybg_placeholder(d):
         f.write("\n".join(lines) + "\n")
 
 
-def write_simple_fp(d, name, descr, w, h, pad_lines):
+def write_simple_fp(d, name, descr, w, h, pad_lines, crt=0.25):
     """Footprint with a body outline and courtyard. w and h are half sizes."""
     lines = fp_header(name, descr)
     lines += [fp_prop("Reference", "REF**", 0, -h - 1.0, "F.SilkS"),
               fp_prop("Value", name, 0, h + 1.0, "F.Fab"),
-              fp_rect(-w, -h, w, h, "F.Fab", 0.1), fp_rect(-w - 0.25, -h - 0.25, w + 0.25, h + 0.25, "F.CrtYd", 0.05),
+              fp_rect(-w, -h, w, h, "F.Fab", 0.1), fp_rect(-w - crt, -h - crt, w + crt, h + crt, "F.CrtYd", 0.05),
               f'\t(fp_circle (center {-w - 0.35:g} {-h:g}) (end {-w - 0.25:g} {-h:g}) (stroke (width 0.1) (type solid)) (fill yes) (layer "F.SilkS"))']
     lines += pad_lines + ["\t(embedded_fonts no)", ")"]
     with open(os.path.join(d, name + ".kicad_mod"), "w", encoding="utf8") as f:
@@ -227,7 +227,7 @@ def write_eco1_footprints(d):
     x = 28.2 / 2 + 2.75 / 2
     ys = [-9.375, -5.625, -1.875, 1.875, 5.625, 9.375]
     pads = [smd(i + 1, -x, ys[i], 2.75, 2.0) for i in range(6)] + [smd(12 - i, x, ys[i], 2.75, 2.0) for i in range(6)]
-    write_simple_fp(d, "Coilcraft_HPH6", "Coilcraft HP6/HPH6 land per Doc 613-5; body 32.65 x 26.75 x 13.6 mm max", 14.9, 13.375, pads)
+    write_simple_fp(d, "Coilcraft_HPH6", "Coilcraft HP6/HPH6 land per Doc 613-5; body 32.65 x 26.75 x 13.6 mm max", 14.9, 13.375, pads, crt=0.1)
     # DS14446 Table 4 / Fig. 15: 0.32 mm copper, 0.22 mm solder-mask-defined opening and stencil
     e, f = 0.25, 0.577
     bumps = {"A1": (-e, -f), "B1": (e, -f), "A2": (-e, 0), "B2": (e, 0), "A3": (-e, f), "B3": (e, f)}
