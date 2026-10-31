@@ -200,8 +200,14 @@ The FL-1 and FL-2 flyback loop compaction (blocker report) was **not** done. It 
 
 - Checkpoint tag `checkpoint/pre-layout-fixes-2026-10-31` → `976a17b` (known-good baseline).
 - Tooling commit `070c403`.
-- Layout and documentation commit: see section 12.
+- Layout and documentation commit `2ca5934` (section 12).
 
 ## 12. Commit record
 
-The layout and documentation commit hash is filled in by the follow-up commit.
+| Commit | Content |
+| --- | --- |
+| `976a17b` | Known-good baseline (tag `checkpoint/pre-layout-fixes-2026-10-31`) |
+| `070c403` | Tooling only (pcbcheck/pcbedit/pcbroute/pcbplot/pcbsilk/layout_fixes/report_unrouted) |
+| `2ca5934` | **Layout fixes, validation logs and documentation (this report)** |
+
+To go back to the baseline board: `git checkout checkpoint/pre-layout-fixes-2026-10-31 -- hardware/kicad/pump_v2.kicad_pcb`.
