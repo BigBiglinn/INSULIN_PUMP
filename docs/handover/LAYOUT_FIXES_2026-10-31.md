@@ -210,4 +210,4 @@ The FL-1 and FL-2 flyback loop compaction (blocker report) was **not** done. It 
 | `070c403` | Tooling only (pcbcheck/pcbedit/pcbroute/pcbplot/pcbsilk/layout_fixes/report_unrouted) |
 | `2ca5934` | **Layout fixes, validation logs and documentation (this report)** |
 
-To go back to the baseline board: `git checkout checkpoint/pre-layout-fixes-2026-10-31 -- hardware/kicad/pump_v2.kicad_pcb`.
+To go back to the baseline board: `git checkout 976a17b -- hardware/kicad/pump_v2.kicad_pcb`. The tag `checkpoint/pre-layout-fixes-2026-10-31` was created in the session's clone, but the remote refused the tag push (only the working branch can be pushed from the cloud session). The baseline commit itself is in the pushed branch history. Re-create the tag locally with `git tag checkpoint/pre-layout-fixes-2026-10-31 976a17b`.
