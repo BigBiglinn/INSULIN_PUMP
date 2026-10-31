@@ -1,8 +1,8 @@
 ** Drc report for pump_v2.kicad_pcb **
-** Created on 2026-10-31T15:13:12 **
+** Created on 2026-10-31T15:13:52 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 333 DRC violations **
+** Found 307 DRC violations **
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; warning
     @(145.3890 mm, 124.7360 mm): Via [VBAT_SENSE] on F.Cu - B.Cu
@@ -15,84 +15,6 @@
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; warning
     @(160.0550 mm, 118.7480 mm): Via [ENC_I_M] on F.Cu - B.Cu
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(100.5000 mm, 100.5000 mm): Zone 'GND_TOP' [GND] on F.Cu, priority 0
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(100.0000 mm, 100.0000 mm): Segment on Edge.Cuts
@@ -1428,7 +1350,7 @@
 [unconnected_items]: Missing connection between items
     Local override; error
     @(117.8000 mm, 112.4000 mm): Pad A1 [CHG_INT_N] of U101 on F.Cu
-    @(108.9950 mm, 119.8770 mm): Track [CHG_INT_N] on F.Cu, length 1.9163 mm
+    @(110.3500 mm, 118.5220 mm): Track [CHG_INT_N] on B.Cu, length 28.5360 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(145.2500 mm, 115.5625 mm): Pad 48 [ENC_I_M] of U501 on F.Cu
