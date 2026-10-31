@@ -240,6 +240,9 @@ def write_eco1_footprints(d):
     write_simple_fp(d, "Crystal_NX1612SA", "NDK NX1612SA 1.6 x 1.2 mm, land from ST MB1803 B-01", 0.8, 0.6, pads)
     pads = [smd(1, -0.55, 0, 0.5, 1.0), smd(2, 0.55, 0, 0.5, 1.0)]
     write_simple_fp(d, "Crystal_NX1610SE", "NDK NX1610SE 1.6 x 1.0 mm, land from ST MB1803 B-01", 0.8, 0.5, pads)
+    # BZX84 SOT-23: physical pin 3 = cathode, pin 1 = anode. Pads are numbered for Device:D_Zener (1 = K, 2 = A).
+    pads = [smd(2, -0.95, 1.1, 1.0, 1.0), smd(1, 0, -1.1, 1.0, 1.0)]
+    write_simple_fp(d, "SOT-23_Zener_A1_K3", "SOT-23 zener: pad 1 (K) at package pin 3, pad 2 (A) at package pin 1; package pin 2 NC", 0.7, 1.5, pads)
 
 
 def write_footprints():

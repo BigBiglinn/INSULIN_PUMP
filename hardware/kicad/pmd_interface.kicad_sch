@@ -4111,7 +4111,133 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 193.04) (xy 27.94 193.04)
+			(xy 17.78 189.23) (xy 17.78 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aaa00a65-e437-5a1d-86c8-bbdf1873cc5b")
+	)
+	(global_label "PMD_MOSI_M"
+		(shape passive)
+		(at 17.78 186.69 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "f1d9d30a-0631-547f-be8a-9b96aa502741")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 17.78 186.69 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 17.78 196.85) (xy 17.78 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "981ec7e8-fbf9-59db-9de1-af6091cf700c")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 17.78 199.39 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "0c19ed23-ae9e-5ef9-9b8f-e8fc8983f170")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 17.78 199.39 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 186.69) (xy 43.18 184.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6f26f176-ddc9-5666-ac3b-5a6016758452")
+	)
+	(global_label "PMD_SS_M"
+		(shape passive)
+		(at 43.18 184.15 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "0f6e42df-3d6a-5a23-a263-5bd83441655a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.18 184.15 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 43.18 194.31) (xy 43.18 196.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1bbdf85f-b67d-5b11-a646-a817427e4942")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 43.18 196.85 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "640a3439-473f-575b-b84d-56e9ba49defd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.18 196.85 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 66.04 189.23) (xy 66.04 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0f1727a-5629-5c60-bf52-73b42a810fff")
+	)
+	(global_label "PMD_SCLK_M"
+		(shape passive)
+		(at 66.04 186.69 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "857b7c54-0a3f-52f1-89d2-ea208ca6d3be")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 66.04 186.69 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 66.04 196.85) (xy 66.04 199.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3c4e506-9d5e-5223-8570-681c1e40594c")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 66.04 199.39 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "3db57d37-9686-5de4-97ec-f3171b1056fb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 66.04 199.39 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts
+			(xy 99.06 193.04) (xy 96.52 193.04)
 		)
 		(stroke
 			(width 0)
@@ -4121,18 +4247,18 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 27.94 193.04 180)
+		(at 96.52 193.04 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "2f8dc5db-99c7-51f8-a9de-14ddb3e52165")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 27.94 193.04 0)
+			(at 96.52 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 38.1 198.12) (xy 38.1 200.66)
+			(xy 106.68 198.12) (xy 106.68 200.66)
 		)
 		(stroke
 			(width 0)
@@ -4142,18 +4268,18 @@
 	)
 	(global_label "PMD_READY_M"
 		(shape passive)
-		(at 38.1 200.66 270)
+		(at 106.68 200.66 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "e30c0c07-2496-581e-9750-d650a404c15e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 38.1 200.66 0)
+			(at 106.68 200.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 38.1 187.96) (xy 38.1 185.42)
+			(xy 106.68 187.96) (xy 106.68 185.42)
 		)
 		(stroke
 			(width 0)
@@ -4162,14 +4288,14 @@
 		(uuid "b229d1e0-6e00-5b76-ba01-09ee63dc135f")
 	)
 	(label "PMD_READY_D"
-		(at 38.1 185.42 90)
+		(at 106.68 185.42 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left bottom))
 		(uuid "e197ac06-6cfe-5f22-a9e9-7b9917b711ed")
 	)
 	(wire
 		(pts
-			(xy 45.72 189.23) (xy 45.72 186.69)
+			(xy 116.84 189.23) (xy 116.84 186.69)
 		)
 		(stroke
 			(width 0)
@@ -4179,18 +4305,18 @@
 	)
 	(global_label "PMD_READY_M"
 		(shape passive)
-		(at 45.72 186.69 90)
+		(at 116.84 186.69 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left))
 		(uuid "c7f372e9-cb27-5cd4-8a99-2b1448c54e38")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 45.72 186.69 0)
+			(at 116.84 186.69 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 45.72 196.85) (xy 45.72 199.39)
+			(xy 116.84 196.85) (xy 116.84 199.39)
 		)
 		(stroke
 			(width 0)
@@ -4200,18 +4326,18 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 45.72 199.39 270)
+		(at 116.84 199.39 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "3f2d69ac-6c0a-590d-beb7-e56160fd21ee")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 45.72 199.39 0)
+			(at 116.84 199.39 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 78.74 193.04) (xy 76.2 193.04)
+			(xy 149.86 193.04) (xy 147.32 193.04)
 		)
 		(stroke
 			(width 0)
@@ -4221,18 +4347,18 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 76.2 193.04 180)
+		(at 147.32 193.04 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "51711a3d-fe94-5501-9680-4b6be6321350")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 76.2 193.04 0)
+			(at 147.32 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 86.36 198.12) (xy 86.36 200.66)
+			(xy 157.48 198.12) (xy 157.48 200.66)
 		)
 		(stroke
 			(width 0)
@@ -4242,18 +4368,18 @@
 	)
 	(global_label "PMD_FAULT_M"
 		(shape passive)
-		(at 86.36 200.66 270)
+		(at 157.48 200.66 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "372a9086-f9b1-5b3c-81f6-50280739c3e1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 86.36 200.66 0)
+			(at 157.48 200.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 86.36 187.96) (xy 86.36 185.42)
+			(xy 157.48 187.96) (xy 157.48 185.42)
 		)
 		(stroke
 			(width 0)
@@ -4262,14 +4388,14 @@
 		(uuid "49688270-4154-532c-ad75-81252b477f05")
 	)
 	(label "PMD_FAULT_D"
-		(at 86.36 185.42 90)
+		(at 157.48 185.42 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left bottom))
 		(uuid "1ca12d9e-ab4b-5ef6-a615-fed167d3fab9")
 	)
 	(wire
 		(pts
-			(xy 96.52 189.23) (xy 96.52 186.69)
+			(xy 165.1 189.23) (xy 165.1 186.69)
 		)
 		(stroke
 			(width 0)
@@ -4279,18 +4405,18 @@
 	)
 	(global_label "PMD_FAULT_M"
 		(shape passive)
-		(at 96.52 186.69 90)
+		(at 165.1 186.69 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left))
 		(uuid "4856611d-0d63-517d-8b36-729480952c4e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.52 186.69 0)
+			(at 165.1 186.69 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 96.52 196.85) (xy 96.52 199.39)
+			(xy 165.1 196.85) (xy 165.1 199.39)
 		)
 		(stroke
 			(width 0)
@@ -4300,18 +4426,18 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 96.52 199.39 270)
+		(at 165.1 199.39 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "8828bb90-7bf9-5664-8754-0afdb3f19b28")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.52 199.39 0)
+			(at 165.1 199.39 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 119.38 184.15) (xy 119.38 181.61)
+			(xy 190.5 184.15) (xy 190.5 181.61)
 		)
 		(stroke
 			(width 0)
@@ -4321,18 +4447,18 @@
 	)
 	(global_label "ENC_A_S"
 		(shape passive)
-		(at 119.38 181.61 90)
+		(at 190.5 181.61 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left))
 		(uuid "aefe4e54-2006-50cb-b11c-1f4ddc284222")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 119.38 181.61 0)
+			(at 190.5 181.61 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 119.38 191.77) (xy 119.38 194.31)
+			(xy 190.5 191.77) (xy 190.5 194.31)
 		)
 		(stroke
 			(width 0)
@@ -4341,14 +4467,14 @@
 		(uuid "b812121c-ab52-55e6-bf22-96d3e7855900")
 	)
 	(label "ENC_A"
-		(at 119.38 194.31 270)
+		(at 190.5 194.31 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "aaac0428-50f0-58da-830d-e06ee0f43a87")
 	)
 	(wire
 		(pts
-			(xy 142.24 184.15) (xy 142.24 181.61)
+			(xy 213.36 184.15) (xy 213.36 181.61)
 		)
 		(stroke
 			(width 0)
@@ -4358,18 +4484,18 @@
 	)
 	(global_label "ENC_B_S"
 		(shape passive)
-		(at 142.24 181.61 90)
+		(at 213.36 181.61 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left))
 		(uuid "a1b1a6bd-99bb-5376-8780-4a0d312fc88a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 142.24 181.61 0)
+			(at 213.36 181.61 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 142.24 191.77) (xy 142.24 194.31)
+			(xy 213.36 191.77) (xy 213.36 194.31)
 		)
 		(stroke
 			(width 0)
@@ -4378,14 +4504,14 @@
 		(uuid "2540f279-a7f9-580d-8a1a-45a92d9ace14")
 	)
 	(label "ENC_B"
-		(at 142.24 194.31 270)
+		(at 213.36 194.31 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "2ce92624-68d4-5da0-bee3-043bdb0495de")
 	)
 	(wire
 		(pts
-			(xy 165.1 186.69) (xy 165.1 184.15)
+			(xy 236.22 186.69) (xy 236.22 184.15)
 		)
 		(stroke
 			(width 0)
@@ -4395,18 +4521,18 @@
 	)
 	(global_label "+48V_MOT"
 		(shape passive)
-		(at 165.1 184.15 90)
+		(at 236.22 184.15 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left))
 		(uuid "f0680346-5314-5dfc-aae6-cb5e4172ba46")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 165.1 184.15 0)
+			(at 236.22 184.15 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 165.1 194.31) (xy 165.1 196.85)
+			(xy 236.22 194.31) (xy 236.22 196.85)
 		)
 		(stroke
 			(width 0)
@@ -4416,18 +4542,18 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 165.1 196.85 270)
+		(at 236.22 196.85 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "68b83043-13cc-5a91-beb0-9eff43f1f89c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 165.1 196.85 0)
+			(at 236.22 196.85 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 205.74 193.04) (xy 203.2 193.04)
+			(xy 274.32 193.04) (xy 271.78 193.04)
 		)
 		(stroke
 			(width 0)
@@ -4437,18 +4563,18 @@
 	)
 	(global_label "RS485_RO"
 		(shape passive)
-		(at 203.2 193.04 180)
+		(at 271.78 193.04 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "787d533c-8d4e-5f9d-9597-22de0745acfc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 203.2 193.04 0)
+			(at 271.78 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 205.74 195.58) (xy 203.2 195.58)
+			(xy 274.32 195.58) (xy 271.78 195.58)
 		)
 		(stroke
 			(width 0)
@@ -4458,18 +4584,18 @@
 	)
 	(global_label "RS485_DE"
 		(shape passive)
-		(at 203.2 195.58 180)
+		(at 271.78 195.58 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "cc7d2ab5-256d-5340-b561-7b233fd02d56")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 203.2 195.58 0)
+			(at 271.78 195.58 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 205.74 198.12) (xy 203.2 198.12)
+			(xy 274.32 198.12) (xy 271.78 198.12)
 		)
 		(stroke
 			(width 0)
@@ -4479,18 +4605,18 @@
 	)
 	(global_label "RS485_DE"
 		(shape passive)
-		(at 203.2 198.12 180)
+		(at 271.78 198.12 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "ee2fb100-2b8c-5dd3-af6b-4a08637bce3f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 203.2 198.12 0)
+			(at 271.78 198.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 205.74 203.2) (xy 203.2 203.2)
+			(xy 274.32 203.2) (xy 271.78 203.2)
 		)
 		(stroke
 			(width 0)
@@ -4500,18 +4626,18 @@
 	)
 	(global_label "RS485_DI"
 		(shape passive)
-		(at 203.2 203.2 180)
+		(at 271.78 203.2 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "fed839fa-9795-5c19-a731-49a8c8341c83")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 203.2 203.2 0)
+			(at 271.78 203.2 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 215.9 213.36) (xy 215.9 215.9)
+			(xy 284.48 213.36) (xy 284.48 215.9)
 		)
 		(stroke
 			(width 0)
@@ -4521,18 +4647,18 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 215.9 215.9 270)
+		(at 284.48 215.9 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "33f21b9a-45fc-53ac-89e3-bbb3320cc589")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 215.9 215.9 0)
+			(at 284.48 215.9 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 226.06 190.5) (xy 228.6 190.5)
+			(xy 294.64 190.5) (xy 297.18 190.5)
 		)
 		(stroke
 			(width 0)
@@ -4541,14 +4667,14 @@
 		(uuid "0f94ffed-506f-508b-8c2f-7e3e39e38098")
 	)
 	(label "RS485_A"
-		(at 228.6 190.5 0)
+		(at 297.18 190.5 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left bottom))
 		(uuid "fd2ab4b6-48dd-5692-91e4-37c1d07372f3")
 	)
 	(wire
 		(pts
-			(xy 226.06 195.58) (xy 228.6 195.58)
+			(xy 294.64 195.58) (xy 297.18 195.58)
 		)
 		(stroke
 			(width 0)
@@ -4557,14 +4683,14 @@
 		(uuid "838125f9-ff42-5ee8-87d1-477bfdcc8587")
 	)
 	(label "RS485_B"
-		(at 228.6 195.58 0)
+		(at 297.18 195.58 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left bottom))
 		(uuid "18d3ebeb-47d7-525c-8fa7-5fea9a5c3732")
 	)
 	(wire
 		(pts
-			(xy 215.9 182.88) (xy 215.9 180.34)
+			(xy 284.48 182.88) (xy 284.48 180.34)
 		)
 		(stroke
 			(width 0)
@@ -4574,18 +4700,18 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 215.9 180.34 90)
+		(at 284.48 180.34 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left))
 		(uuid "47d6318c-b4b8-56dc-bac2-eaa8863d8be7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 215.9 180.34 0)
+			(at 284.48 180.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 246.38 181.61) (xy 246.38 179.07)
+			(xy 317.5 181.61) (xy 317.5 179.07)
 		)
 		(stroke
 			(width 0)
@@ -4595,18 +4721,18 @@
 	)
 	(global_label "+3V3"
 		(shape passive)
-		(at 246.38 179.07 90)
+		(at 317.5 179.07 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left))
 		(uuid "2186424b-a413-5e91-b8ed-8cad30fc8696")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 246.38 179.07 0)
+			(at 317.5 179.07 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 246.38 189.23) (xy 246.38 191.77)
+			(xy 317.5 189.23) (xy 317.5 191.77)
 		)
 		(stroke
 			(width 0)
@@ -4616,18 +4742,18 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 246.38 191.77 270)
+		(at 317.5 191.77 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right))
 		(uuid "a0407b64-190c-5c86-acef-2b263ee6961f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 246.38 191.77 0)
+			(at 317.5 191.77 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
 	(wire
 		(pts
-			(xy 269.24 181.61) (xy 269.24 179.07)
+			(xy 340.36 181.61) (xy 340.36 179.07)
 		)
 		(stroke
 			(width 0)
@@ -4636,14 +4762,14 @@
 		(uuid "28aa6490-5bf2-5d50-b519-f8876805985a")
 	)
 	(label "RS485_A"
-		(at 269.24 179.07 90)
+		(at 340.36 179.07 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify left bottom))
 		(uuid "6f80eea3-32ba-51fd-aaa0-764e4580c23a")
 	)
 	(wire
 		(pts
-			(xy 269.24 189.23) (xy 269.24 191.77)
+			(xy 340.36 189.23) (xy 340.36 191.77)
 		)
 		(stroke
 			(width 0)
@@ -4652,14 +4778,14 @@
 		(uuid "34c97c4e-4c6e-5ca0-a96a-232f10f70c0a")
 	)
 	(label "RS485_B"
-		(at 269.24 191.77 270)
+		(at 340.36 191.77 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "5916c0e1-35e2-538e-93cb-574c86fc046a")
 	)
 	(wire
 		(pts
-			(xy 292.1 172.72) (xy 292.1 175.26)
+			(xy 363.22 172.72) (xy 363.22 175.26)
 		)
 		(stroke
 			(width 0)
@@ -4668,14 +4794,14 @@
 		(uuid "8d7cdc42-2277-5543-8275-1aca40ab3928")
 	)
 	(label "PMD_READY"
-		(at 292.1 175.26 270)
+		(at 363.22 175.26 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "38734fee-bddb-5bd0-8bed-25269ffe287a")
 	)
 	(wire
 		(pts
-			(xy 317.5 172.72) (xy 317.5 175.26)
+			(xy 386.08 172.72) (xy 386.08 175.26)
 		)
 		(stroke
 			(width 0)
@@ -4684,7 +4810,7 @@
 		(uuid "34c1000c-a5d6-5e9f-8dce-a29853d3c7a3")
 	)
 	(label "PMD_FAULT"
-		(at 317.5 175.26 270)
+		(at 386.08 175.26 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "5aa1b18e-dc78-55e1-be58-5301b9c13f6f")
@@ -5257,7 +5383,7 @@
 			(at 287.05 77.47 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "100R"
+		(property "Value" "1k"
 			(at 287.05 80.01 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -5277,11 +5403,11 @@
 			(at 284.48 78.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "DECIDED"
+		(property "Status" "CALC"
 			(at 287.05 82.24 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "E-07 series resistor ('about 100 ohm', value to confirm)"
+		(property "Note" "ECO2. E-07 series resistor raised to 1 k on SPI: limits back-feed into an unpowered PMD401 to about 3 mA; 100 ns with 100 pF at <= 500 kbit/s"
 			(at 284.48 78.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5369,7 +5495,7 @@
 			(at 345.47 74.93 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "100R"
+		(property "Value" "1k"
 			(at 345.47 77.47 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -5389,11 +5515,11 @@
 			(at 342.9 76.2 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "DECIDED"
+		(property "Status" "CALC"
 			(at 345.47 79.7 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "E-07 series resistor ('about 100 ohm', value to confirm)"
+		(property "Note" "ECO2. E-07 series resistor raised to 1 k on SPI: limits back-feed into an unpowered PMD401 to about 3 mA; 100 ns with 100 pF at <= 500 kbit/s"
 			(at 342.9 76.2 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5481,7 +5607,7 @@
 			(at 20.35 133.35 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "100R"
+		(property "Value" "1k"
 			(at 20.35 135.89 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -5501,11 +5627,11 @@
 			(at 17.78 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "DECIDED"
+		(property "Status" "CALC"
 			(at 20.35 138.12 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "E-07 series resistor ('about 100 ohm', value to confirm)"
+		(property "Note" "ECO2. E-07 series resistor raised to 1 k on SPI: limits back-feed into an unpowered PMD401 to about 3 mA; 100 ns with 100 pF at <= 500 kbit/s"
 			(at 17.78 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6197,8 +6323,176 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 17.78 193.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "da4d136d-1426-50a8-803f-b6a438cc9c40")
+		(property "Reference" "R717"
+			(at 20.35 191.77 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "15k"
+			(at 20.35 194.31 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 17.78 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 17.78 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Resistor"
+			(at 17.78 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 17.78 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "CALC"
+			(at 20.35 196.54 0)
+			(effects (font (size 1 1)) (justify left) (hide yes))
+		)
+		(property "Note" "ECO2. Divider with the PMD401 pull-up: holds the pin below 4 V if VDD is 0 while the PMD401 rail decays (DS14127 Table 27). 3.6 V max at a 5.25 V rail with -30 % pull-up"
+			(at 17.78 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "f650435b-0be6-5c43-8f95-6c1cf03e1155")
+		)
+		(pin "2"
+			(uuid "2e281b81-e5f9-5cf9-a248-b1402a874532")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/24800ffa-d018-5d4e-8f8c-c763c6d216c0"
+					(reference "R717")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 43.18 190.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1eecaee6-57c2-573a-9b9b-ac7b09dbfd08")
+		(property "Reference" "R718"
+			(at 45.75 189.23 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "33k"
+			(at 45.75 191.77 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 43.18 190.5 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 43.18 190.5 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Resistor"
+			(at 43.18 190.5 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 43.18 190.5 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "CALC"
+			(at 45.75 194 0)
+			(effects (font (size 1 1)) (justify left) (hide yes))
+		)
+		(property "Note" "ECO2. Divider with the PMD401 pull-up: holds the pin below 4 V if VDD is 0 while the PMD401 rail decays (DS14127 Table 27). 3.6 V max at a 5.25 V rail with -30 % pull-up"
+			(at 43.18 190.5 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b562d0c1-f9c9-590c-b6b7-bf344a0883da")
+		)
+		(pin "2"
+			(uuid "d374dafb-de7f-5ab0-b535-a0d6c8abfa99")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/24800ffa-d018-5d4e-8f8c-c763c6d216c0"
+					(reference "R718")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 66.04 193.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6ceb46b6-502e-525a-9338-8aadb6bf4d4b")
+		(property "Reference" "R719"
+			(at 68.61 191.77 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "15k"
+			(at 68.61 194.31 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 66.04 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 66.04 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Resistor"
+			(at 66.04 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" ""
+			(at 66.04 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Status" "CALC"
+			(at 68.61 196.54 0)
+			(effects (font (size 1 1)) (justify left) (hide yes))
+		)
+		(property "Note" "ECO2. Divider with the PMD401 pull-up: holds the pin below 4 V if VDD is 0 while the PMD401 rail decays (DS14127 Table 27). 3.6 V max at a 5.25 V rail with -30 % pull-up"
+			(at 66.04 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "cf2826e0-0c8b-56c2-8455-403e3c14a01b")
+		)
+		(pin "2"
+			(uuid "a8b08e1e-3517-5764-a681-70ee26836d5f")
+		)
+		(instances
+			(project "pump_v2"
+				(path "/f846824e-fe00-58de-b74d-a87eb7212abb/24800ffa-d018-5d4e-8f8c-c763c6d216c0"
+					(reference "R719")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Transistor_FET:BSS138")
-		(at 35.56 193.04 0)
+		(at 104.14 193.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6206,35 +6500,35 @@
 		(dnp no)
 		(uuid "0a2e803e-5d81-53e5-8e89-26e71abfa30b")
 		(property "Reference" "Q701"
-			(at 35.56 188.7 0)
+			(at 104.14 188.7 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Value" "BSS138"
-			(at 35.56 197.38 0)
+			(at 104.14 197.38 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 35.56 193.04 0)
+			(at 104.14 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BSS138-D.PDF"
-			(at 35.56 193.04 0)
+			(at 104.14 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"
-			(at 35.56 193.04 0)
+			(at 104.14 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" "BSS138 (e.g. Nexperia BSS138P)"
-			(at 35.56 193.04 0)
+			(at 104.14 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "DS"
-			(at 35.56 199.58 0)
+			(at 104.14 199.58 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
 		(property "Note" "ECO1. Non-inverting level shifter: gate +3V3, source MCU, drain PMD401 side. VGS(th) 0.9-1.5 V. Off when +3V3 is down, so the pin is isolated"
-			(at 35.56 193.04 0)
+			(at 104.14 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6257,7 +6551,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 45.72 193.04 0)
+		(at 116.84 193.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6265,35 +6559,35 @@
 		(dnp no)
 		(uuid "693f32f0-00b6-58ef-be8d-8cd89ce3d29b")
 		(property "Reference" "R715"
-			(at 48.29 191.77 0)
+			(at 119.41 191.77 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "100k"
-			(at 48.29 194.31 0)
+			(at 119.41 194.31 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 45.72 193.04 0)
+			(at 116.84 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 45.72 193.04 0)
+			(at 116.84 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "Resistor"
-			(at 45.72 193.04 0)
+			(at 116.84 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 45.72 193.04 0)
+			(at 116.84 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "CALC"
-			(at 48.29 196.54 0)
+			(at 119.41 196.54 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "ECO1. MCU-side high level for the shifter; 33 uA for the PMD401 output to sink"
-			(at 45.72 193.04 0)
+			(at 116.84 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6313,7 +6607,7 @@
 	)
 	(symbol
 		(lib_id "Transistor_FET:BSS138")
-		(at 83.82 193.04 0)
+		(at 154.94 193.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6321,35 +6615,35 @@
 		(dnp no)
 		(uuid "bd2c8458-33dc-5938-b38a-1124525f5822")
 		(property "Reference" "Q702"
-			(at 83.82 188.7 0)
+			(at 154.94 188.7 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Value" "BSS138"
-			(at 83.82 197.38 0)
+			(at 154.94 197.38 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
-			(at 83.82 193.04 0)
+			(at 154.94 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/BSS138-D.PDF"
-			(at 83.82 193.04 0)
+			(at 154.94 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"
-			(at 83.82 193.04 0)
+			(at 154.94 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" "BSS138 (e.g. Nexperia BSS138P)"
-			(at 83.82 193.04 0)
+			(at 154.94 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "DS"
-			(at 83.82 199.58 0)
+			(at 154.94 199.58 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
 		(property "Note" "ECO1. Non-inverting level shifter: gate +3V3, source MCU, drain PMD401 side. VGS(th) 0.9-1.5 V. Off when +3V3 is down, so the pin is isolated"
-			(at 83.82 193.04 0)
+			(at 154.94 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6372,7 +6666,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 96.52 193.04 0)
+		(at 165.1 193.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6380,35 +6674,35 @@
 		(dnp no)
 		(uuid "f8eef96e-dcc6-5a57-b3a2-fc1198118138")
 		(property "Reference" "R716"
-			(at 99.09 191.77 0)
+			(at 167.67 191.77 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "100k"
-			(at 99.09 194.31 0)
+			(at 167.67 194.31 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 96.52 193.04 0)
+			(at 165.1 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 96.52 193.04 0)
+			(at 165.1 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "Resistor"
-			(at 96.52 193.04 0)
+			(at 165.1 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 96.52 193.04 0)
+			(at 165.1 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "CALC"
-			(at 99.09 196.54 0)
+			(at 167.67 196.54 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "ECO1. MCU-side high level for the shifter; 33 uA for the PMD401 output to sink"
-			(at 96.52 193.04 0)
+			(at 165.1 193.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6428,7 +6722,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 119.38 187.96 0)
+		(at 190.5 187.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6436,35 +6730,35 @@
 		(dnp no)
 		(uuid "7d7b8a95-c2f6-5596-b61f-e35cc536d106")
 		(property "Reference" "R711"
-			(at 121.95 186.69 0)
+			(at 193.07 186.69 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "100R"
-			(at 121.95 189.23 0)
+			(at 193.07 189.23 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 119.38 187.96 0)
+			(at 190.5 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 119.38 187.96 0)
+			(at 190.5 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "Resistor"
-			(at 119.38 187.96 0)
+			(at 190.5 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 119.38 187.96 0)
+			(at 190.5 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "DECIDED"
-			(at 121.95 191.46 0)
+			(at 193.07 191.46 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "S-07: supervisor's own series resistor on encoder A"
-			(at 119.38 187.96 0)
+			(at 190.5 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6484,7 +6778,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 142.24 187.96 0)
+		(at 213.36 187.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6492,35 +6786,35 @@
 		(dnp no)
 		(uuid "1b4f2e76-a59e-54df-9785-ae8f1ca3ed9e")
 		(property "Reference" "R712"
-			(at 144.81 186.69 0)
+			(at 215.93 186.69 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "100R"
-			(at 144.81 189.23 0)
+			(at 215.93 189.23 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 142.24 187.96 0)
+			(at 213.36 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 142.24 187.96 0)
+			(at 213.36 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "Resistor"
-			(at 142.24 187.96 0)
+			(at 213.36 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 142.24 187.96 0)
+			(at 213.36 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "DECIDED"
-			(at 144.81 191.46 0)
+			(at 215.93 191.46 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "S-07: supervisor's own series resistor on encoder B"
-			(at 142.24 187.96 0)
+			(at 213.36 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6540,7 +6834,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Polarized")
-		(at 165.1 190.5 0)
+		(at 236.22 190.5 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6548,35 +6842,35 @@
 		(dnp no)
 		(uuid "ee2eb0fd-01fe-5110-881d-a2be6eb8bb17")
 		(property "Reference" "C702"
-			(at 167.67 189.23 0)
+			(at 238.79 189.23 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "100uF/100V"
-			(at 167.67 191.77 0)
+			(at 238.79 191.77 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm"
-			(at 165.1 190.5 0)
+			(at 236.22 190.5 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 165.1 190.5 0)
+			(at 236.22 190.5 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "Polarized capacitor"
-			(at 165.1 190.5 0)
+			(at 236.22 190.5 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 165.1 190.5 0)
+			(at 236.22 190.5 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "DECIDED"
-			(at 167.67 194 0)
+			(at 238.79 194 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "Rev A item 24: 100 uF/100 V low-ESR bulk at the PMD401 input. Series/size TBD"
-			(at 165.1 190.5 0)
+			(at 236.22 190.5 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6596,7 +6890,7 @@
 	)
 	(symbol
 		(lib_id "Interface_UART:MAX3485")
-		(at 215.9 198.12 0)
+		(at 284.48 198.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6604,35 +6898,35 @@
 		(dnp no)
 		(uuid "6e89b3f2-71e0-58be-8401-1a9d61de2bd6")
 		(property "Reference" "U701"
-			(at 215.9 183.62 0)
+			(at 284.48 183.62 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Value" "MAX3485"
-			(at 215.9 212.62 0)
+			(at 284.48 212.62 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 215.9 198.12 0)
+			(at 284.48 198.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "https://datasheets.maximintegrated.com/en/ds/MAX3483-MAX3491.pdf"
-			(at 215.9 198.12 0)
+			(at 284.48 198.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "True RS-485/RS-422, 10Mbps, Slew-Rate Limited, with low-power shutdown, with receiver/driver enable, 32 receiver drive capacitity, DIP-8 and SOIC-8"
-			(at 215.9 198.12 0)
+			(at 284.48 198.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" "MAX3485 SOIC-8 (suffix TBD)"
-			(at 215.9 198.12 0)
+			(at 284.48 198.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "DECIDED"
-			(at 215.9 214.82 0)
+			(at 284.48 214.82 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
 		(property "Note" "Rev A item 9 RS-485 setup link (carried per P-01). SOIC-8 variant ASSUMED"
-			(at 215.9 198.12 0)
+			(at 284.48 198.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6670,7 +6964,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 246.38 185.42 0)
+		(at 317.5 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6678,35 +6972,35 @@
 		(dnp no)
 		(uuid "8f3f49fc-51a4-5fad-bf4c-1ac2b261886e")
 		(property "Reference" "C703"
-			(at 248.95 184.15 0)
+			(at 320.07 184.15 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "100nF"
-			(at 248.95 186.69 0)
+			(at 320.07 186.69 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 246.38 185.42 0)
+			(at 317.5 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 246.38 185.42 0)
+			(at 317.5 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 246.38 185.42 0)
+			(at 317.5 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 246.38 185.42 0)
+			(at 317.5 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "ASSUMED"
-			(at 248.95 188.92 0)
+			(at 320.07 188.92 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "MAX3485 decoupling"
-			(at 246.38 185.42 0)
+			(at 317.5 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6726,7 +7020,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 269.24 185.42 0)
+		(at 340.36 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6734,35 +7028,35 @@
 		(dnp yes)
 		(uuid "377e72d4-5f2a-5cf1-b116-e18f167b67bf")
 		(property "Reference" "R714"
-			(at 271.81 184.15 0)
+			(at 342.93 184.15 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "120R"
-			(at 271.81 186.69 0)
+			(at 342.93 186.69 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 269.24 185.42 0)
+			(at 340.36 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 269.24 185.42 0)
+			(at 340.36 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "Resistor"
-			(at 269.24 185.42 0)
+			(at 340.36 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 269.24 185.42 0)
+			(at 340.36 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "ASSUMED"
-			(at 271.81 188.92 0)
+			(at 342.93 188.92 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "Optional termination; PMD401 has its own switchable AC termination"
-			(at 269.24 185.42 0)
+			(at 340.36 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6782,7 +7076,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 292.1 172.72 0)
+		(at 363.22 172.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -6790,35 +7084,35 @@
 		(dnp no)
 		(uuid "f256e9ec-26ea-5041-abe4-a7bcad391cdb")
 		(property "Reference" "TP701"
-			(at 294.67 171.45 0)
+			(at 365.79 171.45 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "PMD_READY"
-			(at 294.67 173.99 0)
+			(at 365.79 173.99 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 292.1 172.72 0)
+			(at 363.22 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 292.1 172.72 0)
+			(at 363.22 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "test point"
-			(at 292.1 172.72 0)
+			(at 363.22 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 292.1 172.72 0)
+			(at 363.22 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "ASSUMED"
-			(at 294.67 176.22 0)
+			(at 365.79 176.22 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "Test point (P-07 proposed; added for bring-up access)"
-			(at 292.1 172.72 0)
+			(at 363.22 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"
@@ -6835,7 +7129,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 317.5 172.72 0)
+		(at 386.08 172.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -6843,35 +7137,35 @@
 		(dnp no)
 		(uuid "35d99cc8-b6c4-55da-95a6-78d6bc378fdf")
 		(property "Reference" "TP702"
-			(at 320.07 171.45 0)
+			(at 388.65 171.45 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "PMD_FAULT"
-			(at 320.07 173.99 0)
+			(at 388.65 173.99 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 317.5 172.72 0)
+			(at 386.08 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 317.5 172.72 0)
+			(at 386.08 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Description" "test point"
-			(at 317.5 172.72 0)
+			(at 386.08 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" ""
-			(at 317.5 172.72 0)
+			(at 386.08 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Status" "ASSUMED"
-			(at 320.07 176.22 0)
+			(at 388.65 176.22 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
 		(property "Note" "Test point (P-07 proposed; added for bring-up access)"
-			(at 317.5 172.72 0)
+			(at 386.08 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(pin "1"

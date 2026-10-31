@@ -139,3 +139,38 @@ A 51 V standoff TVS can reach 62.7 V breakdown, above the 60 V ceiling. **SMBJ48
 - U501 fan-out, including FLY_PGOOD at pin 28: no route exists on today's copper. If the fan-out redo cannot escape it, a pin-change ECO returns as a fallback.
 
 **Firmware obligations:** PMD401 parked until FLY_PGOOD; READY and FAULT valid only after FLY_PGOOD; SMPS and TX power configured for VDDRFPA on VDD11; HSETRIM centring; PC13 unused.
+
+---
+
+# ECO2: four closures before PCB update (31 Oct 2026, tag `sch-eco2-done`)
+
+These supersede ECO1 where they differ. No MCU pins change. Calculations and simulation only.
+
+**1. 48 V protection: SMBJ48A rejected.** VC 77.4 V at 7.8 A; Rd = (77.4 - 58.9) / 7.8 = 2.37 ohm. At the 0.21 A the converter can deliver: 58.9 + 0.5 = 59.4 V cold, with 0.6 V margin and no allowance for heating at about 12 W. Its 53.3 V minimum also overlaps the OVP. Replaced by an independent trip: D303 BZX84B51 + R314 1 k + R315 10 k + C313 10 nF + Q304 BSS138 pulling FLY_EN low. Trip = Vz (about 49.5-52.0 V at 100 uA) + Vgs (0.9-1.5 V) + 0.15 V = **50.5-53.7 V; 53.9 V with filter delay**. Above the 48.58 V setpoint maximum, below the 60 V ceiling by 6 V. Dissipates nothing in normal use. A shorted zener or FET stops the rail. PMD401 limit: 50.4 V is its specified range; its absolute maximum is unknown, and any fault may reach 53.9 V until it trips, as the LM51551 OVP already allows.
+
+**2. R312.** Correct part: 10 k 2512 **1 W** (0.25 W was the dissipation). 0.254 W at 50.4 V, 0.29 W at 53.9 V: 29 % of rating. Discharge with 182 uF: 4.21 s from 50.4 V, 4.33 s from 53.9 V. Moved to the +48V_RAW side beside C311, because the transformer no longer leaves room near J703. If R311 is lifted, the PMD401 side is not bled.
+
+**3. Flyback clamp.** The earlier 24.2 V figure was at 3.1-3.4 A. At the 4.9 A current-limit peak, a harness with slope compensation gives (`flyback_clamp_worstcase.cir`): 390 ohm/22 nF: 26.3 V at 2 %, 32.6 V at 4 %, 45.2 V at 10 % leakage. Fix: Q301 AONR34332C (30 V, 2.9 mohm at 2.5 V), R306 330 ohm, C308 100 nF, D304 SMAJ15A ceiling. Results, 4.2 V, 48.6 V output, Lp +5 %, TVS at top of tolerance:
+
+| Leakage | Vds at 3.4 A | Vds at 4.9 A | R306 at 3.4 A |
+|---|---|---|---|
+| 2 % | 18.6 V | 22.8 V | 0.54 W |
+| 4 % | 21.9 V | 23.9 V | 0.83 W |
+| 6 % | 23.4 V | 24.1 V | 0.96 W, TVS conducting |
+| 10 % | 23.8 V | 24.4 V | 0.97 W, TVS conducting |
+
+Vds <= 24.4 V is 81 % of 30 V. Generic FET and diode models with 0.6 nF Coss (real part 1.45 nF). **Bench only:** true leakage, layout ringing above the simulated peak, TVS and R306 temperature, efficiency, final R306. Measured leakage above about 4 % means R306 and D304 overheat in continuous use, so re-select the winding or part. The transformer primary pins are on opposite sides of the part, so the input loop runs through the In1/In2 plane pair: scope it.
+
+**4. PMD401 SPI.** No level shifter needed. BSS138 rejected: rising edges would depend on the PMD401 pull-up, 10 k with about 100 pF is 1 us against a 1 us half period at 500 kbit/s.
+
+| Condition | Pin state | Result |
+|---|---|---|
+| Normal | Push-pull 3.3 V | Manual states 3.3-5 V signal levels; VIH not published. Bench check |
+| Pull-up to 5 V, output high | About 0.17 mA into VDD | Harmless |
+| MCU reset, VDD up | Analog hi-Z | FT limit 5.5 V; no debug pull-ups on PA5, PA0, PB8 |
+| VDD = 0, rail decaying | Divider R717-719 with pull-up | 3.4-3.6 V worst case, below the 4 V limit |
+| PMD401 off, MCU driving high | Back-feed | 1 k limits to about 3 mA; firmware keeps SPI low or hi-Z until FLY_PGOOD |
+
+R702, R703, R704: 100 R to 1 k. R717 and R719 15 k, R718 33 k. If the rail is 3.3 V, an unconfigured SS sits near 2 V, only while the MCU is in reset and the rail is decaying.
+
+Vendor values for BZX84B51, SMAJ15A and AONR34332C come from a distributor listing or datasheet as noted in the design source; SMAJ15A datasheet still to be read.

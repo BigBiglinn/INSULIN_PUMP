@@ -199,11 +199,10 @@ def build():
       note="PRELIMINARY type-II compensation for fc ~3 kHz < fRHPZ/5 (FLYBACK_DESIGN.md). Depends on T301 Lp and output capacitance")
     C(s, "C306", "180nF", "FLY_COMP_RC", "GND", status="CALC", note="PRELIMINARY: compensation zero ~300 Hz (FLYBACK_DESIGN.md)")
     C(s, "C307", "3.3nF", "FLY_COMP", "GND", status="CALC", note="PRELIMINARY: HF pole ~16 kHz (FLYBACK_DESIGN.md)")
-    s.add("Q301", "pump_v2:CSD16340Q3", "CSD16340Q3", {"4": "FLY_GATE", "5": "FLY_SW", "1": "FLY_CS", "2": "FLY_CS", "3": "FLY_CS"},
-          "Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET", status="DS", mpn="TI CSD16340Q3",
-          note="25 V NexFET, RDS(on) rated at VGS = 2.5 V (6.1 mohm typ), Qg 6.5 nC (TI datasheet in docs/datasheets). "
-               "Gate drive = VBAT 3.0-4.2 V. Vds = 4.2 V + 48.7/5 = 13.9 V + leakage spike: RCD clamp must hold <= 20 V "
-               "(80 % rule). Footprint is KiCad's TI NexFET 3.3x3.3 pattern - VERIFY against TI DQG0008 drawing")
+    s.add("Q301", "pump_v2:CSD16340Q3", "AONR34332C", {"4": "FLY_GATE", "5": "FLY_SW", "1": "FLY_CS", "2": "FLY_CS", "3": "FLY_CS"},
+          "Package_SON:VSON-8_3.3x3.3mm_P0.65mm_NexFET", status="DS", mpn="AOS AONR34332C",
+          note="ECO2. 30 V, RDS(on) < 2.9 mohm at VGS 2.5 V, VGS(th) 0.5-1.2 V, Qg(4.5 V) 36 nC, pins 1-3 S, 4 G, 5-8 D (AOS datasheet Rev 2.0). "
+               "Replaces the 25 V CSD16340Q3: Vds reaches 26-33 V at the 4.9 A limit without the D304 ceiling. Check land against the AOS outline")
     R(s, "R305", "22m 1% 1W", "FLY_CS", "GND", FP_R2512, status="CALC",
       note="Ilim = VCLTH/Rs = 93..107 mV / 22 mohm = 4.2..4.9 A (SNVSB75E). Peak at 3.0 V / 100 mA ~3.1 A. P ~0.12 W (Irms ~2.3 A)")
     s.add("T301", "pump_v2:HPH6-0090L", "HPH6-0090L",
@@ -226,10 +225,11 @@ def build():
     s.add("D302", "Device:D_Schottky", "PMEG10020ELR", {"2": "FLY_SW", "1": "FLY_CLAMP"}, "Diode_SMD:Nexperia_CFP3_SOD-123W",
           status="DS", mpn="Nexperia PMEG10020ELR",
           note="RCD clamp diode (100 V/2 A Schottky; sees ~18.5 V). Clamp values R306/C308 from sim run 3")
-    R(s, "R306", "390R 1W", "FLY_CLAMP", "VBAT", FP_R2512, status="CALC",
-      note="RCD clamp (sim run 3, 2 % leakage assumed): Vds peak 18.5 V = 74 % of 25 V; dissipation 0.35-0.42 W -> 2512 1 W. "
-           "Re-tune once T301 leakage is known")
-    C(s, "C308", "22nF/50V X7R", "FLY_CLAMP", "VBAT", FP_C0805, status="CALC", note="RCD clamp capacitor (sees ~15 V)")
+    R(s, "R306", "330R 1W", "FLY_CLAMP", "VBAT", FP_R2512, status="CALC",
+      note="ECO2. RCD clamp (validation/sim/flyback_clamp_final_330.log): 0.54 W at 2 % leakage, 0.83 W at 4 %. Bench-tune with the real T301")
+    C(s, "C308", "100nF/50V X7R", "FLY_CLAMP", "VBAT", FP_C0805, status="CALC", note="ECO2. Larger than 22 nF: cuts clamp ripple and Vds by several volts")
+    s.add("D304", "Device:D_Zener", "SMAJ15A", {"1": "FLY_CLAMP", "2": "VBAT"}, "Diode_SMD:D_SMA", status="CALC", mpn="Littelfuse SMAJ15A",
+          note="ECO2. Vds ceiling across the clamp: Vds <= 24.4 V (81 % of 30 V) up to 10 % leakage at the 4.9 A limit in simulation. VBR 16.7-18.5 V; conducting steadily means leakage is too high")
     C(s, "C309", "2.2uF/100V X7R", "+48V_RAW", "GND", FP_C1210, status="CALC",
       note="Ripple: dV = Iout x D / (fsw x C) -> needs >= 1.1 uF effective at 48 V for 0.24 V; 2 parts allow ~60 % DC-bias loss. E-06 >= 100 V")
     C(s, "C310", "2.2uF/100V X7R", "+48V_RAW", "GND", FP_C1210, status="CALC", note="see C309")
@@ -241,11 +241,16 @@ def build():
     # --- ECO1: K-12 switched-output placeholders Q302/Q303/R309/R310 deleted; EN is the rail control
     R(s, "R311", "0R", "+48V_RAW", "+48V_MOT", FP_R1206, status="ASSUMED",
       note="Link between the converter output and the PMD401 rail; lift for bench isolation of the load")
-    R(s, "R312", "10k 1% 1W", "+48V_MOT", "GND", FP_R2512, status="CALC",
-      note="ECO1. E-11: 50.4 V to 5 V in <= 4.2 s with 182 uF worst case (t = RC ln 10.08). 0.25 W at 50.4 V, 0.29 W at 54.2 V; 2512 1 W. Check element voltage rating >= 100 V")
-    s.add("D303", "Device:D_Zener", "SMBJ48A", {"1": "+48V_RAW", "2": "GND"}, "Diode_SMD:D_SMB", status="CALC", mpn="Littelfuse SMBJ48A",
-          note="ECO1. E-11 60 V ceiling clamp for an open FB divider. VR 48 V, VBR 53.3-58.9 V at 1 mA (distributor data; check Littelfuse datasheet). "
-               "Sustained fault power exceeds its rating: intended to fail short, which then hiccups the converter. Sacrificial, not a regulator")
+    R(s, "R312", "10k 1% 1W", "+48V_RAW", "GND", FP_R2512, status="CALC",
+      note="ECO2. E-11: 50.4 V to 5 V in 4.2 s with 182 uF worst case. Dissipation 0.25 W at 50.4 V, 0.29 W at the 53.9 V trip ceiling: 29 % of the 1 W rating. Element voltage rating >= 100 V required")
+    s.add("D303", "Device:D_Zener", "BZX84B51", {"1": "+48V_RAW", "2": "OVP_K"}, "Package_TO_SOT_SMD:SOT-23_Handsoldering" if False else "pump_v2:SOT-23_Zener_A1_K3", status="CALC", mpn="Vishay BZX84B51-E3-08",
+          note="ECO2. Independent OVP trip, replaces the SMBJ48A clamp. 51 V +/-2 %, 180 ohm max. Trip 50.5-53.7 V: above the 48.58 V setpoint maximum, below the 60 V ceiling, overlaps the LM51551 OVP 51.4-54.2 V")
+    R(s, "R314", "1k", "OVP_K", "OVP_G", status="CALC", note="ECO2. Limits gate current on overshoot")
+    R(s, "R315", "10k", "OVP_G", "GND", status="CALC", note="ECO2. Zener bias: 90-150 uA at the FET threshold")
+    C(s, "C313", "10nF", "OVP_G", "GND", status="CALC", note="ECO2. Noise filter, about 100 us")
+    s.add("Q304", "Transistor_FET:BSS138", "BSS138", {"1": "OVP_G", "2": "GND", "3": "FLY_EN"},
+          "Package_TO_SOT_SMD:SOT-23", status="CALC", mpn="BSS138 (e.g. Nexperia BSS138P)",
+          note="ECO2. Pulls FLY_EN low on over-voltage, independent of the U301 FB path. Same action as veto Q401; can only stop the rail")
     TP(s, "TP301", "+48V_MOT")
     TP(s, "TP302", "FLY_PGOOD")
 
@@ -319,10 +324,10 @@ def build():
       note="ECO1. AN6373 sec.4: 2.2 uH +/-20 %, RDC < 500 mohm, Iop > 200 mA, Isat > 800 mA; other values not stable")
     C(s, "C509", "4.7uF", "WBA_VDD11", "GND", FP_C0402, status="DS", mpn="Murata GRM155R60J475ME47D",
       note="ECO1. SMPS output cap, fixed by design: 4.7 uF +/-20 %, ESR < 50 mohm (AN6373 sec.4.3)")
-    C(s, "C510", "470nF", "WBA_VDDHPA", "GND", status="DS", note="ECO1. VDDHPA: capacitor only, no supply (DS14127 sec.3.12). At pin 38")
-    C(s, "C511", "100nF", "WBA_VDD11", "GND", status="DS", note="ECO1. VDDANA pin 39 on the VDD11 node (DS14127 sec.3.12, Fig.15). At pin 39")
-    C(s, "C512", "100nF", "+3V3", "GND", status="DS", note="ECO1. VDDRF pin 40 on VDD (DS14127 sec.3.12). At pin 40")
-    C(s, "C513", "100nF", "WBA_VDDRFPA", "GND", status="DS", note="ECO1. VDDRFPA pin 43 (DS14127 Fig.15). At pin 43")
+    C(s, "C510", "470nF", "WBA_VDDHPA", "GND", FP_C0402, status="DS", note="ECO1. VDDHPA: capacitor only, no supply (DS14127 sec.3.12). At pin 38")
+    C(s, "C511", "100nF", "WBA_VDD11", "GND", FP_C0402, status="DS", note="ECO1. VDDANA pin 39 on the VDD11 node (DS14127 sec.3.12, Fig.15). At pin 39")
+    C(s, "C512", "100nF", "+3V3", "GND", FP_C0402, status="DS", note="ECO1. VDDRF pin 40 on VDD (DS14127 sec.3.12). At pin 40")
+    C(s, "C513", "100nF", "WBA_VDDRFPA", "GND", FP_C0402, status="DS", note="ECO1. VDDRFPA pin 43 (DS14127 Fig.15). At pin 43")
     s.add("FB502", "Device:FerriteBead", "47R@100MHz", {"1": "WBA_VDD11", "2": "WBA_VDDRFPA"}, FP_C, status="DS", mpn="Taiyo Yuden LSMGA160808T470RG",
           note="ECO1. VDDRFPA from the SMPS output; AN6373 sec.7 filter, as MB1803 L7. Remove if R513 is fitted")
     R(s, "R513", "0R", "WBA_VDDRFPA", "+3V3", dnp=True, status="DS",
@@ -413,7 +418,12 @@ def build():
     shifted = {"PMD_READY_M": "PMD_READY_D", "PMD_FAULT_M": "PMD_FAULT_D"}
     for i, (ext, mcu) in enumerate(lines):
         TVS(s, f"D{701 + i}", ext)
-        R(s, f"R{702 + i}", "100R", shifted.get(mcu, mcu), ext, status="DECIDED", note="E-07 series resistor ('about 100 ohm', value to confirm)")
+        spi = mcu in ("PMD_MOSI_M", "PMD_SS_M", "PMD_SCLK_M")
+        R(s, f"R{702 + i}", "1k" if spi else "100R", shifted.get(mcu, mcu), ext, status="CALC" if spi else "DECIDED",
+          note="ECO2. E-07 series resistor raised to 1 k on SPI: limits back-feed into an unpowered PMD401 to about 3 mA; 100 ns with 100 pF at <= 500 kbit/s" if spi else "E-07 series resistor ('about 100 ohm', value to confirm)")
+    for rref, net, val in (("R717", "PMD_MOSI_M", "15k"), ("R718", "PMD_SS_M", "33k"), ("R719", "PMD_SCLK_M", "15k")):
+        R(s, rref, val, net, "GND", status="CALC",
+          note="ECO2. Divider with the PMD401 pull-up: holds the pin below 4 V if VDD is 0 while the PMD401 rail decays (DS14127 Table 27). 3.6 V max at a 5.25 V rail with -30 % pull-up")
     for qref, rref, pin_net, drain in (("Q701", "R715", "PMD_READY_M", "PMD_READY_D"), ("Q702", "R716", "PMD_FAULT_M", "PMD_FAULT_D")):
         s.add(qref, "Transistor_FET:BSS138", "BSS138", {"1": "+3V3", "2": pin_net, "3": drain},
               "Package_TO_SOT_SMD:SOT-23", status="DS", mpn="BSS138 (e.g. Nexperia BSS138P)",
