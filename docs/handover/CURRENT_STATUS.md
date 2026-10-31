@@ -1,6 +1,6 @@
 # Piezo Insulin Pump v2 Rev B: current status and handoff (living document)
 
-**Updated:** 11 Oct 2026, after the D7 deferral ruling (no copper change; board = tag `route-stage4-done` = `route-stage5a-done`, branch `placement-opt`).
+**Updated:** 31 Oct 2026, schematic ECO1 applied at `sch-eco1-done` (see `ECO1_SCHEMATIC.md`). **The PCB is still at `route-stage5a-done`, so schematic parity differs until the owner approves the PCB update.** Sections below describe the routing state before ECO1.
 
 **Board status:**
 - Digital design only. **NOT fully connected, NOT electrically verified, NOT fabrication-ready.**

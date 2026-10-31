@@ -140,3 +140,12 @@ Full wording and context: `docs/handover/CURRENT_STATUS.md` §5 and `docs/handov
 | 11 Oct | D7: FLY_PGOOD → U501.28 deferred into a coordinated U501 pin 24–38 fan-out review after DS14127 and the ST RF layout documentation | The scratch investigation showed that re-routing pins 29/30 alone cannot free pin 28. A B.Cu crossing under RF_ANT is not assumed acceptable. Leftover segments are cleaned up only in a reviewed change. A pin reassignment needs explicit approval of the schematic and firmware/CubeMX change. | DEFERRED (owner) |
 | 11 Oct | D8: PMD_READY_M and other possibly voltage-incompatible MCU inputs stay unrouted | PB15 tolerance (U-10) and the PMD401 Ready output level are not verified | BLOCKED (owner) |
 | 11 Oct | D9: MAIN_SWCLK deferred to a joint review of the crystal layout and the SWD stub | Depends on the crystal layout (D5) | BLOCKED (owner) |
+
+## 8. Schematic ECO1, 31 Oct 2026
+
+Full record: `docs/handover/ECO1_SCHEMATIC.md`.
+
+| Date | Decision | Rationale | Status |
+| --- | --- | --- | --- |
+| 31 Oct | Objective is now a fabricated, working bench prototype; owner approved the recommended architecture where evidence supports it and asked for schematic implementation. K-7 Rev A gate: owner has not separately waived it in writing | Owner instruction | DECIDED (owner) for ECO1; K-7 waiver OPEN |
+| 31 Oct | ECO1: WBA55 supplies per DS14127 Fig. 15; MLPF-WB-04D3; HPH6-0090L; 1 uF soft start; 10 k bleeder; SMBJ48A clamp; K-12 switched output removed; READY/FAULT level shifters; LSE fitted; no MCU pin changes | Verification in ECO1_SCHEMATIC.md | IMPLEMENTED in schematic; PCB pending owner review |

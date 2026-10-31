@@ -368,6 +368,22 @@
         "pattern": "*FLY_SEC"
       },
       {
+        "netclass": "HV48",
+        "pattern": "*FLY_SEC_A"
+      },
+      {
+        "netclass": "HV48",
+        "pattern": "*FLY_SEC_B"
+      },
+      {
+        "netclass": "HV48",
+        "pattern": "*FLY_SEC_C"
+      },
+      {
+        "netclass": "HV48",
+        "pattern": "*FLY_SEC_D"
+      },
+      {
         "netclass": "PWR",
         "pattern": "*VBAT_RAW"
       },
