@@ -1,0 +1,39 @@
+RF_MCU           2.5 mm  0 vias
+RF_ANT           8.5 mm  0 vias
+HSE_IN           4.1 mm  0 vias
+HSE_OUT          7.5 mm  0 vias
+LSE_IN           8.8 mm  0 vias
+LSE_OUT          6.1 mm  0 vias
+WBA_VDD11       28.2 mm  6 vias
+WBA_VLX_L        5.1 mm  0 vias
+WBA_VLXSMPS      1.9 mm  0 vias
+WBA_VDDSMPS      4.7 mm  0 vias
+WBA_VDDRFPA     15.2 mm  3 vias
+FLY_PGOOD       53.4 mm  2 vias
+MAIN_NRST       49.3 mm  2 vias
+MAIN_SWO        48.3 mm  2 vias
+MAIN_SWCLK      31.6 mm  1 vias
+MAIN_SWDIO      30.6 mm  1 vias
+PMD_READY_M     43.2 mm  2 vias
+PMD_FAULT_M     50.4 mm  2 vias
+PMD_SCLK_M      69.4 mm  4 vias
+PMD_MOSI_M      39.7 mm  2 vias
+PMD_SS_M        44.9 mm  2 vias
+I2C_SDA         20.5 mm  0 vias
+VBAT_SENSE      43.3 mm  5 vias
+CON_MAIN_TX     37.8 mm  4 vias
+BUCK_SW          2.9 mm  0 vias
+RF crossings []
+C510 pin 38 straight-line 2.0 mm
+C511 pin 39 straight-line 4.2 mm
+C512 pin 40 straight-line 5.0 mm
+C513 pin 43 straight-line 5.0 mm
+C501 pin 44 straight-line 7.8 mm
+C509 pin 45 straight-line 7.1 mm
+C506 pin 2 straight-line 2.8 mm
+C505 pin 8 straight-line 7.2 mm
+C503 pin 35 straight-line 4.5 mm
+C508 pin 36 straight-line 11.0 mm
+Y501 pin 42 straight-line 2.9 mm
+Y502 pin 17 straight-line 3.5 mm
+L501 pin 3 straight-line 6.9 mm

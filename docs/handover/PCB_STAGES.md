@@ -89,3 +89,68 @@ Route specifications: `validation/routing/p2/`. Measurements: `p2_measurements.t
 - Y501 has 0.87 mm from pad centre to VDD11 track. MCU_48V_EN and VBAT_SENSE remain beside Y502.
 
 **Still unconnected (50), by stage:** flyback and 48 V rail, including T301 series links and the OVP group (P3); PMD_FAULT, SPI, CON_MAIN_TX, ENC_I_M, I2C_SDA, VBAT_SENSE, R716, L201, RS485_B, charger pins (P4); 3 small GND pour islands (P4).
+
+## ECO3 and Stage P4 (tags `sch-eco3-done`, `pcb-p4-done`)
+
+**Status: P3 flyback routing on hold. Q301 margin, T301 leakage and PMD401 voltage protection are all OPEN.** Incomplete, electrically untested, not fabrication-ready.
+
+### ECO3 optional parts
+
+| Ref | Part | State | Note |
+|---|---|---|---|
+| JP301 | Copper bridge, B.Cu | Bridged | Needed because an unfitted series resistor would leave the gate open. No component. Cut it to use R316 |
+| R316 | Gate resistor, B.Cu 0603 | Unfitted, value TBD | Hand-fit on the bench only |
+| R317, C314 | Drain RC snubber, 0402 | Unfitted, values TBD, not routed yet (P3) | FLY_SW to GND beside Q301 |
+
+### Q301: higher-voltage search (not resolved)
+
+Requirement: full enhancement at 3.0-4.2 V gate, because the LM51551 gate drive equals VBAT here. At about 2.3 A RMS, 20 mOhm costs about 0.1 W.
+
+| Part | VDS | Gate-drive evidence | Result |
+|---|---|---|---|
+| AOS AONR34332C (fitted in schematic) | 30 V | Under 2.9 mOhm at 2.5 V (datasheet) | Gate fine, voltage margin not established |
+| TI CSD18543Q3A | 60 V | Rated at 4.5 V; RDS(on) curve rises steeply below about 3.5 V (datasheet Fig. 7) | Rejected at VBAT 3.0-3.5 V |
+| AOS AON2240 | 40 V | Rated at 4.5 V (29 mOhm); VGS(th) up to 2.4 V | Rejected: threshold too high |
+| Diodes DMN4020LFDE | 40 V | Rated at 4.5 V (28 mOhm); advance information | Not usable without low-gate data |
+| Nexperia BUK9M20-40H | 40 V | Logic level, 20 mOhm; datasheet could not be retrieved | **Only candidate worth checking** |
+| Toshiba SSM3K339R | 40 V | 180 mOhm at 2.5 V | Too lossy |
+
+No part above 30 V has been verified. Parts searches are not exhaustive.
+
+**Stress-reduction option, not applied:** SMAJ13A clamp ceiling and R305 24 mOhm (limit 3.9-4.5 A). Simulated Vds at most 21.7 V at 10 % leakage (`flyback_clamp_smaj13.log`), about 25-27 V with the same parasitic and heating estimates, or 83-91 % of 30 V. It leaves less overload headroom (3.4 A needed at 3.0 V, 100 mA). Hardware measurement still decides.
+
+### PMD401 question for PiezoMotor/Acuvi (not yet sent)
+
+> For the PMD401 (manual 150025-01, data sheet PMD401-2504-01): (1) What is the absolute maximum voltage on the 48 V input, and for how long? (2) What happens at 50.4-54 V, beyond the voltage error flag? (3) What are the Ready, Fault, SPI and AEN input and output levels, and which rail do their pull-ups use? (4) What is the input capacitance on the 48 V rail?
+
+**The PMD401 must not be described as protected until this is answered.**
+
+### P2 concerns (reviewed)
+
+| Concern | Finding | Action |
+|---|---|---|
+| Decoupling distance (straight line) | C510 2.0, C506 2.8, C511 4.2, C503 4.5, C512 5.0, C513 5.0, C505 7.2, C501 7.8 mm; several through vias | Not fatal; RF test decides. No change: caps cannot get closer without a tighter layout around the crystal |
+| VDD11 | **Corrected:** L501 now beside C509; VLX path 7 mm, no vias. Net still 28 mm and 6 vias overall; pin 39 and pin 45 reach the node by separate branches | Measure ripple and TX spurs on the bench |
+| FLY_PGOOD to FLY_EN | One crossing at 72 degrees, F.Cu over B.Cu with two planes between; 2.5 mm within 1 mm. Estimated coupling about 1 fF | Acceptable on paper. Check for false sync on the bench (SG-03) |
+| MAIN_NRST | **Corrected:** 49 mm and 2 vias (was 62.5 mm and 6 vias), still no RF crossing | Done |
+| J703 | 0.40 mm pad gap, below the 0.6 mm rule. JST SH rating at 48-54 V not confirmed. About 0.5 mm from T301 body, set back 1.5 mm from the edge | **Open:** check with the real plug and JST data |
+
+### P4 results
+
+| Check | P2 | P4 |
+|---|---|---|
+| DRC errors other than unconnected | 0 | **0** |
+| Parity | 0 | **0** |
+| ERC | 5 + 1 cosmetic | Same |
+| Unconnected pairs | 50 | **37** |
+
+**Routed in P4:** PMD_FAULT_M and _D, PMD_SS_M, PMD_SCLK_M, PMD_MOSI_M, I2C_SDA (MCU to R105), VBAT_SENSE, CON_MAIN_TX, BUCK_SW, +3V3 at L201 and R716, gate path through JP301 and R316.
+
+**Unrouted, by reason:**
+- **P3 hold:** +48V_RAW, +48V_MOT, FLY_SW, FLY_SEC, FLY_SEC_A to _D, FLY_CLAMP, FLY_SNUB, FLY_DSNB, FLY_EN to Q304, OVP_G, OVP_K.
+- **U101 land drawing:** CHG_INT_N, I2C_SDA (U101 to R105), VBAT_FUSED.
+- **Owner decision:** ENC_I_M (below) and RS485_B to R714 (D3).
+
+**ENC_I_M (pin 48):** no route exists without crossing the RF line or a pin change. Rows on B.Cu box it in, and every route east must pass the RF path. Options: one B.Cu crossing under the RF line with In1 GND between, or move the index to another pin. PA15 (pin 25) also had no route in a quick scratch test.
+
+Moved beyond the approved routing nets to clear the left side: L501, L503, L201, FB501, C509 and the NRST, SWO and VDD11 paths around them.
