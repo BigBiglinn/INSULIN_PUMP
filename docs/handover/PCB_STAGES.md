@@ -51,3 +51,41 @@ Bench-only prototype: water or 0.9 % saline, never on a person or animal, never 
 | P3 | Flyback, secondary links, 48 V rail, OVP group | Owner review, T301 leakage result |
 | P4 | Remaining signals and U101 (needs the TI land drawing) | 0 unconnected, DRC errors 0, parity 0 |
 | P5 | Silkscreen, footprint checks, fab rules, manufacturing outputs | K-7 waiver, owner release |
+
+## Placement review before P2 (tag `pcb-p1b-placement`)
+
+Estimates below are hand calculations, not measurements. Nothing here proves the circuit works.
+
+| Item | Result | Action |
+|---|---|---|
+| T301 edge | 0.4 mm pad to edge was not acceptable for a 22 g, 13.6 mm tall part | Right board edge moved out 1.5 mm (now 111.5 x 85 mm); pads 2.1 mm from edge. Connectors J701-J705 now sit 1.5 mm back from the edge: check plug access. |
+| T301 courtyard | 0.1 mm each side | J703 moved 0.8 mm up, T301 re-centred: about 0.47 mm to J703, 0.48 mm to H904. M3 head clearance about 0.5 mm with washer radius 3.5 mm. |
+| Clamp loop | C308 had been placed about 7 mm from D302 | C308 and D304 moved beside D302 (D304 now about 5 mm); R306 moved away because it carries only DC. |
+| Primary loop | Input caps at Q301, pin 3 about 31 mm away, planes continuous (same island, checked) | Estimate 8-9 nH extrinsic including about 2.3 nH for the In2/In1 pair. Commutation loop (Q301, D302, C308, VBAT via, C303) about 3-5 nH sets the fast spike. |
+| 48 V clearance | HV48 rule 0.6 mm on all layers; lowest pad gaps 0.72-0.85 mm. J703 0.40 mm is below the rule (vendor connector, FL-6 open). 105 V peak across D301 and snubber. | P3 checks routed copper. IPC-2221 values not confirmed from a source copy. |
+| PMD401 voltage | Neither PMD401 document gives an absolute maximum. Manual: 48 V error limit +/-5 %, motor stops on voltage error. | **NOT VERIFIED.** Trip at 50.5-53.9 V can exceed 50.4 V. See P3 decision. |
+| Q301 margin | 24.4 V simulated peak + 2.5-4.9 V estimated parasitic spike + about 1 V TVS heating = 27.9-30.3 V at the worst corner | **Margin not established.** Measure before continuous running; P3 proposes a gate resistor and a DNP drain snubber. |
+
+## Stage P2: RF, WBA55 supplies, crystals, U501 pins 24-40, FLY_PGOOD (tag `pcb-p2-done`)
+
+Route specifications: `validation/routing/p2/`. Measurements: `p2_measurements.txt`, `p2_clearance.txt`. Pictures: `p2_board_fcu.png`, `p2_u501_fcu.png`, `p2_u501_bcu.png`.
+
+| Check | P1 | P2 |
+|---|---|---|
+| DRC errors other than unconnected | 0 | **0** |
+| Parity | 0 | **0** |
+| ERC | 5 + 1 cosmetic | Same |
+| Unconnected pairs | 81 | **50** |
+
+**RF:** 2.5 mm RF_MCU (0.20 mm) and 8.5 mm RF_ANT (0.32 mm, first 0.5 mm at 0.20 mm beside the filter), no vias, **0 crossings on any layer**, was 50.9 mm with 2 vias and 10 crossings. Solder mask opened over the lines. GND stitching vias both sides. A 0.4 mm jog at the pin moves the line clear of pin 38.
+
+**Fan-out:** every pin 24-40 connected, including FLY_PGOOD (53.4 mm, 2 vias), MAIN_SWCLK and PMD_READY_M. Duplicate LED_MAIN and zero-length RS485_RO segments removed. 9 GND vias under the exposed pad.
+
+**Trade-offs for review:**
+- MAIN_NRST is 62.5 mm with 6 vias, to avoid crossing the RF line. It has 100 nF at C508. A single crossing under the RF line would be much shorter; the owner asked not to assume that is acceptable.
+- C501 (VDD decoupling) is about 7 mm from pin 44 through the +3V3 plane. C512 is about 3 mm from pin 40, also through vias.
+- VDD11 branch: L501 to pin 45 about 12 mm with 2 vias; pin 39 reaches the same node through about 15 mm and vias. VDDANA decoupling C511 is about 4 mm from pin 39.
+- FLY_PGOOD crosses FLY_EN once, on different layers. No check of coupling into the UVLO/SYNC pin.
+- Y501 has 0.87 mm from pad centre to VDD11 track. MCU_48V_EN and VBAT_SENSE remain beside Y502.
+
+**Still unconnected (50), by stage:** flyback and 48 V rail, including T301 series links and the OVP group (P3); PMD_FAULT, SPI, CON_MAIN_TX, ENC_I_M, I2C_SDA, VBAT_SENSE, R716, L201, RS485_B, charger pins (P4); 3 small GND pour islands (P4).

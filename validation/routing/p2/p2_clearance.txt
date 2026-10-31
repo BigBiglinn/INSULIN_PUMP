@@ -1,0 +1,46 @@
+--- pad to pad: lowest gap for each HV/switching net against any different net (pad bounding boxes)
++48V_RAW    0.75 mm  C309.1 <-> C312.1 FLY_SNUB
++48V_MOT    0.40 mm  J703.2 <-> J703.1 GND
+FLY_SEC     0.72 mm  T301.7 <-> C308.1 FLY_CLAMP
+FLY_SEC_A   1.75 mm  T301.2 <-> T301.1 GND
+FLY_SEC_B   1.75 mm  T301.4 <-> T301.3 VBAT
+FLY_SEC_C   1.18 mm  T301.9 <-> R305.2 GND
+FLY_SEC_D   0.85 mm  T301.8 <-> D302.2 FLY_SW
+OVP_K       0.62 mm  D303.2 <-> R314.2 OVP_G
+FLY_SW      0.56 mm  Q301.5 <-> Q301.1 FLY_CS
+FLY_CLAMP   0.62 mm  C308.1 <-> C303.2 GND
+FLY_SNUB    0.75 mm  C312.1 <-> C309.1 +48V_RAW
+--- HV and switching pads to board edge and mounting holes
++48V_RAW   edge 12.95 mm   nearest M3 hole wall 30.75 mm
++48V_MOT   edge  6.31 mm   nearest M3 hole wall 30.17 mm
+FLY_SEC    edge 29.35 mm   nearest M3 hole wall 36.47 mm
+FLY_SEC_A  edge  2.10 mm   nearest M3 hole wall  9.20 mm
+FLY_SEC_B  edge  2.10 mm   nearest M3 hole wall 16.70 mm
+FLY_SEC_C  edge  2.10 mm   nearest M3 hole wall 20.45 mm
+FLY_SEC_D  edge  2.10 mm   nearest M3 hole wall 24.20 mm
+OVP_K      edge 22.95 mm   nearest M3 hole wall 32.83 mm
+FLY_SW     edge 18.10 mm   nearest M3 hole wall 29.95 mm
+FLY_CLAMP  edge 28.45 mm   nearest M3 hole wall 38.63 mm
+FLY_SNUB   edge 28.55 mm   nearest M3 hole wall 40.35 mm
+--- T301 pads
+  pin  1 GND        x 206.70..209.45 y 172.45..174.45  edge 2.10
+  pin  2 FLY_SEC_A  x 206.70..209.45 y 168.70..170.70  edge 2.10
+  pin  3 VBAT       x 206.70..209.45 y 164.95..166.95  edge 2.10
+  pin  4 FLY_SEC_B  x 206.70..209.45 y 161.20..163.20  edge 2.10
+  pin  5 FLY_SEC_C  x 206.70..209.45 y 157.45..159.45  edge 2.10
+  pin  6 FLY_SEC_D  x 206.70..209.45 y 153.70..155.70  edge 2.10
+  pin  7 FLY_SEC    x 175.75..178.50 y 153.70..155.70  edge 33.05
+  pin  8 FLY_SEC_D  x 175.75..178.50 y 157.45..159.45  edge 33.05
+  pin  9 FLY_SEC_C  x 175.75..178.50 y 161.20..163.20  edge 33.05
+  pin 10 FLY_SW     x 175.75..178.50 y 164.95..166.95  edge 33.05
+  pin 11 FLY_SEC_B  x 175.75..178.50 y 168.70..170.70  edge 33.05
+  pin 12 FLY_SEC_A  x 175.75..178.50 y 172.45..174.45  edge 33.05
+--- plane continuity
+  C302.1 VBAT on In2: inside island [0], (170.55, 151.20)
+  C303.1 VBAT on In2: inside island [0], (170.55, 154.20)
+  T301.3 VBAT on In2: inside island [0], (208.07, 165.95)
+  R305.2 GND on In1: inside island [2], (173.96, 164.60)
+  C302.2 GND on In1: inside island [2], (172.45, 151.20)
+  C303.2 GND on In1: inside island [2], (172.45, 154.20)
+  VBAT In2 zone islands: 1, area [3911] mm2
+  GND In1 zone islands: 3, area [0, 0, 8935] mm2

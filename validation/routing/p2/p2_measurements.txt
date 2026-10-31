@@ -1,0 +1,27 @@
+RF_MCU           2.5 mm  0 vias
+RF_ANT           8.5 mm  0 vias
+HSE_IN           4.1 mm  0 vias
+HSE_OUT          7.5 mm  0 vias
+LSE_IN           8.8 mm  0 vias
+LSE_OUT          6.1 mm  0 vias
+WBA_VDD11       32.3 mm  6 vias
+WBA_VDDHPA       2.8 mm  0 vias
+WBA_VDDRFPA     15.2 mm  3 vias
+WBA_VDDSMPS      7.9 mm  0 vias
+WBA_VLXSMPS      1.9 mm  0 vias
+WBA_VLX_L        3.5 mm  0 vias
+FLY_PGOOD       53.4 mm  2 vias
+PMD_READY_M     43.2 mm  2 vias
+MAIN_SWO        38.5 mm  2 vias
+MAIN_NRST       62.5 mm  6 vias
+MAIN_SWCLK      31.6 mm  1 vias
+MAIN_SWDIO      30.6 mm  1 vias
+RS485_RO        45.9 mm  2 vias
+LED_MAIN        17.9 mm  2 vias
+RF crossings on any layer: []
+FLY_PGOOD centre distance to switch copper: (1.9646882704388555, 'FLY_GATE')
+FLY_PGOOD centre distance to FLY_EN: (0.03732267585517821, 'FLY_EN')
+Y501 nearest other-net track (pad centre to track centre): [(0.87, 'WBA_VDD11', 'F.Cu'), (1.05, 'WBA_VDD11', 'F.Cu'), (1.05, 'WBA_VDDRFPA', 'B.Cu'), (1.05, 'WBA_VDDRFPA', 'B.Cu')]
+Y502 nearest other-net track (pad centre to track centre): [(1.57, 'MCU_48V_EN', 'F.Cu'), (1.22, 'VBAT_SENSE', 'F.Cu')]
+EP vias 9
+Y501-L501 centre 8.0 mm; Y501-FL501 5.6
