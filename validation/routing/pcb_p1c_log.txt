@@ -1,0 +1,6 @@
+RIP NETS []: 0 items
+STUBS on moving R306
+STUBS on moving R311
+MOVE R306: (165.50, 149.00, 0) -> (164.2, 149.0, 0)
+MOVE R311: (199.50, 149.50, 0) -> (199.5, 149.25, 0)
+FANOUT requested 1 pads; not fanned: []
