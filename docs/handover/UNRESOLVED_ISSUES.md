@@ -55,7 +55,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | --- | --- | --- |
 | U-10 | Electrical pin properties not checked: 5 V tolerance of the pins facing the PMD401 and encoder, drive current, ADC leakage, reset-state behaviour | ST datasheets |
 | U-11 | WBA55 TIM2 width (32-bit?) unconfirmed (CF-21/FW-08) | RM0493 |
-| U-12 (rest) | Footprints still to be checked against drawings: BQ25188 **done 1 Nov**; CSD16340Q3 matches TI within 5 µm (1 Nov) but Q301 is to be replaced (U-41), so the new part's pattern must be checked; connectors, TVS, crystals, transformer pending their drawings | Drawings |
+| U-12 (rest) | Footprints still to be checked against drawings: BQ25188 **corrected 1 Nov**; U301, D301, D302 match and U201 is an accepted deviation (`validation/logs/footprint_verification.md`); CSD16340Q3 matches TI within 5 µm (1 Nov) but Q301 is to be replaced (U-41), so the new part's pattern must be checked; connectors, TVS, crystals, transformer pending their drawings | Drawings |
 | U-14 | Encoder supply voltage and cable pinout unverified (item 12) | LL06 datasheet, delivered cable |
 | U-15 | TVS parts (D701–D709) not chosen | Part selection after IF-02 |
 | U-16 | No fab chosen; rules are generic. Two scoped DRC exceptions exist (J703 vendor connector; Q301 pad pitch) | Fab rule file and stack-up |

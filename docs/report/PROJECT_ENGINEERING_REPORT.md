@@ -935,7 +935,7 @@ Real transformer behaviour, loop phase margin, thermal behaviour, EMI, the PMD40
 | Simulation regression | ngspice 42 / Python 3.13 | 1 Nov 2026 | same | Open-loop runs reproduce 10 Oct; closed-loop and cycle runs as §27 | No TI model, no real T301 |
 | ERC / DRC / parity / BOM | kicad-cli 10.0.4 (CI runs 5–8) | 1 Nov 2026 | `36f06f2`, `02cb895`, `ab2eba2`, `32c4a8b` | Run 7 (`ab2eba2`): ERC 6 + 1 (unchanged); DRC 0 copper, 0 parity, 0 footprint errors, **19 unconnected**, 1 `lib_footprint_mismatch` (U101 fab outline; fixed in `32c4a8b`), 122 silk | Run 8 result in `validation/KICAD_CI_PROVENANCE.md` |
 | Gerber/drill export **dry run** | kicad-cli 10.0.4 (CI) + `scripts/inspect_fab_outputs.py` | 1 Nov 2026 | `32c4a8b` | See `validation/logs/fab_dryrun.txt`. **Not a release** (CLAUDE.md Phase 6) | Release outputs only after the blockers close |
-| Footprint vs drawing | rendering of the TI PDF + script comparison | 1 Nov 2026 | `02cb895` | BQ25188 YBG0008-C01: pitch/positions/ball map OK; pad 0.20 → 0.23 mm, NSMD, paste corrected | Other parts pending drawings |
+| Footprint vs drawing | rendering of the datasheet drawings + script comparison | 1 Nov 2026 | `02cb895`, `32c4a8b` | U101 corrected; U301, D301, D302 match; U201 accepted deviation (`validation/logs/footprint_verification.md`) | Parts without drawings |
 | Simulation regression (Q301 sweep, soft-start worst case, cycle model) | ngspice 42 / Python 3.13 | 1 Nov 2026 | `ab2eba2` | Q301: 37 cases within 0.2 V; soft-start worst-case runs as §27.2 | No TI model; T301 = specification |
 | Git cleanliness | git | 1 Nov 2026 | each commit | Clean tree after each commit; history not rewritten | — |
 
@@ -1111,7 +1111,7 @@ Bench work follows `requirements/VALIDATION_PLAN.md` (Rev A first, then Rev B). 
 | Independent OVP implemented and verified | ✘ (proposed; simulated) |
 | Motor runaway protection implemented and verified | ✘ (proposed; calculated) |
 | Battery and charging finalised | ✘ (decision 13) |
-| All critical footprints verified | ✘ (BQ25188 verified and corrected; CSD16340Q3 matches but is rejected; connectors/TVS/crystals/T301 pending) |
+| All critical footprints verified | ✘ Partly: U101 corrected; U301, D301, D302 match; U201 accepted deviation; Q301 matches but is rejected; MCUs, connectors, TVS, crystals and T301 have no drawing in the repo (`validation/logs/footprint_verification.md`) |
 | PCB fully routed / no unconnected items | ✘ (19: 12 ST, 6 U501 fan-out, 1 SW48_GATE) |
 | No unexplained copper DRC violations | ✔ (0) |
 | ERC errors resolved or explicitly justified | ✔ justified (U-05) |

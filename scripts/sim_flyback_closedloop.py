@@ -325,14 +325,17 @@ def plot(results):
         return a  # columns: t, v(out), v(comp), v(ss), clf, i(Lp)
 
     fig, ax = plt.subplots(2, 2, figsize=(12, 8))
+    a = load("startup_3v0_6mA_css4u7")
+    if a is not None:
+        ax[0, 0].plot(a[:, 0] * 1e3, a[:, 1], label="C305 4.7 uF (adopted), 6 mA (motor parked)")
     a = load("startup_3v0_100mA_css2u2")
     if a is not None:
-        ax[0, 0].plot(a[:, 0] * 1e3, a[:, 1], label="C305 2.2 uF (corrected)")
+        ax[0, 0].plot(a[:, 0] * 1e3, a[:, 1], label="C305 2.2 uF, 100 mA (hiccup at 214 ms*)")
     a = load("startup_3v0_100mA_css47n")
     if a is not None:
         ax[0, 0].plot(a[:, 0] * 1e3, a[:, 1], label="C305 47 nF (hiccup triggers <1 ms)")
     ax[0, 0].set_xlabel("time (ms)"); ax[0, 0].set_ylabel("+48V_RAW (V)"); ax[0, 0].legend(fontsize=8)
-    ax[0, 0].set_title("Startup, Vin 3.0 V, 100 mA"); ax[0, 0].grid(alpha=.3)
+    ax[0, 0].set_title("Start-up, Vin 3.0 V (*trace invalid after hiccup time)", fontsize=9); ax[0, 0].grid(alpha=.3)
     for name, lab in (("loadstep_3v0", "step, Vin 3.0 V (hiccup at 6.1 ms*)"), ("loadstep_3v4", "step, Vin 3.4 V (hiccup*)"),
                       ("loadstep_4v2", "step, Vin 4.2 V"), ("loadramp_3v0_20ms", "20 ms ramp, Vin 3.0 V")):
         a = load(name)
