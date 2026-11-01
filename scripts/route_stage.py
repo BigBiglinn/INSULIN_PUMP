@@ -112,6 +112,12 @@ def hand(spec_path):
         via.SetDrill(MM(v.get("drill", 0.3)))
         via.SetNet(netinfo(b, v["net"]))
         b.Add(via)
+    for g in list(b.GetDrawings()):              # rework-land mask openings no longer needed
+        if g.GetLayer() == pcbnew.F_Mask and spec.get("remove_mask_at"):
+            x, y = spec["remove_mask_at"]
+            if g.HitTest(V(x, y)):
+                b.Remove(g)
+                print("removed F.Mask graphic at", x, y)
     for r in spec.get("mask_rects", []):         # solder-mask opening over a rework land, F.Mask graphic with no net
         g = pcbnew.PCB_SHAPE(b)
         g.SetShape(pcbnew.SHAPE_T_RECTANGLE)
