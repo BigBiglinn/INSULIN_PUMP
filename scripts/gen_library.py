@@ -10,7 +10,7 @@ claims; their pinout only matches the placeholder footprint.
 import os
 import re
 
-from kicadlib import FP_DIR, PROJECT_DIR
+from kicadlib import FP_DIR, PROJECT_DIR, dump, get_symbol
 
 LIB = "pump_v2"
 F = '(effects (font (size 1.27 1.27)))'
@@ -134,10 +134,17 @@ def symbols():
     return out
 
 
+def max3485_symbol():
+    """KiCad's MAX3485 is a derived symbol; a flattened project copy keeps the schematic and library in step."""
+    sym = get_symbol("Interface_UART:MAX3485")
+    sym[1] = '"MAX3485"'
+    return dump(sym, 1)
+
+
 def write_symbol_lib():
     os.makedirs(PROJECT_DIR, exist_ok=True)
     txt = ('(kicad_symbol_lib\n\t(version 20241209)\n\t(generator "pump_v2_gen")\n'
-           '\t(generator_version "10.0")\n' + "\n".join(symbols()) + "\n)\n")
+           '\t(generator_version "10.0")\n' + "\n".join(list(symbols()) + [max3485_symbol()]) + "\n)\n")
     with open(os.path.join(PROJECT_DIR, LIB + ".kicad_sym"), "w", encoding="utf8") as f:
         f.write(txt)
 

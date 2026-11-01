@@ -446,7 +446,7 @@ def build():
     R(s, "R712", "100R", "ENC_B_S", "ENC_B", status="DECIDED", note="S-07: supervisor's own series resistor on encoder B")
     CP(s, "C702", "100uF/100V", "+48V_MOT", "GND", "Capacitor_THT:CP_Radial_D12.5mm_P5.00mm", status="DECIDED",
        note="Rev A item 24: 100 uF/100 V low-ESR bulk at the PMD401 input. Series/size TBD")
-    s.add("U701", "Interface_UART:MAX3485", "MAX3485", {"1": "RS485_RO", "2": "RS485_DE", "3": "RS485_DE", "4": "RS485_DI",
+    s.add("U701", "pump_v2:MAX3485", "MAX3485", {"1": "RS485_RO", "2": "RS485_DE", "3": "RS485_DE", "4": "RS485_DI",
                                                         "5": "GND", "6": "RS485_A", "7": "RS485_B", "8": "+3V3"},
           "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", status="DECIDED", mpn="MAX3485 SOIC-8 (suffix TBD)",
           note="Rev A item 9 RS-485 setup link (carried per P-01). SOIC-8 variant ASSUMED")
