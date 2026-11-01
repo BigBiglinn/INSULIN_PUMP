@@ -57,7 +57,7 @@ No locked component (K-3 to K-6, K-9 Rev A parts, K-12 Rev B power parts) was su
 | A-18 | TVS: 5 V-class, SOD-323, part TBD; series resistors 100 R | D701–D709, R702–R712 | OPEN B.15; IF-02 measurement |
 | A-19 | Edge-connector orientation derived from footprint geometry (body vs pads), not from connector drawings | J101–J103, J701–J705 | Check each footprint against the connector drawing |
 | A-20 | Generic 4-layer rules: 0.15 mm track/space, 0.3 mm drill / 0.5 mm via, 0.3 mm copper-to-edge. HV48 net class 0.6 mm clearance on all layers (conservative reading of P-03; CF-6 unresolved) | `pump_v2.kicad_pro` | Fab rule file (B.7); IPC-2221C table |
-| A-21 | Board 110 × 78 mm, 4 × M3 holes. Size is not set by any requirement (B.6) | PCB | Enclosure / mechanical design |
+| A-21 | Board 110 × 85 mm (corrected 1 Nov 2026 from the Edge.Cuts outline; earlier text said 110 × 78 mm), 4 × M3 holes. Size is not set by any requirement (B.6) | PCB | Enclosure / mechanical design |
 | A-22 | Default KiCad 4-layer 1.6 mm stack-up. RF trace is not impedance-controlled (U.FL is next to the MCU) | PCB | Fab stack-up; 50 Ω calculation |
 
 ## 2b. Assumptions added in the second session

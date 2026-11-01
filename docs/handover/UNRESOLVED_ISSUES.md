@@ -1,6 +1,6 @@
 # Unresolved issues: Rev B digital handover design
 
-Updated 10 Oct 2026 (second session); layout items updated 31 Oct and 1 Nov 2026 (`LAYOUT_FIXES_2026-10-31.md`, `LAYOUT_FIXES_2026-11-01.md`). Recommendations for every critical item: `ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`. Severity:
+Updated 10 Oct 2026 (second session); layout items updated 31 Oct and 1 Nov 2026 (`LAYOUT_FIXES_2026-10-31.md`, `LAYOUT_FIXES_2026-11-01.md`). Recommendations for every critical item: `ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`; detailed decision proposals and the owner-decision list: `FINAL_ENGINEERING_REVIEW_2026-11-01.md`. Severity:
 
 - **Critical**: blocks any build, or leaves a safety function without evidence.
 - **Major**: the board will not work as intended until it is resolved.
@@ -31,8 +31,9 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-05 | **STM32WBA55 supply/RF wiring not from the datasheet.** SMPS inductor, VDD11, VDDHPA/VDDANA/VDDRF/VDDRFPA, decoupling, HSE crystal and load, RF match. ST datasheets could not be downloaded (st.com blocked from this machine) and were not supplied in this session | L501, C509–C515, R510–R513 (DNP), L502, Y501. **These are the 6 ERC errors** | ST STM32WBA55CG datasheet plus the WBA hardware/RF design guide; same for the STM32C031C6 decoupling |
 | U-03 | Speed cap is enforced only in firmware (item 2, S-06). The supervisor now counts the encoder (S-07) | Firmware | Supervisor rate check, then FT-02 |
 | U-06 | K-12 "switched output" and the E-11 bleeder are not designed | Q302/Q303/R309/R310/R312 DNP; R311 0 R bypass | High-side switch ≥ 100 V class; bleeder value |
-| U-37 | **J703 (JST SM02B-SRSS-TB) is reportedly rated 50 V AC/DC** (distributor listings; the JST datasheet could not be read). The rail is 48 V nominal, up to 50.4 V normally and 51.4–54.2 V at the LM51551 OVP | — | Confirm in the JST datasheet; if 50 V, use a ≥ 100 V board connector with an SH cable to the PMD401 (review §7) |
-| U-23 | 60 V fault ceiling relies on LM51551 OVP through the FB divider (51.4–54.2 V). An open R307/R308 is an uncovered single fault, and 54.2 V is above the PMD401's 50.4 V maximum | — | Secondary OVP clamp or crowbar, or a redundant divider; decision |
+| U-37 | **J703 (JST SM02B-SRSS-TB) is reportedly rated 50 V AC/DC** (distributor listings; the JST datasheet could not be read). The rail is 48 V nominal, up to 50.4 V normally and up to 55.9 V at the LM51551 OVP (worst case) | — | Confirm in the JST datasheet; if 50 V, use a ≥ 100 V board connector with an SH cable to the PMD401 (review §7) |
+| U-38 | **R307 (470 kΩ, FB divider top) working voltage.** 0603 footprint, no MPN; sees ≈ 47 V (up to ≈ 55 V). An open R307 is the U-23 single fault | — | Choose a part with a datasheet working voltage ≥ 75 V (or a 1206); same rule for any new 48 V divider (final review §1.3) |
+| U-23 | 60 V fault ceiling relies on LM51551 OVP through the FB divider (52.8 V typical, 49.9–55.9 V worst case). An open R307/R308 is an uncovered single fault, and 54.2 V is above the PMD401's 50.4 V maximum | — | Secondary OVP clamp or crowbar, or a redundant divider; decision |
 
 ## Major
 

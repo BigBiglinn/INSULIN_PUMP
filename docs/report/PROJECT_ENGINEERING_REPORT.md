@@ -5,7 +5,7 @@
 | Project | Piezo Insulin Pump v2 (HybridPancreasSim v2), Rev B handover PCB |
 | Owner | B Charan |
 | Report date | 1 Nov 2026 |
-| Design state | Commit `ef091c3` (board/schematic), documentation up to the commit that adds this report |
+| Design state | Commit `ef091c3` (board/schematic, unchanged since); report revised by the final engineering review of 1 Nov 2026 (`docs/handover/FINAL_ENGINEERING_REVIEW_2026-11-01.md`) |
 | Prepared with | Claude Code sessions of 10 Oct, 31 Oct and 1 Nov 2026, from repository evidence only |
 
 > **Safety and scope.** This is a **bench-only prototype** for water or 0.9 % saline. It must **never be connected to a person or an animal**, and real insulin must never be used. It is a **digital handover design**: nothing has been fabricated, built or measured. This report is not a claim that the pump works, is safe for clinical use, or is ready for fabrication. A clean ERC/DRC report does not show that a circuit works.
@@ -24,6 +24,27 @@
   - **pcbcheck.py**: the project's pure-Python approximation.
   - **LTspice / ngspice**: open-loop power-stage simulation only.
 - **"Not measured"** means exactly that. No measurement of any kind exists for this project.
+
+**Review status.** This report was audited section by section on 1 Nov 2026. Corrections A1–A12 are listed in `docs/handover/FINAL_ENGINEERING_REVIEW_2026-11-01.md` Part 1 and every recomputed figure is in `validation/logs/report_audit_calcs.txt` (`scripts/audit_calcs.py`). The most important correction: the LM51551 over-voltage trip is **52.8 V typical, 49.9–55.9 V worst case**, not 51.4–54.2 V.
+
+### Evidence level of each part of the design
+
+| Subsystem | Designed | Calculated | Simulated | Verified by KiCad | Hardware tested | Not yet implemented |
+| --- | --- | --- | --- | --- | --- | --- |
+| Battery path, fuse, switch | ✔ (parts partly TBD) | Current budget | — | ✔ ERC/DRC/parity | ✘ | Fuse part, pack connector, IPC-2152 width check |
+| Charger BQ25188 | ✔ | Dissipation | — | ✔ | ✘ | Charge-current setting (firmware); YBG footprint check |
+| 3.3 V buck TPS62840 | ✔ | — | — | ✔ | ✘ | — |
+| 48 V flyback power stage | ✔ (transformer placeholder) | ✔ | ✔ open loop (LTspice + ngspice) | ✔ | ✘ | Real transformer, loop simulation, flyback loop compaction |
+| 48 V over-voltage protection | LM51551 FB-based only | ✔ | — | ✔ | ✘ | **Independent OVP** (proposal §2.3 of the review) |
+| 48 V output switch / bleeder | Placeholders only | ✔ (bleeder) | — | ✔ (placeholders) | ✘ | Owner decision (review §2.6) |
+| Kill path (enable, veto, park) | ✔ (owner-approved defaults) | ✔ thresholds | — | ✔ | ✘ | SG tests |
+| Runaway (speed) protection | Encoder to supervisor only | ✔ budget | — | ✔ | ✘ | **SPI gate + supervisor firmware** (review §2.4) |
+| STM32WBA55 logic/pin map | ✔ (CubeMX-verified) | — | — | ✔ | ✘ | — |
+| STM32WBA55 power / clock / RF | Placeholders | — | — | ERC errors kept visible | ✘ | **ST documents needed** (review §2.1) |
+| STM32C031 supervisor | ✔ | — | — | ✔ | ✘ | Decoupling values (ST DS) |
+| PMD401 / encoder / RS-485 interfaces | ✔ (TVS parts TBD) | — | — | ✔ | ✘ | TVS selection, IF-02 level check |
+| PCB layout | 4 layers, 80 % of multi-pad nets complete | — | — | ✔ 0 copper errors, 24 unconnected | ✘ | 24 items (review Part 3), human review |
+| Firmware | Requirements only | — | (PC simulator outside repo) | n/a | ✘ | All |
 
 ---
 
@@ -70,7 +91,7 @@ The project builds a small, close-to-industry-grade insulin-pump **prototype** t
 | Schematic | 8 hierarchical sheets, 147 symbols, generated from `scripts/design.py`; every part carries a status field and a source note |
 | PCB | 4 layers, 110 × 85 mm, 147 footprints, 492 pads, 93 multi-pad nets; 1104 track segments (F.Cu 1947 mm, B.Cu 1008 mm) and 240 vias |
 | **KiCad verification (real)** | kicad-cli **10.0.4** in GitHub Actions on commit `ef091c3`: **ERC** 6 intentional errors + 1 cosmetic warning (unchanged since 10 Oct); **DRC 0 copper errors, 0 schematic-parity issues, 24 unconnected items**, 122 silkscreen warnings |
-| Power-stage simulation | 48 V flyback open-loop power stage simulated in LTspice (10 Oct) and **reproduced independently in ngspice (1 Nov)** within about 2 %: 48.8 V, 3.45 A primary peak, 18.7 V on the 25 V FET, 89 V on the 200 V rectifier at 3.0 V in / 100 mA out |
+| Power-stage simulation | 48 V flyback open-loop power stage simulated in LTspice (10 Oct) and **reproduced independently in ngspice (1 Nov)**: averages, peaks and stresses agree within about 2 %, output ripple within ±17 %. At 3.0 V in / 100 mA out (ngspice): 48.8 V, 3.45 A primary peak, 18.7 V on the 25 V FET, 89 V on the 200 V rectifier |
 | Routing progress | 35 → 24 unconnected items over 31 Oct–1 Nov. The 24 remaining: **12** need ST documents (STM32WBA55 supply/clock/RF), **1** is an undesigned DNP switch, **11** sit in the STM32WBA55 fan-out or at the BQ25188 package whose footprint is unverified |
 
 **What does not exist:**
@@ -87,7 +108,7 @@ Five critical safety and design questions need owner decisions (section 18):
 - the transformer;
 - 48 V over-voltage protection independent of the feedback divider;
 - an independent motor-speed stop fast enough for S-06;
-- the J703 connector's voltage rating (distributors list 50 V, below the 50.4–54.2 V the rail can reach);
+- the J703 connector's voltage rating (distributors list 50 V, below the 50.4 V normal maximum and the up-to-55.9 V OVP ceiling);
 - the ST documents.
 
 **Completion assessment (§21):** the digital design is a credible, well-documented **pre-release draft**. It is **not** fabrication-ready.
@@ -124,8 +145,10 @@ Five critical safety and design questions need owner decisions (section 18):
 ```mermaid
 flowchart LR
   subgraph PWR[Power]
-    CELL["1S Li-ion cell<br/>(protected pack)"] --> J101[J101 XT30] --> F101[F101 5 A fuse] --> SW["J102 master switch<br/>(off-board)"] --> VBAT((VBAT 3.0–4.2 V))
-    USB[J103 USB-C power] --> CHG["U101 BQ25188<br/>linear charger"] --> F101
+    CELL["1S Li-ion cell<br/>(protected pack)"] --> J101[J101 XT30] --> F101[F101 5 A fuse]
+    VFUSED --> SW["J102 master switch<br/>(off-board)"] --> VBAT((VBAT 3.0–4.2 V))
+    F101 --> VFUSED((VBAT_FUSED))
+    USB[J103 USB-C power] --> CHG["U101 BQ25188<br/>linear charger (BAT pin)"] --> VFUSED
     VBAT --> BUCK["U201 TPS62840<br/>buck"] --> V33((+3V3))
     VBAT --> FLY["U301 LM51551 flyback<br/>Q301 · T301 · D301"] --> V48((+48 V))
   end
@@ -199,7 +222,7 @@ The schematic is generated from `scripts/design.py` (`docs/handover/pump_v2_sche
 | Waveform | Update rate 65 kHz; maximum cycle rate 1500 Hz |
 | Holding | Self-locking when unpowered (holding force > 6.5 N), so **"off" is the safe state** (S-01) |
 | Force | 6.5 N stall; 0–3 N recommended working load |
-| Speed | Top speed ≤ 15 mm/s; power about 5 mW per Hz of step rate |
+| Speed | Top speed ≤ 15 mm/s (project record, `COMPONENTS_AND_BOM.md`); the PMD401's 1500 Hz × about 5 µm limits it to about 7.5 mm/s [DS]; power about 5 mW per Hz of step rate |
 | Encoder | Integrated, 80 nm per count, quadrature A/B at 3.3–5 V |
 
 **Syringe and dose arithmetic** (Hamilton 81320, 4.61 mm bore; DESIGN_REQUIREMENTS §2) [CALC]:
@@ -291,13 +314,13 @@ The **PMD401** is used as bought (K-4); designing a custom piezo driver is prohi
 | Cell | Molicel INR18650-P28A on Rev A (K-9); Rev B cell OPEN (B.20) | Distributor data: 2800 mAh typical, 4.2 V charge, 35 A continuous [WEB-2ND] |
 | Protection | 1S protected pack (K-12); 5 A fuse F101 (2920 SMD, part TBD) | E-01 |
 | Master switch | Off-board, wired to J102 (5.08 mm terminal) | E-01, A-15 |
-| Charger | **BQ25188YBGR**: 1 A linear charger, 3.0–18 V input, VBATREG 3.6–4.65 V in 10 mV steps, 5 mA–1 A fast charge, 55 mΩ battery FET [DS SLUSFJ3] | K-12 |
+| Charger | **BQ25188YBGR**: 1 A linear charger; V<sub>IN</sub> operating 3.6–18 V (electrical table; the feature list says 3.0 V), VBATREG 3.5–4.65 V in 10 mV steps, 5–1000 mA fast charge, 55 mΩ battery FET, selectable thermal regulation T<sub>REG</sub> 60/80/100 °C [DS SLUSFJ3] | K-12 |
 | Charger wiring | Charges on VBAT_FUSED (after the fuse, before the switch), so charging works with the switch off. **SYS is unloaded**, so the charger is never the load path (E-09) | A-14 |
 | Defaults | VBATREG 4.20 V; ICHG 10 mA; I²C watchdog on (resets registers). **Firmware must set the charge current** | SLUSFJ3 §7.5 |
 | TS pin | R101 10 kΩ, as the datasheet specifies when TS is unused (0.38 V vs the 90 mV button threshold) | DS |
 | Battery sense | R107/R108 1 MΩ/1 MΩ + C104 100 nF into PB9: 4.2 V → 2.1 V; about 2.1 µA drain; τ = 50 ms | CALC (A-27: ADC leakage unverified) |
 
-**Charge-current recommendation (proposal, owner decision):** about 0.5 A. As a linear charger from 5 V, the BQ25188 would dissipate 2.0 W at 1 A with a 3.0 V cell, in a 1.1 × 1.6 mm WCSP [CALC].
+**Charge-current recommendation (proposal, owner decision):** about 0.5 A. As a linear charger from 5 V, the BQ25188 would dissipate 2.0 W at 1 A with a 3.0 V cell, in a 1.1 × 1.6 mm WCSP [CALC]. The repository datasheet's thermal table lists only the BQ25185 DLH package, so the YBG junction temperature cannot be computed; T<sub>REG</sub> reduces the charge current automatically if the die reaches the set limit.
 
 ---
 
@@ -309,7 +332,7 @@ The **PMD401** is used as bought (K-4); designing a custom piezo driver is prohi
   - L201 2.2 µH; C201 4.7 µF in; C202 10 µF out.
   - MODE = GND (auto PFM/PWM); EN tied to VIN.
 - **Supply source:** taken from VBAT, not from the 48 V chain, so motor current spikes stay off the logic rail (constraint 23).
-- **Low-cell behaviour:** below about 3.4 V input the buck enters 100 % mode and +3V3 follows VBAT. E-02 requires ≥ 3.0 V while dosing, and S-13 stops dosing at 3.4 V cell.
+- **Low-cell behaviour (estimate, not derived from SLVSEC6D dropout data):** below about 3.4 V input the buck enters 100 % mode and +3V3 follows VBAT minus its dropout. E-02 requires ≥ 3.0 V while dosing, and S-13 stops dosing at 3.4 V cell.
 - **Open conflict CF-8:** E-02's wording says "LDO", which is the Rev A MCP1700; Rev B uses the decided buck.
 - **Planes:** +3V3 is distributed on the In2.Cu plane (3V3_L3 zone) everywhere except the VBAT regions (§12).
 
@@ -331,7 +354,7 @@ The **PMD401** is used as bought (K-4); designing a custom piezo driver is prohi
 | Sense resistor | I<sub>lim</sub> = V<sub>CLTH</sub>/R<sub>s</sub>, V<sub>CLTH</sub> = 93–107 mV [DS] | R305 22 mΩ → 4.2–4.9 A | CALC |
 | Soft start | t<sub>SS</sub> = C<sub>SS</sub>·V<sub>REF</sub>/I<sub>SS</sub> | C305 47 nF → 4.7 ms | CALC |
 | Output divider | V<sub>out</sub> = V<sub>REF</sub>(1 + 470k/10k), V<sub>REF</sub> 0.99–1.01 V [DS] | 48.0 V nominal; **46.6–49.4 V** with 1 % resistors | CALC |
-| Over-voltage | FB > 107/110/113 % of V<sub>REF</sub> [DS] | 51.4–54.2 V; **sensed on FB only** | DS / CALC |
+| Over-voltage | FB > 107/110/113 % of V<sub>REF</sub> [DS] | 52.8 V typical; **49.9–55.9 V worst case** (V<sub>REF</sub> ±1 %, 1 % divider); ≥ 7 % above the regulation point for any one part set; **sensed on FB only** | DS / CALC |
 | Output capacitors | ΔV = I·D/(f·C) | 2 × 2.2 µF/100 V X7R + 47 µF/100 V; C702 100 µF/100 V at the connector | CALC / DECIDED |
 | FET | CSD16340Q3, 25 V, 6.1 mΩ at V<sub>GS</sub> 2.5 V, Q<sub>g</sub> 6.5 nC [DS] | Gate drive = VBAT | DS |
 | Rectifier | PNE20010ER, 200 V / 1 A hyperfast [DS] | 100 V Schottky rejected (§15) | DS |
@@ -437,7 +460,7 @@ The **PMD401** is used as bought (K-4); designing a custom piezo driver is prohi
 - Copper-to-edge 0.3 mm.
 - Two scoped DRU exceptions:
   - J703 pad-to-pad 0.35 mm (vendor connector pitch);
-  - Q301 pad-to-pad 0.127 mm (NexFET pad pitch).
+  - Q301 pad-to-pad 0.127 mm (NexFET pad pitch). The audit compared the footprint with TI SLPS247E §7.2: it matches within 5 µm, but TI's pads sit at a uniform 0.65 mm pitch (0.15 mm gaps), so moving the four pads to TI's exact positions would remove this exception (proposal, owner approval).
 - The fab and its rule file are not chosen (U-16). The stack-up is KiCad's default 1.6 mm, so the RF trace is not impedance-controlled (U-20).
 
 ### 12.2 Placement
@@ -486,6 +509,15 @@ These positions are also recorded in `gen_pcb.py` `ANCHORS`.
 | B | 1 | SW48_GATE | Undesigned 48 V switch (U-06) |
 | C | 11 | 3 at the BQ25188 WCSP: VBAT_FUSED, CHG_INT_N, I2C_SDA (U101→R105). 8 in the U501 fan-out: FLY_PGOOD → PA12, MAIN_SWCLK, PMD_MOSI_M, PMD_SCLK_M, PMD_READY_M, ENC_I_M, VBAT_SENSE, I2C_SDA (R105→U501.6) | BQ25188 ball pitch unverified (U-12); U501 fan-out to be redone with the ST-guided layout |
 
+**Classification after the final review** (trial routing on a scratch copy, nothing committed; details in the final review, Part 3):
+
+| Class | Count | Items |
+| --- | --- | --- |
+| Routable immediately | 2 | ENC_I_M (31.9 mm, 2 vias), VBAT_SENSE (33.4 mm, 4 vias): clean trial routes, deferred because they cross the U501 area that the ST re-layout will change |
+| Blocked by ST documents | 12 + 6 | Group A; plus I2C_SDA (→ U501.6), PMD_SCLK_M, PMD_MOSI_M, PMD_READY_M, MAIN_SWCLK, FLY_PGOOD, whose U501 pins are boxed in until U501 is re-fanned-out with the ST layout |
+| Blocked by the TI YBG drawing | 3 | VBAT_FUSED, CHG_INT_N, I2C_SDA (→ U101.C1) |
+| Blocked by an owner decision | 1 | SW48_GATE |
+
 **Not yet done by any step:**
 
 - Flyback loop compaction (FL-1 to FL-4); it depends on T301.
@@ -518,6 +550,7 @@ sequenceDiagram
   participant M as Main MCU (WBA55)
   participant S as Supervisor (C031)
   participant D as PMD401
+  participant E as LL06 encoder (J705)
   P->>M: dose command (counter + check value, C-03)
   M->>S: heartbeat token (LPUART1 -> USART2)
   S-->>M: token reply
@@ -525,8 +558,9 @@ sequenceDiagram
   M->>M: FLY_EN high (48 V on)
   loop every < 10 ms
     M->>D: SPI speed word (mode 3, <= 500 kbit/s)
-    D->>M: encoder A/B (TIM2) and Ready/Fault
-    D->>S: encoder A/B (TIM3)
+    E->>M: encoder A/B/I (TIM2, via R708/R709/R710)
+    E->>S: encoder A/B (TIM3, via R711/R712)
+    D->>M: Ready / Fault (J702)
   end
   M->>D: speed 0, settle
   S->>S: park, veto ON
@@ -557,7 +591,7 @@ sequenceDiagram
 | Firmware safe-halt | Corruption detection → halt (S-03 path 3) | — | Firmware not in repo |
 | Independent travel check | Encoder A/B to the supervisor TIM3 (S-07) | — | Hardware done; firmware not in repo |
 | Rail discharge | E-11 < 5 V in 5 s | — | **Bleeder not fitted (U-06)** |
-| Over-voltage | LM51551 OVP on FB (51.4–54.2 V) | — | **Single-fault gap: open FB divider (U-23)** |
+| Over-voltage | LM51551 OVP on FB (52.8 V typ, 49.9–55.9 V worst case) | — | **Single-fault gap: open FB divider (U-23)** |
 
 **Known gaps (critical):**
 
@@ -566,7 +600,8 @@ sequenceDiagram
    - Park (250 ms) is too slow. The 48 V veto is unproven, because the PMD401's behaviour as its supply decays is unknown.
    - A supervisor-controlled SPI gate would use the PMD401's ~10 ms timeout: about 11 ms, ≈ 0.28 U [CALC]. This is proposed in ENGINEERING_BLOCKER_REVIEW §6.
 2. **No over-voltage protection independent of R307/R308** (U-23). An open feedback divider runs the converter at current limit with nothing to stop the rail rising past the 100 V capacitor rating.
-3. **J703 rating.** Distributors list 50 V for the SH series, below the 50.4 V normal maximum and the 51.4–54.2 V OVP window [WEB-2ND].
+3. **J703 rating.** Distributors list 50 V for the SH series, below the 50.4 V normal maximum and the up-to-55.9 V OVP ceiling [WEB-2ND].
+5. **Resistor working voltage on 48 V nodes.** R307 (470 kΩ, FB divider top) is an 0603 with no MPN and sees about 47 V (up to about 55 V). Its datasheet working voltage must be ≥ 69 V (80 % rule); an R307 open-circuit is exactly the U-23 single fault (U-38).
 4. Buzzer and STOP button not on the board (owner decision 10 Oct; S-12 proposed).
 
 ---
@@ -591,6 +626,8 @@ sequenceDiagram
 - **LTspice** showed D301 ringing to its 200 V breakdown, which is why the snubber was added.
 - **ngspice** did not converge to a physical steady state (output power exceeded input power), so those runs are flagged invalid and not used.
 
+**Agreement between the two simulators.** V<sub>out</sub> 0.1–0.7 %, I<sub>pk</sub> 0.7–1.8 %, V<sub>DS</sub> 0.4–1.1 %, D301 stress 0–0.6 %, I<sub>in</sub> 0.7–2 %, P<sub>clamp</sub> 1–2.4 %. **Output ripple differs by −12 to +17 %**, and efficiency by 2 points at 3.0 V.
+
 ![ngspice waveforms](figures/sim_flyback_waveforms_3v0.png)
 
 *Figure 15-1. ngspice waveforms, 3.0 V in, 100 mA, snubber fitted. The primary peak (3.45 A) occurs at switch-on (D301 reverse recovery reflected), not at the end of the ramp (about 3.1 A). The off-state drain plateau is about 12.9 V (V<sub>in</sub> + V<sub>out</sub>/n). D301 sees about 63 V steady-state (V<sub>out</sub> + n·V<sub>in</sub>) with an 89 V spike.*
@@ -600,8 +637,8 @@ sequenceDiagram
 | Calculation | Result |
 | --- | --- |
 | 48 V setpoint tolerance (V<sub>REF</sub> ±1 %, 1 % resistors) | 46.6–49.4 V vs E-03 45.6–50.4 V |
-| OVP window | 51.4–54.2 V (above the PMD401's 50.4 V) |
-| Bleeder for E-11 (C<sub>max</sub> ≈ 181.7 µF) | R ≤ 11.5 kΩ; with 10 kΩ: 4.3 s worst case, 3.5 s nominal; 0.25–0.29 W while on |
+| OVP window | 52.8 V typical; 49.9–55.9 V worst case (upper end above the PMD401's 50.4 V) |
+| Bleeder for E-11 (C<sub>max</sub> ≈ 180.8 µF, +20 % electrolytics assumed) | R ≤ 11.5–12.0 kΩ; with 10 kΩ: 4.4 s from 55.9 V, 4.2 s from 50.4 V, 3.5 s nominal; 0.25–0.31 W while on |
 | Runaway budget S-06 (0.5 U = 300 µm) | 20 ms at 15 mm/s; 40 ms at the PMD401's 1500 Hz × 5 µm |
 | PMD401 at dosing speed | ≈ 0.29 W idle + 0.075 W motor ≈ 0.37 W at 48 V → ≈ 0.15 A from a 3.0 V cell (PMD401 drive losses unknown) |
 | Full-speed input current | 2.0–2.07 A at 3.0 V (sim) = the E-05 2.1 A budget |
@@ -623,7 +660,7 @@ sequenceDiagram
 | Silkscreen | **kicad-cli 10.0.4** | 69 overlap, 52 over copper, 1 edge (D704) — cosmetic | same |
 | Pin map | STM32CubeMX 6.18.1 database (10 Oct) | 41/41 functions, 0 failures | `validation/logs/pinmap_check.md` |
 | Python checker calibration | `scripts/pcbcheck.py` vs kicad-cli | Matched unconnected count and copper errors on 10 Oct, 31 Oct and 1 Nov boards. **Missed 3 dangling track ends on 31 Oct** (test corrected 1 Nov) | `validation/logs/pcbcheck_2026-1*.txt` |
-| Power stage | LTspice 26.1.1 + ngspice 42 | §15.1, agreement within about 2 % | `validation/sim/` |
+| Power stage | LTspice 26.1.1 + ngspice 42 | §15.1: averages, peaks and stresses within about 2 %; ripple within ±17 %; efficiency 0.82 vs 0.80 | `validation/sim/` |
 
 **Distinctions that matter:**
 
@@ -648,7 +685,8 @@ Qualitative; S = severity, L = likelihood before mitigation (H/M/L), for a **ben
 | R6 | Battery-path current at full motor speed reaches the 2.1 A budget | M | M | 5 A fuse and protection; sense resistor limit 4.2–4.9 A | Measure MT-07; size the path for current limit |
 | R7 | Rail does not discharge (no bleeder) → touch voltage after stop | M | H | — | Fit R312 (§18) |
 | R8 | Charger overheating at 1 A from 5 V | M | M | Default ICHG 10 mA until firmware sets it | Choose ≈ 0.5 A after thermal check |
-| R9 | Unverified footprints (BQ25188 WCSP pitch, CSD16340Q3, connector orientation) | H | M | Marked UNVERIFIED in the library | Check against drawings (U-12, U-17) |
+| R9 | Unverified footprints (BQ25188 WCSP pitch, connector orientation) | H | M | Marked UNVERIFIED in the library; CSD16340Q3 checked against TI's pattern on 1 Nov (matches within 5 µm) | BQ25188 YBG drawing needed (not in the repository PDF); connector drawings (U-12, U-17) |
+| R15 | 48 V divider resistor (R307, 0603, no MPN) under-rated for ≈ 47–55 V | H | M | — | Choose a part with ≥ 75 V working voltage (U-38) |
 | R10 | Autorouted copper not reviewed (flyback loop, long ENC_A_S route near the 48 V divider) | M | M | DRC clean | Human review in pcbnew |
 | R11 | Encoder count corruption when 48 V cycles | M | M | Encoder powered from 3V3 by default (JP701) | MT-08 |
 | R12 | Sensorless occlusion does not work | M (project goal) | M | — | MT-05 / OC tests |
@@ -659,7 +697,7 @@ Qualitative; S = severity, L = likelihood before mitigation (H/M/L), for a **ben
 
 ## 18. Unresolved engineering decisions (owner)
 
-Full analysis: `docs/handover/ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`.
+Full analysis: `docs/handover/ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`; detailed decision proposals (evidence, calculations, pros and cons, schematic and PCB changes, risks): `docs/handover/FINAL_ENGINEERING_REVIEW_2026-11-01.md` Part 2. Owner decision list: same document, §4.2.
 
 | # | Decision | Recommendation (proposal only) |
 | --- | --- | --- |
@@ -667,8 +705,8 @@ Full analysis: `docs/handover/ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`.
 | 2 | Transformer | Check Coilcraft Hexa-Path 1+5 against §9; otherwise a custom winding |
 | 3 | R313 package | ≥ 0.5 W rating (2010/2512) |
 | 4 | 48 V output switch / bleeder; E-11 status | Option A: delete the switch placeholders, fit R312 10 kΩ ≥ 0.5 W ≥ 100 V |
-| 5 | Independent OVP | Hardware comparator on a separate divider to FLY_EN, plus supervisor ADC; 0.1 % dividers |
-| 6 | Runaway stop | Supervisor-controlled SPI gate + TIM3 rate check; ask PiezoMotor about a stored speed limit |
+| 5 | Independent OVP | Hardware comparator on a separate divider to FLY_EN (trip about 52.5 V, band 51.9–53.1 V with a 0.1 % divider), latched by the supervisor, plus supervisor ADC; R307 and the new divider with ≥ 75 V-rated resistors |
+| 6 | Runaway stop | OR gate on PMD_SS with a supervisor-controlled, pulled-up block input (blocked by default) + two-tier TIM3 rate check; ask PiezoMotor about a stored speed limit |
 | 7 | J703 | Confirm the JST rating; ≥ 100 V board connector + SH cable to the PMD401 |
 | 8 | HV clearance (P-03, CF-6) | Keep 0.6 mm on all layers; confirm against IPC-2221C |
 | 9 | Battery, connector, fuse, switch, charge current, E-10 | ≈ 0.5 A charge; size the path for the current limit; measure idle power |
@@ -741,7 +779,7 @@ The board went from 35 to 24 unconnected items. The remaining items are delibera
 | Schematic | Functionally complete except the STM32WBA55 supply/RF circuit, the 48 V output switch decision and the independent OVP |
 | PCB | **74 of 93 multi-pad nets (80 %) fully connected** (kicad-cli: 24 unconnected items on 19 nets); flyback copper provisional around a placeholder transformer. **Draft, not release** |
 | Verification | Software checks done (ERC/DRC/parity in CI, pin map, open-loop simulation). **Bench and manufacturing validation: 0 %** |
-| Fabrication readiness | **Not ready.** At least decisions 1, 2, 4, 5, 6 and 7 of §18, the footprint verification and a design review are prerequisites |
+| Fabrication readiness | **Not ready.** All eight critical owner decisions (final review §4.2), the remaining footprint verification (BQ25188 YBG, connectors), the remaining routing, a design review and Rev A bench results are prerequisites |
 
 The design is a sound, honest starting point for the successor engineer. It is not a working insulin pump, and it must never be connected to a person or an animal.
 

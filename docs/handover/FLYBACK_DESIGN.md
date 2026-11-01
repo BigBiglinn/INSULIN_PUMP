@@ -87,6 +87,6 @@ Candidates screened without success:
 4. Thermal check: R306 at 0.4 W, R305, Q301, D301.
 5. The input current at full PMD401 speed (about 2.0–2.3 A at 3.0 V) is at or above the E-05 2.1 A budget. Measure the PMD401 current at dosing speed (MT-07).
 6. 60 V fault ceiling (E-11, PROPOSED):
-   - The LM51551 OVP trips at 107–113 % of V<sub>REF</sub> on FB (SNVSB75E electrical characteristics). The output is therefore stopped at about 51.4–54.2 V while the FB divider is intact.
+   - The LM51551 OVP trips at 107–113 % of V<sub>REF</sub> on FB (SNVSB75E electrical characteristics). The output is therefore stopped at about 51.4–54.2 V with nominal divider and V<sub>REF</sub>; including V<sub>REF</sub> ±1 % and 1 % resistors the worst case is **49.9–55.9 V** (52.8 V typical; corrected 1 Nov 2026, `scripts/audit_calcs.py`) while the FB divider is intact.
    - **An open R307/R308 or a lifted FB pin removes this protection.** That single fault is not covered: no secondary OVP or clamp is fitted.
    - Note also that 54.2 V exceeds the PMD401's 50.4 V maximum (E-03). OVP protects against touch voltage, not against overvoltage at the driver.

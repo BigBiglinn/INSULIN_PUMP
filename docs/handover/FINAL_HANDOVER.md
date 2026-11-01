@@ -6,6 +6,8 @@
 >
 > **Not fabrication-ready.** No Gerbers have been generated. Nothing has been built or measured. A clean ERC or DRC report does not show that the circuit works.
 >
+> **Final engineering review (1 Nov 2026):** `FINAL_ENGINEERING_REVIEW_2026-11-01.md` contains the report audit, detailed decision proposals for the eight remaining critical issues, the classification of the 24 unconnected items and the **owner-decision list needed before fabrication**. Not fabrication-ready.
+>
 > **1 Nov 2026 update: real KiCad results.** kicad-cli 10.0.4 now runs in GitHub Actions (`.github/workflows/kicad-checks.yml`). On commit `ef091c3`:
 > - ERC: 6 intentional errors and 1 cosmetic warning.
 > - DRC: **0 copper errors**, **0 schematic-parity issues**, **24 unconnected**, plus silkscreen warnings.

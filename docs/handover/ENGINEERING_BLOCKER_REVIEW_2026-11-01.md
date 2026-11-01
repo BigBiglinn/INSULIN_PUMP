@@ -2,6 +2,8 @@
 
 1 Nov 2026. Covers the nine open critical items named by the owner on 1 Nov 2026. Board state: commit `ef091c3` (kicad-cli 10.0.4 in CI: ERC 6 intentional errors + 1 cosmetic warning; DRC 0 copper errors, 24 unconnected, silkscreen warnings only).
 
+> **Superseded in part by `FINAL_ENGINEERING_REVIEW_2026-11-01.md`** (same day). Corrections from that review: LM51551 OVP worst case is **49.9–55.9 V** (52.8 V typical), not 51.4–54.2 V; bleeder C<sub>max</sub> 180.8 µF (10 kΩ still meets E-11: 4.4 s worst case); the detailed decision proposals there replace the recommendations here.
+>
 > Bench-only prototype: water or 0.9 % saline, never on a person or an animal, no real insulin. Nothing below is a validation result. **No electrical or safety decision has been made in this review.** Every recommendation is a proposal for the owner.
 
 ## How to read the evidence labels
@@ -153,20 +155,20 @@ There is no LM51551 model in LTspice or ngspice [REPO].
 
 **Calculation [CALC]: bleeder for E-11**
 
-Assumption: +20 % tolerance on the electrolytic capacitors, a typical figure that is not from their datasheets because the capacitor series is TBD. That gives C<sub>max</sub> ≈ 181.7 µF.
+Assumption: +20 % tolerance on the electrolytic capacitors, a typical figure that is not from their datasheets because the capacitor series is TBD. That gives C<sub>max</sub> ≈ 180.8 µF.
 
 | Start voltage | Condition | R for < 5 V in 5 s |
 | --- | --- | --- |
-| 50.4 V | normal maximum | R ≤ 5 s / (181.7 µF × ln(50.4/5)) = **11.9 kΩ** |
-| 54.2 V | LM51551 OVP ceiling | R ≤ 5 s / (181.7 µF × ln(54.2/5)) = **11.5 kΩ** |
+| 50.4 V | normal maximum | R ≤ 5 s / (180.8 µF × ln(50.4/5)) = **12.0 kΩ** |
+| 55.9 V | LM51551 OVP worst case (corrected) | R ≤ 5 s / (180.8 µF × ln(55.9/5)) = **11.5 kΩ** |
 
 With **R312 = 10 kΩ**:
 
 | Check | Result |
 | --- | --- |
-| Discharge time, worst case (181.7 µF, from 54.2 V to 5 V) | 4.3 s |
+| Discharge time, worst case (180.8 µF, from 55.9 V to 5 V) | 4.4 s |
 | Discharge time, nominal (151.4 µF, from 50.4 V) | 3.5 s |
-| Dissipation while the rail is on | 0.25 W at 50.4 V; 0.29 W at 54.2 V |
+| Dissipation while the rail is on | 0.25 W at 50.4 V; 0.31 W at 55.9 V |
 | Added load on the flyback | about 5 mA (design load 100 mA) |
 
 Because E-04 keeps the rail on only while dosing, the energy cost is roughly 0.25 W × motor-on time. That is about 0.03 Wh/day at a 50 U/day profile (assumed; see §9).
@@ -192,10 +194,10 @@ Because E-04 keeps the rail on only while dosing, the energy cost is roughly 0.2
 
 **Already established**
 
-- The LM51551 over-voltage threshold is **107 / 110 / 113 % of VREF, sensed on FB** [REPO-DS SNVSB75E, electrical characteristics]. With VREF 0.99–1.01 V and R307/R308 = 470 kΩ/10 kΩ, the output stops at about 51.4–54.2 V [CALC] while the divider is intact.
+- The LM51551 over-voltage threshold is **107 / 110 / 113 % of VREF, sensed on FB** [REPO-DS SNVSB75E, electrical characteristics]. With VREF 0.99–1.01 V and R307/R308 = 470 kΩ/10 kΩ, the output stops at about 52.8 V typical, 49.9–55.9 V worst case [CALC, corrected in the final review] while the divider is intact.
 - **An open R307/R308 or a lifted FB pin removes all regulation and over-voltage protection.** The converter then runs at current limit (93–107 mV / 22 mΩ ≈ 4.2–4.9 A primary [REPO-DS]). The output can rise past the 100 V capacitor rating; nothing else limits it. This is an uncovered single fault.
 - **Setpoint tolerance [CALC]:** VREF ±1 % and 1 % resistors give 46.6–49.4 V static. That is inside E-03's 45.6–50.4 V, with about 1 V margin at the top (ripple 0.13–0.16 V p-p [SIM]).
-- The 54.2 V OVP ceiling is above the PMD401's 50.4 V upper limit (48 V ±5 %, PMD401 manual 150025-01 §3.2 [REPO-DS]). The LM51551's OVP protects touch voltage, not the driver.
+- The OVP ceiling (up to 55.9 V worst case) is above the PMD401's 50.4 V upper limit (48 V ±5 %, PMD401 manual 150025-01 §3.2 [REPO-DS]). The LM51551's OVP protects touch voltage, not the driver.
 
 **Options**
 
@@ -274,7 +276,7 @@ Because E-04 keeps the rail on only while dosing, the energy cost is roughly 0.2
 | --- | --- | --- |
 | Nominal | 48 V | 96 % |
 | E-03 maximum | 50.4 V | **exceeds** |
-| LM51551 OVP window | 51.4–54.2 V | **exceeds** |
+| LM51551 OVP window | 52.8 V typical, 49.9–55.9 V worst case (corrected) | **exceeds** |
 | E-11 fault ceiling | 60 V | **exceeds** |
 | E-06 80 % rule (PROPOSED) | would need a rating ≥ 63 V | **fails** |
 
@@ -310,7 +312,7 @@ Because E-04 keeps the rail on only while dosing, the energy cost is roughly 0.2
 | Node | Voltage |
 | --- | --- |
 | 48 V rail, normal | ≤ 50.4 V |
-| 48 V rail, OVP ceiling | 54.2 V |
+| 48 V rail, OVP ceiling | 55.9 V worst case |
 | 48 V rail, E-11 fault limit | 60 V |
 | FLY_SEC / D301 reverse | 88–97 V peaks in simulation (snubbed) |
 

@@ -153,3 +153,15 @@ Engineering choices within the owner's 1 Nov instruction (route ENC_I, ENC_VCC, 
 | 1 Nov | Python checker dangling test corrected (end point must lie in same-net copper) | kicad-cli run 1 exposed 3 dangling ends the 31 Oct checker missed | Done; the 31 Oct report carries a correction note |
 | 1 Nov | Stale BOM files replaced by kicad-cli exports from CI | The old files dated from Stage 2 (pre design v2) | Done (133 references, 79 lines) |
 | 1 Nov | Blocker recommendations written (`docs/handover/ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`) | Owner request | **All PROPOSED; owner decisions listed there** |
+
+## 9. Final engineering review, 1 Nov 2026
+
+Review only. **No schematic, PCB, part or value change; no owner decision taken.** Output: `docs/handover/FINAL_ENGINEERING_REVIEW_2026-11-01.md`.
+
+| Date | Item | Result | Status |
+| --- | --- | --- | --- |
+| 1 Nov | Audit of the engineering report (recomputed in `scripts/audit_calcs.py`) | 12 corrections (A1–A12). Most important: LM51551 OVP worst case 49.9–55.9 V (not 51.4–54.2 V); two diagram errors; simulation-agreement wording | Report, blocker review, FLYBACK_DESIGN, UNRESOLVED_ISSUES, A-21 corrected |
+| 1 Nov | CSD16340Q3 footprint compared with TI SLPS247E §7.2 | Matches within 5 µm; TI pitch would remove the Q301 DRU exception | Proposal (owner approval) |
+| 1 Nov | New issue U-38: R307 (0603, no MPN) working voltage at ≈ 47–55 V | Needs ≥ 75 V-rated part | OPEN |
+| 1 Nov | Eight decision proposals (ST power/RF, transformer, independent OVP, SPI-gate runaway stop, J703, switch vs bleeder, HV clearance, battery/fuse/charge) | Written with evidence, calculations, pros/cons, schematic/PCB changes, risks | **All PROPOSED; owner decisions in §4.2 of the review** |
+| 1 Nov | 24 unconnected items classified by trial routing (not committed) | 2 routable now (deferred), 21 blocked by datasheets (12 + 6 ST, 3 TI YBG), 1 by an owner decision | Documented |
