@@ -10,7 +10,7 @@ ngspice: `** ngspice-42 : Circuit level simulation program`
 | Case | Converged | Result |
 |---|---|---|
 | startup_3v0_100mA_css47n | yes | C305=47n; hiccup_trigger_t=0.0007785s; iin_end=-1.413; ipri_max=4.679; vd1_max=30.25; vds_max=20.93; vout_end=5.183; vout_max=6.875 |
-| startup_3v0_100mA_css2u2 | NO RESULT (run incomplete) | C305=2.2u; hiccup_trigger_t=not reached |
+| startup_3v0_100mA_css2u2 | yes | C305=2.2u; hiccup_trigger_t=0.2139s; iin_end=-1.943; ipri_max=4.185; pout_end=4.798; t_reg=0.2176s; vd1_max=88.6; vds_max=20.82; vout_end=47.99; vout_max=48.3; vpp_end=0.04521 |
 | loadstep_3v0 | yes | C305=2.2u; hiccup_trigger_t=0.006064s; iin_100ma=-2.975; iin_end=-0.07153; ipri_max=5.261; pout_100ma=4.66; vd1_max=89.43; vds_max=23.84; vmax_unload=49.26; vmin_step=47.01; vout_end=49.24; vout_max=49.26; vpp_100ma=0.4147; vpre=47.92 |
 | loadstep_3v4 | yes | C305=2.2u; hiccup_trigger_t=0.006245s; iin_100ma=-2.703; iin_end=-0.03175; ipri_max=4.617; pout_100ma=4.675; vd1_max=91.93; vds_max=22.73; vmax_unload=49.2; vmin_step=47.02; vout_end=49.17; vout_max=49.2; vpp_100ma=0.4693; vpre=47.93 |
 | loadramp_3v0_20ms | yes | C305=2.2u; hiccup_trigger_t=not reached; iin_100ma=-1.931; iin_end=-1.914; ipri_max=3.392; vd1_max=88.23; vds_max=18.43; vend_100ma=48.03; vmin_ramp=47.74; vout_end=48.02; vout_max=48.06; vpre=47.92 |

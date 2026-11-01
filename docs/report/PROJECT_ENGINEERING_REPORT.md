@@ -455,7 +455,8 @@ The 48 V converter is power-limited at low cell voltage: a 100 mA load **step** 
 
 | Item | Result | Label |
 | --- | --- | --- |
-| Startup (C305 2.2 µF, 3.0 V 100 mA and 4.2 V 6 mA) | No hiccup, PGOOD at ≈ 209 ms, peak 48.2–48.4 V | SIM (cycle model; switching-model cross-check §27.2) |
+| Startup (C305 2.2 µF), idle load (PMD401 parked, 6 mA) | No hiccup, PGOOD at ≈ 209 ms, peak ≤ 48.4 V | SIM (cycle model) |
+| Startup (C305 2.2 µF) into a full 100 mA load at 3.0 V | Reaches 47.5 V at 218 ms, but the hiccup rule triggers at **214 ms** (soft-start charge current 33 mA on top of full load exceeds the converter's capability at 3.0 V with losses); the lossless cycle model does not show this | SIM (switching model) → FW-R2: keep the PMD401 parked until PGOOD (already the hardware default) |
 | Load step 6 → 100 mA | Dip 0.9 V; **hiccup about 3 ms after the step at 3.0 and 3.4 V**, none at 4.2 V | SIM |
 | Same load as a 20 ms ramp, 3.0 V | Dip 0.19 V, no hiccup, η ≈ 83 % | SIM |
 | Unload 100 → 6 mA | Overshoot +1.3 V | SIM |
@@ -668,7 +669,7 @@ No route was forced through congested or high-voltage areas. Both new routes kee
 **Design review (1 Nov):** `docs/handover/FIRMWARE_DESIGN_REVIEW.md` checks each firmware function against the hardware and lists everything not implemented. New firmware requirements from this revision:
 
 - **FW-R1:** ramp PMD401 speed changes over ≥ 20 ms (§27.2).
-- **FW-R2:** after enabling 48 V, wait for FLY_PGOOD (soft start now about 220 ms).
+- **FW-R2:** after enabling 48 V, keep the PMD401 parked and wait for FLY_PGOOD (soft start now about 220 ms); starting into full load at 3.0 V trips hiccup [SIM].
 - **FW-R3:** send no SPI keep-alive when stopping; the timeout is the stop mechanism.
 - **FW-R4:** supervisor IWDG ≤ 10 ms.
 
@@ -816,7 +817,8 @@ Three model levels, each with stated scope. No model includes the real transform
 | --- | --- | --- |
 | C305 47 nF, 3.0 V, 100 mA | Current limit within 1 ms, **hiccup at 0.78 ms**; rail stuck below 9 V after 6 hiccup cycles in 0.6 s | level 2 + 3 |
 | C305 sweep, worst case (V<sub>CLTH</sub> 93 mV, I<sub>SS</sub> 11 µA, V<sub>REF</sub> 1.01, 3.0 V) | 47–680 nF: hiccup. 1 µF: hiccup at 100 mA. **≥ 1.5 µF: clean start** at 6 mA and 100 mA | level 3 |
-| 2.2 µF, 3.0 V, 100 mA / 4.2 V, 6 mA | PGOOD at 209 ms, V<sub>max</sub> 48.2–48.4 V, no hiccup | level 3 |
+| 2.2 µF, 3.0 V, 100 mA / 4.2 V, 6 mA | PGOOD at 209 ms, V<sub>max</sub> 48.2–48.4 V, no hiccup | level 3 (lossless) |
+| 2.2 µF, 3.0 V, **100 mA during startup**, switching model with losses (260 ms run) | 47.5 V at 218 ms, steady 47.99 V, ripple 45 mV, P<sub>out</sub> 4.80 W, I<sub>in</sub> 1.94 A; **hiccup trigger at 214 ms** (end of soft start). With the motor parked during startup (6 mA, the hardware default) the start is clean (level 3) | level 2 |
 | Load step 6 → 100 mA, 3.0 V | Dip to 47.0 V; **hiccup trigger 3.1 ms after the step** | level 2 |
 | Load step 6 → 100 mA, 3.4 V | Dip to 47.0 V; **hiccup trigger 3.2 ms after the step** | level 2 |
 | Load step 6 → 100 mA, 4.2 V | Dip to 47.1 V; no hiccup; unload overshoot +1.2 V | level 2 |

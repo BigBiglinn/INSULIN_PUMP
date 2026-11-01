@@ -22,7 +22,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 
 | ID | Was | Resolution |
 | --- | --- | --- |
-| U-39 | **Soft-start lock-out (found 1 Nov by simulation).** C305 47 nF gave a 4.7 ms soft start that needs 1.54 A to charge 151 µF; the LM51551 would run at current limit, arm its 64-cycle hiccup and never reach 48 V | C305 = 2.2 µF (220 ms; worst-case minimum 1.5 µF), commit `a768755`. CALC + SIM (`sim_flyback_cycle.py`, `sim_flyback_closedloop.py`); bench test PW-SS still needed |
+| U-39 | **Soft-start lock-out (found 1 Nov by simulation).** C305 47 nF gave a 4.7 ms soft start that needs 1.54 A to charge 151 µF; the LM51551 would run at current limit, arm its 64-cycle hiccup and never reach 48 V | C305 = 2.2 µF (220 ms; worst-case minimum 1.5 µF), commit `a768755`. CALC + SIM (`sim_flyback_cycle.py`, `sim_flyback_closedloop.py`); bench test PW-SS still needed. Residual: starting into a full 100 mA load at 3.0 V still trips hiccup at the end of the soft start (switching model); covered by keeping the motor parked until PGOOD (FW-R2, hardware default) |
 | (U-21 part) | ENC_I_M and VBAT_SENSE unconnected | Routed 1 Nov (`layout_fixes_3.py`); kicad-cli CI run 4: 22 unconnected |
 
 ## Critical
