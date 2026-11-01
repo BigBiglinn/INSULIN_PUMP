@@ -1,0 +1,67 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * piezo insulin pump v2 - 48 v flyback power stage, open loop (ngspice translation of flyback_openloop.cir)
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using transient initial conditions
+ Reference value :  5.00000e-03
+ Reference value :  5.19969e-03
+ Reference value :  5.39988e-03
+ Reference value :  5.59668e-03
+ Reference value :  5.79668e-03
+ Reference value :  5.99595e-03
+No. of Data Rows : 231361
+
+  Measurements for Transient Analysis
+
+vout_avg            =  6.143401e+01 from=  5.000000e-03 to=  6.000000e-03
+vout_pp             =  2.401013e+00 from=  5.000000e-03 to=  6.000000e-03
+ipri_pk             =  1.056299e+00 at=  5.009331e-03
+vds_max             =  1.750144e+01 at=  5.006112e-03
+vd1_rev_max         =  8.101485e+01 at=  5.003327e-03
+iin_avg             =  -3.578157e-01 from=  5.000000e-03 to=  6.000000e-03
+pout                =  7.863781e+00 from=  5.000000e-03 to=  6.000000e-03
+pclamp              =  3.521692e-01 from=  5.000000e-03 to=  6.000000e-03
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using transient initial conditions
+ Reference value :  5.00000e-03
+ Reference value :  5.20543e-03
+ Reference value :  5.40945e-03
+ Reference value :  5.61596e-03
+ Reference value :  5.82071e-03
+ Reference value :  5.98327e-03
+No. of Data Rows : 231361
+
+  Measurements for Transient Analysis
+
+vout_avg            =  6.143401e+01 from=  5.000000e-03 to=  6.000000e-03
+vout_pp             =  2.401013e+00 from=  5.000000e-03 to=  6.000000e-03
+ipri_pk             =  1.056299e+00 at=  5.009331e-03
+vds_max             =  1.750144e+01 at=  5.006112e-03
+vd1_rev_max         =  8.101485e+01 at=  5.003327e-03
+iin_avg             =  -3.578157e-01 from=  5.000000e-03 to=  6.000000e-03
+pout                =  7.863781e+00 from=  5.000000e-03 to=  6.000000e-03
+pclamp              =  3.521692e-01 from=  5.000000e-03 to=  6.000000e-03
+
+
+Total analysis time (seconds) = 16.669
+
+Total elapsed time (seconds) = 17.149 
+
+Total DRAM available = 16091.164 MB.
+DRAM currently available = 14823.137 MB.
+Maximum ngspice program size =  352.867 MB.
+Current ngspice program size =   78.547 MB.
+
+Shared ngspice pages =   11.191 MB.
+Text (code) pages =    6.156 MB.
+Stack = 0 bytes.
+Library pages =  333.609 MB.
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using SPARSE 1.3 as Direct Linear Solver

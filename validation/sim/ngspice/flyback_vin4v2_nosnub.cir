@@ -1,0 +1,50 @@
+* Piezo Insulin Pump v2 - 48 V flyback power stage, OPEN LOOP (ngspice translation of flyback_openloop.cir)
+* case vin4v2_nosnub: Vin=4.2 V, D=0.715, snubber=0
+.param fs=300k
+.param vin=4.2
+.param duty=0.715
+V1 vsrc 0 {vin}
+R1s vsrc vin 20m
+C1 vin c1n 220u
+R1c c1n 0 80m
+C2 vin c2n 20u
+R2c c2n 0 3m
+Lp vin lpn 7.3u
+Rlp lpn sw 15m
+Ls 0 lsn 182.5u
+Rls lsn sec 0.35
+K1 Lp Ls 0.99
+M1 sw g cs cs QCSD
+Rs cs 0 22m
+Vg gd 0 PULSE(0 {vin} 0 15n 15n {duty/fs-15n} {1/fs})
+Rg gd g 2
+Dc sw clamp DSCH
+Rc clamp vin 390
+Cc clamp vin 22n
+D1 sec out DHF
+Rsn sec snb 220
+Csn snb out 1f
+C3 out c3n 1.8u
+R3c c3n 0 5m
+C4 out c4n 47u
+R4c c4n 0 0.3
+Rload out 0 480
+.model QCSD VDMOS(Vto=1.1 Kp=40 Rd=2.5m Rs=1m Rg=1 Cgs=0.9n Cgdmax=0.6n Cgdmin=0.08n Cjo=0.6n Is=1e-12 BV=25)
+.model DSCH D(Is=2u Rs=40m N=1.15 Cjo=60p BV=100)
+.model DHF D(Is=5n Rs=60m N=1.6 Cjo=15p Tt=15n BV=200)
+.ic V(out)=48 V(clamp)=15
+.options method=gear reltol=1e-3
+.tran 5n 6m 5m uic
+.meas tran vout_avg AVG v(out) FROM=5m TO=6m
+.meas tran vout_pp PP v(out) FROM=5m TO=6m
+.meas tran ipri_pk MAX i(Lp) FROM=5m TO=6m
+.meas tran vds_max MAX v(sw) FROM=5m TO=6m
+.meas tran vd1_rev_max MAX par('v(out)-v(sec)') FROM=5m TO=6m
+.meas tran iin_avg AVG i(V1) FROM=5m TO=6m
+.meas tran pout AVG par('v(out)*v(out)/480') FROM=5m TO=6m
+.meas tran pclamp AVG par('(v(clamp)-v(vin))*(v(clamp)-v(vin))/390') FROM=5m TO=6m
+.control
+run
+wrdata /home/user/INSULIN_PUMP/validation/sim/ngspice/wave_vin4v2_nosnub.txt v(sw) i(Lp) v(out) v(out)-v(sec) v(clamp)
+.endc
+.end
