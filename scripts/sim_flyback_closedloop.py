@@ -59,6 +59,21 @@ CASES = {
     # worst case for hiccup: VCLTH minimum 93 mV [DS]
     "ssend_3v0_100mA_css3u3_vclth93": dict(vin=3.0, tstop=40e-3, load="480", css="3.3u", ic=(44.0, 1.65, 0.9167),
                                            vclth=0.093),
+    # same, but current-limit events inside the 140 ns minimum on-time (leading-edge spike) not counted for hiccup
+    # (0.0417 of the period = 140 ns): bounds the effect of an internal or external leading-edge blanking
+    "ssend_3v0_100mA_css2u2_vclth93_blank": dict(vin=3.0, tstop=30e-3, load="480", css="2.2u",
+                                                 ic=(44.0, 1.65, 0.9167), vclth=0.093, cl_blank=0.0417),
+    "ssend_3v0_100mA_css3u3_vclth93_blank": dict(vin=3.0, tstop=40e-3, load="480", css="3.3u",
+                                                 ic=(44.0, 1.65, 0.9167), vclth=0.093, cl_blank=0.0417),
+    # same, with the TI-recommended CS RC filter 100 ohm / 470 pF (proposal)
+    "ssend_3v0_100mA_css2u2_vclth93_csf": dict(vin=3.0, tstop=30e-3, load="480", css="2.2u",
+                                               ic=(44.0, 1.65, 0.9167), vclth=0.093, csfilter=("100", "470p")),
+    "ssend_3v0_100mA_css3u3_vclth93_csf": dict(vin=3.0, tstop=40e-3, load="480", css="3.3u",
+                                               ic=(44.0, 1.65, 0.9167), vclth=0.093, csfilter=("100", "470p")),
+    # steady 100 mA at minimum battery and minimum VCLTH, without and with the CS filter
+    "steady_3v0_100mA_vclth93": dict(vin=3.0, tstop=15e-3, load="480", css="2.2u", ic=(48.0, 1.63, 2.0), vclth=0.093),
+    "steady_3v0_100mA_vclth93_csf": dict(vin=3.0, tstop=15e-3, load="480", css="2.2u", ic=(48.0, 1.63, 2.0),
+                                         vclth=0.093, csfilter=("100", "470p")),
     "ssend_3v0_100mA_css4u7_vclth93": dict(vin=3.0, tstop=55e-3, load="480", css="4.7u", ic=(44.0, 1.65, 0.9167),
                                            vclth=0.093),
     # same 100 mA demand reached by a 20 ms ramp (firmware acceleration limit) instead of a step
@@ -77,7 +92,7 @@ CASES = {
     "short_3v0": dict(vin=3.0, tstop=1.6e-3, load="480", css="2.2u", short=1e-3, ic=(48.0, 1.628, 2.0)),
 }
 DEFAULTS = dict(css="2.2u", fb_open=None, ovp=None, short=None, ic=None, long=False, r306="220", c308="470n",
-                vclth=0.100)
+                vclth=0.100, cl_blank=0.0, csfilter=None)
 
 NET = """* Piezo Insulin Pump v2 - 48 V flyback, CLOSED-LOOP BEHAVIOURAL LM51551 model ({name})
 * see scripts/sim_flyback_closedloop.py header for every parameter source and assumption
@@ -96,7 +111,8 @@ Rls lsn sec 0.35
 K1 Lp Ls 0.99
 M1 sw g cs cs QCSD
 Rs cs 0 22m
-Dc sw clamp DSCH
+* CS pin node (optional RC filter)
+{cs_filter}Dc sw clamp DSCH
 * RCD clamp: R306/C308 as in design.py (re-tuned 1 Nov from 390 ohm / 22 nF; cases marked 'oldclamp' keep those)
 Rc clamp vin {r306}
 Cc clamp vin {c308}
@@ -141,13 +157,13 @@ C307 comp 0 3.3n
 Bclamp comp 0 I=v(comp) > 2.8 ? (v(comp)-2.8)/100 : (v(comp) < 1.0 ? (v(comp)-1.0)/100 : 0)
 * PWM latch: set at period start (tON(min)/blanking 140 ns = ramp < 0.0417), reset by PWM compare, CL or DMAX
 Bset set 0 V=v(ramp) < 0.0417 ? 1 : 0
-Brst rst 0 V=((v(cs) + 0.04*v(ramp) > 0.142*(v(comp)-1.0)) || (v(cs) > {vclth}) || (v(ramp) > 0.9)) ? 1 : 0
+Brst rst 0 V=((v(csp) + 0.04*v(ramp) > 0.142*(v(comp)-1.0)) || (v(csp) > {vclth}) || (v(ramp) > 0.9)) ? 1 : 0
 Bq q 0 V=(v(enok) < 0.5 || v(ovd) > 0.5) ? 0 : ((v(set) > 0.5) ? 1 : ((v(rst) > 0.5) ? 0 : (v(qd) > 0.5 ? 1 : 0)))
 Rq q qd 100
 Cq qd 0 10p
-Bcl cl 0 V=(v(cs) > {vclth}) ? 1 : 0
+Bcl cl 0 V=(v(csp) > {vclth}) ? 1 : 0
 * per-period current-limit flag (set by CL, cleared at period start) for the hiccup post-processor
-Bclf clf 0 V=(v(cl) > 0.5) ? 1 : ((v(ramp) < 0.01) ? 0 : (v(clfd) > 0.5 ? 1 : 0))
+Bclf clf 0 V=(v(cl) > 0.5 && v(ramp) > {cl_blank}) ? 1 : ((v(ramp) < 0.01) ? 0 : (v(clfd) > 0.5 ? 1 : 0))
 Rclf clf clfd 100
 Cclf clfd 0 10p
 Bg gd 0 V=v(qd) > 0.5 ? {vin} : 0
@@ -238,10 +254,16 @@ def build(name, c):
                    f"v(ss)={ss0} v(vin)={vin} v(vsrc)={vin} v(clamp)={vin + 15} v(en)=2.72 v(mcu)=3.3")
     # long runs: store only the needed vectors, interpolated to a 50 ns grid (a 260 ms run otherwise exhausts
     # memory); peak measurements of such a run are therefore on the 50 ns grid
+    if c["csfilter"]:
+        # TI-recommended CS RC filter (SNVSB75E 9.3.7: RF 10-200 ohm, CF 100 pF-2 nF; 3 RF CF < (1-D)/fsw)
+        rf, cf = c["csfilter"]
+        net_cs = f"Rcsf cs csp {rf}\nCcsf csp 0 {cf}\n"
+    else:
+        net_cs = "Rcsf cs csp 1m\n"
     long_opts = (".options interp\n.save v(out) v(mot) v(comp) v(ss) v(clfd) v(sw) v(sec) v(cl) i(Lp) i(V1) v(en)"
                  if c["long"] else "")
     tstep = "50n" if c["long"] else "100n"
-    return c, NET.format(r306=c["r306"], c308=c["c308"], vclth=c["vclth"], long_opts=long_opts, tstep=tstep, uic=uic, ic_line=ic_line, name=name, vin=c["vin"], load_expr=load, r307_expr=r307, ovp_block=ovp,
+    return c, NET.format(cs_filter=net_cs, cl_blank=c["cl_blank"], r306=c["r306"], c308=c["c308"], vclth=c["vclth"], long_opts=long_opts, tstep=tstep, uic=uic, ic_line=ic_line, name=name, vin=c["vin"], load_expr=load, r307_expr=r307, ovp_block=ovp,
                          tstop=c["tstop"], meas=meas_lines(c), wave=wave,
                          css=c["css"])
 
