@@ -336,6 +336,13 @@ def build():
     C(s, "C513", "100nF", "WBA_VDDRFPA", "GND", FP_C0402, status="DS", note="ECO1. VDDRFPA pin 43 (DS14127 Fig.15). At pin 43")
     s.add("FB502", "Device:FerriteBead", "47R@100MHz", {"1": "WBA_VDD11", "2": "WBA_VDDRFPA"}, FP_C, status="DS", mpn="Taiyo Yuden LSMGA160808T470RG",
           note="ECO1. VDDRFPA from the SMPS output; AN6373 sec.7 filter, as MB1803 L7. Remove if R513 is fitted")
+    # WBA55 rails fed through a bead/inductor or by the chip's own SMPS: no pin on these nets is a
+    # KiCad "power output", so each carries a marker. See UNRESOLVED_ISSUES.md (ERC section).
+    FLAG(s, "#FLG501", "WBA_VDDSMPS")
+    FLAG(s, "#FLG502", "WBA_VLXSMPS")
+    FLAG(s, "#FLG503", "WBA_VDD11")
+    FLAG(s, "#FLG504", "WBA_VDDHPA")
+    FLAG(s, "#FLG505", "WBA_VDDRFPA")
     R(s, "R513", "0R", "WBA_VDDRFPA", "+3V3", dnp=True, status="DS",
       note="ECO1. Alternative for +10 dBm: fit this and remove FB502 (AN6373 sec.7, DS14127 Fig.16). Never fit both")
     s.add("FL501", "pump_v2:MLPF-WB-04D3", "MLPF-WB-04D3", {"A1": "RF_MCU", "A3": "RF_ANT", "A2": "GND", "B1": "GND", "B2": "GND", "B3": "GND"},
