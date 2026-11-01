@@ -1,0 +1,53 @@
+# Read-only KiCad ERC/DRC for the Piezo Insulin Pump v2 Rev B handover board.
+# Runs the official KiCad Docker image on a GitHub-hosted runner, writes the reports as a build
+# artifact and prints a summary in the job log. It never modifies or commits the design files.
+# KiCad 10.0.3 (the version named in CLAUDE.md) has no Docker image; 10.0.4 is the nearest release.
+name: kicad-checks
+
+on:
+  push:
+    branches: [claude/friendly-keller-9gz8a8]
+    paths: ["hardware/kicad/**", ".github/workflows/kicad-checks.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  erc-drc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    container:
+      image: kicad/kicad:10.0.4-full
+      options: --user root
+    env:
+      HOME: /tmp/kicadhome
+    steps:
+      - uses: actions/checkout@v4
+      - name: KiCad version
+        run: kicad-cli --version
+      - name: ERC
+        run: |
+          mkdir -p out
+          kicad-cli sch erc --format report --severity-all -o out/pump_v2-erc.rpt hardware/kicad/pump_v2.kicad_sch || true
+          kicad-cli sch erc --format json --severity-all -o out/pump_v2-erc.json hardware/kicad/pump_v2.kicad_sch || true
+      - name: DRC (zones refilled in memory, board not saved, schematic parity)
+        run: |
+          kicad-cli pcb drc --format report --severity-all --schematic-parity --refill-zones \
+            -o out/pump_v2-drc.rpt hardware/kicad/pump_v2.kicad_pcb || true
+          kicad-cli pcb drc --format json --severity-all --schematic-parity --refill-zones \
+            -o out/pump_v2-drc.json hardware/kicad/pump_v2.kicad_pcb || true
+      - name: Summary
+        run: |
+          echo "== ERC summary"; grep -E "^\[" out/pump_v2-erc.rpt | sed 's/\]:.*/]/' | sort | uniq -c || true
+          grep -E "^\*\*" out/pump_v2-erc.rpt || true
+          echo "== DRC summary"; grep -E "^\[" out/pump_v2-drc.rpt | sed 's/\]:.*/]/' | sort | uniq -c | sort -rn || true
+          grep -E "^\*\*" out/pump_v2-drc.rpt || true
+          echo "== DRC copper errors (full text)"
+          awk 'BEGIN{RS="\n\\["} /^(clearance|shorting_items|tracks_crossing|hole_clearance|copper_edge_clearance|hole_to_hole|courtyards_overlap)/{print "["$0}' out/pump_v2-drc.rpt || true
+          echo "== Unconnected (full text)"
+          awk 'BEGIN{RS="\n\\["} /^unconnected_items/{print "["$0}' out/pump_v2-drc.rpt || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kicad-reports
+          path: out/
