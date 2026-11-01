@@ -9,14 +9,16 @@ ngspice: `** ngspice-42 : Circuit level simulation program`
 
 | Case | Converged | Result |
 |---|---|---|
-| startup_3v0_100mA_css47n | yes | C305=47n; hiccup_trigger_t=0.001144s; iin_end=-1.304; ipri_max=4.676; stack=0; vd1_max=29.04; vds_max=20.71; vout_end=4.346; vout_max=6.133 |
-| startup_3v0_100mA_css2u2 | yes | C305=2.2u; hiccup_trigger_t=not reacheds |
-| loadstep_3v0 | NO (do not use) | C305=2.2u; hiccup_trigger_t=not reacheds; stack=0 |
-| loadstep_4v2 | NO (do not use) | C305=2.2u; hiccup_trigger_t=not reacheds; stack=0 |
-| openfb_4v2_idle | NO (do not use) | C305=2.2u; hiccup_trigger_t=0.001376s; stack=0 |
-| ovptrip_4v2_52v5_10us | NO (do not use) | C305=2.2u; hiccup_trigger_t=0.0003221s; stack=0 |
-| ovptrip_4v2_53v1_50us | NO (do not use) | C305=2.2u; hiccup_trigger_t=not reacheds; stack=0 |
-| short_3v0 | NO (do not use) | C305=2.2u; hiccup_trigger_t=not reacheds; stack=0 |
+| startup_3v0_100mA_css47n | yes | C305=47n; hiccup_trigger_t=0.0007785s; iin_end=-1.413; ipri_max=4.679; vd1_max=30.25; vds_max=20.93; vout_end=5.183; vout_max=6.875 |
+| startup_3v0_100mA_css2u2 | NO RESULT (run incomplete) | C305=2.2u; hiccup_trigger_t=not reached |
+| loadstep_3v0 | yes | C305=2.2u; hiccup_trigger_t=0.006064s; iin_100ma=-2.975; iin_end=-0.07153; ipri_max=5.261; pout_100ma=4.66; vd1_max=89.43; vds_max=23.84; vmax_unload=49.26; vmin_step=47.01; vout_end=49.24; vout_max=49.26; vpp_100ma=0.4147; vpre=47.92 |
+| loadstep_3v4 | yes | C305=2.2u; hiccup_trigger_t=0.006245s; iin_100ma=-2.703; iin_end=-0.03175; ipri_max=4.617; pout_100ma=4.675; vd1_max=91.93; vds_max=22.73; vmax_unload=49.2; vmin_step=47.02; vout_end=49.17; vout_max=49.2; vpp_100ma=0.4693; vpre=47.93 |
+| loadramp_3v0_20ms | yes | C305=2.2u; hiccup_trigger_t=not reached; iin_100ma=-1.931; iin_end=-1.914; ipri_max=3.392; vd1_max=88.23; vds_max=18.43; vend_100ma=48.03; vmin_ramp=47.74; vout_end=48.02; vout_max=48.06; vpre=47.92 |
+| loadstep_4v2 | yes | C305=2.2u; hiccup_trigger_t=not reached; iin_100ma=-2.222; iin_end=-0.01181; ipri_max=4.005; pout_100ma=4.702; vd1_max=96.84; vds_max=21.88; vmax_unload=49.11; vmin_step=47.06; vout_end=49.07; vout_max=49.11; vpp_100ma=0.5156; vpre=47.93 |
+| openfb_4v2_idle | yes | C305=2.2u; hiccup_trigger_t=0.001376s; iin_end=-2.417; ipri_max=5.521; vd1_max=98.75; vd1_max_fault=98.75; vds_max=25.71; vds_max_fault=25.71; vout_end=48.54; vout_max=49.17 |
+| ovptrip_4v2_52v5_10us | yes | C305=2.2u; hiccup_trigger_t=0.0003221s; iin_end=-0.001241; ipri_max=5.548; t_en_low=0.000452s; t_trip=0.000452s; vd1_max=103.7; vd1_max_fault=103.7; vds_max=25.73; vds_max_fault=25.73; vout_end=52.5; vout_max=52.57; vout_max_after=52.57 |
+| ovptrip_4v2_53v1_50us | yes | C305=2.2u; hiccup_trigger_t=0.0003289s; iin_end=-0.009531; ipri_max=5.54; t_en_low=0.0004955s; t_trip=0.0004955s; vd1_max=104.5; vd1_max_fault=104.5; vds_max=25.73; vds_max_fault=25.73; vout_end=53.14; vout_max=53.21; vout_max_after=53.21 |
+| short_3v0 | yes | C305=2.2u; hiccup_trigger_t=0.001235s; iin_end=-1.105; ipri_max=4.951; ipri_max_short=4.951; vd1_max=87.75; vd1_max_short=78.56; vds_max=22.14; vds_max_short=22.14; vout_end=19.94; vout_max=48.02 |
 
 Keys: vout_* = +48V_MOT/+48V_RAW (V); ipri = primary current (A); vds = Q301 drain (V); vd1 = D301 reverse
 (V); iin = battery current (A, negative = drawn); t_reg = time to reach 47.5 V; t_50v4 etc = time the rail first

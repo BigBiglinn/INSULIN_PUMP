@@ -352,15 +352,18 @@ def report(results):
          "| Case | Converged | Result |", "|---|---|---|"]
     for name, c, m, ok in results:
         try:
-            m["hiccup_trigger_t"] = hiccup_trigger(name)
+            m["hiccup_trigger_t"] = hiccup_trigger(name) if ok else None
         except Exception:
             m["hiccup_trigger_t"] = None
         bits = [f"C305={c['css']}"]
         for k in sorted(m):
             v = m[k]
-            unit = "s" if (k.startswith("t_") or k.endswith("_t")) else ""
+            if k == "stack":
+                continue
+            unit = "s" if (k.startswith("t_") or k.endswith("_t")) and v is not None else ""
             bits.append(f"{k}={fmt(v, 4)}{unit}")
-        L.append(f"| {name} | {'yes' if ok else 'NO (do not use)'} | {'; '.join(bits)} |")
+        state = "yes" if ok else ("NO RESULT (run incomplete)" if ok is None else "NO (do not use)")
+        L.append(f"| {name} | {state} | {'; '.join(bits)} |")
     L += ["", "Keys: vout_* = +48V_MOT/+48V_RAW (V); ipri = primary current (A); vds = Q301 drain (V); vd1 = D301 reverse",
           "(V); iin = battery current (A, negative = drawn); t_reg = time to reach 47.5 V; t_50v4 etc = time the rail first",
           "crosses that voltage; cl_frac = fraction of time CS is above VCLTH; t_trip = independent-OVP latch time;",
@@ -378,6 +381,8 @@ def parse_case(name):
     for m in re.finditer(r"^(\w+)\s*=\s*([-+0-9.eE]+)", txt, re.M):
         meas[m.group(1).lower()] = float(m.group(2))
     ok = "simulation(s) aborted" not in txt and "Timestep too small" not in txt
+    if "Total elapsed time" not in txt and not meas:
+        ok = None                                  # run still in progress or killed: no result
     return name, c, meas, ok
 
 
