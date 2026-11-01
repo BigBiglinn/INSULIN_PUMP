@@ -3720,7 +3720,7 @@
 			(at 203.23 69.85 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "2.2uF/10V X7R"
+		(property "Value" "4.7uF/10V X5R"
 			(at 203.23 72.39 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -3744,7 +3744,7 @@
 			(at 203.23 74.62 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "tSS = CSS x VREF / ISS = 2.2 uF x 1 V / 10 uA = 220 ms (SNVSB75E 9.3.3). 1 Nov: 47 nF hit current limit and hiccup (9.3.10) charging 151 uF; min 1.5 uF worst case (sim_flyback_cycle.py)"
+		(property "Note" "tSS = CSS x VREF / ISS = 4.7 uF x 1 V / 10 uA = 470 ms (SNVSB75E 9.3.3), +-20 % part. 47 nF locked in hiccup; 2.2/3.3 uF fail full-load start-up at the tolerance corner (sim_flyback_closedloop.py ssend_*); 4.7 uF passes with the CS RC filter (approval decision 19). Start-up is with the motor parked (FW-R2)"
 			(at 200.66 71.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

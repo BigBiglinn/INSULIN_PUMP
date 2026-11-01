@@ -45,6 +45,8 @@ CASES = {
     # 10 Oct soft start (47 nF): current limit within the first ms -> hiccup trigger (post-processed)
     "startup_3v0_100mA_css47n": dict(vin=3.0, tstop=2e-3, load="480", css="47n"),
     # corrected soft start (2.2 uF): full start-up, switching level (long run)
+    # adopted C305 4.7 uF, full start-up at minimum battery with the motor parked (FW-R2), lean storage
+    "startup_3v0_6mA_css4u7": dict(vin=3.0, tstop=0.55, load="8000", css="4.7u", long=True),
     "startup_3v0_100mA_css2u2": dict(vin=3.0, tstop=0.26, load="480", css="2.2u", long=True),
     # load steps from regulation
     "loadstep_3v0": dict(vin=3.0, tstop=11e-3, load="(time<3m || time>7m) ? 8000 : 480", css="2.2u",
@@ -74,6 +76,32 @@ CASES = {
     "steady_3v0_100mA_vclth93": dict(vin=3.0, tstop=15e-3, load="480", css="2.2u", ic=(48.0, 1.63, 2.0), vclth=0.093),
     "steady_3v0_100mA_vclth93_csf": dict(vin=3.0, tstop=15e-3, load="480", css="2.2u", ic=(48.0, 1.63, 2.0),
                                          vclth=0.093, csfilter=("100", "470p")),
+    # parked-motor load during start-up (FW-R2), minimum VCLTH, present circuit
+    "ssend_3v0_6mA_css2u2_vclth93": dict(vin=3.0, tstop=30e-3, load="8000", css="2.2u", ic=(44.0, 1.25, 0.9167),
+                                         vclth=0.093),
+    # load steps with the CS filter (and at minimum VCLTH)
+    "loadstep_3v0_csf": dict(vin=3.0, tstop=11e-3, load="(time<3m || time>7m) ? 8000 : 480", css="2.2u",
+                             ic=(48.0, 1.186, 2.0), csfilter=("100", "470p")),
+    "loadstep_3v0_vclth93_csf": dict(vin=3.0, tstop=11e-3, load="(time<3m || time>7m) ? 8000 : 480", css="2.2u",
+                                     ic=(48.0, 1.186, 2.0), vclth=0.093, csfilter=("100", "470p")),
+    "loadstep_3v4_csf": dict(vin=3.4, tstop=11e-3, load="(time<3m || time>7m) ? 8000 : 480", css="2.2u",
+                             ic=(48.0, 1.17, 2.0), csfilter=("100", "470p")),
+    "loadramp_3v0_20ms_vclth93": dict(vin=3.0, tstop=30e-3, css="2.2u", ic=(48.0, 1.186, 2.0), vclth=0.093,
+                                      load="v(mot)/(6m + 94m*min(1, max(0, (time-3m)/20m)))"),
+    "loadramp_3v0_20ms_vclth93_csf": dict(vin=3.0, tstop=30e-3, css="2.2u", ic=(48.0, 1.186, 2.0), vclth=0.093,
+                                          load="v(mot)/(6m + 94m*min(1, max(0, (time-3m)/20m)))",
+                                          csfilter=("100", "470p")),
+    # tolerance corner: 2.2 uF -20 % and ISS +10 % (11 uA) -> equivalent 1.6 uF at 10 uA
+    "ssend_3v0_100mA_css1u6_vclth93_csf": dict(vin=3.0, tstop=25e-3, load="480", css="1.6u",
+                                               ic=(44.0, 1.65, 0.9167), vclth=0.093, csfilter=("100", "470p")),
+    # 3.3 uF -20 % with ISS +10 % -> 2.4 uF equivalent
+    "ssend_3v0_100mA_css2u4_vclth93_csf": dict(vin=3.0, tstop=30e-3, load="480", css="2.4u",
+                                               ic=(44.0, 1.65, 0.9167), vclth=0.093, csfilter=("100", "470p")),
+    # 4.7 uF -20 % with ISS +10 % -> 3.4 uF equivalent
+    "ssend_3v0_100mA_css3u4_vclth93_csf": dict(vin=3.0, tstop=40e-3, load="480", css="3.4u",
+                                               ic=(44.0, 1.65, 0.9167), vclth=0.093, csfilter=("100", "470p")),
+    "ssend_3v0_6mA_css1u6_vclth93": dict(vin=3.0, tstop=25e-3, load="8000", css="1.6u", ic=(44.0, 1.25, 0.9167),
+                                         vclth=0.093),
     "ssend_3v0_100mA_css4u7_vclth93": dict(vin=3.0, tstop=55e-3, load="480", css="4.7u", ic=(44.0, 1.65, 0.9167),
                                            vclth=0.093),
     # same 100 mA demand reached by a 20 ms ramp (firmware acceleration limit) instead of a step

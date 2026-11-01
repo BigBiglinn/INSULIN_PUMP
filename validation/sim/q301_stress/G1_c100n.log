@@ -39,17 +39,17 @@ iin_avg             =  -2.773852e+00 from=  1.500000e-04 to=  2.500000e-04
 pout_avg            =  3.937573e-01 from=  1.500000e-04 to=  2.500000e-04
 
 
-Total analysis time (seconds) = 5.721
+Total analysis time (seconds) = 3.725
 
-Total elapsed time (seconds) = 5.956 
+Total elapsed time (seconds) = 3.948 
 
 Total DRAM available = 16091.164 MB.
-DRAM currently available = 10240.867 MB.
-Maximum ngspice program size =   87.520 MB.
-Current ngspice program size =   78.449 MB.
+DRAM currently available = 13907.660 MB.
+Maximum ngspice program size =   88.516 MB.
+Current ngspice program size =   79.395 MB.
 
-Shared ngspice pages =   10.383 MB.
+Shared ngspice pages =   10.332 MB.
 Text (code) pages =    6.156 MB.
 Stack = 0 bytes.
-Library pages =   68.262 MB.
+Library pages =   69.258 MB.
 

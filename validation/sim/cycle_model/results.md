@@ -32,29 +32,29 @@ with no hiccup event.
 
 | Case | hiccups | PGOOD (ms) | Vmax (V) | Vend (V) |
 |---|---|---|---|---|
-| 47 nF, 3.0 V, 6 mA | 6 | not reached | 8.69 | 8.39 |
-| 47 nF, 3.0 V, 100 mA | 6 | not reached | 2.95 | 1.57 |
-| 47 nF, 4.2 V, 6 mA | 6 | not reached | 9.28 | 8.95 |
-| 2.2 uF, 3.0 V, 100 mA | 0 | 209.08053691275168 | 48.24 | 48.00 |
-| 2.2 uF, 4.2 V, 6 mA | 0 | 209.03355704697987 | 48.37 | 48.00 |
-| 2.2 uF, 4.2 V, 0 to 100 mA step at 0.4 s (min after step 47.07 V) | 0 | 209.03355704697987 | 48.45 | 48.00 |
+| 47 nF, 3.0 V, 6 mA | 9 | not reached | 10.55 | 9.64 |
+| 47 nF, 3.0 V, 100 mA | 10 | not reached | 2.95 | 2.85 |
+| 47 nF, 4.2 V, 6 mA | 9 | not reached | 11.28 | 10.30 |
+| 4.7 uF, 3.0 V, 100 mA | 0 | 446.5973154362417 | 48.11 | 48.00 |
+| 4.7 uF, 4.2 V, 6 mA | 0 | 446.54697986577185 | 48.20 | 48.00 |
+| 4.7 uF, 4.2 V, 0 to 100 mA step at 0.7 s (min after step 47.07 V) | 0 | 446.54697986577185 | 48.45 | 48.00 |
 
-## 3. Single fault: R307 (FB top resistor) opens at t = 0.5 s (after PGOOD, C305 = 2.2 uF), Vin 4.2 V
+## 3. Single fault: R307 (FB top resistor) opens at t = 0.8 s (after PGOOD, C305 = 4.7 uF), Vin 4.2 V
 
 FB is pulled to 0 V by R308, so the LM51551 internal OVP (sensed on FB) cannot act. Hiccup is the only
 on-chip limit. 'no load' = PMD401 unpowered/disconnected and no bleeder (C leakage only, 10 MOhm).
 
 | Load | Independent OVP | Vmax (V) | time >50.4 V after fault (ms) | >55.9 V | >60 V | >100 V | hiccups | OVP trip (ms after fault) |
 |---|---|---|---|---|---|---|---|---|
-| no load | none | 100.7 | 111.65 | 336.13 | 449.58 | 2915.69 | 27 | - |
-| no load | 52.5 V / 10 us | 52.5 | 111.65 | - | - | - | 1 | 113.443 |
-| no load | 53.1 V / 50 us | 53.2 | 111.65 | - | - | - | 2 | 223.926 |
-| bleeder R312 10k only | none | 49.0 | - | - | - | - | 27 | - |
-| bleeder R312 10k only | 52.5 V / 10 us | 49.0 | - | - | - | - | 27 | - |
-| bleeder R312 10k only | 53.1 V / 50 us | 49.0 | - | - | - | - | 27 | - |
-| PMD401 idle 6 mA | none | 48.8 | - | - | - | - | 27 | - |
-| PMD401 idle 6 mA | 52.5 V / 10 us | 48.8 | - | - | - | - | 27 | - |
-| PMD401 idle 6 mA | 53.1 V / 50 us | 48.8 | - | - | - | - | 27 | - |
+| no load | none | 117.5 | 111.79 | 226.55 | 340.01 | 2036.43 | 27 | - |
+| no load | 52.5 V / 10 us | 52.5 | 111.79 | - | - | - | 1 | 113.805 |
+| no load | 53.1 V / 50 us | 53.2 | 111.79 | - | - | - | 1 | 114.329 |
+| bleeder R312 10k only | none | 54.7 | 115.03 | - | - | - | 27 | - |
+| bleeder R312 10k only | 52.5 V / 10 us | 52.5 | 115.03 | - | - | - | 6 | 680.523 |
+| bleeder R312 10k only | 53.1 V / 50 us | 53.2 | 115.03 | - | - | - | 8 | 906.832 |
+| PMD401 idle 6 mA | none | 49.8 | - | - | - | - | 27 | - |
+| PMD401 idle 6 mA | 52.5 V / 10 us | 49.8 | - | - | - | - | 27 | - |
+| PMD401 idle 6 mA | 53.1 V / 50 us | 49.8 | - | - | - | - | 27 | - |
 | 100 mA | none | 48.3 | - | - | - | - | 27 | - |
 | 100 mA | 52.5 V / 10 us | 48.3 | - | - | - | - | 27 | - |
 | 100 mA | 53.1 V / 50 us | 48.3 | - | - | - | - | 27 | - |
@@ -62,7 +62,7 @@ on-chip limit. 'no load' = PMD401 unpowered/disconnected and no bleeder (C leaka
 Over 3 s after the fault. A rail that keeps rising in hiccup steps (no load) will exceed any rating
 given enough time: the hiccup ratchet only slows the runaway.
 
-## 4. Output short (0.1 Ohm) at 0.5 s, Vin 3.0 V, C305 = 2.2 uF
+## 4. Output short (0.1 Ohm) at 0.8 s, Vin 3.0 V, C305 = 4.7 uF
 
 - hiccup events after the short in 0.5 s: 5; first at 0.225 ms after the short.
 - on-time per hiccup burst is 64 CL cycles = 215 us out of 110.2 ms (burst duty 0.19 %), so average input current in a sustained short is far below the

@@ -1,0 +1,61 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * piezo insulin pump v2 - 48 v flyback, closed-loop behavioural lm51551 model (loadramp_3v0_20ms_vclth93_csf)
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using transient initial conditions
+
+No. of Data Rows : 4252072
+
+  Measurements for Transient Analysis
+
+vout_end            =  4.803074e+01 from=  2.900000e-02 to=  3.000000e-02
+vout_max            =  4.806849e+01 at=  2.870134e-02
+ipri_max            =  3.521026e+00 at=  2.592622e-02
+vds_max             =  1.566562e+01 at=  1.136745e-05
+vd1_max             =  8.832975e+01 at=  2.668799e-02
+iin_end             =  -1.995889e+00 from=  2.900000e-02 to=  3.000000e-02
+vmin_ramp           =  4.773060e+01 at=  6.294503e-03
+vpre                =  4.789987e+01 from=  2.000000e-03 to=  3.000001e-03
+vend_100ma          =  4.803210e+01 from=  2.800000e-02 to=  3.000000e-02
+iin_100ma           =  -2.016937e+00 from=  2.800000e-02 to=  3.000000e-02
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using transient initial conditions
+
+No. of Data Rows : 4252072
+
+  Measurements for Transient Analysis
+
+vout_end            =  4.803074e+01 from=  2.900000e-02 to=  3.000000e-02
+vout_max            =  4.806849e+01 at=  2.870134e-02
+ipri_max            =  3.521026e+00 at=  2.592622e-02
+vds_max             =  1.566562e+01 at=  1.136745e-05
+vd1_max             =  8.832975e+01 at=  2.668799e-02
+iin_end             =  -1.995889e+00 from=  2.900000e-02 to=  3.000000e-02
+vmin_ramp           =  4.773060e+01 at=  6.294503e-03
+vpre                =  4.789987e+01 from=  2.000000e-03 to=  3.000001e-03
+vend_100ma          =  4.803210e+01 from=  2.800000e-02 to=  3.000000e-02
+iin_100ma           =  -2.016937e+00 from=  2.800000e-02 to=  3.000000e-02
+
+
+Total analysis time (seconds) = 115.494
+
+Total elapsed time (seconds) = 116.242 
+
+Total DRAM available = 16091.164 MB.
+DRAM currently available = 11959.230 MB.
+Maximum ngspice program size = 2014.156 MB.
+Current ngspice program size = 2005.297 MB.
+
+Shared ngspice pages =   10.500 MB.
+Text (code) pages =    6.156 MB.
+Stack = 0 bytes.
+Library pages = 1994.898 MB.
+

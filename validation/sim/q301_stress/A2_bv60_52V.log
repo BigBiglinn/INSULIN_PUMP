@@ -14,11 +14,11 @@ No. of Data Rows : 129332
   Measurements for Transient Analysis
 
 vds_max             =  2.623844e+01 at=  1.018587e-04
-vclamp_avg          =  1.591318e+01 from=  1.000000e-04 to=  2.500000e-04
-ipk                 =  5.592322e+00 at=  2.282474e-04
-p_r306              =  6.630932e-01 from=  1.000000e-04 to=  2.500000e-04
+vclamp_avg          =  1.591317e+01 from=  1.000000e-04 to=  2.500000e-04
+ipk                 =  5.592323e+00 at=  2.282474e-04
+p_r306              =  6.630927e-01 from=  1.000000e-04 to=  2.500000e-04
 vout_end            =  5.227712e+01 from=  2.300000e-04 to=  2.500000e-04
-iin_avg             =  -2.525054e+00 from=  1.500000e-04 to=  2.500000e-04
+iin_avg             =  -2.525050e+00 from=  1.500000e-04 to=  2.500000e-04
 pout_avg            =  3.410335e-01 from=  1.500000e-04 to=  2.500000e-04
 
 Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
@@ -31,25 +31,25 @@ No. of Data Rows : 129332
   Measurements for Transient Analysis
 
 vds_max             =  2.623844e+01 at=  1.018587e-04
-vclamp_avg          =  1.591318e+01 from=  1.000000e-04 to=  2.500000e-04
-ipk                 =  5.592322e+00 at=  2.282474e-04
-p_r306              =  6.630932e-01 from=  1.000000e-04 to=  2.500000e-04
+vclamp_avg          =  1.591317e+01 from=  1.000000e-04 to=  2.500000e-04
+ipk                 =  5.592323e+00 at=  2.282474e-04
+p_r306              =  6.630927e-01 from=  1.000000e-04 to=  2.500000e-04
 vout_end            =  5.227712e+01 from=  2.300000e-04 to=  2.500000e-04
-iin_avg             =  -2.525054e+00 from=  1.500000e-04 to=  2.500000e-04
+iin_avg             =  -2.525050e+00 from=  1.500000e-04 to=  2.500000e-04
 pout_avg            =  3.410335e-01 from=  1.500000e-04 to=  2.500000e-04
 
 
-Total analysis time (seconds) = 6.919
+Total analysis time (seconds) = 4.032
 
-Total elapsed time (seconds) = 7.176 
+Total elapsed time (seconds) = 4.159 
 
 Total DRAM available = 16091.164 MB.
-DRAM currently available = 7025.555 MB.
-Maximum ngspice program size =   87.527 MB.
-Current ngspice program size =   78.355 MB.
+DRAM currently available = 13840.473 MB.
+Maximum ngspice program size =   88.520 MB.
+Current ngspice program size =   79.500 MB.
 
-Shared ngspice pages =   10.281 MB.
+Shared ngspice pages =   10.434 MB.
 Text (code) pages =    6.156 MB.
 Stack = 0 bytes.
-Library pages =   68.270 MB.
+Library pages =   69.262 MB.
 

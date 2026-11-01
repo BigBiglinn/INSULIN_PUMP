@@ -1,0 +1,57 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * piezo insulin pump v2 - 48 v flyback, closed-loop behavioural lm51551 model (ssend_3v0_6ma_css2u2_vclth93)
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using transient initial conditions
+
+No. of Data Rows : 3993240
+
+  Measurements for Transient Analysis
+
+vout_end            =  4.792659e+01 from=  2.900000e-02 to=  3.000000e-02
+vout_max            =  4.824386e+01 at=  2.036183e-02
+ipri_max            =  2.359690e+00 at=  4.745001e-03
+vds_max             =  1.765537e+01 at=  1.752623e-06
+vd1_max             =  8.480512e+01 at=  1.575845e-02
+iin_end             =  -7.426987e-02 from=  2.900000e-02 to=  3.000000e-02
+vpp_end             =  4.226286e-02 from=  2.900000e-02 to=  3.000000e-02
+t_reg47             =   1.58220e-02
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using transient initial conditions
+
+No. of Data Rows : 3993240
+
+  Measurements for Transient Analysis
+
+vout_end            =  4.792659e+01 from=  2.900000e-02 to=  3.000000e-02
+vout_max            =  4.824386e+01 at=  2.036183e-02
+ipri_max            =  2.359690e+00 at=  4.745001e-03
+vds_max             =  1.765537e+01 at=  1.752623e-06
+vd1_max             =  8.480512e+01 at=  1.575845e-02
+iin_end             =  -7.426987e-02 from=  2.900000e-02 to=  3.000000e-02
+vpp_end             =  4.226286e-02 from=  2.900000e-02 to=  3.000000e-02
+t_reg47             =   1.58220e-02
+
+
+Total analysis time (seconds) = 98.704
+
+Total elapsed time (seconds) = 99.380 
+
+Total DRAM available = 16091.164 MB.
+DRAM currently available = 12528.992 MB.
+Maximum ngspice program size = 1981.035 MB.
+Current ngspice program size = 1884.910 MB.
+
+Shared ngspice pages =   10.453 MB.
+Text (code) pages =    6.156 MB.
+Stack = 0 bytes.
+Library pages = 1961.777 MB.
+

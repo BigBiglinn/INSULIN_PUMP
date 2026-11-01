@@ -9,47 +9,47 @@ Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
 Using SPARSE 1.3 as Direct Linear Solver
 Using transient initial conditions
 
-No. of Data Rows : 130405
+No. of Data Rows : 130384
 
   Measurements for Transient Analysis
 
-vds_max             =  2.392134e+01 at=  2.025875e-04
-vclamp_avg          =  1.488073e+01 from=  1.000000e-04 to=  2.500000e-04
-ipk                 =  5.479614e+00 at=  2.014405e-04
-p_r306              =  1.476880e+00 from=  1.000000e-04 to=  2.500000e-04
-vout_end            =  5.615215e+01 from=  2.300000e-04 to=  2.500000e-04
-iin_avg             =  -2.744210e+00 from=  1.500000e-04 to=  2.500000e-04
-pout_avg            =  3.935527e-01 from=  1.500000e-04 to=  2.500000e-04
+vds_max             =  2.402719e+01 at=  2.363509e-04
+vclamp_avg          =  1.498295e+01 from=  1.000000e-04 to=  2.500000e-04
+ipk                 =  5.425274e+00 at=  5.714481e-05
+p_r306              =  1.497232e+00 from=  1.000000e-04 to=  2.500000e-04
+vout_end            =  5.615679e+01 from=  2.300000e-04 to=  2.500000e-04
+iin_avg             =  -2.853021e+00 from=  1.500000e-04 to=  2.500000e-04
+pout_avg            =  3.935829e-01 from=  1.500000e-04 to=  2.500000e-04
 
 Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
 
 Using SPARSE 1.3 as Direct Linear Solver
 Using transient initial conditions
 
-No. of Data Rows : 130405
+No. of Data Rows : 130384
 
   Measurements for Transient Analysis
 
-vds_max             =  2.392134e+01 at=  2.025875e-04
-vclamp_avg          =  1.488073e+01 from=  1.000000e-04 to=  2.500000e-04
-ipk                 =  5.479614e+00 at=  2.014405e-04
-p_r306              =  1.476880e+00 from=  1.000000e-04 to=  2.500000e-04
-vout_end            =  5.615215e+01 from=  2.300000e-04 to=  2.500000e-04
-iin_avg             =  -2.744210e+00 from=  1.500000e-04 to=  2.500000e-04
-pout_avg            =  3.935527e-01 from=  1.500000e-04 to=  2.500000e-04
+vds_max             =  2.402719e+01 at=  2.363509e-04
+vclamp_avg          =  1.498295e+01 from=  1.000000e-04 to=  2.500000e-04
+ipk                 =  5.425274e+00 at=  5.714481e-05
+p_r306              =  1.497232e+00 from=  1.000000e-04 to=  2.500000e-04
+vout_end            =  5.615679e+01 from=  2.300000e-04 to=  2.500000e-04
+iin_avg             =  -2.853021e+00 from=  1.500000e-04 to=  2.500000e-04
+pout_avg            =  3.935829e-01 from=  1.500000e-04 to=  2.500000e-04
 
 
-Total analysis time (seconds) = 5.449
+Total analysis time (seconds) = 3.521
 
-Total elapsed time (seconds) = 5.641 
+Total elapsed time (seconds) = 3.673 
 
 Total DRAM available = 16091.164 MB.
-DRAM currently available = 9905.301 MB.
-Maximum ngspice program size =   90.977 MB.
-Current ngspice program size =   82.008 MB.
+DRAM currently available = 13917.609 MB.
+Maximum ngspice program size =   91.984 MB.
+Current ngspice program size =   82.891 MB.
 
-Shared ngspice pages =   10.484 MB.
+Shared ngspice pages =   10.363 MB.
 Text (code) pages =    6.156 MB.
 Stack = 0 bytes.
-Library pages =   71.719 MB.
+Library pages =   72.727 MB.
 

@@ -1,0 +1,18 @@
+start: 22 unconnected pairs
+rip-up: 4 I2C_SCL escape items at U101.B1
+  I2C_SDA (U101.C1): routed 15.8 mm, 0 vias, min clearance 0.199 mm (CHG_TS)
+  -> 22 unconnected pairs
+  I2C_SCL (U101.B1): routed 12.9 mm, 0 vias, min clearance 0.200 mm (I2C_SDA)
+  -> 21 unconnected pairs
+  CHG_INT_N (U101.A1): routed 9.4 mm, 1 vias, min clearance 0.191 mm (I2C_SCL)
+  -> 20 unconnected pairs
+  VBAT_FUSED (U101.C2) at 0.25 mm: NO ROUTE found (left unconnected)
+  VBAT_FUSED (U101.C2) at 0.2 mm: routed 8.9 mm, 2 vias, min clearance 0.188 mm (GND)
+  -> 19 unconnected pairs
+step dangling clean-up: removed 0 dead-end items
+  zone re-clip: In2.Cu VBAT: 1 fill polygons -> 1 (0 islands dropped)
+  zone re-clip: In2.Cu +3V3: 3 fill polygons -> 3 (0 islands dropped)
+  zone re-clip: In1.Cu GND: 3 fill polygons -> 3 (0 islands dropped)
+  zone re-clip: B.Cu GND: 8 fill polygons -> 9 (0 islands dropped)
+  zone re-clip: F.Cu GND: 30 fill polygons -> 31 (1 islands dropped)
+end: 19 unconnected pairs, 0 dangling; saved /home/user/INSULIN_PUMP/hardware/kicad/pump_v2.kicad_pcb

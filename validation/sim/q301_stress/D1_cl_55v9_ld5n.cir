@@ -16,7 +16,10 @@ K1 Lp Ls 0.99
 Ld sw drn 5n
 M1 drn g cs cs QCSD
 Rs cs 0 22m
+* CS pin node (optional RC filter)
+Rcsf cs csp 1m
 Dc sw clamp DSCH
+* RCD clamp: R306/C308 as in design.py (re-tuned 1 Nov from 390 ohm / 22 nF; cases marked 'oldclamp' keep those)
 Rc clamp vin 390
 Cc clamp vin 22n
 D1 sec out DHF
@@ -60,13 +63,13 @@ C307 comp 0 3.3n
 Bclamp comp 0 I=v(comp) > 2.8 ? (v(comp)-2.8)/100 : (v(comp) < 1.0 ? (v(comp)-1.0)/100 : 0)
 * PWM latch: set at period start (tON(min)/blanking 140 ns = ramp < 0.0417), reset by PWM compare, CL or DMAX
 Bset set 0 V=v(ramp) < 0.0417 ? 1 : 0
-Brst rst 0 V=((v(cs) + 0.04*v(ramp) > 0.142*(v(comp)-1.0)) || (v(cs) > 0.107) || (v(ramp) > 0.9)) ? 1 : 0
+Brst rst 0 V=((v(csp) + 0.04*v(ramp) > 0.142*(v(comp)-1.0)) || (v(csp) > 0.107) || (v(ramp) > 0.9)) ? 1 : 0
 Bq q 0 V=(v(enok) < 0.5 || v(ovd) > 0.5) ? 0 : ((v(set) > 0.5) ? 1 : ((v(rst) > 0.5) ? 0 : (v(qd) > 0.5 ? 1 : 0)))
 Rq q qd 100
 Cq qd 0 10p
-Bcl cl 0 V=(v(cs) > 0.107) ? 1 : 0
+Bcl cl 0 V=(v(csp) > 0.107) ? 1 : 0
 * per-period current-limit flag (set by CL, cleared at period start) for the hiccup post-processor
-Bclf clf 0 V=(v(cl) > 0.5) ? 1 : ((v(ramp) < 0.01) ? 0 : (v(clfd) > 0.5 ? 1 : 0))
+Bclf clf 0 V=(v(cl) > 0.5 && v(ramp) > 0.0) ? 1 : ((v(ramp) < 0.01) ? 0 : (v(clfd) > 0.5 ? 1 : 0))
 Rclf clf clfd 100
 Cclf clfd 0 10p
 Bg gd 0 V=v(qd) > 0.5 ? 4.2 : 0

@@ -33,8 +33,8 @@ LS = N * N * LP
 RS = 0.022
 COUT = 1.8e-6 * 2 + 47e-6 + 100e-6          # C309, C310 (DC-bias derated as in the SPICE runs), C311, C702
 R307, R308 = 470e3, 10e3
-CSS_NEW = 2.2e-6                              # corrected C305 (section 1 of results.md)
-TF = 0.5                                      # fault time, after PGOOD with CSS_NEW
+CSS_NEW = 4.7e-6                              # adopted C305 (1 Nov final; see report §27.2)
+TF = 0.8                                      # fault time, after PGOOD with CSS_NEW
 
 
 def simulate(vin=3.0, t_end=0.5, load=lambda t, v: 8000.0, css=47e-9, iss=10e-6, vref=1.0, vclth=0.100,
@@ -175,13 +175,13 @@ def run_all():
     for name, kw in (("47 nF, 3.0 V, 6 mA", dict(css=47e-9, vin=3.0, load=lambda t, v: 8000.0)),
                      ("47 nF, 3.0 V, 100 mA", dict(css=47e-9, vin=3.0, load=lambda t, v: 480.0)),
                      ("47 nF, 4.2 V, 6 mA", dict(css=47e-9, vin=4.2, load=lambda t, v: 8000.0)),
-                     ("2.2 uF, 3.0 V, 100 mA", dict(css=CSS_NEW, vin=3.0, load=lambda t, v: 480.0)),
-                     ("2.2 uF, 4.2 V, 6 mA", dict(css=CSS_NEW, vin=4.2, load=lambda t, v: 8000.0)),
-                     ("2.2 uF, 4.2 V, 0 to 100 mA step at 0.4 s", dict(css=CSS_NEW, vin=4.2,
-                      load=lambda t, v: 8000.0 if t < 0.4 else 480.0))):
-        r = simulate(t_end=0.6, sample=100, **kw)
+                     ("4.7 uF, 3.0 V, 100 mA", dict(css=CSS_NEW, vin=3.0, load=lambda t, v: 480.0)),
+                     ("4.7 uF, 4.2 V, 6 mA", dict(css=CSS_NEW, vin=4.2, load=lambda t, v: 8000.0)),
+                     ("4.7 uF, 4.2 V, 0 to 100 mA step at 0.7 s", dict(css=CSS_NEW, vin=4.2,
+                      load=lambda t, v: 8000.0 if t < 0.7 else 480.0))):
+        r = simulate(t_end=1.0, sample=100, **kw)
         if "step" in name:
-            sel = r["t"] > 0.4
+            sel = r["t"] > 0.7
             name += f" (min after step {r['v'][sel].min():.2f} V)"
         res["start:" + name] = r
         L.append(f"| {name} | {len(r['hiccups'])} | {(r['pgood_t']*1e3) if r['pgood_t'] is not None else 'not reached'}"
@@ -189,7 +189,7 @@ def run_all():
     L.append("")
 
     # ---- 3. open R307 (single fault), from regulated state ----
-    L += ["## 3. Single fault: R307 (FB top resistor) opens at t = 0.5 s (after PGOOD, C305 = 2.2 uF), Vin 4.2 V", "",
+    L += [f"## 3. Single fault: R307 (FB top resistor) opens at t = {TF} s (after PGOOD, C305 = 4.7 uF), Vin 4.2 V", "",
           "FB is pulled to 0 V by R308, so the LM51551 internal OVP (sensed on FB) cannot act. Hiccup is the only",
           "on-chip limit. 'no load' = PMD401 unpowered/disconnected and no bleeder (C leakage only, 10 MOhm).", "",
           "| Load | Independent OVP | Vmax (V) | time >50.4 V after fault (ms) | >55.9 V | >60 V | >100 V | hiccups | OVP trip (ms after fault) |",
@@ -216,7 +216,7 @@ def run_all():
     r = simulate(vin=3.0, t_end=TF + 0.5, load=lambda t, v: 480.0 if t < TF else 0.1, css=CSS_NEW, sample=50)
     res["short"] = r
     hs = [h for h in r["hiccups"] if h >= TF]
-    L += [f"## 4. Output short (0.1 Ohm) at {TF} s, Vin 3.0 V, C305 = 2.2 uF", "",
+    L += [f"## 4. Output short (0.1 Ohm) at {TF} s, Vin 3.0 V, C305 = 4.7 uF", "",
           f"- hiccup events after the short in 0.5 s: {len(hs)}; first at {((hs[0]-TF)*1e3):.3f} ms after the short."
           if hs else "- no hiccup event after the short (unexpected - check)",
           f"- on-time per hiccup burst is 64 CL cycles = {64*T*1e6:.0f} us out of {(64+32768)*T*1e3:.1f} ms "
@@ -233,12 +233,12 @@ def plots(res):
     fig, ax = plt.subplots(2, 1, figsize=(9, 8))
     for key, lab in (("start:47 nF, 3.0 V, 100 mA", "C305 47 nF (10 Oct value), 100 mA"),
                      ("start:47 nF, 3.0 V, 6 mA", "C305 47 nF (10 Oct value), 6 mA"),
-                     ("start:2.2 uF, 3.0 V, 100 mA", "C305 2.2 uF (corrected), 100 mA")):
+                     ("start:4.7 uF, 3.0 V, 100 mA", "C305 4.7 uF (adopted), 100 mA")):
         r = res[key]
         ax[0].plot(r["t"] * 1e3, r["v"], label=lab)
-    ax[0].set_xlim(0, 600)
+    ax[0].set_xlim(0, 1000)
     ax[0].set_xlabel("time (ms)"); ax[0].set_ylabel("+48V_RAW (V)"); ax[0].grid(alpha=.3); ax[0].legend(fontsize=8)
-    ax[0].set_title("Startup at Vin 3.0 V: hiccup lock-out with 47 nF, clean start with 2.2 uF (cycle model)")
+    ax[0].set_title("Startup at Vin 3.0 V: hiccup lock-out with 47 nF, clean start with 4.7 uF (cycle model, lossless)")
     for key, lab in (("openfb:no load:None", "no load, no independent OVP"),
                      ("openfb:PMD401 idle 6 mA:None", "6 mA, no independent OVP"),
                      ("openfb:no load:(52.5, 1e-05)", "no load, proposed OVP 52.5 V")):
@@ -247,7 +247,7 @@ def plots(res):
     ax[1].set_xlim(0, TF + 3.0)
     ax[1].axhline(50.4, ls="--", c="r", lw=.8); ax[1].axhline(100, ls="--", c="r", lw=.8)
     ax[1].set_xlabel("time (s)"); ax[1].set_ylabel("+48V_RAW (V)"); ax[1].grid(alpha=.3); ax[1].legend(fontsize=8)
-    ax[1].set_title(f"R307 opens at {TF} s, Vin 4.2 V, C305 2.2 uF (hiccup ratchet; cycle model)")
+    ax[1].set_title(f"R307 opens at {TF} s, Vin 4.2 V, C305 4.7 uF (hiccup ratchet; cycle model)")
     fig.suptitle("Cycle-by-cycle model - simulation, not measurement", fontsize=9)
     fig.tight_layout()
     fig.savefig(os.path.join(FIG, "sim_cycle_flyback.png"), dpi=110)
