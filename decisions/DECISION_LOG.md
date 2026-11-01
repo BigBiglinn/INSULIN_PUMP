@@ -178,3 +178,13 @@ Engineering-level work under the owner's master execution prompt ("implement eve
 | 1 Nov | STM32WBA55 SMPS mode and LSE use recommended from ST's public reference firmware (`validation/logs/st_cubewba_evidence.md`) | st.com unreachable; ST's GitHub repositories reachable | Recommendation only (decision 12) |
 | 1 Nov | New findings U-40 to U-44 (load-step hiccup, Q301 margin at current limit, unload overshoot vs 50.4 V, supervisor VBAT, PMD401 timeout bound) | Simulation and calculation | On the approval sheet (decisions 6, 8, 9, 14, 2) |
 | 1 Nov | Report restructured to 36 sections; approval sheet, fabrication blockers, firmware review, file index, progress log | Phase G/H | Done |
+
+## 11. Final completion pass, 1 Nov 2026
+
+Engineering-level changes only; no owner decision taken.
+
+| Date | Item | Rationale / evidence | Status |
+| --- | --- | --- | --- |
+| 1 Nov | Q301 stress investigation (`scripts/sim_q301_stress.py`, 33 cases) | The 25.7 V seen earlier is physical in the model (not numerical, not a breakdown artefact) and occurs only in current-limit operation; worst corner 31.4 V | Done; results in `validation/sim/q301_stress/results.md` |
+| 1 Nov | **R306 390 Ω → 220 Ω (2512, 1 W), C308 22 nF → 470 nF/50 V X7R (0805)** | The 22 nF clamp capacitor rippled several volts per cycle at current limit. The re-tune lowers the worst-corner peak to 22.1 V (ideal layout) and normal operation to 14.7–15.3 V, for about 1.7 points of efficiency (87.2 % vs 88.9 % at 3.0 V/100 mA). Insensitive to C308 derating to 220 nF (22.6 V). Interim values: re-tune with the real T301 | Done, commit `36f06f2`, CI to confirm |
+| 1 Nov | Q301 25 V part declared **not acceptable for fabrication** | With 2–5 nH drain-loop inductance the peak is 28–33 V at the worst corner; a 25 V abs max cannot be guaranteed | Replacement ≥ 40 V = owner decision 9 (fabrication blocker) |
