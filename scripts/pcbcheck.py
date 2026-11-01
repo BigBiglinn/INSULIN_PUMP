@@ -335,7 +335,7 @@ def dangling(b, groups=None):
             l = it.layers[0]
             tr, its = trees[l]
             for end in (it.data["p0"], it.data["p1"]):
-                pt = Point(end).buffer(it.data["w"] / 2 * 0.9)
+                pt = Point(end).buffer(1e-3)   # the end point itself must lie in other same-net copper
                 hit = [its[j] for j in tr.query(pt, predicate="intersects") if its[j].idx != it.idx and its[j].net == it.net]
                 if not hit:
                     res.append(("track_dangling", it, end))

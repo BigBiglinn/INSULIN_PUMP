@@ -220,7 +220,7 @@ def step_prune_dangling(S):
                         ends = 0
                         for e in (i.data["p0"], i.data["p1"]):
                             from shapely.geometry import Point
-                            pe = Point(e).buffer(i.data["w"] / 2 * 0.9)
+                            pe = Point(e).buffer(1e-3)   # end point must lie in other same-net copper
                             if any(alive[j] is not i and pe.intersects(alive[j].geom) and set(alive[j].layers) & set(i.layers)
                                    for j in tree.query(pe)):
                                 ends += 1

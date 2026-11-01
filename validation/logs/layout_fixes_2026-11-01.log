@@ -1,0 +1,31 @@
+start: 28 unconnected pairs, 3 dangling items (corrected test)
+step dangling clean-up: removed 9 dead-end items
+    ENC_VCC track ((171.757, 104.422), (171.845, 104.334))
+    ENC_VCC track ((171.845, 104.334), (171.845, 102.795))
+    WBA_VDDRFPA track ((160.5645, 128.482), (160.676, 128.5935))
+    WBA_VDDRFPA track ((155.582, 128.482), (160.5645, 128.482))
+    WBA_VDDRFPA track ((155.582, 128.482), (148.819, 128.482))
+    MAIN_SWCLK track ((141.395, 120.32), (141.509, 120.32))
+    MAIN_SWCLK track ((140.842, 119.768), (141.395, 120.32))
+    MAIN_SWCLK track ((140.842, 111.937), (140.842, 119.768))
+    MAIN_SWCLK track ((134.635, 105.73), (140.842, 111.937))
+  -> 28 unconnected pairs, 0 dangling
+  ENC_VCC (JP701.2 -> C701.1/J705.3): routed 17.8 mm, 2 vias, min clearance 0.186 mm (PMD_5V)
+  -> 27 unconnected pairs
+  ENC_I (J705.1 -> D709.1/R710.2): routed 47.7 mm, 1 vias, min clearance 0.195 mm (ENC_A)
+  -> 26 unconnected pairs
+step RS485: removing the 6-segment RS485_A stub R714.1 -> U701.6 (29 mm of copper outline/2)
+  R714 -> (197.50, 130.50, 90 deg) between U701 and J704 (DNP, value 120R unchanged)
+  RS485_A (R714.1 -> U701.6/J704.3): routed 0.8 mm, 1 vias, min clearance 0.857 mm (RS485_B)
+  RS485_B (R714.2 -> U701.7/J704.2): routed 0.8 mm, 1 vias, min clearance 0.203 mm (ENC_VCC)
+  -> 25 unconnected pairs
+  +3V3 (R302.2 -> +3V3 network): routed 30.7 mm, 1 vias, min clearance 0.201 mm (SUP_VETO)
+  -> 24 unconnected pairs
+step dangling clean-up: removed 0 dead-end items
+  silk R714: reference text -> (196.50, 127.25)
+  zone re-clip: In2.Cu VBAT: 1 fill polygons -> 1 (0 islands dropped)
+  zone re-clip: In2.Cu +3V3: 3 fill polygons -> 3 (0 islands dropped)
+  zone re-clip: In1.Cu GND: 3 fill polygons -> 3 (0 islands dropped)
+  zone re-clip: B.Cu GND: 7 fill polygons -> 8 (2 islands dropped)
+  zone re-clip: F.Cu GND: 28 fill polygons -> 30 (5 islands dropped)
+end: 24 unconnected pairs, 0 dangling; saved /tmp/claude-0/-home-user-INSULIN-PUMP/144ca2f2-10c8-5906-b8d5-21debfac7b81/scratchpad/s2.kicad_pcb

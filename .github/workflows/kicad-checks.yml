@@ -24,8 +24,15 @@ jobs:
       HOME: /tmp/kicadhome
     steps:
       - uses: actions/checkout@v4
-      - name: KiCad version
-        run: kicad-cli --version
+      - name: KiCad version and default library tables
+        run: |
+          kicad-cli --version
+          # A fresh HOME has no global symbol/footprint library tables, which makes every symbol and
+          # footprint report a library issue. Install KiCad's shipped default tables first.
+          mkdir -p "$HOME/.config/kicad/10.0"
+          cp /usr/share/kicad/template/sym-lib-table "$HOME/.config/kicad/10.0/" || true
+          cp /usr/share/kicad/template/fp-lib-table "$HOME/.config/kicad/10.0/" || true
+          ls -la "$HOME/.config/kicad/10.0/"
       - name: ERC
         run: |
           mkdir -p out
@@ -47,6 +54,10 @@ jobs:
           awk 'BEGIN{RS="\n\\["} /^(clearance|shorting_items|tracks_crossing|hole_clearance|copper_edge_clearance|hole_to_hole|courtyards_overlap)/{print "["$0}' out/pump_v2-drc.rpt || true
           echo "== Unconnected (full text)"
           awk 'BEGIN{RS="\n\\["} /^unconnected_items/{print "["$0}' out/pump_v2-drc.rpt || true
+      - name: Full reports (archived in validation/ from this log)
+        run: |
+          echo "=====BEGIN ERC REPORT====="; cat out/pump_v2-erc.rpt; echo "=====END ERC REPORT====="
+          echo "=====BEGIN DRC REPORT====="; cat out/pump_v2-drc.rpt; echo "=====END DRC REPORT====="
       - uses: actions/upload-artifact@v4
         with:
           name: kicad-reports
