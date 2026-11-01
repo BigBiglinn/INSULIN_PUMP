@@ -88,7 +88,11 @@ def hand(spec_path):
               f"{pcbnew.ToMM(fp.GetPosition().y):.2f})")
     for r in spec.get("move", []):               # footprint moves; pads keep their nets
         fp = b.FindFootprintByReference(r["ref"])
+        if r.get("flip"):
+            fp.Flip(fp.GetPosition(), pcbnew.FLIP_DIRECTION_TOP_BOTTOM)
         fp.SetPosition(V(*r["at"]))
+        if "rot" in r:
+            fp.SetOrientationDegrees(r["rot"])
         print(f"moved {r['ref']} to {r['at']}")
     for t in spec.get("tracks", []):
         ni = netinfo(b, t["net"])

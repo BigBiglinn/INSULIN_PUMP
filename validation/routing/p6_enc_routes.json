@@ -1,0 +1,21 @@
+{
+ "tracks": [],
+ "vias": [],
+ "failed": [
+  {
+   "net": "ENC_I_M",
+   "w": 0.2,
+   "from": [
+    145.25,
+    114.45,
+    "F"
+   ],
+   "to": [
+    172.7,
+    109.775,
+    "F"
+   ],
+   "why": "Owner ruling 1 Nov 2026: B.Cu crossing under the RF line, In1 GND between"
+  }
+ ]
+}
