@@ -10,7 +10,7 @@ claims; their pinout only matches the placeholder footprint.
 import os
 import re
 
-from kicadlib import FP_DIR, PROJECT_DIR
+from kicadlib import FP_DIR, PROJECT_DIR, dump, get_symbol
 
 LIB = "pump_v2"
 F = '(effects (font (size 1.27 1.27)))'
@@ -120,17 +120,31 @@ def symbols():
         "PLACEHOLDER level-shift N-MOSFET (>=100 V class), part and package TBD",
         False, ["1"], ["2"], ["3"]))
     out.append(box_symbol(
-        "XFMR_FLYBACK_TBD", "T", "XFMR_TBD", "pump_v2:XFMR_PLACEHOLDER_4P", "",
-        "PLACEHOLDER flyback transformer, part number / turns ratio TBD (OPEN B.16)",
-        left=[("1", "P_DOT", "passive"), None, ("2", "P", "passive")],
-        right=[("3", "S_DOT", "passive"), None, ("4", "S", "passive")], width=10.16))
+        "HPH6-0090L", "T", "HPH6-0090L", "pump_v2:Coilcraft_HPH6", "https://www.coilcraft.com/getmedia/936400ae-3cbc-4381-aed1-ae101ef7a35e/hexa-path.pdf",
+        "Coilcraft Hexa-Path six 1:1 windings; dots on pins 1-6 (Doc 613-1)",
+        left=[(str(i), f"{i}_DOT", "passive") for i in (1, 2, 3, 4, 5, 6)],
+        right=[(str(i), str(i), "passive") for i in (12, 11, 10, 9, 8, 7)], width=15.24,
+        extra_props=[("MPN", "HPH6-0090L")]))
+    out.append(box_symbol(
+        "MLPF-WB-04D3", "FL", "MLPF-WB-04D3", "pump_v2:ST_MLPF-WB-04D3", "https://www.st.com/resource/en/datasheet/mlpf-wb-04d3.pdf",
+        "ST 2.4 GHz low-pass filter matched to STM32WBA QFN/BGA, 50 ohm output (DS14446)",
+        left=[("A1", "IN", "passive"), ("A3", "OUT", "passive")],
+        right=[("A2", "GND4", "passive"), ("B1", "GND3", "passive"), ("B2", "GND2", "passive"), ("B3", "GND1", "passive")],
+        width=15.24, extra_props=[("MPN", "MLPF-WB-04D3")]))
     return out
+
+
+def max3485_symbol():
+    """KiCad's MAX3485 is a derived symbol; a flattened project copy keeps the schematic and library in step."""
+    sym = get_symbol("Interface_UART:MAX3485")
+    sym[1] = '"MAX3485"'
+    return dump(sym, 1)
 
 
 def write_symbol_lib():
     os.makedirs(PROJECT_DIR, exist_ok=True)
     txt = ('(kicad_symbol_lib\n\t(version 20241209)\n\t(generator "pump_v2_gen")\n'
-           '\t(generator_version "10.0")\n' + "\n".join(symbols()) + "\n)\n")
+           '\t(generator_version "10.0")\n' + "\n".join(list(symbols()) + [max3485_symbol()]) + "\n)\n")
     with open(os.path.join(PROJECT_DIR, LIB + ".kicad_sym"), "w", encoding="utf8") as f:
         f.write(txt)
 
@@ -199,11 +213,51 @@ def write_ybg_placeholder(d):
         f.write("\n".join(lines) + "\n")
 
 
+def write_simple_fp(d, name, descr, w, h, pad_lines, crt=0.25):
+    """Footprint with a body outline and courtyard. w and h are half sizes."""
+    lines = fp_header(name, descr)
+    lines += [fp_prop("Reference", "REF**", 0, -h - 1.0, "F.SilkS"),
+              fp_prop("Value", name, 0, h + 1.0, "F.Fab"),
+              fp_rect(-w, -h, w, h, "F.Fab", 0.1), fp_rect(-w - crt, -h - crt, w + crt, h + crt, "F.CrtYd", 0.05),
+              f'\t(fp_circle (center {-w - 0.35:g} {-h:g}) (end {-w - 0.25:g} {-h:g}) (stroke (width 0.1) (type solid)) (fill yes) (layer "F.SilkS"))']
+    lines += pad_lines + ["\t(embedded_fonts no)", ")"]
+    with open(os.path.join(d, name + ".kicad_mod"), "w", encoding="utf8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
+def smd(n, x, y, sx, sy):
+    return f'\t(pad "{n}" smd rect (at {x:g} {y:g}) (size {sx:g} {sy:g}) (layers "F.Cu" "F.Paste" "F.Mask"))'
+
+
+def write_eco1_footprints(d):
+    # Coilcraft Doc 613-5 recommended land: pads 2.75 x 2.00, 28.2 mm between inner edges, 3.75 mm pitch
+    x = 28.2 / 2 + 2.75 / 2
+    ys = [-9.375, -5.625, -1.875, 1.875, 5.625, 9.375]
+    pads = [smd(i + 1, -x, ys[i], 2.75, 2.0) for i in range(6)] + [smd(12 - i, x, ys[i], 2.75, 2.0) for i in range(6)]
+    write_simple_fp(d, "Coilcraft_HPH6", "Coilcraft HP6/HPH6 land per Doc 613-5; body 32.65 x 26.75 x 13.6 mm max", 14.9, 13.375, pads, crt=0.1)
+    # DS14446 Table 4 / Fig. 15: 0.32 mm copper, 0.22 mm solder-mask-defined opening and stencil
+    e, f = 0.25, 0.577
+    bumps = {"A1": (-e, -f), "B1": (e, -f), "A2": (-e, 0), "B2": (e, 0), "A3": (-e, f), "B3": (e, f)}
+    pads = [f'\t(pad "{n}" smd circle (at {px:g} {py:g}) (size 0.32 0.32) (layers "F.Cu" "F.Paste" "F.Mask") '
+            f'(solder_mask_margin -0.05) (solder_paste_margin -0.05))' for n, (px, py) in bumps.items()]
+    write_simple_fp(d, "ST_MLPF-WB-04D3", "ST MLPF-WB-04D3 CSPG 6 bumps, land per DS14446 sec.3", 0.5, 0.8, pads)
+    # Pad geometry read from ST's MB1803 B-01 board file (components X2 and X1)
+    pads = [smd(1, -0.525, -0.375, 0.75, 0.6), smd(2, 0.525, -0.375, 0.75, 0.6),
+            smd(3, 0.525, 0.375, 0.75, 0.6), smd(4, -0.525, 0.375, 0.75, 0.6)]
+    write_simple_fp(d, "Crystal_NX1612SA", "NDK NX1612SA 1.6 x 1.2 mm, land from ST MB1803 B-01", 0.8, 0.6, pads)
+    pads = [smd(1, -0.55, 0, 0.5, 1.0), smd(2, 0.55, 0, 0.5, 1.0)]
+    write_simple_fp(d, "Crystal_NX1610SE", "NDK NX1610SE 1.6 x 1.0 mm, land from ST MB1803 B-01", 0.8, 0.5, pads)
+    # BZX84 SOT-23: physical pin 3 = cathode, pin 1 = anode. Pads are numbered for Device:D_Zener (1 = K, 2 = A).
+    pads = [smd(2, -0.95, 1.1, 1.0, 1.0), smd(1, 0, -1.1, 1.0, 1.0)]
+    write_simple_fp(d, "SOT-23_Zener_A1_K3", "SOT-23 zener: pad 1 (K) at package pin 3, pad 2 (A) at package pin 1; package pin 2 NC", 0.7, 1.5, pads)
+
+
 def write_footprints():
     d = os.path.join(PROJECT_DIR, LIB + ".pretty")
     os.makedirs(d, exist_ok=True)
     write_xfmr_placeholder(d)
     write_ybg_placeholder(d)
+    write_eco1_footprints(d)
 
 
 if __name__ == "__main__":

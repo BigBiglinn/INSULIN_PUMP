@@ -1,0 +1,45 @@
+RIP NETS []: 0 items
+STUBS on moving T301
+  removed via GND (208.28, 173.85)
+  removed via VBAT (208.28, 166.35)
+STUBS on moving J703
+  removed seg GND F.Cu (208.35, 149.80)-(207.20, 151.00)
+  removed via GND (207.20, 151.00)
+  removed seg GND F.Cu (208.35, 146.20)-(207.20, 145.00)
+  removed via GND (207.20, 145.00)
+STUBS on moving D301
+STUBS on moving C309
+  removed seg GND F.Cu (186.57, 149.25)-(186.57, 151.20)
+  removed via GND (186.57, 151.20)
+STUBS on moving C310
+  removed seg GND F.Cu (191.57, 149.25)-(192.75, 149.25)
+  removed via GND (192.75, 149.25)
+STUBS on moving R313
+STUBS on moving C312
+STUBS on moving C311
+STUBS on moving C702
+STUBS on moving C308
+  removed seg VBAT F.Cu (176.05, 150.20)-(176.05, 151.52)
+  removed via VBAT (176.05, 151.52)
+STUBS on moving D302
+STUBS on moving D304
+  removed via VBAT (167.50, 149.00)
+STUBS on moving R306
+  removed seg VBAT F.Cu (175.96, 147.00)-(175.96, 149.28)
+  removed via VBAT (175.96, 149.28)
+MOVE T301: (192.80, 164.47, 180) -> (192.6, 164.075, 180)
+MOVE J703: (206.47, 148.00, 90) -> (206.47, 147.2, 90)
+MOVE D301: (179.60, 149.60, 180) -> (179.6, 149.2, 180)
+MOVE C309: (185.10, 149.25, 0) -> (185.1, 148.85, 0)
+MOVE C310: (190.10, 149.25, 0) -> (190.1, 148.85, 0)
+MOVE R313: (179.30, 146.25, 0) -> (179.3, 145.85, 0)
+MOVE C312: (183.90, 146.25, 0) -> (183.9, 145.85, 0)
+MOVE C311: (176.50, 139.70, 0) -> (176.7, 139.3, 0)
+MOVE C702: (188.80, 140.20, 0) -> (188.8, 139.8, 0)
+MOVE C308: (175.10, 150.20, 0) -> (174.3, 153.1, 90)
+MOVE D302: (174.50, 157.40, -90) -> (174.3, 157.4, -90)
+MOVE D304: (165.50, 149.00, 0) -> (172.0, 147.2, 0)
+MOVE R306: (173.00, 147.00, 0) -> (165.5, 149.0, 0)
+CUT seg GND F.Cu (172.45, 154.20)-(173.55, 154.20) hit by C308.1
+CUT via GND (173.55, 154.20) hit by C308.1
+FANOUT requested 11 pads; not fanned: ['J703.1(no room)', 'R306.2(no room)']

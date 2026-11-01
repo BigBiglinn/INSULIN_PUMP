@@ -1464,7 +1464,7 @@
 			(at 99.09 59.69 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
+		(property "Footprint" "Inductor_SMD:L_Murata_DFE201610P"
 			(at 96.52 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1476,7 +1476,7 @@
 			(at 96.52 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Murata DFE201612E-2R2M=P2"
 			(at 96.52 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1484,7 +1484,7 @@
 			(at 99.09 61.92 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "2.2 uH per SLVSEC6D typical application; specific part TBD from SLVSEC6D Table 4 (Isat/DCR)"
+		(property "Note" "ECO1. SLVSEC6D Table 4 lists 2.0 x 1.6 mm DFE201612E; the old 0603 footprint could not fit it. Footprint is KiCad's Murata 2016 pattern; check land against the Murata drawing"
 			(at 96.52 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

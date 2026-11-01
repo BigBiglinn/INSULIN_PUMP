@@ -1,0 +1,23 @@
+{
+ "_comment": "Stage 1 explicit routes (mm, KiCad page coordinates). Layer F = F.Cu, B = B.Cu. See docs/handover/ROUTING_STAGES.md section 1.",
+ "remove": [
+  {"net": "GND",  "via": [167.40, 158.75], "why": "U301.4 PGND fan-out via sat in the gate/CS channel; replaced by a direct PGND-to-EP track"},
+  {"net": "VBAT", "via": [167.40, 159.75], "why": "U301.2 VCC fan-out via in the gate channel; VCC now fed through C304 (SNVSB75E: CVCC close to the device)"},
+  {"net": "VBAT", "via": [167.06, 160.93], "why": "U301.1 VCC fan-out via; as above"}
+ ],
+ "tracks": [
+  {"net": "GND",      "layer": "F", "w": 0.25, "pts": [[166.55, 158.75], [165.85, 158.75]], "why": "PGND pin 4 to exposed pad (pin 13)"},
+  {"net": "VBAT",     "layer": "F", "w": 0.25, "pts": [[166.55, 159.75], [166.55, 160.25]], "why": "VCC pin 2 to BIAS pin 1"},
+  {"net": "VBAT",     "layer": "F", "w": 0.30, "pts": [[166.55, 160.25], [166.55, 161.60], [165.00, 161.90], [164.82, 162.90]], "why": "VCC/BIAS to C304.1 (C304.1 keeps its own plane via)"},
+  {"net": "FLY_GATE", "layer": "F", "w": 0.30, "pts": [[166.55, 159.25], [167.45, 159.25]], "why": "gate drive out of U301.3"},
+  {"net": "FLY_GATE", "layer": "B", "w": 0.30, "pts": [[167.45, 159.25], [169.50, 161.30]], "why": "gate drive under the CS power path (unavoidable crossing)"},
+  {"net": "FLY_GATE", "layer": "F", "w": 0.30, "pts": [[169.50, 161.30], [169.76, 160.47]], "why": "into Q301.4 gate"},
+  {"net": "FLY_CS",   "layer": "F", "w": 0.50, "pts": [[169.55, 158.53], [169.55, 159.70]], "why": "bar joining Q301 source pads 1-3"},
+  {"net": "FLY_CS",   "layer": "F", "w": 0.50, "pts": [[169.55, 159.10], [168.75, 159.10], [168.75, 162.40], [168.30, 163.30]], "why": "switch current path Q301 source to R305.1"},
+  {"net": "FLY_CS",   "layer": "F", "w": 0.20, "pts": [[166.55, 158.25], [168.10, 158.25], [168.10, 162.00], [167.70, 162.40], [167.70, 163.30]], "why": "Kelvin sense U301.5 to R305.1, separate from the power path"}
+ ],
+ "vias": [
+  {"net": "FLY_GATE", "at": [167.45, 159.25]},
+  {"net": "FLY_GATE", "at": [169.50, 161.30]}
+ ]
+}

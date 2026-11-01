@@ -1,0 +1,22 @@
+{
+ "_comment": "Stage 1b explicit routes for the LM51551 small-signal nets (mm). See docs/handover/ROUTING_STAGES.md section 1. U301.11 -> R302 (FLY_PGOOD) is NOT routed: blocked, needs approval.",
+ "remove": [
+  {"net": "GND", "via": [163.82, 158.20], "why": "C305.2 fan-out via blocked the U301.8 (FB) escape; C305.2 now joins R308.2's existing GND via (162.82, 157.47)"}
+ ],
+ "tracks": [
+  {"net": "GND",         "layer": "F", "w": 0.30, "pts": [[162.78, 158.20], [162.82, 157.47]], "why": "C305.2 (SS cap ground) to the existing plane via of R308.2"},
+  {"net": "FLY_FB",      "layer": "F", "w": 0.15, "pts": [[164.65, 158.25], [163.55, 158.25], [163.55, 156.70], [163.75, 156.40], [163.55, 156.10], [163.55, 155.30], [163.00, 154.75]], "why": "U301.8 FB to R307.2 (low-voltage end of the divider), clear of the HV48 pad R307.1"},
+  {"net": "FLY_FB",      "layer": "B", "w": 0.15, "pts": [[163.75, 156.40], [160.20, 156.40]], "why": "FB node to R308 under the GND pad column (top-layer paths blocked by HV48 clearance and a GND via)"},
+  {"net": "FLY_FB",      "layer": "F", "w": 0.15, "pts": [[160.20, 156.40], [161.18, 156.40]], "why": "into R308.1"},
+  {"net": "FLY_SS",      "layer": "F", "w": 0.15, "pts": [[164.65, 158.75], [163.90, 158.75], [163.72, 158.93], [161.22, 158.93], [161.22, 158.40]], "why": "U301.9 SS to C305.1"},
+  {"net": "FLY_RT",      "layer": "F", "w": 0.15, "pts": [[164.65, 159.25], [161.18, 159.25], [161.18, 159.70]], "why": "U301.10 RT to R301.1"},
+  {"net": "FLY_COMP",    "layer": "F", "w": 0.20, "pts": [[166.55, 157.75], [166.20, 157.40], [165.38, 156.60], [165.38, 155.60]], "why": "U301.6 COMP to R303.1"},
+  {"net": "FLY_COMP",    "layer": "F", "w": 0.20, "pts": [[165.38, 155.60], [164.60, 155.10], [164.60, 152.50], [165.10, 152.00], [165.43, 152.00]], "why": "R303.1 to C307.1 (high-frequency pole cap)"},
+  {"net": "FLY_COMP_RC", "layer": "F", "w": 0.20, "pts": [[167.03, 155.60], [167.03, 154.75], [165.43, 154.75], [165.43, 153.80]], "why": "R303.2 to C306.1"},
+  {"net": "FLY_PGOOD",   "layer": "F", "w": 0.20, "pts": [[161.18, 161.80], [159.00, 161.80]], "why": "R302.1 pull-up to TP302 (local part only)"}
+ ],
+ "vias": [
+  {"net": "FLY_FB", "at": [163.75, 156.40]},
+  {"net": "FLY_FB", "at": [160.20, 156.40]}
+ ]
+}

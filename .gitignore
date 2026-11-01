@@ -1,5 +1,6 @@
 # KiCad backups / caches
 *-backups/
+.history/
 *.kicad_prl
 fp-info-cache
 ~*.lck
@@ -7,3 +8,6 @@ _autosave-*
 *.bak
 __pycache__/
 hardware/kicad/pump_v2.net
+# Q301 LTspice waveform outputs (hundreds of MB; regenerate from the decks)
+validation/sim/q301/*.raw
+validation/sim/q301/*.db

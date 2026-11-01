@@ -1,0 +1,23 @@
+{
+ "_comment": "P5 cleanup. C512.2 and Y501.4 had no ground connection (the two reported GND zone pairs). Redundant single-layer vias and a 0.05 mm track tail removed. Unused 14 mm ENC_I_M stub removed; R710.1 stays the rework land on that side, new mask-open land by U501 pin 48.",
+ "remove_box": [
+  {"net": "VBAT_SENSE", "box": [145.37, 124.71, 145.41, 124.76], "layer": "F"},
+  {"net": "WBA_VDD11", "box": [143.83, 114.83, 143.87, 114.87], "layer": "B"},
+  {"net": "ENC_I_M", "box": [159, 107, 173, 120]}
+ ],
+ "remove_tracks": [
+  {"net": "MAIN_NRST", "layer": "F", "pts": [[152.0, 115.95], [152.05, 115.95]]},
+  {"net": "WBA_VDDRFPA", "layer": "B", "pts": [[147.65, 114.5], [147.65, 111.95], [143.45, 111.95]]}
+ ],
+ "tracks": [
+  {"net": "WBA_VDDRFPA", "layer": "B", "w": 0.25, "pts": [[147.65, 114.5], [147.65, 112.2], [146.4, 112.2], [146.15, 111.95], [143.45, 111.95]]},
+  {"net": "GND", "layer": "F", "w": 0.25, "pts": [[145.925, 113.0], [146.55, 113.05]]},
+  {"net": "ENC_I_M", "layer": "F", "w": 0.2, "pts": [[145.25, 115.5625], [145.25, 114.85]]},
+  {"net": "ENC_I_M", "layer": "F", "w": 0.5, "pts": [[145.25, 114.85], [145.25, 114.45]]}
+ ],
+ "vias": [
+  {"net": "GND", "at": [146.55, 113.05]},
+  {"net": "GND", "at": [147.3, 111.6]}
+ ],
+ "mask_rects": [[144.95, 114.15, 145.55, 115.15]]
+}

@@ -1,0 +1,59 @@
+* Flyback clamp worst case: forced peak current, output held at the top of the setpoint range.
+* Purpose: Vds spike and clamp dissipation against leakage, current and clamp values. Generic FET and
+* diode models; PCB parasitics are not included. A bench measurement decides the final values.
+* Leakage is an explicit primary series inductor so it can be stepped directly.
+.param Lp=7.29u*{Ltol} Ltol=1.05
+.param Lk={leak}*Lp
+.param n=5
+.param Dn={(48.6+0.9)/n/(Vin+(48.6+0.9)/n)}
+.param Vin=4.2
+.param Ipk=4.9
+.param leak=0.10
+.param Rcl=330
+.param Cl=100n
+.param tvs=1
+V1 vin 0 {Vin}
+Ll vin a {Lk}
+Lm a sw {Lp} Rser=30m
+Ls 0 sec {n*n*Lp} Rser=0.15
+K1 Lm Ls 0.999
+M1 sw g cs QF
+Rs cs 0 22m
+* fixed-frequency peak-current latch
+Vclk ck 0 PULSE(0 1 0 1n 1n 50n {1/298k})
+* slope compensation prevents subharmonic oscillation above 50 % duty, as in the LM51551
+Vrmp rmp 0 PULSE(0 2.0 0 3.2u 1n 1n {1/298k})
+Bcmp r 0 V=if(I(Rs)+V(rmp)>{Ipk}+{2.0*Dn},1,0)
+A1 ck r 0 0 0 qb q 0 SRFLOP Trise=5n Tfall=5n Vhigh=1
+Bdrv gd 0 V=if(V(q)>0.5,{Vin},0)
+Rg gd g 2
+Lstray sw swl 5n
+Dc swl clamp DSCH
+Rc clamp vin {Rcl}
+Cc clamp vin {Cl}
+* optional hard ceiling: SMAJ15A at top of its VBR tolerance, Rd from (VC-VBRmax)/Ipp
+Dtv vin tv DTVS
+Rtv tv clamp {if(tvs==1,0.36,1e6)}
+D1 sec out DHF
+Rsn sec snb 220
+Csn snb out 100p
+Vout out 0 48.6
+.model QF VDMOS(Vto=0.85 Kp=300 Rd=1m Rs=0.3m Rg=1 Cgs=3n Cgdmax=0.6n Cgdmin=0.15n Cjo=2.7n M=0.28 Is=1e-12 BV=60 mfg=AONR34332C_fit)
+.model DTVS D(Is=1n N=1 BV=18.5 Ibv=1m Rs=1m)
+.model DSCH D(Is=2u Rs=40m N=1.15 Cjo=60p BV=100 Iave=2 Vpk=100 type=Schottky)
+.model DHF D(Is=5n Rs=60m N=1.6 Cjo=15p Tt=15n BV=200 Iave=1 Vpk=200)
+.ic V(clamp)=14
+.tran 0 430u 400u 0 uic
+.meas tran Vds_max MAX V(sw)
+.meas tran Ip_max MAX I(Lm)
+.meas tran Vd1_rev MAX V(out)-V(sec)
+.meas tran Pclamp AVG (V(clamp)-V(vin))*(V(clamp)-V(vin))/{Rcl}
+.meas tran Ptv AVG (V(clamp)-V(tv))*I(Rtv)
+.meas tran Vcl_avg AVG V(clamp)-V(vin)
+.meas tran Vcl_max MAX V(clamp)-V(vin)
+.meas tran Ip_min MIN I(Lm)
+.meas tran Pin AVG -V(vin)*I(V1)
+.meas tran Pout AVG -48.6*I(Vout)
+.meas tran Prc AVG V(sw)*Id(M1)
+.meas tran Pdtv AVG (V(vin)-V(tv))*I(Dtv)
+.end

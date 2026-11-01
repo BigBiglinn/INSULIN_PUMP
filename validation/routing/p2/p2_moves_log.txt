@@ -1,0 +1,44 @@
+RIP NETS []: 0 items
+STUBS on moving FL501
+STUBS on moving J501
+  removed seg GND F.Cu (152.28, 102.03)-(153.98, 102.03)
+  removed via GND (153.98, 102.03)
+  removed seg GND F.Cu (152.28, 104.97)-(152.28, 106.10)
+  removed via GND (152.28, 106.10)
+STUBS on moving C510
+  removed seg GND F.Cu (149.10, 112.92)-(149.10, 112.04)
+  removed via GND (149.10, 112.04)
+STUBS on moving C511
+  removed via GND (147.81, 112.92)
+  removed seg GND F.Cu (148.00, 112.92)-(148.00, 112.04)
+  removed via GND (148.00, 112.04)
+  removed seg GND F.Cu (146.90, 112.92)-(147.81, 112.92)
+STUBS on moving C512
+STUBS on moving Y501
+  removed seg GND F.Cu (145.53, 112.33)-(146.40, 111.70)
+  removed via GND (146.40, 111.70)
+  removed seg GND F.Cu (144.47, 113.08)-(144.47, 113.97)
+  removed via GND (144.47, 113.97)
+STUBS on moving L503
+STUBS on moving C506
+STUBS on moving C521
+  removed seg +3V3 F.Cu (133.22, 115.30)-(132.17, 115.30)
+  removed via +3V3 (132.17, 115.30)
+  removed seg GND F.Cu (134.78, 115.30)-(134.78, 116.38)
+  removed via GND (134.78, 116.38)
+STUBS on moving R513
+  removed seg +3V3 F.Cu (145.35, 132.28)-(146.35, 132.28)
+  removed via +3V3 (146.35, 132.28)
+STUBS on moving C501
+MOVE FL501: (150.50, 112.60, 180) -> (150.9, 112.6, 180)
+MOVE J501: (152.28, 103.50, 0) -> (152.68, 103.5, 0)
+MOVE C510: (149.10, 113.40, 90) -> (149.55, 113.22, 90)
+MOVE C511: (148.00, 113.40, 90) -> (148.6, 111.7, 0)
+MOVE C512: (146.90, 113.40, 90) -> (146.6, 111.7, 0)
+MOVE Y501: (145.00, 112.70, 0) -> (145.4, 113.375, 180)
+MOVE L503: (142.20, 117.30, 0) -> (142.2, 117.3, 180)
+MOVE C506: (141.40, 115.30, 0) -> (141.4, 115.3, 180)
+MOVE C521: (134.00, 115.30, 0) -> (134.0, 115.3, 180)
+MOVE R513: (144.53, 132.28, 0) -> (146.6, 109.7, 0)
+MOVE C501: (141.70, 113.00, 90) -> (146.5, 107.9, 0)
+FANOUT requested 6 pads; not fanned: ['C506.2(no room)']

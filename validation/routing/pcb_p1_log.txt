@@ -1,0 +1,398 @@
+RIP NETS ['HSE_IN', 'HSE_OUT', 'LSE_IN', 'LSE_OUT', 'RF_ANT', 'RF_MCU', 'SW48_DRV', 'SW48_GATE', 'WBA_VDD11', 'WBA_VDDANA', 'WBA_VDDHPA', 'WBA_VDDRF', 'WBA_VDDRFPA', 'WBA_VLXSMPS']: 102 items
+  removed seg SW48_GATE F.Cu (171.50, 156.28)-(171.50, 146.97)
+  removed seg SW48_GATE F.Cu (165.85, 178.36)-(167.74, 178.36)
+  removed seg SW48_GATE F.Cu (170.33, 157.45)-(171.50, 156.28)
+  removed seg SW48_GATE F.Cu (164.58, 177.00)-(165.45, 177.87)
+  removed seg SW48_GATE F.Cu (170.33, 175.77)-(170.33, 157.45)
+  removed seg SW48_GATE F.Cu (167.74, 178.36)-(170.33, 175.77)
+  removed seg SW48_GATE F.Cu (157.64, 177.00)-(164.58, 177.00)
+  removed seg SW48_GATE F.Cu (165.45, 177.87)-(165.45, 177.95)
+  removed seg SW48_GATE F.Cu (171.50, 146.97)-(172.20, 146.28)
+  removed seg SW48_GATE F.Cu (165.45, 177.95)-(165.85, 178.36)
+  removed seg SW48_GATE F.Cu (157.29, 177.34)-(157.64, 177.00)
+  removed seg RF_ANT F.Cu (151.88, 131.57)-(151.88, 131.10)
+  removed seg RF_ANT F.Cu (152.47, 132.00)-(152.47, 132.16)
+  removed seg RF_ANT F.Cu (152.47, 132.32)-(151.21, 133.58)
+  removed seg RF_ANT F.Cu (152.47, 132.16)-(151.88, 131.57)
+  removed seg RF_ANT F.Cu (149.02, 107.76)-(146.85, 105.59)
+  removed seg RF_ANT F.Cu (162.15, 130.39)-(162.15, 123.38)
+  removed seg RF_ANT F.Cu (151.21, 133.58)-(150.03, 133.58)
+  removed seg RF_ANT F.Cu (149.51, 107.76)-(149.02, 107.76)
+  removed seg RF_ANT F.Cu (152.47, 132.16)-(152.47, 132.32)
+  removed seg RF_ANT F.Cu (162.15, 123.38)-(152.62, 113.85)
+  removed seg RF_ANT F.Cu (146.85, 105.59)-(146.85, 103.50)
+  removed seg RF_ANT F.Cu (161.49, 131.05)-(162.15, 130.39)
+  removed seg RF_ANT F.Cu (150.03, 133.58)-(148.46, 132.01)
+  removed seg RF_ANT F.Cu (152.62, 113.85)-(152.62, 110.87)
+  removed seg RF_ANT F.Cu (152.62, 110.87)-(149.51, 107.76)
+  removed via RF_ANT (161.49, 131.05)
+  removed via RF_ANT (151.88, 131.10)
+  removed seg RF_ANT B.Cu (161.44, 131.10)-(161.49, 131.05)
+  removed seg RF_ANT B.Cu (151.88, 131.10)-(161.44, 131.10)
+  removed seg WBA_VDDHPA F.Cu (163.70, 129.86)-(163.70, 130.78)
+  removed seg WBA_VDDHPA F.Cu (150.25, 115.56)-(150.25, 115.56)
+  removed seg WBA_VDDHPA F.Cu (135.75, 129.78)-(136.82, 128.71)
+  removed seg WBA_VDDHPA F.Cu (155.16, 126.18)-(155.16, 118.02)
+  removed seg WBA_VDDHPA F.Cu (150.69, 114.62)-(150.25, 115.06)
+  removed seg WBA_VDDHPA F.Cu (136.82, 128.71)-(136.82, 127.81)
+  removed seg WBA_VDDHPA F.Cu (151.76, 114.62)-(150.69, 114.62)
+  removed seg WBA_VDDHPA F.Cu (163.63, 129.79)-(163.70, 129.86)
+  removed seg WBA_VDDHPA F.Cu (155.16, 118.02)-(151.76, 114.62)
+  removed seg WBA_VDDHPA F.Cu (150.25, 115.06)-(150.25, 115.56)
+  removed via WBA_VDDHPA (163.63, 129.79)
+  removed via WBA_VDDHPA (155.16, 126.18)
+  removed via WBA_VDDHPA (136.82, 127.81)
+  removed seg WBA_VDDHPA B.Cu (161.65, 127.81)-(163.63, 129.79)
+  removed seg WBA_VDDHPA B.Cu (155.16, 127.81)-(161.65, 127.81)
+  removed seg WBA_VDDHPA B.Cu (155.16, 127.81)-(155.16, 126.18)
+  removed seg WBA_VDDHPA B.Cu (136.82, 127.81)-(155.16, 127.81)
+  removed seg RF_MCU F.Cu (148.12, 131.30)-(147.49, 131.93)
+  removed seg RF_MCU F.Cu (148.80, 131.30)-(148.12, 131.30)
+  removed seg RF_MCU F.Cu (149.50, 132.00)-(148.80, 131.30)
+  removed seg RF_MCU F.Cu (149.97, 132.00)-(149.50, 132.00)
+  removed seg RF_MCU F.Cu (147.49, 131.93)-(147.49, 132.01)
+  removed seg SW48_DRV F.Cu (166.90, 181.94)-(166.79, 181.94)
+  removed seg SW48_DRV F.Cu (177.09, 171.76)-(166.90, 181.94)
+  removed seg SW48_DRV F.Cu (177.09, 149.51)-(177.09, 171.76)
+  removed seg SW48_DRV F.Cu (173.85, 146.28)-(177.09, 149.51)
+  removed seg WBA_VDDRFPA F.Cu (147.75, 114.81)-(147.75, 115.56)
+  removed seg WBA_VDDRFPA F.Cu (147.75, 129.78)-(148.81, 128.71)
+  removed seg WBA_VDDRFPA F.Cu (144.58, 131.39)-(146.13, 131.39)
+  removed seg WBA_VDDRFPA F.Cu (148.81, 128.71)-(148.81, 128.48)
+  removed seg WBA_VDDRFPA F.Cu (143.70, 132.28)-(144.58, 131.39)
+  removed seg WBA_VDDRFPA F.Cu (148.77, 113.78)-(147.75, 114.81)
+  removed seg WBA_VDDRFPA F.Cu (146.13, 131.39)-(147.75, 129.78)
+  removed seg WBA_VDDRFPA F.Cu (148.77, 113.52)-(148.77, 113.78)
+  removed via WBA_VDDRFPA (155.58, 128.48)
+  removed via WBA_VDDRFPA (160.68, 128.59)
+  removed via WBA_VDDRFPA (148.77, 113.52)
+  removed via WBA_VDDRFPA (148.81, 128.48)
+  removed seg WBA_VDDRFPA B.Cu (155.58, 128.48)-(160.56, 128.48)
+  removed seg WBA_VDDRFPA B.Cu (148.82, 128.48)-(148.81, 128.48)
+  removed seg WBA_VDDRFPA B.Cu (155.58, 128.48)-(148.82, 128.48)
+  removed seg WBA_VDDRFPA B.Cu (160.56, 128.48)-(160.68, 128.59)
+  removed seg WBA_VLXSMPS F.Cu (139.06, 114.12)-(139.06, 114.13)
+  removed seg WBA_VLXSMPS F.Cu (144.47, 117.35)-(142.28, 117.35)
+  removed seg WBA_VLXSMPS F.Cu (142.28, 117.35)-(139.06, 114.13)
+  removed seg WBA_VLXSMPS F.Cu (144.56, 117.25)-(144.47, 117.35)
+  removed seg WBA_VLXSMPS F.Cu (144.56, 117.25)-(144.56, 117.25)
+  removed seg WBA_VDDRF F.Cu (142.46, 131.07)-(143.75, 129.78)
+  removed seg WBA_VDDRF F.Cu (139.70, 132.28)-(140.91, 131.07)
+  removed seg WBA_VDDRF F.Cu (140.91, 131.07)-(142.46, 131.07)
+  removed seg LSE_OUT F.Cu (130.79, 131.35)-(130.79, 130.19)
+  removed seg LSE_OUT F.Cu (147.50, 125.48)-(146.80, 124.78)
+  removed seg LSE_OUT F.Cu (131.55, 130.30)-(131.98, 130.74)
+  removed seg LSE_OUT F.Cu (146.75, 122.44)-(146.75, 122.44)
+  removed seg LSE_OUT F.Cu (146.80, 124.78)-(146.80, 122.49)
+  removed seg LSE_OUT F.Cu (146.80, 122.49)-(146.78, 122.46)
+  removed seg LSE_OUT F.Cu (146.78, 122.46)-(146.75, 122.44)
+  removed seg LSE_OUT F.Cu (130.47, 132.50)-(130.47, 131.67)
+  removed seg LSE_OUT F.Cu (131.55, 130.19)-(131.55, 130.30)
+  removed seg LSE_OUT F.Cu (146.75, 122.44)-(146.78, 122.46)
+  removed seg LSE_OUT F.Cu (147.50, 128.31)-(147.50, 125.48)
+  removed seg LSE_OUT F.Cu (130.47, 131.67)-(130.79, 131.35)
+  removed seg LSE_OUT F.Cu (130.79, 130.19)-(131.55, 130.19)
+  removed seg LSE_OUT F.Cu (147.35, 128.46)-(147.50, 128.31)
+  removed via LSE_OUT (147.35, 128.46)
+  removed via LSE_OUT (131.98, 130.74)
+  removed seg LSE_OUT B.Cu (147.35, 128.46)-(147.35, 128.46)
+  removed seg LSE_OUT B.Cu (134.26, 128.46)-(147.35, 128.46)
+  removed seg LSE_OUT B.Cu (131.98, 130.74)-(134.26, 128.46)
+  removed seg WBA_VDDANA F.Cu (138.50, 131.03)-(139.75, 129.78)
+  removed seg WBA_VDDANA F.Cu (135.70, 132.28)-(136.95, 131.03)
+  removed seg WBA_VDDANA F.Cu (136.95, 131.03)-(138.50, 131.03)
+DELETE C514 (TBD) at (150.46, 132.00)
+  removed seg GND F.Cu (150.94, 132.00)-(150.94, 132.91)
+  removed via GND (150.94, 132.91)
+DELETE C515 (TBD) at (152.96, 132.00)
+  removed seg GND F.Cu (153.44, 132.00)-(153.44, 132.91)
+  removed via GND (153.44, 132.91)
+DELETE C516 (TBD) at (155.46, 132.00)
+  removed seg GND F.Cu (155.94, 132.00)-(155.94, 132.91)
+  removed via GND (155.94, 132.91)
+DELETE C517 (TBD) at (157.96, 132.00)
+  removed seg GND F.Cu (158.44, 132.00)-(158.44, 132.91)
+  removed via GND (158.44, 132.91)
+DELETE L502 (TBD) at (147.97, 132.01)
+DELETE Q302 (PMOS_TBD) at (160.44, 179.65)
+DELETE Q303 (NMOS_TBD) at (169.94, 179.65)
+  removed seg GND F.Cu (166.79, 179.65)-(168.40, 179.65)
+  removed via GND (168.40, 179.65)
+  removed via GND (173.09, 179.65)
+DELETE R309 (TBD) at (194.03, 144.78)
+DELETE R310 (TBD) at (173.03, 146.28)
+DELETE R510 (0R_VERIFY) at (164.53, 130.78)
+  removed seg +3V3 F.Cu (165.35, 130.78)-(166.35, 130.78)
+  removed via +3V3 (166.35, 130.78)
+DELETE R511 (0R_VERIFY) at (136.53, 132.28)
+  removed seg +3V3 F.Cu (137.35, 132.28)-(138.35, 132.28)
+  removed via +3V3 (138.35, 132.28)
+DELETE R512 (0R_VERIFY) at (140.53, 132.28)
+  removed seg +3V3 F.Cu (141.35, 132.28)-(142.35, 132.28)
+  removed via +3V3 (142.35, 132.28)
+STUBS on moving T301
+  removed via VBAT (179.00, 152.50)
+  removed via GND (188.00, 152.50)
+STUBS on moving D302
+STUBS on moving C308
+  removed via VBAT (175.50, 152.50)
+  removed seg VBAT F.Cu (175.20, 152.35)-(175.20, 151.25)
+  removed via VBAT (175.20, 151.25)
+STUBS on moving R306
+  removed seg VBAT F.Cu (184.96, 147.00)-(186.18, 147.00)
+  removed via VBAT (186.18, 147.00)
+STUBS on moving D301
+STUBS on moving R313
+STUBS on moving C312
+STUBS on moving C309
+  removed seg GND F.Cu (190.82, 152.50)-(189.65, 152.50)
+  removed via GND (189.65, 152.50)
+STUBS on moving C310
+  removed seg GND F.Cu (190.82, 156.00)-(189.65, 156.00)
+  removed via GND (189.65, 156.00)
+STUBS on moving C311
+STUBS on moving C702
+STUBS on moving R312
+  removed seg GND F.Cu (186.84, 143.54)-(186.84, 144.11)
+  removed seg GND F.Cu (186.84, 142.97)-(186.84, 143.54)
+  removed seg GND F.Cu (186.84, 143.54)-(186.84, 143.54)
+  removed seg GND F.Cu (186.84, 144.11)-(186.84, 145.25)
+  removed via GND (186.84, 145.25)
+  removed seg GND F.Cu (186.84, 143.54)-(186.84, 142.97)
+  removed seg GND F.Cu (186.84, 143.54)-(186.84, 142.97)
+  removed seg GND F.Cu (186.84, 144.11)-(186.84, 143.54)
+STUBS on moving J501
+  removed seg GND F.Cu (148.38, 102.03)-(150.07, 102.03)
+  removed via GND (150.07, 102.03)
+  removed seg GND F.Cu (148.38, 104.97)-(148.38, 106.10)
+  removed via GND (148.38, 106.10)
+STUBS on moving C510
+  removed seg GND F.Cu (137.30, 129.78)-(138.35, 129.78)
+  removed via GND (138.35, 129.78)
+STUBS on moving C511
+  removed seg GND F.Cu (141.30, 129.78)-(142.35, 129.78)
+  removed via GND (142.35, 129.78)
+STUBS on moving C512
+  removed seg GND F.Cu (145.30, 129.78)-(146.35, 129.78)
+  removed via GND (146.35, 129.78)
+STUBS on moving Y501
+  removed seg GND F.Cu (140.82, 118.67)-(141.77, 119.42)
+  removed via GND (141.77, 119.42)
+  removed seg GND F.Cu (139.43, 117.58)-(138.48, 116.83)
+  removed via GND (138.48, 116.83)
+STUBS on moving C513
+  removed seg GND F.Cu (149.30, 129.78)-(149.30, 130.85)
+  removed via GND (149.30, 130.85)
+STUBS on moving C501
+  removed seg +3V3 F.Cu (139.35, 111.12)-(138.30, 111.12)
+  removed via +3V3 (138.30, 111.12)
+  removed seg GND F.Cu (140.90, 111.12)-(141.95, 111.12)
+  removed via GND (141.95, 111.12)
+STUBS on moving C509
+  removed seg GND F.Cu (156.65, 114.12)-(157.70, 114.12)
+  removed via GND (157.70, 114.12)
+STUBS on moving C506
+  removed seg +3V3 F.Cu (149.35, 126.88)-(148.30, 126.88)
+  removed via +3V3 (148.30, 126.88)
+  removed seg GND F.Cu (150.90, 126.88)-(151.95, 126.88)
+  removed via GND (151.95, 126.88)
+STUBS on moving L501
+STUBS on moving C505
+  removed seg +3V3 F.Cu (149.35, 111.12)-(148.30, 111.12)
+  removed via +3V3 (148.30, 111.12)
+  removed seg GND F.Cu (150.90, 111.12)-(151.95, 111.12)
+  removed via GND (151.95, 111.12)
+STUBS on moving C503
+  removed seg +3V3 F.Cu (144.35, 111.12)-(143.30, 111.12)
+  removed via +3V3 (143.30, 111.12)
+  removed seg GND F.Cu (145.90, 111.12)-(146.95, 111.12)
+  removed via GND (146.95, 111.12)
+STUBS on moving Y502
+STUBS on moving C518
+  removed seg GND F.Cu (160.94, 132.00)-(161.81, 132.00)
+  removed via GND (161.81, 132.00)
+STUBS on moving C519
+  removed seg GND F.Cu (131.44, 132.50)-(132.31, 132.50)
+  removed via GND (132.31, 132.50)
+STUBS on moving C504
+  removed seg +3V3 F.Cu (144.35, 126.88)-(143.30, 126.88)
+  removed via +3V3 (143.30, 126.88)
+  removed seg GND F.Cu (145.90, 126.88)-(146.95, 126.88)
+  removed via GND (146.95, 126.88)
+ADD C313: Capacitor_SMD:C_0603_1608Metric
+REPLACE C507: Capacitor_SMD:C_0603_1608Metric -> Capacitor_SMD:C_0805_2012Metric
+  removed seg +3V3 F.Cu (154.35, 111.12)-(153.30, 111.12)
+  removed via +3V3 (153.30, 111.12)
+  removed seg GND F.Cu (155.90, 111.12)-(156.95, 111.12)
+  removed via GND (156.95, 111.12)
+REPLACE C509: Capacitor_SMD:C_0603_1608Metric -> Capacitor_SMD:C_0402_1005Metric
+REPLACE C510: Capacitor_SMD:C_0603_1608Metric -> Capacitor_SMD:C_0402_1005Metric
+REPLACE C511: Capacitor_SMD:C_0603_1608Metric -> Capacitor_SMD:C_0402_1005Metric
+REPLACE C512: Capacitor_SMD:C_0603_1608Metric -> Capacitor_SMD:C_0402_1005Metric
+REPLACE C513: Capacitor_SMD:C_0603_1608Metric -> Capacitor_SMD:C_0402_1005Metric
+ADD C520: Capacitor_SMD:C_0603_1608Metric
+ADD C521: Capacitor_SMD:C_0603_1608Metric
+ADD D303: pump_v2:SOT-23_Zener_A1_K3
+ADD D304: Diode_SMD:D_SMA
+ADD FB501: Capacitor_SMD:C_0603_1608Metric
+ADD FB502: Capacitor_SMD:C_0603_1608Metric
+ADD FL501: pump_v2:ST_MLPF-WB-04D3
+REPLACE L201: Inductor_SMD:L_0603_1608Metric -> Inductor_SMD:L_Murata_DFE201610P
+  removed seg BUCK_SW F.Cu (125.50, 140.79)-(125.50, 140.79)
+  removed seg BUCK_SW F.Cu (125.50, 140.79)-(125.50, 140.79)
+  removed seg BUCK_SW F.Cu (125.50, 140.79)-(126.28, 140.01)
+  removed seg BUCK_SW F.Cu (126.28, 140.01)-(126.28, 138.17)
+  removed seg BUCK_SW F.Cu (126.28, 138.17)-(125.71, 137.60)
+  removed seg BUCK_SW F.Cu (125.71, 137.60)-(125.21, 137.60)
+  removed seg BUCK_SW F.Cu (125.21, 137.60)-(124.17, 138.64)
+  removed seg BUCK_SW F.Cu (124.17, 138.64)-(124.17, 138.73)
+  removed seg BUCK_SW F.Cu (124.17, 138.73)-(123.15, 139.75)
+  removed seg BUCK_SW F.Cu (123.15, 139.75)-(122.72, 139.75)
+  removed seg +3V3 F.Cu (125.50, 139.21)-(125.50, 138.18)
+  removed via +3V3 (125.50, 138.18)
+ADD L503: Inductor_SMD:L_0402_1005Metric
+ADD Q304: Package_TO_SOT_SMD:SOT-23
+ADD Q701: Package_TO_SOT_SMD:SOT-23
+ADD Q702: Package_TO_SOT_SMD:SOT-23
+ADD R314: Resistor_SMD:R_0603_1608Metric
+ADD R315: Resistor_SMD:R_0603_1608Metric
+ADD R715: Resistor_SMD:R_0603_1608Metric
+ADD R716: Resistor_SMD:R_0603_1608Metric
+ADD R717: Resistor_SMD:R_0603_1608Metric
+ADD R718: Resistor_SMD:R_0603_1608Metric
+ADD R719: Resistor_SMD:R_0603_1608Metric
+REPLACE T301: pump_v2:XFMR_PLACEHOLDER_4P -> pump_v2:Coilcraft_HPH6
+REPLACE Y501: Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm -> pump_v2:Crystal_NX1612SA
+REPLACE Y502: Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm -> pump_v2:Crystal_NX1610SE
+VALUE R107: 1M 1% -> 200k 1%
+VALUE R108: 1M 1% -> 200k 1%
+VALUE L201: L_Murata_DFE201610P -> 2.2uH
+VALUE C305: 47nF -> 1uF/10V X7R
+VALUE C308: 22nF/50V X7R -> 100nF/50V X7R
+VALUE C313: C_0603_1608Metric -> 10nF
+VALUE D303: SOT-23_Zener_A1_K3 -> BZX84B51
+VALUE D304: D_SMA -> SMAJ15A
+VALUE Q301: CSD16340Q3 -> AONR34332C
+VALUE Q304: SOT-23 -> BSS138
+VALUE R306: 390R 1W -> 330R 1W
+VALUE R307: 470k 1% -> 470k 0.1%
+VALUE R308: 10k 1% -> 10k 0.1%
+VALUE R312: TBD -> 10k 1% 1W
+VALUE R314: R_0603_1608Metric -> 1k
+VALUE R315: R_0603_1608Metric -> 10k
+VALUE T301: Coilcraft_HPH6 -> HPH6-0090L
+VALUE C506: 100nF -> 10uF/10V
+VALUE C507: C_0805_2012Metric -> 10uF/10V
+VALUE C509: C_0402_1005Metric -> 4.7uF
+VALUE C510: C_0402_1005Metric -> 470nF
+VALUE C511: C_0402_1005Metric -> 100nF
+VALUE C512: C_0402_1005Metric -> 100nF
+VALUE C513: C_0402_1005Metric -> 100nF
+VALUE C518: TBD -> 6pF C0G
+VALUE C519: TBD -> 6pF C0G
+VALUE C520: C_0603_1608Metric -> 1uF
+VALUE C521: C_0603_1608Metric -> 1uF
+VALUE FB501: C_0603_1608Metric -> 47R@100MHz
+VALUE FB502: C_0603_1608Metric -> 47R@100MHz
+VALUE FL501: ST_MLPF-WB-04D3 -> MLPF-WB-04D3
+VALUE L501: L_SMPS_TBD -> 2.2uH
+VALUE L503: L_0402_1005Metric -> 10nH
+VALUE R513: 0R_VERIFY -> 0R
+VALUE Y501: Crystal_NX1612SA -> 32MHz
+VALUE Y502: Crystal_NX1610SE -> 32.768kHz
+VALUE Q701: SOT-23 -> BSS138
+VALUE Q702: SOT-23 -> BSS138
+VALUE R702: 100R -> 1k
+VALUE R703: 100R -> 1k
+VALUE R704: 100R -> 1k
+VALUE R715: R_0603_1608Metric -> 100k
+VALUE R716: R_0603_1608Metric -> 100k
+VALUE R717: R_0603_1608Metric -> 15k
+VALUE R718: R_0603_1608Metric -> 33k
+VALUE R719: R_0603_1608Metric -> 15k
+NEW NET FLY_SEC_A
+NEW NET FLY_SEC_B
+NEW NET FLY_SEC_C
+NEW NET FLY_SEC_D
+NEW NET OVP_G
+NEW NET OVP_K
+NEW NET WBA_VDDSMPS
+NEW NET WBA_VLX_L
+NEW NET PMD_FAULT_D
+NEW NET PMD_READY_D
+NET CHANGE R707.1 -> PMD_FAULT_D
+  removed seg PMD_FAULT_M F.Cu (190.20, 107.28)-(191.08, 108.16)
+  removed seg PMD_FAULT_M F.Cu (191.08, 108.16)-(191.08, 120.60)
+NET CHANGE L501.1 -> WBA_VLX_L
+NET CHANGE C506.1 -> WBA_VDDSMPS
+NET CHANGE R312.1 -> +48V_RAW
+NET CHANGE U501.2 -> WBA_VDDSMPS
+  removed seg +3V3 F.Cu (144.56, 116.75)-(143.53, 116.75)
+  removed via +3V3 (143.53, 116.75)
+NET CHANGE U501.39 -> WBA_VDD11
+NET CHANGE U501.40 -> +3V3
+NET CHANGE T301.1 -> GND
+NET CHANGE T301.2 -> FLY_SEC_A
+NET CHANGE T301.3 -> VBAT
+  removed via GND (168.03, 153.80)
+  removed seg GND F.Cu (166.97, 153.80)-(168.03, 153.80)
+NET CHANGE T301.4 -> FLY_SEC_B
+NET CHANGE C512.1 -> +3V3
+NET CHANGE R706.1 -> PMD_READY_D
+NET CHANGE C511.1 -> WBA_VDD11
+MOVE T301: (183.50, 156.00, 0) -> (192.8, 164.475, 180)
+MOVE D302: (175.20, 157.40, -90) -> (174.5, 157.4, -90)
+MOVE C308: (175.20, 153.30, 90) -> (175.1, 150.2, 0)
+MOVE R306: (182.00, 147.00, 0) -> (173.0, 147.0, 0)
+MOVE D304: (150.00, 90.00, 0) -> (165.5, 149.0, 0)
+MOVE D301: (192.60, 159.50, 180) -> (179.6, 149.6, 180)
+MOVE R313: (191.20, 163.10, -90) -> (179.3, 146.25, 0)
+MOVE C312: (194.00, 163.10, 90) -> (183.9, 146.25, 0)
+MOVE C309: (192.30, 152.50, 180) -> (185.1, 149.25, 0)
+MOVE C310: (192.30, 156.00, 180) -> (190.1, 149.25, 0)
+MOVE C311: (180.50, 171.00, 0) -> (176.5, 139.7, 0)
+MOVE C702: (200.50, 158.00, 0) -> (188.8, 140.2, 0)
+MOVE R312: (183.88, 142.97, 0) -> (168.0, 140.9, 90)
+MOVE Q304: (150.00, 90.00, 0) -> (181.7, 119.8, 0)
+MOVE R315: (150.00, 90.00, 0) -> (181.5, 122.6, 0)
+MOVE C313: (150.00, 90.00, 0) -> (181.5, 124.2, 0)
+MOVE R314: (150.00, 90.00, 0) -> (177.5, 125.0, 0)
+MOVE D303: (150.00, 90.00, 0) -> (178.5, 122.3, 0)
+MOVE R717: (150.00, 90.00, 0) -> (167.0, 105.5, 0)
+MOVE R718: (150.00, 90.00, 0) -> (171.0, 103.2, 0)
+MOVE R719: (150.00, 90.00, 0) -> (166.9, 103.2, 0)
+MOVE Q701: (150.00, 90.00, 0) -> (188.0, 113.5, 0)
+MOVE R715: (150.00, 90.00, 0) -> (191.5, 116.8, 0)
+MOVE Q702: (150.00, 90.00, 0) -> (192.0, 113.5, 0)
+MOVE R716: (150.00, 90.00, 0) -> (191.5, 118.4, 0)
+MOVE J501: (148.38, 103.50, 0) -> (152.28, 103.5, 0)
+MOVE FL501: (150.00, 90.00, 0) -> (150.5, 112.6, 180)
+MOVE C510: (136.53, 129.78, 0) -> (149.1, 113.4, 90)
+MOVE C511: (140.53, 129.78, 0) -> (148.0, 113.4, 90)
+MOVE C512: (144.53, 129.78, 0) -> (146.9, 113.4, 90)
+MOVE Y501: (140.12, 118.12, 0) -> (145.0, 112.7, 0)
+MOVE C513: (148.53, 129.78, 0) -> (143.05, 113.4, 90)
+MOVE C501: (140.12, 111.12, 0) -> (141.7, 113.0, 90)
+MOVE C509: (155.88, 114.12, 0) -> (140.2, 113.4, 90)
+MOVE FB502: (150.00, 90.00, 0) -> (143.0, 110.2, 0)
+MOVE C506: (150.12, 126.88, 0) -> (141.4, 115.3, 0)
+MOVE FB501: (150.00, 90.00, 0) -> (137.2, 115.3, 0)
+MOVE C521: (150.00, 90.00, 0) -> (134.0, 115.3, 0)
+MOVE L503: (150.00, 90.00, 0) -> (142.2, 117.3, 0)
+MOVE L501: (140.12, 114.12, 0) -> (139.0, 118.2, 90)
+MOVE C505: (150.12, 111.12, 0) -> (139.8, 124.4, 0)
+MOVE C520: (150.00, 90.00, 0) -> (136.7, 124.4, 0)
+MOVE C503: (145.12, 111.12, 0) -> (155.9, 114.12, 0)
+MOVE Y502: (132.04, 130.19, 0) -> (146.3, 125.9, 180)
+MOVE C518: (160.46, 132.00, 0) -> (142.5, 125.4, 90)
+MOVE C519: (130.96, 132.50, 0) -> (143.6, 125.4, 90)
+MOVE C504: (145.12, 126.88, 0) -> (144.53, 129.78, 0)
+CUT via GND (173.55, 151.20) hit by C308.1
+CUT seg MAIN_NRST F.Cu (135.75, 109.54)-(139.83, 113.62) hit by C509.1
+CUT seg MAIN_NRST F.Cu (139.83, 114.04)-(142.50, 116.71) hit by C509.1
+CUT seg MAIN_NRST F.Cu (139.83, 113.62)-(139.83, 114.04) hit by C509.1
+CUT via MAIN_NRST (142.68, 116.71) hit by L503.2
+CUT seg MAIN_SWO F.Cu (142.62, 111.01)-(138.62, 107.00) hit by FB502.1
+CUT seg MAIN_SWO F.Cu (150.09, 112.36)-(143.74, 112.36) hit by FL501.B2
+CUT seg MAIN_SWO F.Cu (155.81, 118.08)-(150.09, 112.36) hit by FL501.A1
+FANOUT requested 45 pads; not fanned: ['C313.2(no room)', 'C501.1(no room)', 'C501.2(no room)', 'C506.2(no room)', 'C512.1(no room)', 'Q304.2(no room)', 'R716.2(no room)']

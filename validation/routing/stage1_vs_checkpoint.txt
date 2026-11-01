@@ -1,0 +1,46 @@
+## DRC violations (checkpoint -> now)
+  nonmirrored_text_on_back_layer      2 ->    2
+  silk_edge_clearance                 3 ->    3
+  silk_over_copper                   73 ->   73
+  silk_overlap                       82 ->   82
+  track_dangling                      1 ->    1
+  via_dangling                        6 ->    6
+  unconnected_items                  80 ->   67
+  schematic parity                    0 ->    0
+## Unconnected pairs closed
+  FLY_COMP     C307.1 <-> R303.1
+  FLY_COMP     R303.1 <-> U301.6
+  FLY_COMP_RC  C306.1 <-> R303.2
+  FLY_CS       Q301.1 <-> Q301.2
+  FLY_CS       Q301.1 <-> U301.5
+  FLY_CS       Q301.2 <-> Q301.3
+  FLY_CS       Q301.3 <-> R305.1
+  FLY_FB       R307.2 <-> R308.1
+  FLY_FB       R308.1 <-> U301.8
+  FLY_GATE     Q301.4 <-> U301.3
+  FLY_PGOOD    R302.1 <-> TP302.1
+  FLY_PGOOD    R302.1 <-> U301.11
+  FLY_RT       R301.1 <-> U301.10
+  FLY_SS       C305.1 <-> U301.9
+  SW48_GATE    R309.1 <-> R310.1
+  VBAT_FUSED   Track <-> U101.C2
+  VBAT_SENSE   R108.1 <-> Track
+  WBA_VDDRFPA  U501.43 <-> Via
+## Unconnected pairs that are new or re-paired
+  FLY_PGOOD    Track <-> U301.11
+  SW48_GATE    R309.1 <-> Track
+  VBAT_FUSED   C102.1 <-> U101.C2
+  VBAT_SENSE   Track <-> Track
+  WBA_VDDRFPA  Track <-> U501.43
+## Copper changes by net (removed / added items)
+  FLY_COMP     -  0 +  7
+  FLY_COMP_RC  -  0 +  3
+  FLY_CS       -  0 +  8
+  FLY_FB       -  0 + 10
+  FLY_GATE     -  0 +  5
+  FLY_PGOOD    -  0 +  1
+  FLY_RT       -  0 +  2
+  FLY_SS       -  0 +  4
+  GND          -  4 +  2
+  VBAT         -  4 +  4
+nets changed outside the stage list: none

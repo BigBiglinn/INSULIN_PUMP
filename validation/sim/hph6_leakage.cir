@@ -1,0 +1,56 @@
+* Piezo Insulin Pump v2 - 48 V flyback POWER-STAGE simulation (OPEN LOOP)
+* NOT a model of the LM51551 control loop: the gate is driven by an ideal fixed-duty PWM.
+* Purpose: check duty cycle, primary peak current, FET drain spike with the RCD clamp, diode
+* reverse voltage, output ripple and clamp/snubber dissipation for the transformer SPECIFICATION in
+* docs/handover/FLYBACK_DESIGN.md. Transformer is the spec (n=5, Lp=7.3u, k=0.99 -> ~2 % leakage), not a real part.
+* FET: generic VDMOS approximating TI CSD16340Q3 datasheet figures (25 V, ~6 mohm @ 2.5 V, Qg ~6.5 nC).
+* D301: generic hyperfast model approximating Nexperia PNE20010ER (200 V, Vf ~0.85 V @ 1 A, trr 25 ns).
+* D302 (clamp): generic Schottky approximating Nexperia PMEG10020ELR (100 V).
+* History: run 1 (100 V Schottky, no snubber) -> D301 reverse ringing reached the 100 V breakdown;
+* run 2 (100R/470p snubber) -> 81-91 V but 0.5-0.6 W snubber loss and Ipk at the current limit. Run 3 = this file.
+.param fs=300k
+.step param case list 1 2
+.step param kk list 0.995 0.99 0.98 0.97 0.95
+.param Vin={if(case==1,3.0,4.2)}
+.param D={if(case==1,0.785,0.715)}
+V1 vin 0 {Vin} Rser=20m
+* input capacitance (C301 220u/16V + 2 x 10u ceramic)
+C1 vin 0 220u Rser=80m
+C2 vin 0 20u Rser=3m
+* transformer: dot of Lp at vin, dot of Ls at ground (standard flyback)
+Lp vin sw 7.29u Rser=30m
+Ls 0 sec 182.25u Rser=0.15
+K1 Lp Ls {kk}
+* switch + 22 mohm sense
+M1 sw g cs QCSD
+Rs cs 0 22m
+Vg gd 0 PULSE(0 {Vin} 0 15n 15n {D/fs-15n} {1/fs})
+Rg gd g 2
+* RCD clamp (D302, R306 390R, C308 22n)
+Dc sw clamp DSCH
+Rc clamp vin 390
+Cc clamp vin 22n
+* output rectifier D301 + optional light RC snubber, capacitors (C309+C310 effective at 48 V, C311)
+D1 sec out DHF
+Rsn sec snb 220
+Csn snb out 100p
+C3 out 0 1.8u Rser=5m
+C4 out 0 147u Rser=0.2
+Rload out 0 480
+.model QCSD VDMOS(Vto=1.1 Kp=40 Rd=2.5m Rs=1m Rg=1 Cgs=0.9n Cgdmax=0.6n Cgdmin=0.08n Cjo=0.6n Is=1e-12 BV=25 mfg=generic)
+.model DSCH D(Is=2u Rs=40m N=1.15 Cjo=60p BV=100 Iave=2 Vpk=100 mfg=generic type=Schottky)
+.model DHF D(Is=5n Rs=60m N=1.6 Cjo=15p Tt=15n BV=200 Iave=1 Vpk=200 mfg=generic type=silicon)
+.ic V(out)=48 V(clamp)=15
+.tran 0 4m 3.5m 0 uic
+.meas tran Vout_avg AVG V(out)
+.meas tran Vout_pp PP V(out)
+.meas tran Ipri_pk MAX I(Lp)
+.meas tran Vds_max MAX V(sw)
+.meas tran Vd1_rev_max MAX V(out)-V(sec)
+.meas tran Pclamp AVG (V(clamp)-V(vin))*(V(clamp)-V(vin))/390
+.meas tran Psnub AVG I(Rsn)*I(Rsn)*220
+.meas tran Iin_avg AVG -I(V1)
+.meas tran Pout AVG V(out)*V(out)/480
+.meas tran Pin AVG -V(vin)*I(V1)
+.meas tran Eff PARAM Pout/Pin
+.end

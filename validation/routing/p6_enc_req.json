@@ -1,0 +1,1 @@
+{"grid": 0.025, "clr": 0.17, "hv_clr": 0.65, "via_cost": 30, "avoid_nets": {"RF_ANT": {"m": 0.3, "same_layer": true}, "RF_MCU": {"m": 0.3, "same_layer": true}}, "routes": [{"net": "ENC_I_M", "w": 0.2, "from": [145.25, 114.85, "B"], "to": [172.7, 109.775, "F"], "why": "One B.Cu crossing under the RF line, In1 GND between (owner ruling 1 Nov 2026)"}]}

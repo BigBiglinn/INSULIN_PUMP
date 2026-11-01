@@ -11,7 +11,7 @@ no signal is used twice. It does not check clock trees, peripheral conflicts at 
 | Pin | CubeMX name | Type | Net | Intended | Result |
 | --- | --- | --- | --- | --- | --- |
 | 1 | VSSSMPS | Power | `GND` |  | power pin |
-| 2 | VDDSMPS | Power | `+3V3` |  | power pin |
+| 2 | VDDSMPS | Power | `WBA_VDDSMPS` |  | power pin |
 | 3 | VLXSMPS | Power | `WBA_VLXSMPS` |  | power pin |
 | 4 | PB12 | I/O | `CON_MAIN_TX` | USART1_TX | OK |
 | 5 | PA8 | I/O | `ENC_B_M` | TIM2_CH2 | OK |
@@ -48,8 +48,8 @@ no signal is used twice. It does not check clock trees, peripheral conflicts at 
 | 36 | NRST | Reset | `MAIN_NRST` | <Reset> | OK |
 | 37 | RF | MonoIO | `RF_MCU` | <MonoIO> | OK |
 | 38 | VDDHPA | Power | `WBA_VDDHPA` |  | power pin |
-| 39 | VDDANA | Power | `WBA_VDDANA` |  | power pin |
-| 40 | VDDRF | Power | `WBA_VDDRF` |  | power pin |
+| 39 | VDDANA | Power | `WBA_VDD11` |  | power pin |
+| 40 | VDDRF | Power | `+3V3` |  | power pin |
 | 41 | OSC_OUT | I/O | `HSE_OUT` |  | unchecked |
 | 42 | OSC_IN | I/O | `HSE_IN` |  | unchecked |
 | 43 | VDDRFPA | Power | `WBA_VDDRFPA` |  | power pin |

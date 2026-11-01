@@ -1,0 +1,27 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\q301\check_aonr_coss_4p2_5n_leak02.cir
+Start Time: Sun Nov  1 15:09:50 2026
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Per .tran options, skipping operating point for transient analysis.
+Total elapsed time: 27.084 seconds.
+Total iterations: 4044785
+
+Files loaded:
+C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\q301\check_aonr_coss_4p2_5n_leak02.cir
+
+vds_max: MAX(V(sw))=27.2496738434 FROM 0.0004 TO 0.00043
+ip_max: MAX(I(Lm))=4.8918466568 FROM 0.0004 TO 0.00043
+vd1_rev: MAX(V(out)-V(sec))=96.6170539856 FROM 0.0004 TO 0.00043
+pclamp: AVG((V(clamp)-V(vin))*(V(clamp)-V(vin))/{Rcl})=0.869495726736 FROM 0.0004 TO 0.00043
+ptv: AVG(V(clamp)-V(tv))*I(Rtv)=-4.01294269158e-19 FROM 0.0004 TO 0.00043
+vcl_avg: AVG(V(clamp)-V(vin))=16.9320475978 FROM 0.0004 TO 0.00043
+vcl_max: MAX(V(clamp)-V(vin))=17.7844743729 FROM 0.0004 TO 0.00043
+ip_min: MIN(I(Lm))=-0.710798025131 FROM 0.0004 TO 0.00043
+pin: AVG(-V(vin)*I(V1))=12.7426689913 FROM 0.0004 TO 0.00043
+pout: AVG(-48.6*I(Vout))=-10.7078005986 FROM 0.0004 TO 0.00043
+prc: AVG(V(sw)*Id(M1))=0.443826733227 FROM 0.0004 TO 0.00043
+pdtv: AVG(V(vin)-V(tv))*I(Dtv)=1.72146512814e-08 FROM 0.0004 TO 0.00043

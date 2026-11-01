@@ -6,6 +6,8 @@
 >
 > **Not fabrication-ready.** No Gerbers have been generated. Nothing has been built or measured. A clean ERC or DRC report does not show that the circuit works.
 
+> **1 Nov 2026:** digital design complete, ERC and DRC 0 violations, fully routed, tag `pcb-p6-final`. Board is 111.5 x 85 mm with 158 footprints. Sections 3-6 below date from 10 Oct; the current record is `PCB_STAGES.md` Stage P6 and `UNRESOLVED_ISSUES.md`.
+
 ## 1. Opening the project
 
 - Open `hardware/kicad/pump_v2.kicad_pro` in **KiCad 10.0.x**. The project library (`pump_v2.kicad_sym`, `pump_v2.pretty`) is referenced through the project-local `sym-lib-table` and `fp-lib-table`.

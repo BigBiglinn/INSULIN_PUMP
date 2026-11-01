@@ -1,0 +1,124 @@
+## 1. Footprint positions
+  T301   ( 180.00, 156.00,   0) -> ( 183.50, 156.00,   0)  side F
+  D302   ( 196.29, 142.15,   0) -> ( 175.20, 157.40, -90)  side F
+  C308   ( 190.25, 145.03,   0) -> ( 175.20, 153.30,  90)  side F
+  R306   ( 175.38, 142.97,   0) -> ( 182.00, 147.00,   0)  side F
+  D301   ( 190.50, 159.50, 180) -> ( 192.60, 159.50, 180)  side F
+  C309   ( 159.84, 142.65,   0) -> ( 192.30, 152.50, 180)  side F
+  C310   ( 165.34, 142.65,   0) -> ( 192.30, 156.00, 180)  side F
+  R313   ( 190.50, 155.50,   0) -> ( 191.20, 163.10, -90)  side F
+  C312   ( 190.50, 152.50,   0) -> ( 194.00, 163.10,  90)  side F
+  U301   ( 164.00, 152.00,   0) -> ( 165.60, 159.00, 180)  side F
+  C304   ( 158.81, 146.50,   0) -> ( 165.60, 162.90,   0)  side F
+  R307   ( 154.41, 142.10,   0) -> ( 162.00, 154.60,   0)  side F
+  R308   ( 158.41, 161.90,   0) -> ( 162.00, 156.40,   0)  side F
+  C305   ( 163.81, 146.50,   0) -> ( 162.00, 158.20,   0)  side F
+  R301   ( 158.81, 157.50,   0) -> ( 162.00, 160.00,   0)  side F
+  R302   ( 163.81, 157.50,   0) -> ( 162.00, 161.80,   0)  side F
+  TP302  ( 197.55, 145.05,   0) -> ( 159.00, 161.80,   0)  side F
+  R303   ( 168.81, 146.50,   0) -> ( 166.20, 155.60,   0)  side F
+  C306   ( 158.81, 149.50,   0) -> ( 166.20, 153.80,   0)  side F
+  C307   ( 158.81, 152.50,   0) -> ( 166.20, 152.00,   0)  side F
+  R311   ( 190.82, 142.18,   0) -> ( 199.50, 149.50,   0)  side F
+  C702   ( 196.50, 164.00,   0) -> ( 200.50, 158.00,   0)  side F
+  TP301  ( 169.55, 142.05,   0) -> ( 201.50, 145.00,   0)  side F
+  J503   ( 159.19, 104.50,  90) -> ( 141.00, 147.00,  90)  side F
+  JP701  ( 171.84, 102.80,   0) -> ( 199.50, 134.50,   0)  side F
+  C701   ( 188.53, 104.78,   0) -> ( 199.50, 138.50,   0)  side F
+  footprints not in the move list that changed: none (of 121)
+  footprint count 147 -> 147
+## 2. Copper and zones outside the ripped nets
+  ripped nets (23): ['+48V_MOT', '+48V_RAW', 'CON_MAIN_TX', 'CON_SUP_RX', 'CON_SUP_TX', 'ENC_B', 'ENC_B_S', 'ENC_VCC', 'FLY_CLAMP', 'FLY_COMP', 'FLY_COMP_RC', 'FLY_CS', 'FLY_EN', 'FLY_FB', 'FLY_GATE', 'FLY_PGOOD', 'FLY_RT', 'FLY_SEC', 'FLY_SNUB', 'FLY_SS', 'FLY_SW', 'HB_S2M', 'PMD_5V']
+  items on all other nets: baseline 996, now 992; removed 44, added 40
+    removed by net: {('via', '+3V3'): 2, ('trk', 'VBAT'): 11, ('trk', 'GND'): 12, ('via', 'VBAT'): 5, ('via', 'GND'): 12, ('trk', '+3V3'): 2}
+    added by net:   {('trk', '+3V3'): 2, ('via', 'GND'): 13, ('trk', 'GND'): 12, ('via', 'VBAT'): 6, ('trk', 'VBAT'): 5, ('via', '+3V3'): 2}
+  zone outlines identical: True
+  WBA55 region (U501 bbox + 12 mm): parts inside baseline 32, now 31; moved parts now inside: none
+  copper items starting inside that region: baseline 377, now 358; removed 19 (nets ['CON_MAIN_TX', 'ENC_B_S', 'HB_S2M']), added 0 (nets [])
+## 3. Loop metrics (straight pad-to-pad, mm) and airwire MST
+  clamp: Q301.D-D302.A, D302.K-C308, C308.VBAT-T301.1          59.7 ->   13.9
+  FLY_SW node: Q301.D-T301.2                                    3.9 ->    7.4
+  secondary: T301.4-D301.A, D301.K-C309.+, C309.GND-T301.3     73.1 ->   18.8
+  gate: U301.GATE-Q301.G                                       11.0 ->    3.4
+  CS: U301.CS-R305.1                                           12.9 ->    6.5
+  VCC cap: U301.VBAT-C304                                       6.6 ->    3.2
+  SS: U301.SS-C305                                              6.1 ->    3.5
+  +48V_MOT: R311.2-J703.2                                      13.3 ->    4.0
+  +48V_MOT: C702.1-J703.2                                      18.3 ->   11.2
+  +48V_MOT        96.2 ->    82.7 (-13.5)
+  FLY_SS           6.1 ->     3.5 (-2.6)
+  FLY_PGOOD       73.5 ->    47.9 (-25.7)
+  CON_SUP_TX      57.2 ->    15.9 (-41.2)
+  CON_SUP_RX      56.2 ->    13.4 (-42.7)
+  CON_MAIN_TX     21.7 ->    29.3 (+7.6)
+  ENC_VCC         54.6 ->     9.9 (-44.7)
+  PMD_5V          41.8 ->    22.5 (-19.3)
+  +48V_RAW        98.6 ->    86.9 (-11.7)
+  FLY_SW          32.1 ->     7.5 (-24.5)
+  FLY_CLAMP       23.3 ->    10.0 (-13.4)
+  FLY_SEC          8.6 ->     5.3 (-3.3)
+  FLY_SNUB         4.2 ->     2.8 (-1.4)
+  FLY_GATE        11.0 ->     3.4 (-7.6)
+  FLY_CS          15.2 ->     9.6 (-5.6)
+  FLY_FB          26.2 ->     6.4 (-19.8)
+  FLY_RT           9.0 ->     3.6 (-5.5)
+  FLY_COMP        13.4 ->     6.1 (-7.4)
+  FLY_COMP_RC     12.0 ->     2.4 (-9.6)
+  FLY_EN          58.6 ->    58.0 (-0.6)
+  TOTAL tracked 1323.9 -> 1031.6 (-22 %)
+## 4. Pad-to-pad copper margin of moved parts (gap - rule; rule 0.6 mm if either net is HV48, else 0.2)
+  T301   min gap  1.45 mm (rule 0.6) margin +0.85  T301.4[FLY_SEC] <-> C310.2[GND]
+  D302   min gap  1.60 mm (rule 0.2) margin +1.40  D302.2[FLY_SW] <-> D302.1[FLY_CLAMP]
+  C308   min gap  0.90 mm (rule 0.2) margin +0.70  C308.2[VBAT] <-> C308.1[FLY_CLAMP]
+  R306   min gap  1.14 mm (rule 0.6) margin +0.54  R306.1[FLY_CLAMP] <-> R312.1[+48V_MOT]
+  D301   min gap  1.55 mm (rule 0.6) margin +0.95  D301.2[FLY_SEC] <-> C310.2[GND]
+  C309   min gap  1.80 mm (rule 0.6) margin +1.20  C309.2[GND] <-> C309.1[+48V_RAW]
+  C310   min gap  1.45 mm (rule 0.6) margin +0.85  C310.2[GND] <-> T301.4[FLY_SEC]
+  R313   min gap  1.02 mm (rule 0.6) margin +0.42  R313.1[FLY_SEC] <-> C312.2[+48V_RAW]
+  C312   min gap  1.02 mm (rule 0.6) margin +0.42  C312.2[+48V_RAW] <-> R313.1[FLY_SEC]
+  U301   min gap  0.20 mm (rule 0.2) margin -0.00  U301.13[GND] <-> U301.1[VBAT]
+  C304   min gap  0.60 mm (rule 0.2) margin +0.40  C304.2[GND] <-> R305.1[FLY_CS]
+  R307   min gap  0.85 mm (rule 0.6) margin +0.25  R307.2[FLY_FB] <-> R307.1[+48V_RAW]
+  R308   min gap  0.85 mm (rule 0.6) margin +0.25  R308.1[FLY_FB] <-> R307.1[+48V_RAW]
+  C305   min gap  0.64 mm (rule 0.2) margin +0.44  C305.2[GND] <-> C305.1[FLY_SS]
+  R301   min gap  0.85 mm (rule 0.2) margin +0.65  R301.2[GND] <-> R301.1[FLY_RT]
+  R302   min gap  0.85 mm (rule 0.2) margin +0.65  R302.1[FLY_PGOOD] <-> R301.1[FLY_RT]
+  TP302  min gap  1.79 mm (rule 0.2) margin +1.59  TP302.1[FLY_PGOOD] <-> R301.1[FLY_RT]
+  R303   min gap  0.85 mm (rule 0.2) margin +0.65  R303.2[FLY_COMP_RC] <-> R303.1[FLY_COMP]
+  C306   min gap  0.64 mm (rule 0.2) margin +0.44  C306.2[GND] <-> C306.1[FLY_COMP_RC]
+  C307   min gap  0.64 mm (rule 0.2) margin +0.44  C307.2[GND] <-> C307.1[FLY_COMP]
+  R311   min gap  1.80 mm (rule 0.6) margin +1.20  R311.2[+48V_MOT] <-> R311.1[+48V_RAW]
+  C702   min gap  2.60 mm (rule 0.6) margin +2.00  C702.2[GND] <-> C702.1[+48V_MOT]
+  J503   min gap  0.84 mm (rule 0.2) margin +0.64  J503.2[CON_MAIN_TX] <-> J503.1[GND]
+  JP701  min gap  0.25 mm (rule 0.2) margin +0.05  JP701.2[ENC_VCC] <-> JP701.1[+3V3]
+  C701   min gap  0.64 mm (rule 0.2) margin +0.44  C701.2[GND] <-> C701.1[ENC_VCC]
+## 5. DRC (kicad-cli, --schematic-parity --refill-zones)
+  nonmirrored_text_on_back_layer      2 ->    2
+  silk_edge_clearance                 3 ->    3
+  silk_over_copper                   55 ->   73
+  silk_overlap                       75 ->   82
+  track_dangling                      1 ->    1
+  via_dangling                        8 ->    6
+  unconnected_items                  35 ->   80
+  schematic parity issues             0 ->    0
+  dangling before:
+    track_dangling: Track [/Main MCU STM32WBA55/MAIN_SWCLK] on B.Cu, length 0.77
+    via_dangling: Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
+    via_dangling: Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
+    via_dangling: Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
+    via_dangling: Via [/PMD401 & encoder interface/ENC_VCC] on F.Cu - B.Cu
+    via_dangling: Via [CON_SUP_TX] on F.Cu - B.Cu
+    via_dangling: Via [ENC_I_M] on F.Cu - B.Cu
+    via_dangling: Via [PMD_MOSI_M] on F.Cu - B.Cu
+    via_dangling: Via [VBAT_SENSE] on F.Cu - B.Cu
+  dangling now:
+    track_dangling: Track [/Main MCU STM32WBA55/MAIN_SWCLK] on B.Cu, length 0.77
+    via_dangling: Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
+    via_dangling: Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
+    via_dangling: Via [/Main MCU STM32WBA55/WBA_VDDRFPA] on F.Cu - B.Cu
+    via_dangling: Via [ENC_I_M] on F.Cu - B.Cu
+    via_dangling: Via [PMD_MOSI_M] on F.Cu - B.Cu
+    via_dangling: Via [VBAT_SENSE] on F.Cu - B.Cu
+## 6. Unconnected classification
+  Groups: A=12 (baseline 12), B=1 (baseline 1), C=14 (baseline 14), D=53 (baseline 8)
+  written: validation/logs/unrouted_nets.txt

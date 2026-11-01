@@ -124,3 +124,43 @@ Added after the handoff snapshot. Source: the owner's messages and answers in th
 | 10 Oct (later session) | Supervisor veto default: **R403 10 k pull-up fitted**, R404 removed. Veto is ON whenever the supervisor is in reset, crashed or not driving PB0 low | Owner choice after trade-off: meets S-01 (dead supervisor blocks 48 V) at the cost of availability | DECIDED (owner). Closes OPEN item 3 / CF-9. Deviation DV-3 from the Rev A pull-down |
 | 10 Oct (later session) | PMD401 AEN: **open-drain BSS138 (Q402) with 10 k gate pull-up (R405)**; supervisor PB1 (SUP_PARK) drives LOW to unpark. Direct drive and the AEN pull-down placeholder R713 removed | PMD401 has a 22 k internal pull-up to an unstated rail; open drain parks by default and lets the PMD401's own pull-up set the run level, so no 3.3/5 V level question | DECIDED (owner). Closes the design side of OPEN item 4; SG-05 still required on hardware |
 | 10 Oct (later session) | Flyback switch Q301 = TI CSD16340Q3; rectifier D301 = Nexperia PNE20010ER (200 V) with RC snubber R313/C312; clamp diode D302 = Nexperia PMEG10020ELR | Datasheet-backed: RDS(on) rated at VGS 2.5 V (gate drive = VBAT); 100 V Schottky rejected after open-loop simulation showed rectifier ringing to breakdown | Engineering selection within the K-12 LM51551 flyback. T301 transformer remains a PLACEHOLDER (no verifiable part) |
+
+## 7. Routing decisions, 11 Oct 2026 (Claude Code session, branch `placement-opt`)
+
+Full wording and context: `docs/handover/CURRENT_STATUS.md` §5 and `docs/handover/ROUTING_STAGES.md`.
+
+| Date | Decision | Rationale | Status |
+| --- | --- | --- | --- |
+| 11 Oct | D1: rotate R301, R302, C305 and R308 by 180° to give the FLY_PGOOD escape at U301 | Cleanest option; no grounding-topology change | DECIDED (owner); applied at `route-d1-done` |
+| 11 Oct | D2: SW48_GATE / SW48_DRV floating placeholder copper. Copper change deferred; the concern is documented | Output switch (U-06) not designed | DEFERRED (owner) |
+| 11 Oct | D3: undefined placeholder circuitry stays unrouted. RS485_B → R714 only after the owner is asked | Avoid inventing connections | DECIDED (owner) |
+| 11 Oct | D4: no routing on the BQ25188 footprint until the TI drawing is checked | U-12 | DECIDED (owner): wait |
+| 11 Oct | D5: wait for the ST documents before the crystal, RF and supply connections | U-05 | DECIDED (owner): wait |
+| 11 Oct | D6: no grounding-topology change, and no grounding-dependent layout change, without review | FL-3 open | DECIDED (owner) |
+| 11 Oct | D7: FLY_PGOOD → U501.28 deferred into a coordinated U501 pin 24–38 fan-out review after DS14127 and the ST RF layout documentation | The scratch investigation showed that re-routing pins 29/30 alone cannot free pin 28. A B.Cu crossing under RF_ANT is not assumed acceptable. Leftover segments are cleaned up only in a reviewed change. A pin reassignment needs explicit approval of the schematic and firmware/CubeMX change. | DEFERRED (owner) |
+| 11 Oct | D8: PMD_READY_M and other possibly voltage-incompatible MCU inputs stay unrouted | PB15 tolerance (U-10) and the PMD401 Ready output level are not verified | BLOCKED (owner) |
+| 11 Oct | D9: MAIN_SWCLK deferred to a joint review of the crystal layout and the SWD stub | Depends on the crystal layout (D5) | BLOCKED (owner) |
+
+## 8. Schematic ECO1, 31 Oct 2026
+
+Full record: `docs/handover/ECO1_SCHEMATIC.md`.
+
+| Date | Decision | Rationale | Status |
+| --- | --- | --- | --- |
+| 31 Oct | Objective is now a fabricated, working bench prototype; owner approved the recommended architecture where evidence supports it and asked for schematic implementation. K-7 Rev A gate: owner has not separately waived it in writing | Owner instruction | DECIDED (owner) for ECO1; K-7 waiver OPEN |
+| 31 Oct | ECO1: WBA55 supplies per DS14127 Fig. 15; MLPF-WB-04D3; HPH6-0090L; 1 uF soft start; 10 k bleeder; SMBJ48A clamp; K-12 switched output removed; READY/FAULT level shifters; LSE fitted; no MCU pin changes | Verification in ECO1_SCHEMATIC.md | IMPLEMENTED in schematic; PCB pending owner review |
+
+## 9. Digital completion, 1 Nov 2026
+
+Owner instruction in this session: the board will not be fabricated, it only has to be complete and error-free digitally, and open choices are to be made without further questions.
+
+| Date | Decision | Rationale | Status |
+| --- | --- | --- | --- |
+| 1 Nov | Objective is a digital design only, no fabrication. Replaces the 31 Oct "fabricated, working prototype" objective. K-7 and the Phase 6 manufacturing outputs do not apply | Owner | DECIDED (owner) |
+| 1 Nov | P3 hold lifted: flyback and 48 V routed with Q301 margin, T301 leakage and PMD401 overvoltage still open | These need hardware or the vendor; they cannot be closed digitally | DECIDED (owner authorised defaults) |
+| 1 Nov | D4 lifted: U101 routed on the 0.4 mm footprint. Pitch still inferred | SLUSFJ3 copy has no outline drawing | DECIDED; footprint stays marked UNVERIFIED |
+| 1 Nov | ENC_I_M: one B.Cu crossing under RF_MCU with In1 GND between; WBA_VDD11 B.Cu jog moved north of pin 48. Replaces the D7 caution for this net only | Avoids a schematic and firmware pin change | DECIDED (owner authorised defaults) |
+| 1 Nov | OVP group moved beside C311/C702; R315 and C313 on B.Cu | Original spot needed crossings; the top side under the capacitor bodies has no room | DECIDED |
+| 1 Nov | D701-D709 = Nexperia PESD5V0S1BA,115 | Bidirectional, VRWM 5 V, SOD323, from Nexperia product data | DECIDED |
+| 1 Nov | PWR_FLAG on WBA_VDDSMPS, WBA_VLXSMPS, WBA_VDD11, WBA_VDDHPA, WBA_VDDRFPA | These rails are fed through a bead or inductor, or by the chip's SMPS, so no pin is a KiCad power output | DECIDED |
+| 1 Nov | MAX3485 flattened into the project symbol library | Clears lib_symbol_mismatch; same pins and graphics | DECIDED |

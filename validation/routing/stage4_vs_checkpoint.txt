@@ -1,0 +1,42 @@
+## DRC violations (checkpoint -> now)
+  nonmirrored_text_on_back_layer      2 ->    2
+  silk_edge_clearance                 3 ->    3
+  silk_over_copper                   71 ->   71
+  silk_overlap                       83 ->   83
+  track_dangling                      1 ->    1
+  via_dangling                        6 ->    6
+  unconnected_items                  54 ->   48
+  schematic parity                    0 ->    0
+## Unconnected pairs closed
+  CHG_INT_N    U101.A1 <-> Via
+  ENC_A_S      R711.1 <-> U601.17
+  ENC_B        D708.1 <-> R709.2
+  ENC_B        D708.1 <-> R712.2
+  ENC_B        J705.4 <-> R712.2
+  ENC_B_S      R712.1 <-> U601.18
+  ENC_I        J705.1 <-> Track
+  ENC_I_M      Track <-> U501.48
+  WBA_VDDRFPA  Track <-> Via
+## Unconnected pairs that are new or re-paired
+  CHG_INT_N    Track <-> U101.A1
+  ENC_I_M      U501.48 <-> Via
+  WBA_VDDRFPA  Track <-> Track
+## Copper changes by net (removed / added items)
+  ENC_A_S      -  0 + 19
+  ENC_B        -  0 + 21
+  ENC_B_S      -  0 + 24
+  ENC_I        -  0 + 11
+nets changed outside the stage list: none
+
+## Full-route clearance margins (Stage 4 nets; ENC_I includes its pre-existing copper)
+== ENC_B: total copper 58.1 mm, 2 vias. Nearest foreign copper: 0.199 ENC_A_S (via,F); 0.199 JP701.3[PMD_5V] (pad,F); 0.199 PMD_5V (via,F); 0.249 R704.2[PMD_SCLK] (pad,F); 0.249 R710.1[ENC_I_M] (pad,F)
+   nearest switching / 48 V copper: none within 3 mm
+== ENC_I: total copper 60.8 mm, 4 vias. Nearest foreign copper: 0.151 PMD_MOSI (track,B); 0.189 R703.1[PMD_SS_M] (pad,F); 0.199 R705.1[PMD_AEN_DRV] (pad,F); 0.204 GND (via,F); 0.274 ENC_B (track,F)
+   nearest switching / 48 V copper: none within 3 mm
+== ENC_A_S: total copper 68.0 mm, 4 vias. Nearest foreign copper: 0.199 ENC_B (track,F); 0.209 HB_M2S (track,F); 0.220 SUP_SWCLK (track,B); 0.230 MCU_48V_EN (track,B); 0.233 SUP_VETO (via,B)
+   nearest switching / 48 V copper: none within 3 mm
+== ENC_B_S: total copper 71.8 mm, 4 vias. Nearest foreign copper: 0.199 CON_SUP_RX (track,B); 0.208 SUP_SWDIO (track,B); 0.221 SUP_VETO (track,F); 0.224 +3V3 (via,B); 0.227 SUP_PARK (track,F)
+   nearest switching / 48 V copper: none within 3 mm
+== Stage 3 concern HB_S2M vs LSE: nearest same-layer: [(0.604247, 'Y502.1[LSE_IN]', 'F.Cu'), (2.094726, 'LSE_OUT', 'F.Cu'), (2.094726, 'LSE_OUT', 'F.Cu')] ; Y502 courtyard/body bbox x 130.02 - 134.07
+   HB_S2M F.Cu vertical x=134.5 crosses LSE_OUT B.Cu at: [(134.26, 128.46, 147.35, 128.46)]
+   note: the 0.151 mm ENC_I-PMD_MOSI gap is pre-existing (ENC_I via (181.08,106.63) vs PMD_MOSI B.Cu), identical at route-stage4-before

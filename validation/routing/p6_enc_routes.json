@@ -1,0 +1,69 @@
+{
+ "tracks": [
+  {
+   "net": "ENC_I_M",
+   "layer": "B",
+   "w": 0.2,
+   "pts": [
+    [
+     145.25,
+     114.85
+    ],
+    [
+     145.5,
+     114.85
+    ],
+    [
+     145.825,
+     115.175
+    ],
+    [
+     158.6,
+     115.175
+    ],
+    [
+     166.8,
+     106.975
+    ],
+    [
+     170.075,
+     106.975
+    ],
+    [
+     171.225,
+     108.125
+    ]
+   ],
+   "why": "One B.Cu crossing under the RF line, In1 GND between (owner ruling 1 Nov 2026)"
+  },
+  {
+   "net": "ENC_I_M",
+   "layer": "F",
+   "w": 0.2,
+   "pts": [
+    [
+     171.225,
+     108.125
+    ],
+    [
+     171.225,
+     108.3
+    ],
+    [
+     172.7,
+     109.775
+    ]
+   ],
+   "why": "One B.Cu crossing under the RF line, In1 GND between (owner ruling 1 Nov 2026)"
+  }
+ ],
+ "vias": [
+  {
+   "net": "ENC_I_M",
+   "at": [
+    171.225,
+    108.125
+   ]
+  }
+ ]
+}

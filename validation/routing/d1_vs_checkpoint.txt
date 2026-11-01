@@ -1,0 +1,65 @@
+## DRC violations (checkpoint -> now)
+  nonmirrored_text_on_back_layer      2 ->    2
+  silk_edge_clearance                 3 ->    3
+  silk_over_copper                   73 ->   71   CHANGED
+  silk_overlap                       82 ->   83   CHANGED
+  track_dangling                      1 ->    1
+  via_dangling                        6 ->    6
+  unconnected_items                  61 ->   59
+  schematic parity                    0 ->    0
+## Unconnected pairs closed
+  +3V3         Track <-> Via
+  FLY_PGOOD    Track <-> U301.11
+  FLY_PGOOD    U301.11 <-> U501.28
+  RS485_B      R714.2 <-> U701.7
+  SW48_GATE    R309.1 <-> Track
+  VBAT_FUSED   Track <-> U101.C2
+  WBA_VDDRF    C512.1 <-> U501.40
+  WBA_VDDRFPA  Track <-> Track
+## Unconnected pairs that are new or re-paired
+  FLY_PGOOD    Track <-> U501.28
+  RS485_B      R714.2 <-> Track
+  SW48_GATE    R309.1 <-> R310.1
+  VBAT_FUSED   C102.1 <-> U101.C2
+  WBA_VDDRF    Track <-> U501.40
+  WBA_VDDRFPA  U501.43 <-> Via
+## Copper changes by net (removed / added items)
+  +3V3         -  2 +  4
+  FLY_FB       -  6 +  3
+  FLY_PGOOD    -  1 +  7
+  FLY_RT       -  2 +  2
+  FLY_SS       -  4 +  2
+  GND          -  5 +  6
+nets changed outside the stage list: none
+## Footprints changed (position/orientation/side): [('R301', 0.0, 180.0, True), ('C305', 0.0, 180.0, True), ('R302', 0.0, 180.0, True), ('R308', 0.0, 180.0, True)]
+## Silkscreen items removed:
+  - ('Reference field of R308', 'Segment of R307 on F.Silkscreen')
+  - ('Reference field of C305', 'Segment of R308 on F.Silkscreen')
+  - ('Reference field of R301', 'Segment of C305 on F.Silkscreen')
+  - ('Reference field of R302', 'Segment of R301 on F.Silkscreen')
+  - ('Reference field of R302', 'Reference field of TP302')
+  - ('Pad 2 [+3V3] of R302 on F.Cu', 'Reference field of U301')
+  - ('Pad 1 [/48V flyback/FLY_SS] of C305 on F.Cu', 'Reference field of R301')
+  - ('Pad 1 [/48V flyback/FLY_FB] of R308 on F.Cu', 'Reference field of C305')
+  - ('Pad 2 [GND] of R308 on F.Cu', 'Reference field of C305')
+  - ('Pad 2 [GND] of C305 on F.Cu', 'Reference field of R301')
+  - ('Pad 1 [/48V flyback/FLY_RT] of R301 on F.Cu', 'Reference field of R302')
+  - ('Pad 2 [GND] of R301 on F.Cu', 'Reference field of R302')
+  - ('Pad 1 [/48V flyback/FLY_RT] of R301 on F.Cu', 'Reference field of TP302')
+  - ('Pad 1 [/48V flyback/+48V_RAW] of R307 on F.Cu', 'Reference field of R308')
+  - ('Pad 2 [/48V flyback/FLY_FB] of R307 on F.Cu', 'Reference field of R308')
+## Silkscreen items added:
+  + ('Reference field of R301', 'Reference field of TP302')
+  + ('Reference field of R301', 'Segment of R302 on F.Silkscreen')
+  + ('Reference field of R301', 'Reference field of U301')
+  + ('Reference field of C305', 'Reference field of TP302')
+  + ('Reference field of C305', 'Segment of R301 on F.Silkscreen')
+  + ('Reference field of R308', 'Segment of C305 on F.Silkscreen')
+  + ('Pad 2 [+3V3] of R302 on F.Cu', 'Reference field of R301')
+  + ('Pad 1 [FLY_PGOOD] of R302 on F.Cu', 'Reference field of R301')
+  + ('Pad 1 [/48V flyback/FLY_RT] of R301 on F.Cu', 'Reference field of C305')
+  + ('Pad 1 [FLY_PGOOD] of R302 on F.Cu', 'Reference field of U301')
+  + ('Pad 2 [GND] of R301 on F.Cu', 'Reference field of TP302')
+  + ('Pad 2 [GND] of R301 on F.Cu', 'Reference field of C305')
+  + ('Pad 2 [GND] of C305 on F.Cu', 'Reference field of R308')
+  + ('Pad 1 [/48V flyback/FLY_SS] of C305 on F.Cu', 'Reference field of R308')

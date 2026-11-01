@@ -16,3 +16,8 @@
 (rule "Q301_nexfet_pad_pitch"
 	(condition "A.memberOfFootprint('Q301') && B.memberOfFootprint('Q301')")
 	(constraint clearance (min 0.127mm)))
+
+# FL501 MLPF-WB-04D3 bump pitch 0.5 mm with 0.32 mm pads gives 0.18 mm between bumps (DS14446 sec.3). Scoped to pads of FL501 only.
+(rule "FL501_bump_pitch"
+	(condition "A.memberOfFootprint('FL501') && B.memberOfFootprint('FL501')")
+	(constraint clearance (min 0.15mm)))

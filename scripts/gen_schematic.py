@@ -293,7 +293,7 @@ def main():
           len(glob_nets), "global nets")
 
 
-HV_NETS = ["+48V_RAW", "+48V_MOT", "FLY_SEC"]
+HV_NETS = ["+48V_RAW", "+48V_MOT", "FLY_SEC", "FLY_SEC_A", "FLY_SEC_B", "FLY_SEC_C", "FLY_SEC_D"]
 # Nets carried by planes (GND, VBAT, +3V3) and nets landing on fine-pitch pads stay Default;
 # wide tracks only where every pad on the net can accept them.
 PWR_NETS = ["VBAT_RAW", "FLY_SW", "FLY_CLAMP"]

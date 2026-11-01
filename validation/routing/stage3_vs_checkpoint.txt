@@ -1,0 +1,52 @@
+## DRC violations (checkpoint -> now)
+  nonmirrored_text_on_back_layer      2 ->    2
+  silk_edge_clearance                 3 ->    3
+  silk_over_copper                   71 ->   71
+  silk_overlap                       83 ->   83
+  track_dangling                      1 ->    1
+  via_dangling                        6 ->    6
+  unconnected_items                  59 ->   54
+  schematic parity                    0 ->    0
+## Unconnected pairs closed
+  CHG_INT_N    Track <-> U101.A1
+  FLY_EN       Q303.1 <-> U301.12
+  FLY_EN       Q401.3 <-> TP401.1
+  FLY_EN       Q401.3 <-> U301.12
+  FLY_EN       R401.1 <-> TP401.1
+  FLY_EN       R402.2 <-> TP401.1
+  HB_S2M       U501.12 <-> U601.13
+  SW48_GATE    R309.1 <-> R310.1
+  VBAT_FUSED   C102.1 <-> U101.C2
+  WBA_VDDRFPA  U501.43 <-> Via
+## Unconnected pairs that are new or re-paired
+  CHG_INT_N    U101.A1 <-> Via
+  FLY_EN       Q303.1 <-> Track
+  SW48_GATE    R309.1 <-> Track
+  VBAT_FUSED   Track <-> U101.C2
+  WBA_VDDRFPA  Track <-> Via
+## Copper changes by net (removed / added items)
+  FLY_EN       -  0 + 13
+  HB_S2M       -  0 +  8
+nets changed outside the stage list: none
+
+## Full-route clearance margins (Stage 3 nets)
+== FLY_EN: 47.4 mm, 2 vias. Nearest foreign copper (edge-to-edge, rule 0.15 mm unless HV48 0.6 mm):
+   0.224 mm  FLY_PGOOD (track, F.Cu)
+   0.274 mm  U301.11[FLY_PGOOD] (pad, F.Cu)
+   0.349 mm  U301.13[GND] (pad, F.Cu)
+   0.423 mm  GND (via, B.Cu)
+   0.516 mm  SUP_VETO (track, F.Cu)
+   0.649 mm  R401.2[GND] (pad, F.Cu)
+   0.699 mm  R405.1[SUP_PARK] (pad, F.Cu)
+   0.699 mm  R405.2[+3V3] (pad, F.Cu)
+   nearest switching-node / gate / CS copper: (1.788573, 'U301.3[FLY_GATE]', 'pad', 'F.Cu')
+== HB_S2M: 64.9 mm, 2 vias. Nearest foreign copper (edge-to-edge, rule 0.15 mm unless HV48 0.6 mm):
+   0.199 mm  SUP_NRST (track, F.Cu)
+   0.249 mm  U601.14[HB_M2S] (pad, F.Cu)
+   0.274 mm  +3V3 (track, F.Cu)
+   0.274 mm  U501.11[+3V3] (pad, F.Cu)
+   0.299 mm  HB_M2S (track, F.Cu)
+   0.375 mm  U601.9[unconnected-(U601-PF1-Pad9)] (pad, F.Cu)
+   0.463 mm  U601.10[SUP_NRST] (pad, F.Cu)
+   0.513 mm  U601.8[unconnected-(U601-PF0-Pad8)] (pad, F.Cu)
+   nearest switching-node / gate / CS copper: none within 3 mm

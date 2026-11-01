@@ -3315,7 +3315,7 @@
 			(at 45.75 113.03 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "1M 1%"
+		(property "Value" "200k 1%"
 			(at 45.75 115.57 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -3339,7 +3339,7 @@
 			(at 45.75 117.8 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "S-13 VBAT sense (INA219 dropped; BQ25188 has no ADC). Ratio 1/2: 4.2 V -> 2.1 V < VDDA min 3.0 V. Drain ~2.1 uA at 4.2 V. Firmware must use VREFINT (VDDA follows VBAT in buck dropout). ADC pin leakage/sampling time to be checked in the ST datasheet (500k source + C104 reservoir)"
+		(property "Note" "ECO1. S-13 VBAT sense (INA219 dropped; BQ25188 has no ADC). Ratio 1/2: 4.2 V -> 2.1 V. Drain ~10.5 uA at 4.2 V. DS14127 Table 76 Ilkg 150 nA max x 100k source = 15 mV at the pin, 30 mV at VBAT (was 150 mV with 1M/1M). Firmware must use VREFINT (VDDA follows VBAT in buck dropout)"
 			(at 43.18 114.3 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3371,7 +3371,7 @@
 			(at 68.61 118.11 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "1M 1%"
+		(property "Value" "200k 1%"
 			(at 68.61 120.65 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -3451,7 +3451,7 @@
 			(at 91.47 122.88 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "Charge reservoir for ADC sampling from the 500k divider (tau 50 ms; sample <= a few Hz)"
+		(property "Note" "Charge reservoir for ADC sampling from the 100k source (tau 10 ms)"
 			(at 88.9 119.38 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
