@@ -2,6 +2,11 @@
 
 Prepared 10 Oct 2026 for the engineer who takes over the project. Layout-only fixes were added on 31 Oct 2026 without KiCad: see `LAYOUT_FIXES_2026-10-31.md`. **They are not yet verified by kicad-cli.**
 
+> **Completion session (1 Nov 2026), start here.** Status and next steps: `OWNER_APPROVAL_SHEET.md` (17 decisions, recommendations and consequences), `FABRICATION_BLOCKERS.md` (everything that still prevents fabrication), `FIRMWARE_DESIGN_REVIEW.md`, `PROJECT_FILE_INDEX.md`, `PROGRESS_LOG.md`, and the 36-section `../report/PROJECT_ENGINEERING_REPORT.md`. Changes in this session:
+> - **C305 47 nF → 2.2 µF.** Simulation showed the 4.7 ms soft start locks the LM51551 in hiccup, so 48 V would never come up.
+> - ENC_I_M and VBAT_SENSE routed. kicad-cli CI run 4 on `a768755`: 0 copper errors, 0 parity, **22 unconnected**.
+> - Closed-loop and cycle-by-cycle flyback simulations, runaway timing model, detailed BOM (`../bom_full.csv`), ST reference-firmware evidence.
+>
 > **BENCH-ONLY PROTOTYPE.** Use water or 0.9 % saline only. Never connect it to a person or an animal, and do not use real insulin.
 >
 > **NOT FABRICATION-APPROVED. NOT VALIDATED.** The design contains TBD and PLACEHOLDER parts, and no Rev A bench result exists yet. A clean ERC or DRC report does not prove the circuit works.

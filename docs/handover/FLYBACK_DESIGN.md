@@ -30,7 +30,7 @@ Sources:
 | Primary inductance | ΔI = 40 % of I<sub>pri,avg</sub> = 2.61 A at 3.0 V; L<sub>p</sub> = V<sub>in</sub>·D/(ΔI·f<sub>SW</sub>) | 7.3 µH (specify 5–10 µH) |
 | Primary peak current | I<sub>pri,avg</sub> + ΔI/2 | 3.1 A (sim: 3.4 A with snubber) |
 | Sense resistor | I<sub>lim</sub> = V<sub>CLTH</sub>/R<sub>s</sub>, V<sub>CLTH</sub> = 93–107 mV | R305 = 22 mΩ → 4.2–4.9 A; P ≈ 0.12 W |
-| Soft start | t<sub>SS</sub> = C<sub>SS</sub>·V<sub>REF</sub>/I<sub>SS</sub> (10 µA, 1 V) | C305 = 47 nF → 4.7 ms |
+| Soft start | t<sub>SS</sub> = C<sub>SS</sub>·V<sub>REF</sub>/I<sub>SS</sub> (10 µA, 1 V); the output charge current C<sub>out</sub>·48 V/t<sub>SS</sub> must stay far below the converter's current-limited output or the 64-cycle hiccup trips (SNVSB75E §9.3.10) | **C305 = 2.2 µF → 220 ms** (changed 1 Nov; 47 nF → 4.7 ms needed 1.54 A and locked the converter in hiccup; minimum 1.5 µF worst case, `scripts/sim_flyback_cycle.py`) |
 | VCC/BIAS capacitor | Datasheet: 1–4.7 µF | C304 = 2.2 µF |
 | Output divider | V<sub>out</sub> = 1 V × (1 + 470k/10k) | 48.0 V nominal (±1 % reference + resistor tolerance; full tolerance stack not done) |
 | Output ripple | ΔV = I<sub>out</sub>·D/(f<sub>SW</sub>·C) | ≥ 1.1 µF effective at 48 V for 0.24 V → 2 × 2.2 µF/100 V X7R (C309, C310) plus C311 |

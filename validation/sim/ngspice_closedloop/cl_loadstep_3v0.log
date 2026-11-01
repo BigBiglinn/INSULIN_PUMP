@@ -1,0 +1,65 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * piezo insulin pump v2 - 48 v flyback, closed-loop behavioural lm51551 model (loadstep_3v0)
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using transient initial conditions
+
+No. of Data Rows : 1583963
+
+  Measurements for Transient Analysis
+
+vout_end            =  4.923927e+01 from=  1.000000e-02 to=  1.100000e-02
+vout_max            =  4.925846e+01 at=  9.975468e-03
+ipri_max            =  5.261415e+00 at=  7.047048e-03
+vds_max             =  2.383731e+01 at=  7.048775e-03
+vd1_max             =  8.942502e+01 at=  8.399401e-03
+iin_end             =  -7.153015e-02 from=  1.000000e-02 to=  1.100000e-02
+vpre                =  4.792355e+01 from=  2.000000e-03 to=  3.000001e-03
+vmin_step           =  4.700602e+01 at=  5.193870e-03
+vmax_unload         =  4.925843e+01 at=  9.975468e-03
+vpp_100ma           =  4.147386e-01 from=  6.000000e-03 to=  7.000000e-03
+iin_100ma           =  -2.975154e+00 from=  6.000000e-03 to=  7.000001e-03
+pout_100ma          =  4.659862e+00 from=  6.000000e-03 to=  7.000001e-03
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using transient initial conditions
+
+No. of Data Rows : 1583963
+
+  Measurements for Transient Analysis
+
+vout_end            =  4.923927e+01 from=  1.000000e-02 to=  1.100000e-02
+vout_max            =  4.925846e+01 at=  9.975468e-03
+ipri_max            =  5.261415e+00 at=  7.047048e-03
+vds_max             =  2.383731e+01 at=  7.048775e-03
+vd1_max             =  8.942502e+01 at=  8.399401e-03
+iin_end             =  -7.153015e-02 from=  1.000000e-02 to=  1.100000e-02
+vpre                =  4.792355e+01 from=  2.000000e-03 to=  3.000001e-03
+vmin_step           =  4.700602e+01 at=  5.193870e-03
+vmax_unload         =  4.925843e+01 at=  9.975468e-03
+vpp_100ma           =  4.147386e-01 from=  6.000000e-03 to=  7.000000e-03
+iin_100ma           =  -2.975154e+00 from=  6.000000e-03 to=  7.000001e-03
+pout_100ma          =  4.659862e+00 from=  6.000000e-03 to=  7.000001e-03
+
+
+Total analysis time (seconds) = 46.633
+
+Total elapsed time (seconds) = 46.915 
+
+Total DRAM available = 16091.164 MB.
+DRAM currently available = 13888.246 MB.
+Maximum ngspice program size =  796.809 MB.
+Current ngspice program size =  772.699 MB.
+
+Shared ngspice pages =    4.109 MB.
+Text (code) pages =    6.156 MB.
+Stack = 0 bytes.
+Library pages =  777.551 MB.
+

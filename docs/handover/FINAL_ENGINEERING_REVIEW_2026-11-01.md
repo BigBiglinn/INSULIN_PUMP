@@ -1,5 +1,7 @@
 # Final engineering review: Piezo Insulin Pump v2 Rev B (digital design)
 
+> **Later update (completion session, 1 Nov 2026).** Part 3's two "routable immediately" items are now routed (22 unconnected). C305 was corrected to 2.2 µF, and new findings U-39 to U-44 were added. The owner-decision list in §4.2 is superseded by `OWNER_APPROVAL_SHEET.md` (17 decisions). In §2.4, the runaway timing uses a 1 ms detection; the worst case is 2 ms (0.30 U), see `validation/logs/runaway_timing.txt`.
+
 | | |
 | --- | --- |
 | Date | 1 Nov 2026 |

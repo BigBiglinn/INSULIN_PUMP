@@ -7,7 +7,7 @@
 "C301","220uF/16V","Capacitor_THT:CP_Radial_D8.0mm_P3.50mm","","DECIDED","1",""
 "C302,C303","10uF/10V X5R","Capacitor_SMD:C_0805_2012Metric","","CALC","2",""
 "C304","2.2uF/10V","Capacitor_SMD:C_0603_1608Metric","","DS","1",""
-"C305","47nF","Capacitor_SMD:C_0603_1608Metric","","CALC","1",""
+"C305","2.2uF/10V X7R","Capacitor_SMD:C_0603_1608Metric","","CALC","1",""
 "C306","180nF","Capacitor_SMD:C_0603_1608Metric","","CALC","1",""
 "C307","3.3nF","Capacitor_SMD:C_0603_1608Metric","","CALC","1",""
 "C308","22nF/50V X7R","Capacitor_SMD:C_0805_2012Metric","","CALC","1",""

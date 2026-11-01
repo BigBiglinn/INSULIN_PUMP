@@ -7,3 +7,6 @@ _autosave-*
 *.bak
 __pycache__/
 hardware/kicad/pump_v2.net
+
+# simulation waveform dumps (large; regenerate with the scripts)
+validation/sim/**/wave_*.txt

@@ -18,9 +18,12 @@ Lp for 40 % ripple                                             7.366  uH        
 Primary peak (calc)                                            3.137  A          Iavg + dI/2 
 Current limit min                                              4.227  A          93 mV / 22 mohm [SNVSB75E VCLTH]
 Current limit max                                              4.864  A          107 mV / 22 mohm [SNVSB75E VCLTH]
-Soft-start time                                                  4.7  ms         C VREF / ISS (ISS typ 10 uA) [SNVSB75E]
-Soft-start time range (ISS 9-11 uA)                            4.273  ms (min)    [SNVSB75E ISS 9..11 uA]
-  ...max                                                       5.222  ms          
+Soft-start time, 10 Oct C305 47 nF                               4.7  ms         C VREF / ISS (ISS typ 10 uA) [SNVSB75E]
+  charge current that 4.7 ms demands                           1.538  A          C_out x 48 V / tSS [-> current limit + hiccup]
+Soft-start time, C305 2.2 uF (1 Nov)                             220  ms          [SNVSB75E]
+  range (ISS 11..9 uA, VREF 0.99..1.01)                          198  ms (min)    
+  ...max                                                       246.9  ms          
+  charge current at 2.2 uF                                   0.03286  A           [sim_flyback_cycle.py: min 1.5 uF]
 Vout nominal                                                      48  V          VREF (1+470k/10k) 
 Vout min (VREF 0.99, 1 % R)                                     46.6  V           [SNVSB75E VREF 0.99-1.01]
 Vout max (VREF 1.01, 1 % R)                                    49.44  V           
@@ -56,7 +59,10 @@ FLY_EN with veto ON, MCU high, Rds(on)=20 ohm                  64.71  mV        
 0.5 U travel                                                   299.6  um          [S-06]
 Time to 0.5 U at 15.0 mm/s                                     19.97  ms          [LL06 top / PMD401 1500 Hz x 5 um]
 Time to 0.5 U at 7.5 mm/s                                      39.94  ms          [LL06 top / PMD401 1500 Hz x 5 um]
-Overrun with 11 ms stop at 15 mm/s                            0.2754  U           [SPI-gate proposal]
+Overrun with 11 ms stop at 15 mm/s                            0.2754  U           [SPI-gate proposal (1 ms detect)]
+Overrun with 12 ms stop at 15 mm/s                            0.3004  U           [2 ms worst-case detect + 10 ms]
+Max PMD401 SPI timeout for S-06 at 15 mm/s                     17.97  ms          [runaway_timing.py]
+Max PMD401 SPI timeout for S-06 at 7.5 mm/s                    37.94  ms          
 Rail decay rate at 100 mA from 151.4 uF                       0.6605  V/ms        
 48 V load at dosing speed                                      0.363  W          48 V x 6 mA + 5 mW/Hz x 15 Hz [PMD401 manual, LL06]
 Battery current at dosing speed (3.0 V, 80 %)                 0.1513  A           
@@ -65,5 +71,10 @@ Idle limit for 3 days, 10 % reserve                            0.126  W         
 Motor-on time for 50 U/day (ASSUMED profile)                   443.8  s           
 Charger loss 1 A, 3.0 V cell, 5 V in                               2  W           [linear charger]
 Charger loss 0.5 A, 3.0 V cell                                     1  W           
+Unload overshoot + 1 % setpoint corner                          50.7  V          49.4 V + 1.3 V (sim) [vs PMD401 50.4 V]
+Unload overshoot + 0.1 % setpoint corner                       49.88  V           
+Current limit with R305 18 mohm (proposal)                     5.167  A (min)     [decision 8]
+  ...max                                                       5.944  A           [-> T301 Isat >= 6.5 A]
+Stored rail energy at 48 V                                     174.4  mJ          
 VBAT divider current at 4.2 V                                    2.1  uA          
 VBAT divider time constant                                        50  ms         500 k x 100 nF 

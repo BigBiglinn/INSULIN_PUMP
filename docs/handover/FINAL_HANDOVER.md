@@ -2,6 +2,11 @@
 
 10 Oct 2026, with the layout-only fixes of 31 Oct 2026 (see `LAYOUT_FIXES_2026-10-31.md`). Read this first. Details are in `HANDOVER_GUIDE.md`, `FLYBACK_DESIGN.md`, `UNRESOLVED_ISSUES.md` and `ASSUMPTIONS_AND_DEVIATIONS.md`.
 
+> **Completion session (1 Nov 2026), start here.** Status and next steps: `OWNER_APPROVAL_SHEET.md` (17 decisions, recommendations and consequences), `FABRICATION_BLOCKERS.md` (everything that still prevents fabrication), `FIRMWARE_DESIGN_REVIEW.md`, `PROJECT_FILE_INDEX.md`, `PROGRESS_LOG.md`, and the 36-section `../report/PROJECT_ENGINEERING_REPORT.md`. Changes in this session:
+> - **C305 47 nF → 2.2 µF.** Simulation showed the 4.7 ms soft start locks the LM51551 in hiccup, so 48 V would never come up.
+> - ENC_I_M and VBAT_SENSE routed. kicad-cli CI run 4 on `a768755`: 0 copper errors, 0 parity, **22 unconnected**.
+> - Closed-loop and cycle-by-cycle flyback simulations, runaway timing model, detailed BOM (`../bom_full.csv`), ST reference-firmware evidence.
+>
 > **Safety limits.** This is a bench-only prototype for water or 0.9 % saline. Never connect it to a person or an animal, and never use real insulin.
 >
 > **Not fabrication-ready.** No Gerbers have been generated. Nothing has been built or measured. A clean ERC or DRC report does not show that the circuit works.
@@ -85,14 +90,14 @@ See `docs/bom_detailed.csv`, which lists every reference with its status and not
 
 ## 6. Final validation results
 
-Current board, kicad-cli 10.0.4 in GitHub Actions, commit `ef091c3` (`validation/KICAD_CI_PROVENANCE.md`):
+Current board, kicad-cli 10.0.4 in GitHub Actions, commit `a768755` (CI run 4; `validation/KICAD_CI_PROVENANCE.md`):
 
 | Check | Result |
 | --- | --- |
 | ERC | 6 × `power_pin_not_driven` (intentional, U-05) + 1 × `lib_symbol_mismatch` (U701) |
 | DRC copper | 0 errors |
 | Schematic parity | 0 issues |
-| Unconnected | **24** (12 ST placeholders, 1 DNP switch, 11 blocked by U-05/U-12) |
+| Unconnected | **22** (12 ST placeholders, 1 DNP switch, 9 blocked by U-05/U-12) |
 | Silkscreen | 69 overlap, 52 over copper, 1 edge |
 
 The 10 Oct kicad-cli 10.0.3 reports are in `validation/*/baseline_2026-10-10/`.

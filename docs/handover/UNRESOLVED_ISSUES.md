@@ -1,6 +1,6 @@
 # Unresolved issues: Rev B digital handover design
 
-Updated 10 Oct 2026 (second session); layout items updated 31 Oct and 1 Nov 2026 (`LAYOUT_FIXES_2026-10-31.md`, `LAYOUT_FIXES_2026-11-01.md`). Recommendations for every critical item: `ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`; detailed decision proposals and the owner-decision list: `FINAL_ENGINEERING_REVIEW_2026-11-01.md`. Severity:
+Updated 10 Oct 2026 (second session); layout items updated 31 Oct and 1 Nov 2026; completion-session items U-39 to U-44 added 1 Nov (decisions in `OWNER_APPROVAL_SHEET.md`) (`LAYOUT_FIXES_2026-10-31.md`, `LAYOUT_FIXES_2026-11-01.md`). Recommendations for every critical item: `ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`; detailed decision proposals and the owner-decision list: `FINAL_ENGINEERING_REVIEW_2026-11-01.md`. Severity:
 
 - **Critical**: blocks any build, or leaves a safety function without evidence.
 - **Major**: the board will not work as intended until it is resolved.
@@ -22,6 +22,8 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 
 | ID | Was | Resolution |
 | --- | --- | --- |
+| U-39 | **Soft-start lock-out (found 1 Nov by simulation).** C305 47 nF gave a 4.7 ms soft start that needs 1.54 A to charge 151 µF; the LM51551 would run at current limit, arm its 64-cycle hiccup and never reach 48 V | C305 = 2.2 µF (220 ms; worst-case minimum 1.5 µF), commit `a768755`. CALC + SIM (`sim_flyback_cycle.py`, `sim_flyback_closedloop.py`); bench test PW-SS still needed |
+| (U-21 part) | ENC_I_M and VBAT_SENSE unconnected | Routed 1 Nov (`layout_fixes_3.py`); kicad-cli CI run 4: 22 unconnected |
 
 ## Critical
 
@@ -33,7 +35,17 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-06 | K-12 "switched output" and the E-11 bleeder are not designed | Q302/Q303/R309/R310/R312 DNP; R311 0 R bypass | High-side switch ≥ 100 V class; bleeder value |
 | U-37 | **J703 (JST SM02B-SRSS-TB) is reportedly rated 50 V AC/DC** (distributor listings; the JST datasheet could not be read). The rail is 48 V nominal, up to 50.4 V normally and up to 55.9 V at the LM51551 OVP (worst case) | — | Confirm in the JST datasheet; if 50 V, use a ≥ 100 V board connector with an SH cable to the PMD401 (review §7) |
 | U-38 | **R307 (470 kΩ, FB divider top) working voltage.** 0603 footprint, no MPN; sees ≈ 47 V (up to ≈ 55 V). An open R307 is the U-23 single fault | — | Choose a part with a datasheet working voltage ≥ 75 V (or a 1206); same rule for any new 48 V divider (final review §1.3) |
-| U-23 | 60 V fault ceiling relies on LM51551 OVP through the FB divider (52.8 V typical, 49.9–55.9 V worst case). An open R307/R308 is an uncovered single fault, and 54.2 V is above the PMD401's 50.4 V maximum | — | Secondary OVP clamp or crowbar, or a redundant divider; decision |
+| U-23 | 60 V fault ceiling relies on LM51551 OVP through the FB divider (52.8 V typical, 49.9–55.9 V worst case). An open R307 (or shorted R308) is an uncovered single fault. Simulation 1 Nov: hiccup only slows the rise; at no load the rail passes 55.9 V after 336 ms and 100 V after 2.9 s; with the proposed independent OVP it latches at ≈ 52.5 V [SIM] | — | Independent OVP (approval sheet decision 1) |
+
+## New on 1 Nov (completion session; all on `OWNER_APPROVAL_SHEET.md`)
+
+| ID | Severity | Issue | Needed to close |
+| --- | --- | --- | --- |
+| U-40 | Major | A 6 → 100 mA load **step** trips the LM51551 hiccup about 3 ms after the step at Vin 3.0 V and 3.4 V (48 V off for 110 ms); none at 4.2 V. A 20 ms ramp does not trip it [SIM] | Firmware FW-R1 (≥ 20 ms speed ramp); optional R305 18 mΩ + T301 I<sub>sat</sub> ≥ 6.5 A (decision 8); bench PW-LS |
+| U-41 | Major | Q301 (25 V) sees about 25.7 V during current-limit operation at V<sub>out</sub> ≥ 48 V and 22–24 V on load steps [SIM]; 18.4–18.7 V in normal operation | Clamp re-tune with the real T301, or a 30–40 V FET (decision 9) |
+| U-42 | Major | Unload overshoot +1.3 V [SIM] on top of the 1 % setpoint corner 49.4 V gives 50.7 V, above the PMD401's 50.4 V | 0.1 % R307/R308 (decision 6) |
+| U-43 | Major | Supervisor has no battery-voltage input (A2 review) | Spare STM32C031 ADC on VBAT_SENSE (decision 14) |
+| U-44 | Critical (part of U-03) | S-06 with the proposed SPI gate holds only if the PMD401 SPI timeout is ≤ 18 ms at 15 mm/s (2 ms worst-case detection) [CALC `runaway_timing.py`]; the manual says "about 10 ms" | Ask PiezoMotor; measure (SG-06b) |
 
 ## Major
 
@@ -49,7 +61,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-18 | Battery connector, cell, fuse part number, master switch, charge current not decided (B.19, B.20) | Owner or successor |
 | U-19 | Thermal check: R306 ≈ 0.4 W, R313 ≈ 0.17 W, R305, Q301, D301 | After U-04 |
 | U-20 | RF trace not impedance-controlled | Stack-up, ST reference |
-| U-21 | **Routing incomplete / not reviewed.** 1 Nov, kicad-cli: **24 unconnected** (12 ST placeholders, 1 DNP switch, 11 genuine: 3 at the BQ25188 WCSP, 8 in the U501 fan-out). Every remaining genuine item is blocked by U-05 or U-12, not by routing effort. The flyback loop is still autorouted around a placeholder transformer, so it is not final | Hand-route and review in pcbnew after U-04/U-05/U-12; the CI workflow re-checks every push |
+| U-21 | **Routing incomplete / not reviewed.** 1 Nov (CI run 4, `a768755`), kicad-cli: **22 unconnected** (12 ST placeholders, 1 DNP switch, 3 at the BQ25188 WCSP, 6 boxed in by the U501 fan-out). Every remaining genuine item is blocked by U-05 or U-12, not by routing effort. The flyback loop is still autorouted around a placeholder transformer, so it is not final | Hand-route and review in pcbnew after U-04/U-05/U-12; the CI workflow re-checks every push |
 | U-24 | Input current at full PMD401 speed is about 2.0–2.3 A at 3.0 V (simulation), at or above the E-05 2.1 A budget | Measure PMD401 current at dosing speed (MT-07); re-check the battery-path ratings |
 | U-22 | Freerouting ran with default telemetry during the first session (disabled afterwards) | Note only |
 

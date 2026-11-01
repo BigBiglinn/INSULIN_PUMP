@@ -1,5 +1,5 @@
 ** Drc report for pump_v2.kicad_pcb **
-** Created on 2026-11-01T03:01:06 **
+** Created on 2026-11-01T04:19:35 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 122 DRC violations **
@@ -492,15 +492,11 @@
     @(190.5000 mm, 153.6700 mm): Reference field of R313
     @(191.9750 mm, 152.5000 mm): Pad 2 [/48V flyback/+48V_RAW] of C312 on F.Cu
 
-** Found 24 unconnected pads **
+** Found 22 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
     @(193.2000 mm, 144.7750 mm): Pad 1 [/48V flyback/SW48_GATE] of R309 on F.Cu
     @(171.5000 mm, 146.9750 mm): Track [/48V flyback/SW48_GATE] on F.Cu, length 0.9899 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(117.7000 mm, 125.2750 mm): Track [VBAT_SENSE] on F.Cu, length 2.3500 mm
-    @(145.7500 mm, 122.4380 mm): Track [VBAT_SENSE] on F.Cu, length 0.0728 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(118.2000 mm, 113.2000 mm): Pad C2 [/Power input & charger/VBAT_FUSED] of U101 on F.Cu
@@ -519,7 +515,7 @@
     @(147.2500 mm, 122.4375 mm): Pad 17 [/Main MCU STM32WBA55/LSE_IN] of U501 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(149.5050 mm, 132.0050 mm): Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.9977 mm
+    @(148.8000 mm, 131.2990 mm): Track [/Main MCU STM32WBA55/RF_MCU] on F.Cu, length 0.6840 mm
     @(150.7500 mm, 115.5625 mm): Pad 37 [/Main MCU STM32WBA55/RF_MCU] of U501 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
@@ -535,7 +531,7 @@
     @(155.1000 mm, 114.1250 mm): Pad 1 [/Main MCU STM32WBA55/WBA_VDD11] of C509 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(142.4570 mm, 131.0680 mm): Track [/Main MCU STM32WBA55/WBA_VDDRF] on F.Cu, length 1.8286 mm
+    @(143.7500 mm, 129.7750 mm): Pad 1 [/Main MCU STM32WBA55/WBA_VDDRF] of C512 on F.Cu
     @(149.2500 mm, 115.5625 mm): Pad 40 [/Main MCU STM32WBA55/WBA_VDDRF] of U501 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
@@ -585,10 +581,6 @@
     Local override; error
     @(154.9750 mm, 132.0050 mm): Pad 1 [/Main MCU STM32WBA55/HSE_IN] of C516 on F.Cu
     @(148.2500 mm, 115.5625 mm): Pad 42 [/Main MCU STM32WBA55/HSE_IN] of U501 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(145.2500 mm, 115.5625 mm): Pad 48 [ENC_I_M] of U501 on F.Cu
-    @(172.7000 mm, 109.7750 mm): Pad 1 [ENC_I_M] of R710 on F.Cu
 
 ** Found 0 Footprint errors **
 

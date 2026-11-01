@@ -1,0 +1,63 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * piezo insulin pump v2 - 48 v flyback, closed-loop behavioural lm51551 model (ovptrip_4v2_52v5_10us)
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using transient initial conditions
+
+No. of Data Rows : 179507
+
+  Measurements for Transient Analysis
+
+vout_end            =  5.250317e+01 from=  5.000000e-04 to=  1.500000e-03
+vout_max            =  5.256936e+01 at=  4.486323e-04
+ipri_max            =  5.547693e+00 at=  3.960330e-04
+vds_max             =  2.573019e+01 at=  3.971195e-04
+vd1_max             =  1.036715e+02 at=  3.960557e-04
+iin_end             =  -1.240574e-03 from=  5.000000e-04 to=  1.500000e-03
+vds_max_fault       =  2.573019e+01 at=  3.971195e-04
+vd1_max_fault       =  1.036715e+02 at=  3.960557e-04
+t_trip              =   4.51994e-04
+t_en_low            =   4.51995e-04
+vout_max_after      =  5.256936e+01 at=  4.486323e-04
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Using transient initial conditions
+
+No. of Data Rows : 179507
+
+  Measurements for Transient Analysis
+
+vout_end            =  5.250317e+01 from=  5.000000e-04 to=  1.500000e-03
+vout_max            =  5.256936e+01 at=  4.486323e-04
+ipri_max            =  5.547693e+00 at=  3.960330e-04
+vds_max             =  2.573019e+01 at=  3.971195e-04
+vd1_max             =  1.036715e+02 at=  3.960557e-04
+iin_end             =  -1.240574e-03 from=  5.000000e-04 to=  1.500000e-03
+vds_max_fault       =  2.573019e+01 at=  3.971195e-04
+vd1_max_fault       =  1.036715e+02 at=  3.960557e-04
+t_trip              =   4.51994e-04
+t_en_low            =   4.51995e-04
+vout_max_after      =  5.256936e+01 at=  4.486323e-04
+
+
+Total analysis time (seconds) = 4.172
+
+Total elapsed time (seconds) = 4.218 
+
+Total DRAM available = 16091.164 MB.
+DRAM currently available = 14403.863 MB.
+Maximum ngspice program size =  150.902 MB.
+Current ngspice program size =  108.480 MB.
+
+Shared ngspice pages =   10.426 MB.
+Text (code) pages =    6.156 MB.
+Stack = 0 bytes.
+Library pages =  131.645 MB.
+

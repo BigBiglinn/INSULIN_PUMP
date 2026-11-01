@@ -68,7 +68,10 @@ No locked component (K-3 to K-6, K-9 Rev A parts, K-12 Rev B power parts) was su
 | A-24 | CSD16340Q3 pinout 1–3 S, 4 G, 5–8 D (TI standard Q3 NexFET); footprint is KiCad's TI NexFET 3.3 × 3.3 pattern | Q301 | TI DQG0008 drawing |
 | A-25 | Compensation R303/C306/C307 is a hand calculation with assumed effective output capacitance (≈ 50 µF including the PMD401 bulk) | 48 V sheet | Loop simulation (TI LM5155 model) or bench Bode measurement |
 | A-26 | Generic SPICE models stand in for the FET and diodes in the open-loop simulation | validation/sim | Vendor SPICE models |
-| A-27 | VBAT divider: 500 k source impedance is acceptable with a 100 nF reservoir at a low sample rate | R107, R108, C104 | ST ADC specifications |
+| A-27 | VBAT divider: 500 k source impedance is acceptable with a 100 nF reservoir at a low sample rate | R107, R108, C104 | ST ADC specifications |
+| A-28 | Closed-loop flyback models (`sim_flyback_closedloop.py`, `sim_flyback_cycle.py`): COMP-to-PWM offset 1.0 V (taken equal to the COMP minimum clamp) and DMAX 90 % are not given in SNVSB75E; every other controller number is from the datasheet. The models are behavioural, not TI's | U301 model; report §26–§27 | Re-run with TI's LM5155/LM51551 model |
+| A-29 | PMD401 SPI timeout band 5–20 ms (manual: "about 10 ms"), PMD401+LL06 power 2–7.5 W at full speed, encoder-rate detection windows as proposed (`runaway_timing.py`) | S-06 timing (report §27.4) | Bench SG-06b; PiezoMotor confirmation |
+| A-30 | Independent OVP modelled as an ideal latch with 10–50 µs total delay | Proposed OVP (decision 1) | Re-simulate with the chosen comparator |
 
 ## 3. Data sources used in this session
 

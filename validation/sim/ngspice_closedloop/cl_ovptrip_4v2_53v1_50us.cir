@@ -1,0 +1,105 @@
+* Piezo Insulin Pump v2 - 48 V flyback, CLOSED-LOOP BEHAVIOURAL LM51551 model (ovptrip_4v2_53v1_50us)
+* see scripts/sim_flyback_closedloop.py header for every parameter source and assumption
+.param vin=4.2 tsw={1/298k}
+V1 vsrc 0 4.2
+R1s vsrc vin 20m
+C1 vin c1n 220u
+R1c c1n 0 80m
+C2 vin c2n 20u
+R2c c2n 0 3m
+* ---- transformer specification (T301 placeholder) ----
+Lp vin lpn 7.3u
+Rlp lpn sw 15m
+Ls 0 lsn 182.5u
+Rls lsn sec 0.35
+K1 Lp Ls 0.99
+M1 sw g cs cs QCSD
+Rs cs 0 22m
+Dc sw clamp DSCH
+Rc clamp vin 390
+Cc clamp vin 22n
+D1 sec out DHF
+Rsn sec snb 220
+Csn snb out 100p
+* ---- +48V_RAW (C309, C310, C311) -> R311 0R -> +48V_MOT (C702) ----
+C3 out c3n 1.8u
+R3c c3n 0 5m
+C3b out c3bn 1.8u
+R3bc c3bn 0 5m
+C4 out c4n 47u
+R4c c4n 0 0.3
+R311 out mot 1m
+C702 mot c7n 100u
+R7c c7n 0 0.2
+Bload mot 0 I=v(mot)/(10e6)
+* ---- feedback divider R307/R308 (R307 may open) ----
+Bfb out fb I=(v(out)-v(fb))/((time < 0.0) ? 470k : 1e9)
+R308 fb 0 10k
+* ---- LM51551 behavioural controller ----
+Vramp ramp 0 PULSE(0 1 0 {tsw-10n} 10n 0 {tsw})
+* UVLO/EN = FLY_EN: R402 1k from main MCU (3.3 V), R401 4.7k pull-down
+Vmcu mcu 0 3.3
+R402 mcu en 1k
+R401 en 0 4.7k
+Benok enok 0 V=v(en) > 1.5 ? 1 : 0
+* soft start: 10 uA into C305 47 nF, 55 ohm discharge when disabled
+Bss 0 ss I=v(enok) > 0.5 ? 10u : -v(ss)/55
+C305 ss 0 2.2u
+* internal OVP with hysteresis (110 % / 105 %)
+Bov ov 0 V=v(fb) > 1.10 ? 1 : (v(fb) < 1.05 ? 0 : (v(ovd) > 0.5 ? 1 : 0))
+Rov ov ovd 1k
+Cov ovd 0 1p
+* error amplifier: Gm 2 mA/V, +-180 uA (40 uA during OVP), RO 10 Mohm, clamp 1.0..2.8 V
+Bea 0 comp I=max(min(2m*(min(v(ss),1.0)-v(fb)), v(ovd) > 0.5 ? 40u : 180u), v(ovd) > 0.5 ? -40u : -180u)
+Ro comp 0 10meg
+R303 comp crc 3.01k
+C306 crc 0 180n
+C307 comp 0 3.3n
+* COMP clamps 1.0 / 2.8 V as a stiff piecewise-linear conductance (100 ohm beyond the clamp)
+Bclamp comp 0 I=v(comp) > 2.8 ? (v(comp)-2.8)/100 : (v(comp) < 1.0 ? (v(comp)-1.0)/100 : 0)
+* PWM latch: set at period start (tON(min)/blanking 140 ns = ramp < 0.0417), reset by PWM compare, CL or DMAX
+Bset set 0 V=v(ramp) < 0.0417 ? 1 : 0
+Brst rst 0 V=((v(cs) + 0.04*v(ramp) > 0.142*(v(comp)-1.0)) || (v(cs) > 0.1) || (v(ramp) > 0.9)) ? 1 : 0
+Bq q 0 V=(v(enok) < 0.5 || v(ovd) > 0.5) ? 0 : ((v(set) > 0.5) ? 1 : ((v(rst) > 0.5) ? 0 : (v(qd) > 0.5 ? 1 : 0)))
+Rq q qd 100
+Cq qd 0 10p
+Bcl cl 0 V=(v(cs) > 0.1) ? 1 : 0
+* per-period current-limit flag (set by CL, cleared at period start) for the hiccup post-processor
+Bclf clf 0 V=(v(cl) > 0.5) ? 1 : ((v(ramp) < 0.01) ? 0 : (v(clfd) > 0.5 ? 1 : 0))
+Rclf clf clfd 100
+Cclf clfd 0 10p
+Bg gd 0 V=v(qd) > 0.5 ? 4.2 : 0
+Rg gd g 2
+* PROPOSED independent OVP (FINAL_ENGINEERING_REVIEW §2.3): own sense of +48V_RAW, latch, open-drain on FLY_EN
+* trip 53.1 V, total detection+propagation delay 5e-05 s modelled as RC to 50 % (ASSUMPTION)
+Bovp op 0 V=(v(out) > 53.1 || v(opd) > 0.5) ? 1 : 0
+Ropd op opd 1k
+Copd opd 0 7.215e-08
+Bpd en 0 I=v(opd) > 0.5 ? v(en)/10 : 0
+
+.model QCSD VDMOS(Vto=1.1 Kp=40 Rd=2.5m Rs=1m Rg=1 Cgs=0.9n Cgdmax=0.6n Cgdmin=0.08n Cjo=0.6n Is=1e-12 BV=25)
+.model DSCH D(Is=2u Rs=40m N=1.15 Cjo=60p BV=100)
+.model DHF D(Is=5n Rs=60m N=1.6 Cjo=15p Tt=15n BV=200)
+.model DCL D(Is=1e-12 N=0.2)
+.options method=gear reltol=1e-3 itl4=50
+.tran 100n 0.0015 0 10n uic
+.ic v(out)=52.6 v(mot)=52.6 v(snb)=52.6 v(fb)=1.0958 v(comp)=2.79 v(crc)=2.79 v(ss)=2.0 v(vin)=4.2 v(vsrc)=4.2 v(clamp)=19.2 v(en)=2.72 v(mcu)=3.3
+.meas tran vout_end AVG v(mot) FROM=0.0005 TO=0.0015
+.meas tran vout_max MAX v(out)
+.meas tran ipri_max MAX i(Lp)
+.meas tran vds_max MAX v(sw)
+.meas tran vd1_max MAX par('v(out)-v(sec)')
+.meas tran iin_end AVG i(V1) FROM=0.0005 TO=0.0015
+.meas tran vds_max_fault MAX v(sw) FROM=0.0 TO=0.0015
+.meas tran vd1_max_fault MAX par('v(out)-v(sec)') FROM=0.0 TO=0.0015
+.meas tran t_trip WHEN v(opd)=0.5 RISE=1
+.meas tran t_en_low WHEN v(en)=1.45 FALL=1
+.meas tran vout_max_after MAX v(out)
+.control
+run
+set wr_singlescale
+set wr_vecnames
+linearize v(out) v(comp) v(ss) v(clfd) i(Lp)
+wrdata /home/user/INSULIN_PUMP/validation/sim/ngspice_closedloop/wave_ovptrip_4v2_53v1_50us.txt v(out) v(comp) v(ss) v(clfd) i(Lp)
+.endc
+.end

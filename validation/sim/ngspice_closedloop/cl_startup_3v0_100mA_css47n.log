@@ -1,0 +1,215 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * piezo insulin pump v2 - 48 v flyback, closed-loop behavioural lm51551 model (startup_3v0_100ma_css47n)
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Warning: singular matrix:  check node ss
+
+Note: Starting dynamic gmin stepping
+Warning: singular matrix:  check node ss
+
+Warning: Dynamic gmin stepping failed
+Note: Starting true gmin stepping
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: True gmin stepping failed
+Note: Starting source stepping
+Warning: source stepping failed
+Note: Transient op started
+Note: Transient op finished successfully
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vsrc                                         3
+vin                                    2.76569
+c1n                                   0.647402
+c2n                                 0.00011172
+lpn                                   0.195238
+sw                                     0.14145
+lsn                                   -12.7237
+sec                                   -12.7237
+g                                      3.00003
+cs                                   0.0788889
+clamp                                  2.76365
+out                               -8.10537e-06
+snb                                   -12.7256
+c3n                                8.06227e-10
+c3bn                               8.06227e-10
+c4n                                2.15376e-06
+mot                               -8.10694e-06
+c7n                                3.17442e-07
+fb                                -1.68862e-07
+ramp                                         0
+mcu                                        3.3
+en                                     2.72105
+enok                                         1
+ss                                  0.00212766
+ov                                           0
+ovd                                          0
+comp                                   1.00454
+crc                                    1.00001
+set                                          1
+rst                                          1
+q                                            1
+qd                                           1
+cl                                           0
+clf                                          0
+clfd                                         0
+gd                                           3
+pa_00                                  12.7237
+bpa_00#branch                                0
+bg#branch                          1.52566e-05
+bclf#branch                                  0
+bcl#branch                                   0
+bq#branch                               -1e-12
+brst#branch                                  0
+bset#branch                                  0
+bov#branch                                   0
+benok#branch                                 0
+ls#branch                          9.07194e-06
+lp#branch                              3.58587
+vmcu#branch                       -0.000578947
+vramp#branch                                 0
+v1#branch                             -11.7156
+
+
+No. of Data Rows : 383120
+
+  Measurements for Transient Analysis
+
+
+Error: measure  t_reg  when(WHEN) : out of interval
+ .meas tran t_reg when v(mot)=47.5 rise=1 failed!
+
+vout_end            =  5.172195e+00 from=  1.000000e-03 to=  2.000000e-03
+vout_max            =  6.865524e+00 at=  2.000000e-03
+ipri_max            =  4.677556e+00 at=  1.691442e-03
+vds_max             =  2.100046e+01 at=  1.980069e-03
+vd1_max             =  3.020752e+01 at=  1.996808e-03
+iin_end             =  -1.411911e+00 from=  1.000000e-03 to=  2.000000e-03
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Note: Starting dynamic gmin stepping
+Warning: singular matrix:  check node ss
+
+Warning: Dynamic gmin stepping failed
+Note: Starting true gmin stepping
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: True gmin stepping failed
+Note: Starting source stepping
+Warning: source stepping failed
+Note: Transient op started
+Note: Transient op finished successfully
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vsrc                                         3
+vin                                    2.76569
+c1n                                   0.647402
+c2n                                 0.00011172
+lpn                                   0.195238
+sw                                     0.14145
+lsn                                   -12.7237
+sec                                   -12.7237
+g                                      3.00003
+cs                                   0.0788889
+clamp                                  2.76365
+out                               -8.10575e-06
+snb                                   -12.7256
+c3n                                8.06227e-10
+c3bn                               8.06227e-10
+c4n                                2.15376e-06
+mot                               -8.10732e-06
+c7n                                3.17442e-07
+fb                                 -1.6887e-07
+ramp                                         0
+mcu                                        3.3
+en                                     2.72105
+enok                                         1
+ss                                  0.00212766
+ov                                           0
+ovd                                          0
+comp                                   1.00454
+crc                                    1.00001
+set                                          1
+rst                                          1
+q                                            1
+qd                                           1
+cl                                           0
+clf                                          0
+clfd                                         0
+gd                                           3
+pa_00                                  12.7237
+bpa_00#branch                                0
+bg#branch                          1.52566e-05
+bclf#branch                                  0
+bcl#branch                                   0
+bq#branch                               -1e-12
+brst#branch                                  0
+bset#branch                                  0
+bov#branch                                   0
+benok#branch                                 0
+ls#branch                          9.07194e-06
+lp#branch                              3.58587
+vmcu#branch                       -0.000578947
+vramp#branch                                 0
+v1#branch                             -11.7156
+
+
+No. of Data Rows : 383158
+
+  Measurements for Transient Analysis
+
+
+Error: measure  t_reg  when(WHEN) : out of interval
+ .meas tran t_reg when v(mot)=47.5 rise=1 failed!
+
+vout_end            =  5.182939e+00 from=  1.000000e-03 to=  2.000000e-03
+vout_max            =  6.874729e+00 at=  2.000000e-03
+ipri_max            =  4.679100e+00 at=  1.751843e-03
+vds_max             =  2.093213e+01 at=  1.980067e-03
+vd1_max             =  3.024771e+01 at=  1.996806e-03
+iin_end             =  -1.413312e+00 from=  1.000000e-03 to=  2.000000e-03
+
+
+Total analysis time (seconds) = 14.437
+
+Total elapsed time (seconds) = 14.502 
+
+Total DRAM available = 16091.164 MB.
+DRAM currently available = 14402.652 MB.
+Maximum ngspice program size =  206.730 MB.
+Current ngspice program size =  182.688 MB.
+
+Shared ngspice pages =    3.957 MB.
+Text (code) pages =    6.156 MB.
+Stack = 0 bytes.
+Library pages =  187.473 MB.
+

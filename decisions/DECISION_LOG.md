@@ -165,3 +165,16 @@ Review only. **No schematic, PCB, part or value change; no owner decision taken.
 | 1 Nov | New issue U-38: R307 (0603, no MPN) working voltage at ≈ 47–55 V | Needs ≥ 75 V-rated part | OPEN |
 | 1 Nov | Eight decision proposals (ST power/RF, transformer, independent OVP, SPI-gate runaway stop, J703, switch vs bleeder, HV clearance, battery/fuse/charge) | Written with evidence, calculations, pros/cons, schematic/PCB changes, risks | **All PROPOSED; owner decisions in §4.2 of the review** |
 | 1 Nov | 24 unconnected items classified by trial routing (not committed) | 2 routable now (deferred), 21 blocked by datasheets (12 + 6 ST, 3 TI YBG), 1 by an owner decision | Documented |
+
+## 10. Completion session, 1 Nov 2026
+
+Engineering-level work under the owner's master execution prompt ("implement every technically justified change that does not require owner approval"). **No owner decision was taken.** Everything owner-dependent is on `docs/handover/OWNER_APPROVAL_SHEET.md`.
+
+| Date | Item | Rationale / evidence | Status |
+| --- | --- | --- | --- |
+| 1 Nov | **C305 47 nF → 2.2 µF/10 V X7R** (same 0603 footprint), in `design.py`, `power_48v.kicad_sch` and `pump_v2.kicad_pcb` | SNVSB75E §9.3.10 requires the soft start to avoid current limit. 47 nF (4.7 ms) demands 1.54 A into 151 µF, so the converter would sit in hiccup and never reach 48 V. Shown by two independent models (`sim_flyback_cycle.py`, `sim_flyback_closedloop.py`); worst-case minimum 1.5 µF. A correction of a CALC value, not a change of architecture or part selection | Done, commit `a768755`; CI run 4 clean (ERC unchanged, DRC 0 copper, 0 parity) |
+| 1 Nov | ENC_I_M and VBAT_SENSE routed (`layout_fixes_3.py`) | Classified "routable immediately" by the final review; short routes that can be redone with the U501 re-layout | Done; 24 → 22 unconnected (kicad-cli) |
+| 1 Nov | Closed-loop behavioural switching model, cycle-by-cycle model, runaway timing model, detailed BOM generator | Phase C/F of the master prompt | Done; results in `validation/sim/`, `validation/logs/`, `docs/bom_full*` |
+| 1 Nov | STM32WBA55 SMPS mode and LSE use recommended from ST's public reference firmware (`validation/logs/st_cubewba_evidence.md`) | st.com unreachable; ST's GitHub repositories reachable | Recommendation only (decision 12) |
+| 1 Nov | New findings U-40 to U-44 (load-step hiccup, Q301 margin at current limit, unload overshoot vs 50.4 V, supervisor VBAT, PMD401 timeout bound) | Simulation and calculation | On the approval sheet (decisions 6, 8, 9, 14, 2) |
+| 1 Nov | Report restructured to 36 sections; approval sheet, fabrication blockers, firmware review, file index, progress log | Phase G/H | Done |

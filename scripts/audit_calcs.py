@@ -45,9 +45,13 @@ row("Lp for 40 % ripple", 3.0 * d3 / (0.4 * ipri * 298e3) * 1e6, "uH", "Vin D / 
 row("Primary peak (calc)", ipri * 1.2, "A", "Iavg + dI/2", "")
 row("Current limit min", 0.093 / 0.022, "A", "93 mV / 22 mohm", "SNVSB75E VCLTH")
 row("Current limit max", 0.107 / 0.022, "A", "107 mV / 22 mohm", "SNVSB75E VCLTH")
-row("Soft-start time", 47e-9 * 1.0 / 10e-6 * 1e3, "ms", "C VREF / ISS (ISS typ 10 uA)", "SNVSB75E")
-row("Soft-start time range (ISS 9-11 uA)", 47e-9 / 11e-6 * 1e3, "ms (min)", "", "SNVSB75E ISS 9..11 uA")
-row("  ...max", 47e-9 / 9e-6 * 1e3, "ms", "", "")
+row("Soft-start time, 10 Oct C305 47 nF", 47e-9 * 1.0 / 10e-6 * 1e3, "ms", "C VREF / ISS (ISS typ 10 uA)", "SNVSB75E")
+c_out = 1.8e-6 * 2 + 47e-6 + 100e-6
+row("  charge current that 4.7 ms demands", c_out * 48 / 4.7e-3, "A", "C_out x 48 V / tSS", "-> current limit + hiccup")
+row("Soft-start time, C305 2.2 uF (1 Nov)", 2.2e-6 * 1.0 / 10e-6 * 1e3, "ms", "", "SNVSB75E")
+row("  range (ISS 11..9 uA, VREF 0.99..1.01)", 2.2e-6 * 0.99 / 11e-6 * 1e3, "ms (min)", "", "")
+row("  ...max", 2.2e-6 * 1.01 / 9e-6 * 1e3, "ms", "", "")
+row("  charge current at 2.2 uF", c_out * 48 / 0.22, "A", "", "sim_flyback_cycle.py: min 1.5 uF")
 ratio_nom = 1 + 470 / 10
 ratio_lo = 1 + 470 * 0.99 / (10 * 1.01)
 ratio_hi = 1 + 470 * 1.01 / (10 * 0.99)
@@ -95,7 +99,10 @@ um_half_U = 0.5 * um_per_U
 row("0.5 U travel", um_half_U, "um", "", "S-06")
 for v in (15.0, 7.5):
     row(f"Time to 0.5 U at {v} mm/s", um_half_U / (v * 1000) * 1000, "ms", "", "LL06 top / PMD401 1500 Hz x 5 um")
-row("Overrun with 11 ms stop at 15 mm/s", 0.011 * 15000 / um_per_U, "U", "", "SPI-gate proposal")
+row("Overrun with 11 ms stop at 15 mm/s", 0.011 * 15000 / um_per_U, "U", "", "SPI-gate proposal (1 ms detect)")
+row("Overrun with 12 ms stop at 15 mm/s", 0.012 * 15000 / um_per_U, "U", "", "2 ms worst-case detect + 10 ms")
+row("Max PMD401 SPI timeout for S-06 at 15 mm/s", (um_half_U / 15000 - 0.002) * 1e3, "ms", "", "runaway_timing.py")
+row("Max PMD401 SPI timeout for S-06 at 7.5 mm/s", (um_half_U / 7500 - 0.002) * 1e3, "ms", "", "")
 row("Rail decay rate at 100 mA from 151.4 uF", 0.1 / 151.4e-6 / 1000, "V/ms", "", "")
 
 # --- power / battery ----------------------------------------------------------------------------
@@ -108,6 +115,11 @@ row("Idle limit for 3 days, 10 % reserve", e_cell * 0.9 / 72, "W", "", "E-10 (pr
 row("Motor-on time for 50 U/day (ASSUMED profile)", 50 / (15 * 4.5 / um_per_U), "s", "", "")
 row("Charger loss 1 A, 3.0 V cell, 5 V in", (5 - 3.0) * 1.0, "W", "", "linear charger")
 row("Charger loss 0.5 A, 3.0 V cell", (5 - 3.0) * 0.5, "W", "", "")
+row("Unload overshoot + 1 % setpoint corner", 49.4 + 1.3, "V", "49.4 V + 1.3 V (sim)", "vs PMD401 50.4 V")
+row("Unload overshoot + 0.1 % setpoint corner", 1.01 * (1 + 470 * 1.001 / (10 * 0.999)) + 1.3, "V", "", "")
+row("Current limit with R305 18 mohm (proposal)", 0.093 / 0.018, "A (min)", "", "decision 8")
+row("  ...max", 0.107 / 0.018, "A", "", "-> T301 Isat >= 6.5 A")
+row("Stored rail energy at 48 V", 0.5 * 151.4e-6 * 48 ** 2 * 1e3, "mJ", "", "")
 row("VBAT divider current at 4.2 V", 4.2 / 2e6 * 1e6, "uA", "", "")
 row("VBAT divider time constant", 0.5e6 * 100e-9 * 1e3, "ms", "500 k x 100 nF", "")
 

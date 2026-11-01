@@ -9,7 +9,7 @@
 "C302","10uF/10V X5R","Capacitor_SMD:C_0805_2012Metric","","CALC","","Input ceramic. Primary ripple ~1.1 A rms at 3.0 V (FLYBACK_DESIGN.md); 2 x 10 uF; check part ripple rating"
 "C303","10uF/10V X5R","Capacitor_SMD:C_0805_2012Metric","","CALC","","see C302"
 "C304","2.2uF/10V","Capacitor_SMD:C_0603_1608Metric","","DS","","VCC/BIAS bypass to PGND: SNVSB75E 'recommended VCC capacitor value is from 1 uF to 4.7 uF'"
-"C305","47nF","Capacitor_SMD:C_0603_1608Metric","","CALC","","tSS = CSS x VREF / ISS = 47 nF x 1 V / 10 uA = 4.7 ms (SNVSB75E 9.3.3)"
+"C305","2.2uF/10V X7R","Capacitor_SMD:C_0603_1608Metric","","CALC","","tSS = CSS x VREF / ISS = 2.2 uF x 1 V / 10 uA = 220 ms (SNVSB75E 9.3.3). 1 Nov: 47 nF hit current limit and hiccup (9.3.10) charging 151 uF; min 1.5 uF worst case (sim_flyback_cycle.py)"
 "C306","180nF","Capacitor_SMD:C_0603_1608Metric","","CALC","","PRELIMINARY: compensation zero ~300 Hz (FLYBACK_DESIGN.md)"
 "C307","3.3nF","Capacitor_SMD:C_0603_1608Metric","","CALC","","PRELIMINARY: HF pole ~16 kHz (FLYBACK_DESIGN.md)"
 "C308","22nF/50V X7R","Capacitor_SMD:C_0805_2012Metric","","CALC","","RCD clamp capacitor (sees ~15 V)"
