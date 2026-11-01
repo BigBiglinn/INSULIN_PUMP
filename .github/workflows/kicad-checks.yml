@@ -7,7 +7,7 @@ name: kicad-checks
 on:
   push:
     branches: [claude/friendly-keller-9gz8a8]
-    paths: ["hardware/kicad/**", ".github/workflows/kicad-checks.yml"]
+    paths: ["hardware/kicad/**", ".github/workflows/kicad-checks.yml", "scripts/inspect_fab_outputs.py"]
   workflow_dispatch:
 
 permissions:
@@ -54,6 +54,16 @@ jobs:
             --fields "Reference,Value,Footprint,MPN,Status,DNP,Note" \
             --labels "Ref,Value,Footprint,MPN,Status,DNP,Note / source" \
             --ref-range-delimiter "" hardware/kicad/pump_v2.kicad_sch || true
+      - name: Fabrication export DRY RUN (NOT FOR FABRICATION; inspection only, not archived as a release)
+        run: |
+          kicad-cli pcb export gerbers --help | sed -n 1,60p || true
+          mkdir -p out/fab_dryrun
+          kicad-cli pcb export gerbers --check-zones -o out/fab_dryrun/ hardware/kicad/pump_v2.kicad_pcb \
+            || kicad-cli pcb export gerbers -o out/fab_dryrun/ hardware/kicad/pump_v2.kicad_pcb || true
+          kicad-cli pcb export drill -o out/fab_dryrun/ hardware/kicad/pump_v2.kicad_pcb || true
+          echo "=====BEGIN FAB DRYRUN====="
+          python3 scripts/inspect_fab_outputs.py out/fab_dryrun || ls -la out/fab_dryrun
+          echo "=====END FAB DRYRUN====="
       - name: Summary
         run: |
           echo "== ERC summary"; grep -E "^\[" out/pump_v2-erc.rpt | sed 's/\]:.*/]/' | sort | uniq -c || true

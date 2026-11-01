@@ -20,10 +20,22 @@ Current limit min                                              4.227  A         
 Current limit max                                              4.864  A          107 mV / 22 mohm [SNVSB75E VCLTH]
 Soft-start time, 10 Oct C305 47 nF                               4.7  ms         C VREF / ISS (ISS typ 10 uA) [SNVSB75E]
   charge current that 4.7 ms demands                           1.538  A          C_out x 48 V / tSS [-> current limit + hiccup]
-Soft-start time, C305 2.2 uF (1 Nov)                             220  ms          [SNVSB75E]
-  range (ISS 11..9 uA, VREF 0.99..1.01)                          198  ms (min)    
-  ...max                                                       246.9  ms          
-  charge current at 2.2 uF                                   0.03286  A           [sim_flyback_cycle.py: min 1.5 uF]
+Soft-start time, C305 2.2 uF (1 Nov, superseded)                 220  ms          [SNVSB75E]
+  charge current at 2.2 uF                                   0.03286  A           
+Soft-start time, C305 4.7 uF (adopted)                           470  ms          [SNVSB75E]
+  range incl. C +-20 %, ISS 9..11 uA, VREF 0.99..1.01          338.4  ms (min)    
+  ...max                                                       632.9  ms          
+  charge current at 4.7 uF                                   0.01538  A           
+  worst-case equivalent C (C -20 %, ISS +10 %)                 3.418  uF          [sim ssend_*_css3u4_vclth93_csf]
+  SS discharge 5 tau through 55 ohm switch                     1.292  ms          [SNVSB75E SS pull-down 55 ohm]
+CS RC filter 100 ohm / 470 pF: tau                                47  ns          [SNVSB75E 9.3.7]
+  3 RF CF vs (1-D)/fsw at 3.0 V                               0.1789  -          must be < 1 [Eq. 13]
+  2 RF CF (current limit invalid below this on-time)              94  ns          [vs tON(min) 140 ns]
+VBAT_FUSED 0.2 mm x 35 um cross-section                        10.85  mil^2       [1 oz assumed]
+  current for 10 C rise                                       0.7446  A          IPC-2221 equation [standard not in repo]
+  rise at 0.5 A                                                4.045  C           
+  rise at 1.0 A                                                19.55  C           
+  resistance (8.9 mm)                                          21.87  mohm        
 Vout nominal                                                      48  V          VREF (1+470k/10k) 
 Vout min (VREF 0.99, 1 % R)                                     46.6  V           [SNVSB75E VREF 0.99-1.01]
 Vout max (VREF 1.01, 1 % R)                                    49.44  V           

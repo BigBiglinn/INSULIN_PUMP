@@ -37,11 +37,12 @@ The device is a water/saline bench prototype only. It must never be connected to
 | 12a | SMPS or LDO core supply | **SMPS** (ST's own choice on NUCLEO-WBA55CG) | `RCC.SupplySource=PWR_SMPS_SUPPLY` [REF] | Inductor value from AN6373 |
 | 12b | Antenna | Keep U.FL to an external 2.4 GHz antenna for the bench | No RF data in the repo | Matching network values from AN5948 |
 | 12c | LSE crystal | **Fit** Y502 (32.768 kHz), now DNP | ST reference uses LSE for the RTC and radio sleep timer [REF] | DNP → fitted; load caps from the datasheet |
-| 13 | **Battery subsystem** (U-18) | Molicel P28A protected 1S pack, **5 A slow-blow fuse**, **0.5 A charge current** with T<sub>REG</sub> 80 °C, XT30 confirmed, E-10 adopted | Charger loss 1.0 W at 0.5 A versus 2.0 W at 1 A [CALC]; cell data [WEB-2ND] | Fuse MPN, firmware ICHG setting |
+| 13 | **Battery subsystem** (U-18) | Molicel P28A protected 1S pack, **5 A slow-blow fuse**, **0.5 A charge current** (the VBAT_FUSED charge track routed 1 Nov is 0.2 mm: ≈ 4 °C rise at 0.5 A, ≈ 20 °C at 1 A by the IPC-2221 equation, so I<sub>CHG</sub> ≤ 0.5 A unless the track is widened) with T<sub>REG</sub> 80 °C, XT30 confirmed, E-10 adopted | Charger loss 1.0 W at 0.5 A versus 2.0 W at 1 A [CALC]; cell data [WEB-2ND] | Fuse MPN, firmware ICHG setting |
 | 14 | **Supervisor battery monitoring** (new, A2) | Connect a spare STM32C031 ADC pin to VBAT_SENSE (shared 1 M/1 M divider) so the supervisor can enforce the low-voltage stop independently | At present only the main MCU reads VBAT; the supervisor cannot | 1 net; pin confirmed in CubeMX |
 | 15 | **Fab house and stack-up** (U-16, U-20) | Choose before RF and fine-pitch routing | — | DRC rules and impedance |
-| 16 | **BQ25188 YBG land pattern** (U-12) | Provide TI's YBG package drawing (PDF in the repo lacks it) | — | Unblocks 3 unconnected items |
+| 16 | ~~BQ25188 YBG land pattern~~ **CLOSED 1 Nov** (U-12) | The drawing **is** in the repo PDF (SLUSFJ3 §13.1, vector graphics; read by rendering pp. 50–52). Footprint corrected to it: pads 0.20 → 0.23 mm, NSMD mask +0.05 mm, 0.25 mm square paste; ball map checked against Table 5-1 | [DS] | U101 escapes routed (CHG_INT_N, I2C_SDA, I2C_SCL re-routed, VBAT_FUSED) |
 | 17 | **Remaining PROPOSED requirements** (OPEN item 15) | Accept, change or strike each | — | Requirements frozen |
+| 19 | **CS-pin RC filter on U301** (new, U-45) | Add RF 100 Ω between FLY_CS (R305/Q301 source) and U301 pin 5, and CF 470 pF from pin 5 to GND, as TI recommends against the leading-edge spike (SNVSB75E §9.3.7: RF 10–200 Ω, CF 100 pF–2 nF; 3·RF·CF = 141 ns < (1−D)/f<sub>SW</sub> = 0.77 µs; 2·RF·CF = 94 ns < t<sub>ON(min)</sub> 140 ns) | Without it, the turn-on spike counts as current limit and trips the 64-cycle hiccup on **every** full-load start at V<sub>CLTH</sub> 93 mV, for C305 = 2.2, 3.3 and 4.7 µF. With it: 2.2 µF nominal passes; the tolerance corners 2.4 µF-eq and 3.4 µF-eq pass (5.7 % margin at 3.4 µF-eq); 3.0 V/100 mA steps still need FW-R1 [SIM] | 2 parts (0603), 1 new net, local re-route at U301 pin 5. Connectivity change → approval |
 
 ## E. Closure review (final completion pass, 1 Nov 2026)
 
@@ -63,9 +64,29 @@ Which decisions the available evidence now closes. **None of the safety-critical
 | 12 ST documents | No | ST reference firmware: SMPS, HSE, LSE [REF] | DS14127, AN5948, AN6373, MB1803 |
 | 13 Battery, fuse, charge current | No | Calculations | Cell/fuse datasheets; approval |
 | 14 Supervisor VBAT | Ready to decide | Gap identified | Approval; pin check in CubeMX |
-| 15–17 | No | — | Owner |
-| 18 C305 for start-up under full load (new) | See `PROGRESS_LOG.md` / report §27.2 | End-of-ramp simulations at 2.2/3.3/4.7 µF | Owner accepts FW-R2 (motor parked until PGOOD) or a larger C305 |
+| 15, 17 | No | — | Owner |
+| 16 BQ25188 land pattern | **Closed** | TI YBG0008-C01 drawing in the repo PDF | — |
+| 19 CS RC filter | Ready to decide | 9 worst-case soft-start/step runs | Approval (connectivity change) |
+| 18 C305 value | **Done (engineering, CALC value): 4.7 µF/10 V X5R ±20 %** | Worst-case end-of-ramp runs (§27.2) | Full-load start robustness also needs decision 19; with the motor parked during start-up (FW-R2), every value passes, including the 1.6 µF-eq corner |
 
+
+### Q301 replacement: electrical requirements (decision 9)
+
+Derived from the schematic and `validation/sim/q301_stress/results.md`. A part qualifies only on the strength of its **manufacturer datasheet**. Threshold voltage is not evidence of drive, and R<sub>DS(on)</sub> quoted only at 4.5 V or 10 V does not count.
+
+| Parameter | Requirement | Basis |
+| --- | --- | --- |
+| V<sub>DS</sub> (abs max) | **≥ 40 V**, with the drain loop verified ≤ 5 nH (33.8 V worst simulated = 84 %); **≥ 60 V** if the loop cannot be verified (39.5 V at 10 nH = 66 %) | Worst corner: V<sub>in</sub> 4.2 V, rail 55.9 V, V<sub>CLTH</sub> 107 mV, 3 % leakage, current limit |
+| R<sub>DS(on)</sub> | **Specified (max) at V<sub>GS</sub> = 2.5 V** in the electrical table; ≤ 15 mΩ at 25 °C. Gate drive is VBAT = 3.0–4.2 V (BIAS = VCC = VBAT, SNVSB75E §9.3.2), minus driver drop | Primary RMS 2.30 A [CALC] → ≤ 0.1 W conduction loss at 125 °C |
+| Q<sub>G</sub> | Q<sub>G</sub> at 3–4.5 V ≤ ≈ 15 nC (hard limit Q<sub>G</sub>·f<sub>SW</sub> < 35 mA → 117 nC [DS SNVSB75E Eq. 18]) | Switching loss and driver current |
+| I<sub>D</sub> | Pulsed ≥ 10 A; continuous ≥ 5 A at T<sub>A</sub> 70 °C | I<sub>pk</sub> up to 5.9 A at current limit [SIM] |
+| Avalanche | E<sub>AS</sub> rated (single pulse) | Fault margin |
+| Package | SON 3.3 × 3.3 class with an exposed drain pad; the land pattern is checked against the manufacturer's drawing before reuse of the Q301 footprint | Layout |
+| Availability | Two or more distributors listed with stock, or an owner-confirmed source | Not checkable from the design environment |
+
+**Alternative, if no part meets the 2.5 V requirement:** add an auxiliary T301 winding feeding BIAS through a diode, so that VCC regulates at 6.5–7 V [DS SNVSB75E Table, V<sub>VCC-REG</sub>]. A 40–60 V part specified at V<sub>GS</sub> = 4.5 V then qualifies. This is a transformer and schematic change (decision 7).
+
+**Evidence still missing:** no ≥ 40 V MOSFET datasheet is in the repository, and no manufacturer or distributor site was reachable (st.com, ti.com, nexperia, vishay, onsemi, infineon, diodes, aosmd, octopart, mouser and digikey all failed, 1 Nov 2026). **Q301 stays unresolved.**
 
 ## D. Approval record
 

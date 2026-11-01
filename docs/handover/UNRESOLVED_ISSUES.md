@@ -24,6 +24,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | --- | --- | --- |
 | U-39 | **Soft-start lock-out (found 1 Nov by simulation).** C305 47 nF gave a 4.7 ms soft start that needs 1.54 A to charge 151 µF; the LM51551 would run at current limit, arm its 64-cycle hiccup and never reach 48 V | C305 = 2.2 µF (220 ms; worst-case minimum 1.5 µF), commit `a768755`. CALC + SIM (`sim_flyback_cycle.py`, `sim_flyback_closedloop.py`); bench test PW-SS still needed. Residual: starting into a full 100 mA load at 3.0 V still trips hiccup at the end of the soft start (switching model); covered by keeping the motor parked until PGOOD (FW-R2, hardware default) |
 | (U-21 part) | ENC_I_M and VBAT_SENSE unconnected | Routed 1 Nov (`layout_fixes_3.py`); kicad-cli CI run 4: 22 unconnected |
+| U-12 | BQ25188 YBG land pattern unverified | **Closed 1 Nov**: TI YBG0008-C01 outline, land pattern and stencil found in the repo PDF (vector graphics, SLUSFJ3 §13.1). Footprint corrected (0.23 mm NSMD pads, 0.25 mm square paste), ball map checked. U101 escapes then routed (`layout_fixes_4.py`): 22 → 19 unconnected |
 
 ## Critical
 
@@ -45,6 +46,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-41 | **Critical (fabrication blocker)** | Q301 (CSD16340Q3, 25 V abs max) exceeds 25 V in current-limit operation. Investigation (1 Nov, `validation/sim/q301_stress/results.md`): physical, not numerical. Worst corner 31.4 V with the 10 Oct clamp; 22.1 V after the clamp re-tune (R306 220 Ω, C308 470 nF, implemented) on an ideal layout; 28–33 V with 2–5 nH drain-loop inductance. Normal operation 14.7–15.3 V | ≥ 40 V FET with R<sub>DS(on)</sub> specified at V<sub>GS</sub> ≤ 2.5 V, or a 40–60 V logic-level FET plus an auxiliary T301 winding feeding BIAS; gate-resistor footprint; tight D302/C308 loop; bench V<sub>DS</sub> measurement at current limit (approval sheet decision 9) |
 | U-42 | Major | Unload overshoot +1.3 V [SIM] on top of the 1 % setpoint corner 49.4 V gives 50.7 V, above the PMD401's 50.4 V | 0.1 % R307/R308 (decision 6) |
 | U-43 | Major | Supervisor has no battery-voltage input (A2 review) | Spare STM32C031 ADC on VBAT_SENSE (decision 14) |
+| U-45 | Major | The Q301 turn-on (leading-edge) current spike reaches the U301 CS pin unfiltered and is counted as current limit: every full-load start at V<sub>CLTH</sub> 93 mV trips hiccup for C305 = 2.2/3.3/4.7 µF [SIM] | CS RC filter 100 Ω/470 pF per SNVSB75E §9.3.7 (approval decision 19) |
 | U-44 | Critical (part of U-03) | S-06 with the proposed SPI gate holds only if the PMD401 SPI timeout is ≤ 18 ms at 15 mm/s (2 ms worst-case detection) [CALC `runaway_timing.py`]; the manual says "about 10 ms" | Ask PiezoMotor; measure (SG-06b) |
 
 ## Major
@@ -53,7 +55,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | --- | --- | --- |
 | U-10 | Electrical pin properties not checked: 5 V tolerance of the pins facing the PMD401 and encoder, drive current, ADC leakage, reset-state behaviour | ST datasheets |
 | U-11 | WBA55 TIM2 width (32-bit?) unconfirmed (CF-21/FW-08) | RM0493 |
-| U-12 | Footprints still to be checked against drawings: BQ25188 YBG (pitch inferred 0.4 mm), CSD16340Q3 DQG (KiCad TI NexFET pattern; source-to-gate pad gap 0.14 mm needs the scoped 0.127 mm DRC rule) | TI drawings |
+| U-12 (rest) | Footprints still to be checked against drawings: BQ25188 **done 1 Nov**; CSD16340Q3 matches TI within 5 µm (1 Nov) but Q301 is to be replaced (U-41), so the new part's pattern must be checked; connectors, TVS, crystals, transformer pending their drawings | Drawings |
 | U-14 | Encoder supply voltage and cable pinout unverified (item 12) | LL06 datasheet, delivered cable |
 | U-15 | TVS parts (D701–D709) not chosen | Part selection after IF-02 |
 | U-16 | No fab chosen; rules are generic. Two scoped DRC exceptions exist (J703 vendor connector; Q301 pad pitch) | Fab rule file and stack-up |
@@ -61,7 +63,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-18 | Battery connector, cell, fuse part number, master switch, charge current not decided (B.19, B.20) | Owner or successor |
 | U-19 | Thermal check: R306 ≈ 0.4 W, R313 ≈ 0.17 W, R305, Q301, D301 | After U-04 |
 | U-20 | RF trace not impedance-controlled | Stack-up, ST reference |
-| U-21 | **Routing incomplete / not reviewed.** 1 Nov (CI run 4, `a768755`), kicad-cli: **22 unconnected** (12 ST placeholders, 1 DNP switch, 3 at the BQ25188 WCSP, 6 boxed in by the U501 fan-out). Every remaining genuine item is blocked by U-05 or U-12, not by routing effort. The flyback loop is still autorouted around a placeholder transformer, so it is not final | Hand-route and review in pcbnew after U-04/U-05/U-12; the CI workflow re-checks every push |
+| U-21 | **Routing incomplete / not reviewed.** 1 Nov (final): **19 unconnected** (12 ST placeholders, 1 DNP switch, 6 boxed in by the U501 fan-out; the 3 BQ25188 items were routed after U-12 closed). Every remaining item is blocked by U-05 (ST documents / U501 re-fan-out) or U-06, not by routing effort. The flyback loop is still autorouted around a placeholder transformer, so it is not final | Hand-route and review in pcbnew after U-04/U-05/U-12; the CI workflow re-checks every push |
 | U-24 | Input current at full PMD401 speed is about 2.0–2.3 A at 3.0 V (simulation), at or above the E-05 2.1 A budget | Measure PMD401 current at dosing speed (MT-07); re-check the battery-path ratings |
 | U-22 | Freerouting ran with default telemetry during the first session (disabled afterwards) | Note only |
 
