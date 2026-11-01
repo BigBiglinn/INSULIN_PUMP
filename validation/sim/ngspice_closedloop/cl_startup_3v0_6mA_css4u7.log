@@ -90,3 +90,110 @@ vmcu#branch                       -0.000578947
 vramp#branch                                 0
 v1#branch                             -11.7156
 
+
+No. of Data Rows : 11000001
+
+  Measurements for Transient Analysis
+
+
+Error: measure  vd1_max  max(TRIG) : no such vector as 'v(pa_00)'
+ .meas tran vd1_max max v(pa_00) failed!
+
+
+Error: measure  pout_end  avg(TRIG) : no such vector as 'v(pa_01)'
+ .meas tran pout_end avg v(pa_01) from=0.549 to=0.55 failed!
+
+vout_end            =  4.799313e+01 from=  5.490000e-01 to=  5.500000e-01
+vout_max            =  4.812331e+01 at=  4.724088e-01
+ipri_max            =  3.621073e+00 at=  1.000000e-07
+vds_max             =  1.277134e+01 at=  4.700030e-01
+iin_end             =  -2.625670e-01 from=  5.490000e-01 to=  5.500000e-01
+t_reg               =   4.65080e-01
+vpp_end             =  8.290032e-03 from=  5.490000e-01 to=  5.500000e-01
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Warning: Interpolated raw file data!
+
+Note: Starting dynamic gmin stepping
+Warning: singular matrix:  check node ss
+
+Warning: Dynamic gmin stepping failed
+Note: Starting true gmin stepping
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: singular matrix:  check node ss
+
+Warning: True gmin stepping failed
+Note: Starting source stepping
+Warning: source stepping failed
+Note: Transient op started
+Note: Transient op finished successfully
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vsrc                                         3
+vin                                    2.76569
+c1n                                   0.647402
+c2n                                 0.00011172
+lpn                                   0.195238
+sw                                     0.14145
+lsn                                   -12.7237
+sec                                   -12.7237
+g                                      3.00003
+cs                                   0.0788889
+csp                                  0.0788889
+clamp                                  2.76544
+out                               -8.11166e-06
+snb                                   -12.7256
+c3n                                8.05461e-10
+c3bn                               8.05461e-10
+c4n                                 2.1523e-06
+mot                               -8.11323e-06
+c7n                                  3.153e-07
+fb                                -1.68993e-07
+ramp                                         0
+mcu                                        3.3
+en                                     2.72105
+enok                                         1
+ss                                 2.12766e-05
+ov                                           0
+ovd                                          0
+comp                                  0.999994
+crc                                   0.999982
+set                                          1
+rst                                          1
+q                                            1
+qd                                           1
+cl                                           0
+clf                                          0
+clfd                                         0
+gd                                           3
+pa_00                                  12.7237
+pa_01                              1.37134e-13
+bpa_01#branch                                0
+bpa_00#branch                                0
+bg#branch                          1.52566e-05
+bclf#branch                                  0
+bcl#branch                                   0
+bq#branch                               -1e-12
+brst#branch                                  0
+bset#branch                                  0
+bov#branch                                   0
+benok#branch                                 0
+ls#branch                          9.07194e-06
+lp#branch                              3.58587
+vmcu#branch                       -0.000578947
+vramp#branch                                 0
+v1#branch                             -11.7156
+
