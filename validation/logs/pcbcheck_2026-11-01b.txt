@@ -1,0 +1,22 @@
+board: hardware/kicad/pump_v2.kicad_pcb
+items: 1898  footprints: 147
+unconnected pairs (components-1 per net): 22 on 17 nets
+  CHG_INT_N      1  {R106.1,U501.10} | {U101.A1}
+  FLY_PGOOD      1  {R302.1,TP302.1,U301.11} | {U501.28}
+  HSE_IN         2  {U501.42} | {Y501.1} | {C516.1}
+  HSE_OUT        2  {U501.41} | {Y501.3} | {C517.1}
+  I2C_SDA        2  {U501.6} | {R105.1} | {U101.C1}
+  LSE_IN         2  {C518.1} | {U501.17} | {Y502.1}
+  MAIN_SWCLK     1  {J502.4} | {U501.26}
+  PMD_MOSI_M     1  {R702.1} | {U501.15}
+  PMD_READY_M    1  {U501.33} | {R706.1}
+  PMD_SCLK_M     1  {R704.1} | {U501.13}
+  RF_MCU         1  {C514.1,L502.1} | {U501.37}
+  SW48_GATE      1  {Q302.1,R310.1} | {R309.1}
+  VBAT_FUSED     1  {C102.1,F101.2,J102.1} | {U101.C2}
+  WBA_VDD11      2  {L501.2} | {C509.1} | {U501.45}
+  WBA_VDDANA     1  {U501.39} | {C511.1,R511.1}
+  WBA_VDDRF      1  {C512.1,R512.1} | {U501.40}
+  WBA_VDDRFPA    1  {C513.1,R513.1} | {U501.43}
+copper clearance / edge / hole violations: 0
+dangling: 0 vias, 0 track ends

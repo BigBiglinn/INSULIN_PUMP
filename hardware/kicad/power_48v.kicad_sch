@@ -3720,7 +3720,7 @@
 			(at 203.23 69.85 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "47nF"
+		(property "Value" "2.2uF/10V X7R"
 			(at 203.23 72.39 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -3744,7 +3744,7 @@
 			(at 203.23 74.62 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "tSS = CSS x VREF / ISS = 47 nF x 1 V / 10 uA = 4.7 ms (SNVSB75E 9.3.3)"
+		(property "Note" "tSS = CSS x VREF / ISS = 2.2 uF x 1 V / 10 uA = 220 ms (SNVSB75E 9.3.3). 1 Nov: 47 nF hit current limit and hiccup (9.3.10) charging 151 uF; min 1.5 uF worst case (sim_flyback_cycle.py)"
 			(at 200.66 71.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

@@ -1,0 +1,12 @@
+start: 24 unconnected pairs, 0 dangling items
+  ENC_I_M (U501.48 -> R710.1): routed 31.9 mm, 2 vias, min clearance 0.195 mm (ENC_B)
+  -> 23 unconnected pairs
+  VBAT_SENSE (U501.14 -> R107/R108/C104 divider): routed 33.4 mm, 4 vias, min clearance 0.191 mm (VBAT)
+  -> 22 unconnected pairs
+step dangling clean-up: removed 0 dead-end items
+  zone re-clip: In2.Cu VBAT: 1 fill polygons -> 1 (0 islands dropped)
+  zone re-clip: In2.Cu +3V3: 3 fill polygons -> 3 (0 islands dropped)
+  zone re-clip: In1.Cu GND: 3 fill polygons -> 3 (0 islands dropped)
+  zone re-clip: B.Cu GND: 8 fill polygons -> 8 (1 islands dropped)
+  zone re-clip: F.Cu GND: 30 fill polygons -> 30 (3 islands dropped)
+end: 22 unconnected pairs, 0 dangling; saved /home/user/INSULIN_PUMP/hardware/kicad/pump_v2.kicad_pcb

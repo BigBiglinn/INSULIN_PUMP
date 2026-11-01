@@ -191,7 +191,8 @@ def build():
       note="VCC/BIAS bypass to PGND: SNVSB75E 'recommended VCC capacitor value is from 1 uF to 4.7 uF'")
     R(s, "R301", "73.2k 1%", "FLY_RT", "GND", status="CALC",
       note="RT = 2.21e10/fsw - 955 (SNVSB75E Eq.5): 73.2k -> fsw = 298 kHz (+/-15 %). DMAX >= ~90 % at this fsw (Fig 8-16)")
-    C(s, "C305", "47nF", "FLY_SS", "GND", status="CALC", note="tSS = CSS x VREF / ISS = 47 nF x 1 V / 10 uA = 4.7 ms (SNVSB75E 9.3.3)")
+    C(s, "C305", "2.2uF/10V X7R", "FLY_SS", "GND", status="CALC",
+      note="tSS = CSS x VREF / ISS = 2.2 uF x 1 V / 10 uA = 220 ms (SNVSB75E 9.3.3). 1 Nov: 47 nF hit current limit and hiccup (9.3.10) charging 151 uF; min 1.5 uF worst case (sim_flyback_cycle.py)")
     R(s, "R302", "100k", "FLY_PGOOD", "+3V3", status="ASSUMED", note="PGOOD open-drain pull-up to 3V3 (<= VBIAS)")
     R(s, "R303", "3.01k 1%", "FLY_COMP", "FLY_COMP_RC", status="CALC",
       note="PRELIMINARY type-II compensation for fc ~3 kHz < fRHPZ/5 (FLYBACK_DESIGN.md). Depends on T301 Lp and output capacitance")
