@@ -1,15 +1,12 @@
 ** Drc report for pump_v2.kicad_pcb **
-** Created on 2026-11-01T05:43:52 **
+** Created on 2026-11-01T05:46:44 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 123 DRC violations **
+** Found 122 DRC violations **
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(100.0000 mm, 100.0000 mm): Segment on Edge.Cuts
     @(188.6450 mm, 100.6450 mm): Reference field of D704
-[lib_footprint_mismatch]: Footprint 'TI_YBG0008_DSBGA-8_P0.4mm' does not match copy in library 'pump_v2'
-    Local override; warning
-    @(118.0000 mm, 113.0000 mm): Footprint U101
 [silk_overlap]: Silkscreen clearance
     Rule: board setup constraints silk; warning
     @(136.3844 mm, 130.2850 mm): Segment of C510 on F.Silkscreen
@@ -530,7 +527,7 @@
     @(155.1000 mm, 114.1250 mm): Pad 1 [/Main MCU STM32WBA55/WBA_VDD11] of C509 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(142.4570 mm, 131.0680 mm): Track [/Main MCU STM32WBA55/WBA_VDDRF] on F.Cu, length 1.8286 mm
+    @(143.7500 mm, 129.7750 mm): Pad 1 [/Main MCU STM32WBA55/WBA_VDDRF] of C512 on F.Cu
     @(149.2500 mm, 115.5625 mm): Pad 40 [/Main MCU STM32WBA55/WBA_VDDRF] of U501 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error

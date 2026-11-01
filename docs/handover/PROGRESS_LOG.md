@@ -2,6 +2,19 @@
 
 Update this file at every checkpoint. Newest first.
 
+## 1 Nov 2026: fabrication-readiness pass (latest)
+
+| Step | Result | Commit |
+| --- | --- | --- |
+| State check | HEAD `8a9e007`, clean except the in-progress soft-start runs | — |
+| Worst-case soft start | 2.2/3.3/4.7 µF all trip hiccup at V<sub>CLTH</sub> 93 mV without a CS filter (leading-edge spike). With the filter: the 4.7 µF corner passes (5.7 % margin). **C305 = 4.7 µF adopted**; CS filter = decision 19 | `add768d`, `ab2eba2` |
+| Q301 | Rejected (25 V); requirement table written; no qualifying datasheet available → **unresolved** | `36f06f2`, `32c4a8b` |
+| Clamp | R306 220 Ω / C308 470 nF; 37-case sweep reproduced within 0.2 V | `36f06f2`, `ab2eba2` |
+| BQ25188 | Footprint verified against TI YBG0008-C01 and corrected; U101 escapes routed | `02cb895`, `ab2eba2`, `32c4a8b` |
+| PCB | **19 unconnected** (12 ST, 6 U501, 1 SW48_GATE), 0 copper DRC, 0 parity (CI run 8) | `32c4a8b` |
+| Export dry run | Gerber/drill generated and inspected (not a release) | `32c4a8b` |
+| Docs | Report, approval sheet (decisions 16 closed, 18 done, 19 new), blockers, register, decision log §12 | final commit |
+
 ## 1 Nov 2026: completion session
 
 | Step | Result | Commit |
@@ -23,7 +36,8 @@ Update this file at every checkpoint. Newest first.
 
 1. Owner works through `OWNER_APPROVAL_SHEET.md`.
 2. With ST documents: re-lay U501 power/RF/crystals, then route the 12 + 6 dependent items.
-3. With the TI YBG drawing: verify the U101 footprint, then route its 3 items.
+2a. Find a Q301 that meets the requirement table in `OWNER_APPROVAL_SHEET.md`, or adopt the auxiliary-winding BIAS option; re-run `scripts/sim_q301_stress.py` with its model.
+3. (Done 1 Nov: U101 footprint verified and routed.)
 4. With the transformer: footprint, clamp/snubber re-tune, re-run `sim_flyback_closedloop.py` (ideally with TI's model), finalise compensation.
 5. Implement approved decisions 1, 2, 3 and 14 (new circuitry), push, and read the CI reports.
 

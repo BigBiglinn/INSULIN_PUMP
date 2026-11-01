@@ -188,3 +188,17 @@ Engineering-level changes only; no owner decision taken.
 | 1 Nov | Q301 stress investigation (`scripts/sim_q301_stress.py`, 33 cases) | The 25.7 V seen earlier is physical in the model (not numerical, not a breakdown artefact) and occurs only in current-limit operation; worst corner 31.4 V | Done; results in `validation/sim/q301_stress/results.md` |
 | 1 Nov | **R306 390 Ω → 220 Ω (2512, 1 W), C308 22 nF → 470 nF/50 V X7R (0805)** | The 22 nF clamp capacitor rippled several volts per cycle at current limit. The re-tune lowers the worst-corner peak to 22.1 V (ideal layout) and normal operation to 14.7–15.3 V, for about 1.7 points of efficiency (87.2 % vs 88.9 % at 3.0 V/100 mA). Insensitive to C308 derating to 220 nF (22.6 V). Interim values: re-tune with the real T301 | Done, commit `36f06f2`, CI to confirm |
 | 1 Nov | Q301 25 V part declared **not acceptable for fabrication** | With 2–5 nH drain-loop inductance the peak is 28–33 V at the worst corner; a 25 V abs max cannot be guaranteed | Replacement ≥ 40 V = owner decision 9 (fabrication blocker) |
+
+## 12. Fabrication-readiness pass, 1 Nov 2026
+
+Engineering-level changes and evidence; owner-level items remain on `docs/handover/OWNER_APPROVAL_SHEET.md`.
+
+| Date | Item | Rationale / evidence | Status |
+| --- | --- | --- | --- |
+| 1 Nov | **C305 2.2 µF → 4.7 µF/10 V X5R ±20 %** (0603 kept) | Worst-case end-of-ramp runs (3.0 V, 100 mA, V<sub>CLTH</sub> 93 mV): 2.2/3.3/4.7 µF all trip hiccup without a CS filter. With the TI CS filter, the tolerance corner of 4.7 µF (3.4 µF-eq) passes with 5.7 % margin; 3.3 µF passes with only 0.5 %; 2.2 µF fails at its corner. Parked-motor start passes at every value | Done, commit `ab2eba2` |
+| 1 Nov | CS-pin RC filter 100 Ω/470 pF **proposed, not implemented** | The leading-edge spike is counted as current limit; SNVSB75E §9.3.7 recommends the filter. It changes schematic connectivity → owner | Approval decision 19 |
+| 1 Nov | **BQ25188 footprint verified and corrected** (`scripts/fix_ybg_footprint.py`) | TI YBG0008-C01 drawings are vector graphics in the repo PDF (pp. 50–52), read by rendering. Pad 0.20 → 0.23 mm, NSMD +0.05 mm, paste 0.25 mm square R0.05; ball map OK | Done, `02cb895`; library/PCB outline aligned `32c4a8b` |
+| 1 Nov | U101 escapes routed (`scripts/layout_fixes_4.py`); I2C_SCL escape ripped and re-routed | All orders tried on a scratch copy; SDA → SCL → INT connects all three. VBAT_FUSED 0.2 mm, so I<sub>CHG</sub> ≤ 0.5 A (IPC-2221 equation) | Done; 22 → 19 unconnected (kicad-cli run 7) |
+| 1 Nov | U501-boxed signals (6) not forced | Re-tried; moving U501 escapes must follow the ST power/decoupling layout (not available) | Open (U-05) |
+| 1 Nov | Q301: no replacement selected | No ≥ 40 V datasheet with R<sub>DS(on)</sub> at V<sub>GS</sub> 2.5 V is available; requirement table written | Open, fabrication blocker |
+| 1 Nov | CI: Gerber/drill **export dry run** with inspection | Checks that outputs generate and look sane. Not a release (CLAUDE.md Phase 6); nothing written to `manufacturing/` | Done |

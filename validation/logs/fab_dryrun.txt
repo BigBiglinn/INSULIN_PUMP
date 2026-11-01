@@ -1,0 +1,31 @@
+Gerber/drill export DRY RUN - NOT FOR FABRICATION
+kicad-cli 10.0.4, GitHub Actions run 8 (job 124764458377), input commit 32c4a8b
+
+pump_v2-B_Adhesive.gba                             463 B
+pump_v2-B_Courtyard.gbr                            437 B  Other,User                             apertures    0  ops      0  no coordinates
+pump_v2-B_Cu.gbl                                198004 B  Copper,L4,Bot                          apertures   25  ops   7297  X 100.50..209.50  Y -184.50..-100.50 mm
+pump_v2-B_Fab.gbr                                  446 B  AssemblyDrawing,Bot                    apertures    0  ops      0  no coordinates
+pump_v2-B_Mask.gbs                                3290 B  Soldermask,Bot                         apertures   17  ops     44  X 103.34..206.50  Y -181.50..-103.50 mm
+pump_v2-B_Paste.gbp                                464 B  Paste,Bot                              apertures    0  ops      0  no coordinates
+pump_v2-B_Silkscreen.gbo                         35641 B  Legend,Bot                             apertures    1  ops   1352  X 125.26..184.69  Y -182.60..-179.41 mm
+pump_v2-Edge_Cuts.gm1                              702 B  Profile,NP                             apertures    1  ops      8  X 100.00..210.00  Y -185.00..-100.00 mm
+pump_v2-F_Adhesive.gta                             463 B
+pump_v2-F_Courtyard.gbr                          31362 B  Other,User                             apertures    1  ops   1081  X 100.05..209.95  Y -183.25..-101.00 mm
+pump_v2-F_Cu.gtl                                476705 B  Copper,L1,Top                          apertures   75  ops  16903  X 100.50..209.50  Y -184.50..-100.50 mm
+pump_v2-F_Fab.gbr                               857934 B  AssemblyDrawing,Top                    apertures    9  ops  32865  X 98.87..211.01  Y -186.10..-100.05 mm
+pump_v2-F_Mask.gts                               23440 B  Soldermask,Top                         apertures   65  ops    476  X 103.34..208.35  Y -181.94..-102.03 mm
+pump_v2-F_Paste.gtp                              19709 B  Paste,Top                              apertures   46  ops    436  X 103.34..208.35  Y -181.94..-102.03 mm
+pump_v2-F_Silkscreen.gto                        441806 B  Legend,Top                             apertures    4  ops  16871  X 98.80..209.16  Y -183.06..-98.80 mm
+pump_v2-In1_Cu.g1                               187018 B  Copper,L2,Inr                          apertures   19  ops   6979  X 100.50..209.50  Y -184.50..-100.50 mm
+pump_v2-In2_Cu.g2                               252283 B  Copper,L3,Inr                          apertures   19  ops   9486  X 100.50..209.50  Y -184.50..-100.50 mm
+pump_v2-Margin.gbr                                 437 B  Other,User                             apertures    0  ops      0  no coordinates
+pump_v2-User_1.gbr                                 437 B  Other,User                             apertures    0  ops      0  no coordinates
+pump_v2-User_2.gbr                                 437 B  Other,User                             apertures    0  ops      0  no coordinates
+pump_v2-User_3.gbr                                 437 B  Other,User                             apertures    0  ops      0  no coordinates
+pump_v2-User_4.gbr                                 437 B  Other,User                             apertures    0  ops      0  no coordinates
+pump_v2-User_Comments.gbr                         1142 B  Other,Comment                          apertures    1  ops     16  X 100.30..209.70  Y -181.50..-103.50 mm
+pump_v2-User_Drawings.gbr                         5118 B  OtherDrawing,Comment                   apertures    1  ops    178  X 100.75..101.59  Y -120.00..-110.00 mm
+pump_v2-User_Eco1.gbr                              437 B  Other,ECO1                             apertures    0  ops      0  no coordinates
+pump_v2-User_Eco2.gbr                              437 B  Other,ECO2                             apertures    0  ops      0  no coordinates
+pump_v2-job.gbrjob                                5107 B
+pump_v2.drl                                       5886 B  tools: T1 0.300 mm x245, T2 0.350 mm x4, T3 0.600 mm x4, T4 0.650 mm x20, T5 0.800 mm x2, T6 1.000 mm x8, T7 1.200 mm x2, T8 1.300 mm x2, T9 1.900 mm x2, T10 3.200 mm x4  total hits 293

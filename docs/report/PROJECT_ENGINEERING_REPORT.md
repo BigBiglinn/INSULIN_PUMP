@@ -5,7 +5,7 @@
 | Project | Piezo Insulin Pump v2 (HybridPancreasSim v2), Rev B handover PCB |
 | Owner | B Charan |
 | Report date | 1 Nov 2026 (completion session) |
-| Design state | Hardware commit `a768755` (C305 soft-start correction; ENC_I_M and VBAT_SENSE routed); kicad-cli 10.0.4 CI run 4 on that commit |
+| Design state | Hardware state of the final pushed commit (see `docs/handover/PROGRESS_LOG.md`): C305 4.7 µF, clamp R306 220 Ω/C308 470 nF, BQ25188 footprint verified and U101 routed; kicad-cli 10.0.4 CI results in `validation/KICAD_CI_PROVENANCE.md` |
 | Supersedes | The 21-section report of `b3734aa`/`7cc348e` (content reused and corrected; audit corrections A1–A12 retained) |
 | Prepared with | Claude Code sessions of 10 Oct, 31 Oct and 1 Nov 2026, from repository evidence only |
 
@@ -15,7 +15,7 @@
 
 | Milestone | Status |
 | --- | --- |
-| Design complete | **No.** The STM32WBA55 power/RF circuit, transformer, independent OVP, SPI-gate runaway stop and 48 V switch/bleeder are undesigned or placeholders; 22 unconnected items |
+| Design complete | **No.** The STM32WBA55 power/RF circuit, transformer, independent OVP, SPI-gate runaway stop, CS filter and 48 V switch/bleeder are undesigned or placeholders; Q301 has no qualified part; 19 unconnected items |
 | Ready for independent engineering review | **Yes, as a pre-release design review package**: every open item is listed with evidence (§31, `docs/handover/OWNER_APPROVAL_SHEET.md`) |
 | Ready for fabrication | **No** (`docs/handover/FABRICATION_BLOCKERS.md`) |
 | Hardware validated | **No.** No hardware exists |
@@ -53,7 +53,7 @@ The design-value status field in the schematic (DECIDED, DS, CALC, ASSUMED, TBD,
 | STM32WBA55 power / clock / RF | Placeholders; SMPS mode and LSE use reference-backed [REF] | — | — | ERC errors kept visible | ✘ | **ST documents needed** [OWNER 12] |
 | STM32C031 supervisor | ✔ | — | — | ✔ | ✘ | Decoupling values (ST DS); VBAT input [OWNER 14] |
 | PMD401 / encoder / RS-485 interfaces | ✔ (TVS parts TBD) | — | — | ✔ | ✘ | TVS selection, IF-02 level check |
-| PCB layout | 4 layers; 76 of 93 multi-pad nets complete | — | — | ✔ 0 copper errors, **22 unconnected** | ✘ | 22 items (§21), human review |
+| PCB layout | 4 layers; 78 of 93 multi-pad nets complete | — | — | ✔ 0 copper errors, **19 unconnected** | ✘ | 19 items (§21), human review |
 | Firmware | Requirements only | — | (PC simulator outside repo) | n/a | ✘ | All (`docs/handover/FIRMWARE_DESIGN_REVIEW.md`) |
 
 ---
@@ -68,11 +68,17 @@ The design-value status field in the schematic (DECIDED, DS, CALC, ASSUMED, TBD,
 
 This report documents the Rev B digital design of a battery-powered piezoelectric syringe-pump bench prototype. A PiezoMotor LL06 Piezo LEGS linear motor, driven by a PMD401 driver from a 48 V rail, pushes the plunger of a 1 mL Hamilton glass syringe directly. An STM32WBA55 runs dosing and BLE; a dissimilar STM32C031 supervisor can only stop the motor. One Li-ion cell supplies everything through a BQ25188 charger, a TPS62840 3.3 V buck and an LM51551 non-isolated flyback to 48 V.
 
-The schematic (147 symbols, 8 sheets) and a 4-layer, 110 × 85 mm PCB are generated from one Python source and verified by kicad-cli 10.0.4 in GitHub Actions: 0 copper DRC errors, 0 schematic–PCB parity issues, 22 unconnected items, ERC 6 intentional errors plus 1 cosmetic warning.
+The schematic (147 symbols, 8 sheets) and a 4-layer, 110 × 85 mm PCB are generated from one Python source and verified by kicad-cli 10.0.4 in GitHub Actions: 0 copper DRC errors, 0 schematic–PCB parity issues, 19 unconnected items, ERC 6 intentional errors plus 1 cosmetic warning.
 
-The flyback was analysed with datasheet calculations, open-loop LTspice/ngspice simulation and, in this revision, a behavioural closed-loop switching model and a cycle-by-cycle model of the LM51551. These revealed three problems. The 4.7 ms soft start would lock the converter into hiccup and it would never start; this is **corrected** (C305 2.2 µF). 100 mA load steps below about 4 V trip hiccup; a 20 ms firmware speed ramp avoids it. An open feedback resistor lets the rail ratchet past 100 V within seconds at no load, which supports the proposed independent over-voltage protection.
+The flyback was analysed with datasheet calculations, open-loop LTspice/ngspice simulation and, in this revision, a behavioural closed-loop switching model and a cycle-by-cycle model of the LM51551. These revealed several problems:
 
-The design is **not complete and not ready for fabrication**: 17 owner decisions, ST and TI documents, a real transformer and independent review remain. No hardware exists, and the device must never be connected to a person or an animal.
+- **Soft start (fixed).** The 4.7 ms soft start locked the converter in hiccup, so it never started. C305 is now 4.7 µF; full-load start at worst-case tolerances also needs a CS-pin RC filter (owner decision).
+- **Load steps.** 100 mA steps at low battery trip hiccup; a 20 ms firmware speed ramp avoids it.
+- **Open feedback resistor.** The rail ratchets past 100 V within about 2 s at no load, which requires independent over-voltage protection.
+- **Q301 rejected.** The 25 V MOSFET exceeds its rating at fault current limit (22.1 V on an ideal layout after the clamp re-tune; 28–34 V with 2–5 nH of drain-loop inductance). It must be replaced by a ≥ 40 V part with R<sub>DS(on)</sub> specified at 2.5 V gate drive, and no such datasheet was available.
+- **BQ25188 footprint (fixed).** It was verified against TI's drawing, corrected, and the charger routed.
+
+The design is **not complete and not ready for fabrication**: owner decisions (approval sheet 1–19), ST documents, a qualified Q301, a real transformer, 19 unconnected items and an independent review remain. No hardware exists, and the device must never be connected to a person or an animal.
 
 ---
 
@@ -440,7 +446,7 @@ The 48 V converter is power-limited at low cell voltage: a 100 mA load **step** 
 | Primary inductance | ΔI = 40 % of I<sub>pri,avg</sub> | L<sub>p</sub> = 7.3 µH (5–10 µH) | CALC |
 | Peak primary | | 3.1 A (calc); 3.39 / 3.45 A (LTspice / ngspice) | CALC / SIM |
 | Sense resistor | I<sub>lim</sub> = V<sub>CLTH</sub>/R<sub>s</sub>, V<sub>CLTH</sub> = 93–107 mV [DS] | R305 22 mΩ → 4.2–4.9 A | CALC |
-| Soft start | t<sub>SS</sub> = C<sub>SS</sub>·V<sub>REF</sub>/I<sub>SS</sub>; charge current C<sub>out</sub>·48 V/t<sub>SS</sub> must stay well below the converter's capability or the 64-cycle hiccup trips [DS §9.3.10] | **C305 2.2 µF → 220 ms (198–247 ms)**, 33 mA charge current. The 10 Oct value 47 nF (4.7 ms) demanded 1.54 A and locked the converter in hiccup [SIM]; minimum 1.5 µF worst case | CALC / SIM; **changed 1 Nov** |
+| Soft start | t<sub>SS</sub> = C<sub>SS</sub>·V<sub>REF</sub>/I<sub>SS</sub>; charge current C<sub>out</sub>·48 V/t<sub>SS</sub> must stay well below the converter capability or the 64-cycle hiccup trips [DS §9.3.10] | **C305 4.7 µF/10 V X5R ±20 % → 470 ms (338–633 ms over C ±20 %, I<sub>SS</sub>, V<sub>REF</sub>)**, 15 mA charge current. History: 47 nF (10 Oct) locked in hiccup; 2.2 µF (1 Nov, first fix) fails full-load start at V<sub>CLTH</sub> min (§27.2) | CALC / SIM; **changed 1 Nov (twice)** |
 | Output divider | V<sub>out</sub> = V<sub>REF</sub>(1 + 470k/10k), V<sub>REF</sub> 0.99–1.01 V [DS] | 48.0 V nominal; **46.6–49.4 V** with 1 % resistors | CALC |
 | Over-voltage | FB > 107/110/113 % of V<sub>REF</sub> [DS] | 52.8 V typical; **49.9–55.9 V worst case** (V<sub>REF</sub> ±1 %, 1 % divider); ≥ 7 % above the regulation point for any one part set; **sensed on FB only** | DS / CALC |
 | Output capacitors | ΔV = I·D/(f·C) | 2 × 2.2 µF/100 V X7R + 47 µF/100 V; C702 100 µF/100 V at the connector | CALC / DECIDED |
@@ -455,10 +461,10 @@ The 48 V converter is power-limited at low cell voltage: a 100 mA load **step** 
 
 | Item | Result | Label |
 | --- | --- | --- |
-| Startup (C305 2.2 µF), idle load (PMD401 parked, 6 mA) | No hiccup, PGOOD at ≈ 209 ms, peak ≤ 48.4 V | SIM (cycle model) |
-| Startup (C305 2.2 µF) into a full 100 mA load at 3.0 V | Reaches 47.5 V at 218 ms, but the hiccup rule triggers at **214 ms** (soft-start charge current 33 mA on top of full load exceeds the converter's capability at 3.0 V with losses); the lossless cycle model does not show this | SIM (switching model) → FW-R2: keep the PMD401 parked until PGOOD (already the hardware default) |
-| Load step 6 → 100 mA | Dip 0.9 V; **hiccup about 3 ms after the step at 3.0 and 3.4 V**, none at 4.2 V | SIM |
-| Same load as a 20 ms ramp, 3.0 V | Dip 0.19 V, no hiccup, η ≈ 83 % | SIM |
+| Start-up (C305 4.7 µF), motor parked (6 mA) | No hiccup at any tolerance corner (1.6 µF-eq included, V<sub>CLTH</sub> 93 mV); PGOOD ≈ 447 ms | SIM (levels 2 and 3) |
+| Start-up into full 100 mA at 3.0 V, V<sub>CLTH</sub> 93 mV | **Fails for 2.2/3.3/4.7 µF without a CS filter** (the leading-edge spike is counted as current limit). With the TI CS filter 100 Ω/470 pF [OWNER 19]: 4.7 µF passes at its tolerance corner (3.4 µF-eq) with 5.7 % current margin | SIM (level 2) |
+| Load step 6 → 100 mA | Dip 0.9 V; hiccup about 3–4 ms after the step at 3.0 V (with or without the CS filter) and at 3.4 V without it; none at 4.2 V, or at 3.4 V with the filter | SIM |
+| Same load as a 20 ms ramp, 3.0 V | Dip 0.17–0.19 V, no hiccup also at V<sub>CLTH</sub> 93 mV (with or without the filter), η ≈ 83 % | SIM |
 | Unload 100 → 6 mA | Overshoot +1.3 V | SIM |
 | Compensation | Stable in all runs with the **preliminary** R303/C306/C307; not a loop-gain measurement | SIM, preliminary |
 
@@ -488,7 +494,9 @@ All figures are reproduced by `scripts/audit_calcs.py` (output `validation/logs/
 | Charger dissipation (linear, 5 V in) | 2.0 W at 1 A / 3.0 V; 1.0 W at 0.5 A / 3.0 V |
 | FET voltage margin | Normal 14.7–15.3 V / 25 V (≈ 60 %, re-tuned clamp); fault current limit up to 22.1 V (ideal layout) and 28–33 V with 2–5 nH → 25 V part rejected (§27.6) |
 | Rectifier margin | 97 V / 200 V = 49 % |
-| Soft start (new) | 47 nF: 4.7 ms, 1.54 A charge demand (fails). 2.2 µF: 198–247 ms, 33 mA |
+| Soft start | 47 nF: 4.7 ms, 1.54 A demand (fails). 2.2 µF: 220 ms, 33 mA. **4.7 µF (adopted): 470 ms nominal, 338–633 ms, 15 mA; worst-case equivalent 3.4 µF; SS discharge 1.3 ms** |
+| CS RC filter (decision 19) | τ = 47 ns; 3·RF·CF/((1−D)/f<sub>SW</sub>) = 0.18 (< 1 required); 2·RF·CF = 94 ns < t<sub>ON(min)</sub> 140 ns |
+| VBAT_FUSED charge track 0.2 mm | IPC-2221 equation: 0.74 A for 10 °C rise; 4 °C at 0.5 A, 20 °C at 1 A; 22 mΩ → I<sub>CHG</sub> ≤ 0.5 A |
 | Unload overshoot vs PMD401 50.4 V | 1 % divider corner 49.4 V + 1.3 V = **50.7 V** (exceeds); 0.1 % corner 48.6 + 1.3 = 49.9 V |
 | Runaway: maximum PMD401 SPI timeout for S-06 | 18.0 ms at 15 mm/s; 37.9 ms at 7.5 mm/s (2 ms worst-case detection) |
 | Stored rail energy at 48 V | 174 mJ (151.4 µF) |
@@ -534,6 +542,8 @@ All figures are reproduced by `scripts/audit_calcs.py` (output `validation/logs/
   - Statuses: DECIDED 26, DS 19, CALC 19, ASSUMED 34, TBD 11, PLACEHOLDER 24.
   - 17 DNP.
 - No Rev B supplier, price or stock data exists (COMPONENTS_AND_BOM §7.3).
+
+**Changed 1 Nov (final pass):** C305 4.7 µF/10 V X5R, R306 220 Ω 1 W, C308 470 nF/50 V X7R (all CALC values, same footprints); U101 footprint corrected to TI YBG0008-C01. Q301 CSD16340Q3 **rejected for fabrication** (§27.6), and no replacement is selected.
 
 **Selection classes (detailed BOM, §29):** final selection 10, final value/generic 18, datasheet value/generic 12, provisional 5, calculated 19, assumption 43, TBD 11, placeholder 8, DNP 17 (`docs/bom_full_summary.md`). Every 48 V-class part is checked in that summary. Capacitors are ≥ 100 V. R307 and the R309/R310/R312 placeholders need ≥ 75 V-rated parts; R313 ≥ 0.5 W [OWNER 6, 11]. J703 is provisional [OWNER 4].
 
@@ -620,7 +630,8 @@ Board outline 110 × 85 mm; 147 footprints; GND plane on In1.Cu under the whole 
 | 10 Oct | Freerouting 2.1.0 (3 passes) + DRC-gated hand router | 63 → 35 | kicad-cli 10.0.3 (`validation/drc/baseline_2026-10-10/`) |
 | 31 Oct | `layout_fixes.py`: +48V_MOT, FLY_SS, TP302, J503 console, ENC_A_S, stub clean-up | 35 → 28 | kicad-cli 10.0.4 CI run 1 on `ab69cdf`: 28, 0 copper errors, **3 dangling tracks missed by the Python checker** |
 | 1 Nov | `layout_fixes_2.py`: ENC_VCC, ENC_I, RS-485 termination, +3V3 at R302.2, remaining stubs | 28 → 24 | kicad-cli 10.0.4 CI run 2 on `ef091c3`: 24, 0 copper errors, 0 dangling |
-| 1 Nov (completion) | `layout_fixes_3.py`: ENC_I_M (31.9 mm, 2 vias), VBAT_SENSE (33.4 mm, 4 vias) | 24 → **22** | kicad-cli 10.0.4 CI run 4 on `a768755`: 22, 0 copper errors, 0 parity |
+| 1 Nov (completion) | `layout_fixes_3.py`: ENC_I_M (31.9 mm, 2 vias), VBAT_SENSE (33.4 mm, 4 vias) | 24 → 22 | kicad-cli 10.0.4 CI run 4 on `a768755`: 22, 0 copper errors, 0 parity |
+| 1 Nov (final) | `fix_ybg_footprint.py` (U101 land pattern to TI YBG0008-C01) and `layout_fixes_4.py`: I2C_SCL escape ripped and re-routed; I2C_SDA, I2C_SCL, CHG_INT_N at 0.15 mm; VBAT_FUSED at 0.2 mm (I<sub>CHG</sub> ≤ 0.5 A) | 22 → **19** | kicad-cli 10.0.4 CI run 7 on `ab2eba2`: 19, 0 copper errors, 0 parity |
 
 ![U301 soft-start rework](../handover/images/fix_2026-10-31_u301_softstart.png)
 
@@ -630,17 +641,17 @@ Board outline 110 × 85 mm; 147 footprints; GND plane on In1.Cu under the whole 
 
 *Figure 21-2. +48V_MOT route to J703.*
 
-**The 22 remaining unconnected items** (kicad-cli, `validation/drc/pump_v2-drc.rpt`), in the dependency order in which they must be closed:
+**The 19 remaining unconnected items** (kicad-cli, `validation/drc/pump_v2-drc.rpt`), in the dependency order in which they must be closed:
 
 | Order | Class | Count | Items | Blocker |
 | --- | --- | --- | --- | --- |
 | 1–2 | STM32WBA55 power, RF and crystals | 12 | WBA_VDD11 ×2, WBA_VDDANA, WBA_VDDRF, WBA_VDDRFPA, RF_MCU, HSE_IN ×2, HSE_OUT ×2, LSE_IN ×2 | ST documents [OWNER 12] |
-| 3 | BQ25188 | 3 | VBAT_FUSED, CHG_INT_N, I2C_SDA (→ U101.C1) | TI YBG drawing [OWNER 16] |
+| 3 | BQ25188 | 0 | — | Footprint verified against TI YBG0008-C01 and routed 1 Nov |
 | 4–6 | PMD401 SPI/status, SWD, flyback PGOOD | 6 | PMD_SCLK_M, PMD_MOSI_M, PMD_READY_M, MAIN_SWCLK, FLY_PGOOD, I2C_SDA (→ U501.6) | Pins boxed in until U501 is re-fanned-out with the ST layout |
 | 7 | 48 V output switch | 1 | SW48_GATE | [OWNER 3]: disappears with option A |
 | 8 | Encoder / communication | 0 | — | ENC_I_M and VBAT_SENSE routed 1 Nov |
 
-No route was forced through congested or high-voltage areas. Both new routes keep ≥ 0.19 mm from other nets (default clearance 0.15 mm) and stay outside the HV48 area [pcbcheck.py; confirmed by kicad-cli].
+No route was forced through congested or high-voltage areas; all new routes keep ≥ 0.188 mm from other nets (default clearance 0.15 mm) and stay outside the HV48 area [pcbcheck.py; confirmed by kicad-cli]. The 6 U501 signals were re-tried after every change (router, all orders): no route without moving U501 escapes, which must follow the ST power/decoupling layout. They are deliberately not forced.
 
 **Not yet done by any step:**
 
@@ -765,6 +776,7 @@ Single-fault analysis of the safety functions (bench prototype; S/D = severity/d
 | FM-14 | PMD401 internal fault drives without SPI | Motor runs until the rail energy is spent after veto | Supervisor rate check + veto | **H** (0.6–2.2 U) [CALC] | No board-level fix; documented residual risk |
 | FM-15 | Load step at low battery | Hiccup → 48 V off 110 ms → PMD401 brown-out mid-move | None | M | FW-R1 ramp [SIM] |
 | FM-16 | Current-limit operation (fault, overload, start-up into load) at high V<sub>in</sub> | Q301 drain above its 25 V abs max (28–33 V with realistic layout inductance) → avalanche, possible FET failure → see FM-7 | Hiccup limits each burst to 64 cycles; re-tuned clamp | **H** (part rating exceeded) | ≥ 40 V FET [OWNER 9] |
+| FM-17 | Q301 turn-on (leading-edge) spike reaches U301 CS unfiltered | Counted as current limit → 64-cycle hiccup on full-load start-up at V<sub>CLTH</sub> min; 48 V does not come up | Motor parked during start-up (FW-R2) | M | CS RC filter [OWNER 19] |
 
 ---
 
@@ -819,6 +831,7 @@ Three model levels, each with stated scope. No model includes the real transform
 | C305 47 nF, 3.0 V, 100 mA | Current limit within 1 ms, **hiccup at 0.78 ms**; rail stuck below 9 V after 6 hiccup cycles in 0.6 s | level 2 + 3 |
 | C305 sweep, worst case (V<sub>CLTH</sub> 93 mV, I<sub>SS</sub> 11 µA, V<sub>REF</sub> 1.01, 3.0 V) | 47–680 nF: hiccup. 1 µF: hiccup at 100 mA. **≥ 1.5 µF: clean start** at 6 mA and 100 mA | level 3 |
 | 2.2 µF, 3.0 V, 100 mA / 4.2 V, 6 mA | PGOOD at 209 ms, V<sub>max</sub> 48.2–48.4 V, no hiccup | level 3 (lossless) |
+| **Worst-case end-of-ramp, 3.0 V, 100 mA, V<sub>CLTH</sub> 93 mV, new clamp** (level 2, window from 44 V, hiccup counted after 2 ms) | 2.2 µF: hiccup 3.6 ms; 3.3 µF: 3.9 ms; **4.7 µF: 31.6 ms** (all fail). Same with leading-edge events ignored: 2.2/3.3 µF pass. With CS filter 100 Ω/470 pF: 2.2 µF pass; corners 1.6 µF-eq fail (5.09 A real current limit), 2.4 µF-eq pass (4.21 A, 0.5 % margin), **3.4 µF-eq pass (3.99 A, 5.7 % margin)**. Steady 100 mA at 93 mV: no hiccup (I<sub>pk</sub> 3.66 A). Parked-motor (6 mA) start: pass at 2.2 µF and 1.6 µF-eq | level 2 |
 | 2.2 µF, 3.0 V, **100 mA during startup**, switching model with losses (260 ms run) | 47.5 V at 218 ms, steady 47.99 V, ripple 45 mV, P<sub>out</sub> 4.80 W, I<sub>in</sub> 1.94 A; **hiccup trigger at 214 ms** (end of soft start). With the motor parked during startup (6 mA, the hardware default) the start is clean (level 3) | level 2 |
 | Load step 6 → 100 mA, 3.0 V | Dip to 47.0 V; **hiccup trigger 3.1 ms after the step** | level 2 |
 | Load step 6 → 100 mA, 3.4 V | Dip to 47.0 V; **hiccup trigger 3.2 ms after the step** | level 2 |
@@ -839,8 +852,8 @@ Three model levels, each with stated scope. No model includes the real transform
 | Case (Vin 4.2 V) | Result | Source |
 | --- | --- | --- |
 | R307 opens, PMD401 idle (6 mA) | Hiccup 0.38 ms after the fault; rail **sags** to below regulation (max 48.8 V) | level 2 + 3 |
-| R307 opens, 10 kΩ bleeder only | Rail sags (max 49.0 V) | level 3 |
-| R307 opens, **no load** | Ratchets: > 50.4 V after 112 ms, > 55.9 V after 336 ms, > 60 V after 450 ms, **> 100 V after 2.9 s** | level 3 |
+| R307 opens, 10 kΩ bleeder only | C305 2.2 µF: sags (max 49.0 V). **C305 4.7 µF: rises to 54.7 V** (> PMD401 50.4 V); with the proposed OVP: latched at 52.5/53.2 V | level 3 |
+| R307 opens, **no load** | C305 2.2 µF: > 50.4 V after 112 ms, > 55.9 V after 336 ms, > 100 V after 2.9 s. **C305 4.7 µF: > 55.9 V after 227 ms, > 100 V after 2.0 s** (slower soft-start restarts deliver more energy per hiccup) | level 3 |
 | R307 open, no load, proposed OVP 52.5 V / 10 µs | Latched at 52.5 V; switching stops immediately after the latch; overshoot after the trip 0.07 V | level 2 + 3 |
 | Same, OVP at the band edge 53.1 V / 50 µs | Latched at 53.2 V | level 2 + 3 |
 | During current-limit operation at V<sub>out</sub> ≥ 48 V | **V<sub>DS</sub> ≈ 25.7 V** (at the 25 V model breakdown); D301 ≈ 104 V | level 2 |
@@ -872,6 +885,8 @@ Three model levels, each with stated scope. No model includes the real transform
 | D301 snubber effectiveness | D301 reverse 88–104 V in the level-2 runs of §27.2–27.3 (≤ 52 % of 200 V); not re-measured in this sweep |
 
 **Conclusion.** A 25 V MOSFET cannot be shown to stay below its absolute maximum in current-limit operation with realistic layout inductance. **CSD16340Q3 is rejected for fabrication** [OWNER 9]. The replacement must be **≥ 40 V** (33 V worst simulated at 5 nH = 83 %).
+
+**Regression (final pass).** The 37-case sweep was re-run with the final script, where clamp and V<sub>CLTH</sub> are model parameters. All peaks reproduce within 0.2 V. The electrical requirements for the replacement, and the evidence still missing, are tabulated in `docs/handover/OWNER_APPROVAL_SHEET.md` ("Q301 replacement"). **Q301 remains unresolved:** no ≥ 40 V datasheet with R<sub>DS(on)</sub> specified at V<sub>GS</sub> 2.5 V is available to the project.
 
 The gate drive is VBAT, down to 3.0 V. The replacement therefore needs R<sub>DS(on)</sub> specified at V<sub>GS</sub> ≤ 2.5 V, or BIAS must come from an auxiliary T301 winding so that VCC regulates (6.75 V typical [DS SNVSB75E]). The 30 V TI parts in the repo (CSD17575Q3, CSD17578Q3A) specify R<sub>DS(on)</sub> only at V<sub>GS</sub> 4.5 V, with V<sub>GS(th)</sub> up to 1.8–1.9 V [DS], so they are not valid at a 3.0 V drive. No ≥ 40 V candidate datasheet is reachable from the design environment.
 
@@ -914,10 +929,14 @@ Real transformer behaviour, loop phase margin, thermal behaviour, EMI, the PMD40
 | ERC | kicad-cli 10.0.4 (CI run 4) | 1 Nov 2026 | `a768755` | 6 errors (intentional, U-05) + 1 warning (U701 symbol) | ST documents |
 | DRC + parity | kicad-cli 10.0.4 (CI run 4), `--refill-zones --schematic-parity` | 1 Nov 2026 | `a768755` | 0 copper, 0 parity, 0 footprint errors, 22 unconnected, 122 silk | §21, silk clean-up |
 | BOM export | kicad-cli 10.0.4 (CI run 4) | 1 Nov 2026 | `a768755` | 133 refs; only C305 changed | — |
-| Python checker | `pcbcheck.py` (Python 3.13, shapely) | 1 Nov 2026 | `a768755` | 22 unconnected on 17 nets, 0 clearance, 0 dangling — **matches kicad-cli; not a substitute for it** | — |
+| Python checker | `pcbcheck.py` (Python 3.13, shapely) | 1 Nov 2026 | `ab2eba2` | 19 unconnected on 15 nets, 0 clearance, 0 dangling — **matches kicad-cli; not a substitute for it** | — |
 | BOM consistency | `gen_bom_full.py` | 1 Nov 2026 | working tree after `a768755` | Reference set identical to the kicad-cli export | — |
 | Calculation audit | `audit_calcs.py` | 1 Nov 2026 | same | All report figures recomputed | — |
 | Simulation regression | ngspice 42 / Python 3.13 | 1 Nov 2026 | same | Open-loop runs reproduce 10 Oct; closed-loop and cycle runs as §27 | No TI model, no real T301 |
+| ERC / DRC / parity / BOM | kicad-cli 10.0.4 (CI runs 5–8) | 1 Nov 2026 | `36f06f2`, `02cb895`, `ab2eba2`, `32c4a8b` | Run 7 (`ab2eba2`): ERC 6 + 1 (unchanged); DRC 0 copper, 0 parity, 0 footprint errors, **19 unconnected**, 1 `lib_footprint_mismatch` (U101 fab outline; fixed in `32c4a8b`), 122 silk | Run 8 result in `validation/KICAD_CI_PROVENANCE.md` |
+| Gerber/drill export **dry run** | kicad-cli 10.0.4 (CI) + `scripts/inspect_fab_outputs.py` | 1 Nov 2026 | `32c4a8b` | See `validation/logs/fab_dryrun.txt`. **Not a release** (CLAUDE.md Phase 6) | Release outputs only after the blockers close |
+| Footprint vs drawing | rendering of the TI PDF + script comparison | 1 Nov 2026 | `02cb895` | BQ25188 YBG0008-C01: pitch/positions/ball map OK; pad 0.20 → 0.23 mm, NSMD, paste corrected | Other parts pending drawings |
+| Simulation regression (Q301 sweep, soft-start worst case, cycle model) | ngspice 42 / Python 3.13 | 1 Nov 2026 | `ab2eba2` | Q301: 37 cases within 0.2 V; soft-start worst-case runs as §27.2 | No TI model; T301 = specification |
 | Git cleanliness | git | 1 Nov 2026 | each commit | Clean tree after each commit; history not rewritten | — |
 
 ---
@@ -949,7 +968,7 @@ Qualitative; S = severity, L = likelihood before mitigation (H/M/L), for a **ben
 | R6 | Battery-path current at full motor speed reaches the 2.1 A budget | M | M | 5 A fuse and protection; sense resistor limit 4.2–4.9 A | Measure MT-07; size the path for current limit |
 | R7 | Rail does not discharge (no bleeder) → touch voltage after stop | M | H | — | Fit R312 (§31) |
 | R8 | Charger overheating at 1 A from 5 V | M | M | Default ICHG 10 mA until firmware sets it | Choose ≈ 0.5 A after thermal check |
-| R9 | Unverified footprints (BQ25188 WCSP pitch, connector orientation) | H | M | Marked UNVERIFIED in the library; CSD16340Q3 checked against TI's pattern on 1 Nov (matches within 5 µm) | BQ25188 YBG drawing needed (not in the repository PDF); connector drawings (U-12, U-17) |
+| R9 | Unverified footprints (connectors, TVS, crystals, transformer; BQ25188 verified 1 Nov) | H | M | Marked UNVERIFIED in the library; CSD16340Q3 checked against TI's pattern on 1 Nov (matches within 5 µm) | BQ25188 YBG drawing needed (not in the repository PDF); connector drawings (U-12, U-17) |
 | R15 | 48 V divider resistor (R307, 0603, no MPN) under-rated for ≈ 47–55 V | H | M | — | Choose a part with ≥ 75 V working voltage (U-38) |
 | R10 | Autorouted copper not reviewed (flyback loop, long ENC_A_S route near the 48 V divider) | M | M | DRC clean | Human review in pcbnew |
 | R11 | Encoder count corruption when 48 V cycles | M | M | Encoder powered from 3V3 by default (JP701) | MT-08 |
@@ -985,8 +1004,9 @@ The issue register is `docs/handover/UNRESOLVED_ISSUES.md`, with U-39 (closed) t
 | 13 | Battery, fuse, charge current | P28A pack, 5 A slow-blow, 0.5 A, T<sub>REG</sub> 80 °C |
 | 14 | Supervisor VBAT input | Spare C031 ADC on VBAT_SENSE |
 | 15 | Fab and stack-up | Choose before RF/fine-pitch routing |
-| 16 | BQ25188 YBG drawing | Provide |
+| 16 | BQ25188 YBG drawing | **Closed**: in the repo PDF; footprint corrected |
 | 17 | Remaining PROPOSED requirements | Accept, change or strike |
+| 19 | CS-pin RC filter (U-45) | 100 Ω + 470 pF at U301 CS (SNVSB75E §9.3.7) |
 
 ---
 
@@ -1021,6 +1041,17 @@ The board must not be fabricated until `docs/handover/FABRICATION_BLOCKERS.md` i
 | Markings | Silkscreen warning that the device is a bench prototype, never for use on a person or animal (present on B.SilkS) |
 | Inspection | Footprint verification record (PB-03); first-article X-ray of the WCSP |
 
+**Export dry run (1 Nov, CI run 8 on `32c4a8b`, `validation/logs/fab_dryrun.txt`).** kicad-cli generated the outputs with zones refilled, and they were inspected. **This is not a release; nothing is in `manufacturing/`.**
+
+| Output | Inspection result |
+| --- | --- |
+| Board outline (Edge.Cuts) | X 100–210 mm, Y 100–185 mm → **110 × 85 mm**, as designed |
+| Copper | L1 F.Cu (16 903 operations), L2 In1.Cu (GND), L3 In2.Cu (VBAT/+3V3), L4 B.Cu; all within 100.5–209.5 × 100.5–184.5 mm (≥ 0.5 mm from the edge) |
+| Mask / paste | Top mask 65 apertures, top paste 46 apertures; bottom paste empty (no bottom SMD parts); U101 paste apertures are the new 0.25 mm squares |
+| Silkscreen | Top legend extends to X 98.8 / Y 98.8 mm, **outside the board outline** (the `silk_edge_clearance` warning, plus off-board text). Clean up before release |
+| Drill | 10 tools, 293 hits: 245 × 0.30 mm (vias), 4 × 0.35 mm (power vias), and 0.6–3.2 mm for THT parts and mounting holes |
+| Missing for release | Fab stack-up and rules (decision 15), release review, IPC netlist, assembly drawing, pick-and-place, and the blockers in `FABRICATION_BLOCKERS.md` |
+
 ---
 
 ## 34. Bench-testing plan
@@ -1054,7 +1085,7 @@ Bench work follows `requirements/VALIDATION_PLAN.md` (Rev A first, then Rev B). 
 
 **Achieved (digital):**
 
-- A complete hierarchical schematic and a 4-layer PCB with every assumption labelled; 76 of 93 multi-pad nets connected; 0 copper DRC errors and 0 parity issues in real KiCad (CI).
+- A complete hierarchical schematic and a 4-layer PCB with every assumption labelled; 78 of 93 multi-pad nets connected; 0 copper DRC errors and 0 parity issues in real KiCad (CI).
 - A flyback design checked at three model levels. This found and **fixed** a soft-start lock-out that would have stopped the 48 V rail from ever starting, and quantified two further issues (load-step hiccup; open-feedback ratchet) with mitigations.
 - A detailed engineering BOM that matches the schematic; a consolidated owner approval sheet; a fabrication-blocker list; a firmware design review.
 
@@ -1080,8 +1111,8 @@ Bench work follows `requirements/VALIDATION_PLAN.md` (Rev A first, then Rev B). 
 | Independent OVP implemented and verified | ✘ (proposed; simulated) |
 | Motor runaway protection implemented and verified | ✘ (proposed; calculated) |
 | Battery and charging finalised | ✘ (decision 13) |
-| All critical footprints verified | ✘ (CSD16340Q3 only) |
-| PCB fully routed / no unconnected items | ✘ (22) |
+| All critical footprints verified | ✘ (BQ25188 verified and corrected; CSD16340Q3 matches but is rejected; connectors/TVS/crystals/T301 pending) |
+| PCB fully routed / no unconnected items | ✘ (19: 12 ST, 6 U501 fan-out, 1 SW48_GATE) |
 | No unexplained copper DRC violations | ✔ (0) |
 | ERC errors resolved or explicitly justified | ✔ justified (U-05) |
 | All calculations reproducible | ✔ (`audit_calcs.py` and the simulation scripts) |
