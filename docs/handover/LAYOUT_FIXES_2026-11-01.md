@@ -1,0 +1,68 @@
+# Layout fixes, session 2 (1 Nov 2026), and first real KiCad verification
+
+Continues `LAYOUT_FIXES_2026-10-31.md`. Bench-only prototype: water/saline, never on a person or an animal. Not fabrication-approved.
+
+## 1. Verification is now real KiCad
+
+**What was added**
+
+- `.github/workflows/kicad-checks.yml` runs the official `kicad/kicad:10.0.4-full` image on GitHub-hosted runners. Nothing runs in the Claude cloud sandbox.
+- It runs ERC, DRC (`--schematic-parity --refill-zones`, board **not** saved) and both BOM exports for every push of this branch that touches `hardware/kicad/` or the workflow.
+- Reports are printed into the job log and uploaded as an artifact.
+- The reports in `validation/erc/` and `validation/drc/` now come from this workflow. Provenance: `validation/KICAD_CI_PROVENANCE.md`.
+
+**Why this route.** KiCad 10 could not run inside the cloud session:
+- Ubuntu ships only KiCad 7.
+- Running the KiCad container locally was refused by the session's permission policy, and that refusal was respected.
+
+GitHub Actions on the owner's own repository is the standard, legitimate place to run kicad-cli for a KiCad project.
+
+| Run | Board | Unconnected | Copper errors | Dangling | Parity | ERC |
+| --- | --- | --- | --- | --- | --- | --- |
+| [1](https://github.com/BigBiglinn/INSULIN_PUMP/actions/runs/41266999207) | `ab69cdf` (31 Oct fixes) | 28 | 0 | **3 track ends** | 0 | 6 errors (intentional) + library-table warnings (CI environment, fixed in run 2) |
+| [2](https://github.com/BigBiglinn/INSULIN_PUMP/actions/runs/41267379973) | `ef091c3` (this session) | **24** | **0** | **0** | **0** | 6 × `power_pin_not_driven` (intentional) + 1 × `lib_symbol_mismatch` (U701) |
+| [3](https://github.com/BigBiglinn/INSULIN_PUMP/actions/runs/41267788329) | same board | 24 | 0 | 0 | 0 | same; also exported `docs/bom.csv` and `docs/bom_detailed.csv` |
+
+**Correction to the 31 Oct report.**
+- `LAYOUT_FIXES_2026-10-31.md` claimed **0 dangling items** after the 31 Oct clean-up. kicad-cli found **3 dangling track ends** (ENC_VCC, WBA_VDDRFPA, MAIN_SWCLK).
+- Cause: `pcbcheck.dangling` accepted a track end within 0.09 mm of other copper. It now requires the end point itself to lie in other same-net copper, as KiCad does, and still reproduces the 10 Oct baseline exactly.
+- The 3 ends were removed in `ef091c3`.
+- All other 31 Oct predictions matched KiCad: 28 unconnected, 0 copper errors, 0 unmirrored back text, D704 edge warning remaining.
+
+## 2. Nets connected in this session (`scripts/layout_fixes_2.py`)
+
+| Net | Before | Route | Notes |
+| --- | --- | --- | --- |
+| ENC_VCC | JP701.2 isolated | 17.8 mm, 0.25 mm track, 2 vias, to C701.1/J705.3 | Encoder supply current is unknown (U-14); the existing ENC_VCC track is 0.2 mm |
+| ENC_I | J705.1 isolated | 47.7 mm, 1 via, to D709.1/R710.2 | |
+| RS485_B | R714.2 isolated | 0.8 mm + 1 via each for A and B | **R714 (DNP 120 Ω termination, value and status unchanged) moved from the PMD401 resistor row to (197.5, 130.5, 90°), between U701 and J704**, i.e. at the bus end. Its 20 mm RS485_A stub was removed |
+| +3V3 at R302.2 | Via in the In2 VBAT region, so no +3V3 connection | 30.7 mm on B.Cu to the +3V3 vias at U601 pins 5/6 | Carries only the FLY_PGOOD 100 kΩ pull-up current. A shorter alternative is a via into the In2 3V3 plane west of x = 155 mm |
+
+Also removed: 9 leftover dead-end stub segments (the 3 dangling ends above and the chains behind them).
+
+**Checks:**
+- No schematic, part, value, footprint or net change.
+- All pads keep their nets.
+- Only R714 moved.
+- pcbcheck.py: 0 clearance violations.
+- kicad-cli: 0 copper errors, 0 parity issues.
+
+## 3. Remaining unconnected: 24 (kicad-cli)
+
+| Group | Count | Items |
+| --- | --- | --- |
+| A | 12 | ST documents needed: HSE_IN ×2, HSE_OUT ×2, LSE_IN ×2, RF_MCU, WBA_VDD11 ×2, WBA_VDDANA, WBA_VDDRF, WBA_VDDRFPA |
+| B | 1 | SW48_GATE (undesigned 48 V switch; see the blocker review §4) |
+| C | 11 | 3 at the BQ25188 WCSP (pitch unverified, U-12): VBAT_FUSED, CHG_INT_N, I2C_SDA (U101→R105). 8 in the U501 fan-out (re-layout with the ST documents): FLY_PGOOD → PA12, MAIN_SWCLK, PMD_MOSI_M, PMD_SCLK_M, PMD_READY_M, ENC_I_M, VBAT_SENSE, I2C_SDA (R105→U501.6) |
+
+Every remaining genuine connection is now blocked by a document or a footprint verification, not by routing effort.
+
+## 4. Other work in this session
+
+- `docs/handover/ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`: the nine critical blockers, with evidence, calculations and recommendations; owner decisions listed.
+- `docs/report/PROJECT_ENGINEERING_REPORT.md`: full engineering report with figures.
+- `scripts/sim_flyback_ngspice.py`: the 10 Oct LTspice power-stage simulation re-run in ngspice 42.
+  - Adopted cases agree within about 2 %.
+  - Waveforms are in `docs/report/figures/sim_flyback_waveforms_3v0.png`.
+  - The no-snubber cases did not converge in ngspice and are marked invalid.
+- `docs/bom.csv`, `docs/bom_detailed.csv`: regenerated by kicad-cli (CI run 3). The old files dated from Stage 2.

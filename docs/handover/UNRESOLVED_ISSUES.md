@@ -1,6 +1,6 @@
 # Unresolved issues: Rev B digital handover design
 
-Updated 10 Oct 2026 (second session); layout items updated 31 Oct 2026 (`LAYOUT_FIXES_2026-10-31.md`). Severity:
+Updated 10 Oct 2026 (second session); layout items updated 31 Oct and 1 Nov 2026 (`LAYOUT_FIXES_2026-10-31.md`, `LAYOUT_FIXES_2026-11-01.md`). Recommendations for every critical item: `ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`. Severity:
 
 - **Critical**: blocks any build, or leaves a safety function without evidence.
 - **Major**: the board will not work as intended until it is resolved.
@@ -18,6 +18,11 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-13 | BQ25188 TS/MR handling and defaults | R101 = 10 k as specified in SLUSFJ3 for the "TS not used" case. Defaults: VBATREG 4.20 V, ICHG 10 mA, watchdog on. Firmware must set the charge current |
 | (part of U-10) | Pin maps unverified | All 41 assigned functions checked against the STM32CubeMX 6.18.1 database by `scripts/verify_pinmap.py`: 0 failures. PF2-NRST, PH3-BOOT0 and PA14-BOOT0 confirmed |
 
+## Closed on 31 Oct and 1 Nov 2026
+
+| ID | Was | Resolution |
+| --- | --- | --- |
+
 ## Critical
 
 | ID | Issue | Placeholder in design | Needed to close |
@@ -26,6 +31,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-05 | **STM32WBA55 supply/RF wiring not from the datasheet.** SMPS inductor, VDD11, VDDHPA/VDDANA/VDDRF/VDDRFPA, decoupling, HSE crystal and load, RF match. ST datasheets could not be downloaded (st.com blocked from this machine) and were not supplied in this session | L501, C509–C515, R510–R513 (DNP), L502, Y501. **These are the 6 ERC errors** | ST STM32WBA55CG datasheet plus the WBA hardware/RF design guide; same for the STM32C031C6 decoupling |
 | U-03 | Speed cap is enforced only in firmware (item 2, S-06). The supervisor now counts the encoder (S-07) | Firmware | Supervisor rate check, then FT-02 |
 | U-06 | K-12 "switched output" and the E-11 bleeder are not designed | Q302/Q303/R309/R310/R312 DNP; R311 0 R bypass | High-side switch ≥ 100 V class; bleeder value |
+| U-37 | **J703 (JST SM02B-SRSS-TB) is reportedly rated 50 V AC/DC** (distributor listings; the JST datasheet could not be read). The rail is 48 V nominal, up to 50.4 V normally and 51.4–54.2 V at the LM51551 OVP | — | Confirm in the JST datasheet; if 50 V, use a ≥ 100 V board connector with an SH cable to the PMD401 (review §7) |
 | U-23 | 60 V fault ceiling relies on LM51551 OVP through the FB divider (51.4–54.2 V). An open R307/R308 is an uncovered single fault, and 54.2 V is above the PMD401's 50.4 V maximum | — | Secondary OVP clamp or crowbar, or a redundant divider; decision |
 
 ## Major
@@ -42,9 +48,7 @@ Item numbers in brackets (for example "item 4", "B.16") refer to `requirements/O
 | U-18 | Battery connector, cell, fuse part number, master switch, charge current not decided (B.19, B.20) | Owner or successor |
 | U-19 | Thermal check: R306 ≈ 0.4 W, R313 ≈ 0.17 W, R305, Q301, D301 | After U-04 |
 | U-20 | RF trace not impedance-controlled | Stack-up, ST reference |
-| U-21 | **Routing incomplete / not reviewed.** 31 Oct: 28 unconnected pairs (12 ST placeholders, 1 DNP switch, 15 genuine; `validation/logs/unrouted_nets_2026-10-31.txt`, pcbcheck.py). +48V_MOT to J703, FLY_SS, CON_SUP_TX/RX and ENC_A_S are now connected; FLY_PGOOD to U501.28 is still open. The flyback loop is still autorouted around a placeholder transformer, so it is not final | Verify the 31 Oct edits in KiCad (U-35), then hand-route and review in pcbnew after U-04/U-05 |
-| U-35 | **31 Oct layout edits not verified by KiCad.** They were made by script and checked with pcbcheck.py only. Stored zone fills are cut-back approximations | Refill zones; run `scripts/run_checks.sh`; compare with `LAYOUT_FIXES_2026-10-31.md` §7 |
-| U-36 | +3V3 at R302.2: its via is in the In2 VBAT region of the 48 V block, so the PGOOD pull-up has no +3V3 connection (pre-existing, made visible by the 31 Oct report) | Short +3V3 track to the 3V3 region, or review the In2 split |
+| U-21 | **Routing incomplete / not reviewed.** 1 Nov, kicad-cli: **24 unconnected** (12 ST placeholders, 1 DNP switch, 11 genuine: 3 at the BQ25188 WCSP, 8 in the U501 fan-out). Every remaining genuine item is blocked by U-05 or U-12, not by routing effort. The flyback loop is still autorouted around a placeholder transformer, so it is not final | Hand-route and review in pcbnew after U-04/U-05/U-12; the CI workflow re-checks every push |
 | U-24 | Input current at full PMD401 speed is about 2.0–2.3 A at 3.0 V (simulation), at or above the E-05 2.1 A budget | Measure PMD401 current at dosing speed (MT-07); re-check the battery-path ratings |
 | U-22 | Freerouting ran with default telemetry during the first session (disabled afterwards) | Note only |
 

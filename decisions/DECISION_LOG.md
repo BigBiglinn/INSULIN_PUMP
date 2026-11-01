@@ -141,3 +141,15 @@ The owner's instruction for this session: complete the PCB layout fixes that nee
 | 31 Oct | FLY_PGOOD → U501.28 (PA12) left unconnected | Pin 28 is enclosed by the pin 27/29 escapes inside the WBA55 fan-out that must be redone from the ST documents (U-05) | OPEN, route after the WBA re-layout |
 | 31 Oct | Dead-end autorouter stubs removed (8 dangling vias, 1 dangling track and the stub tracks leading only to them) | Leftovers on nets that were unconnected anyway; no connection removed | Done |
 | 31 Oct | B.SilkS disclaimer texts mirrored and centred (wording unchanged); edge-clipped references of J501 and J102 and the references of moved parts repositioned | Cosmetic DRC warnings | Done; D704 reference left in place (no clear spot). Silkscreen counts unverified |
+
+## 8. Claude Code session of 1 Nov 2026 (layout completion, verification, review)
+
+Engineering choices within the owner's 1 Nov instruction (route ENC_I, ENC_VCC, RS485_B and +3V3 at R302.2 where safe; review the critical blockers; find a legitimate KiCad environment; write the project report). **No owner decision was taken on the owner's behalf; no electrical or safety decision was made.**
+
+| Date | Decision | Rationale | Status |
+| --- | --- | --- | --- |
+| 1 Nov | KiCad checks run on GitHub-hosted runners with the official `kicad/kicad:10.0.4-full` image (`.github/workflows/kicad-checks.yml`, read-only), not in the cloud sandbox | The sandbox refused to run the container locally (respected); CI on the owner's repository is the standard legitimate route. 10.0.3 has no image; 10.0.4 is the nearest | Done; reports archived in `validation/` with provenance |
+| 1 Nov | ENC_VCC, ENC_I and the R302.2 +3V3 link routed; R714 (DNP RS-485 termination) moved to the bus end between U701 and J704, and its 20 mm RS485_A stub removed | Layout only; termination belongs at the bus end | Done; kicad-cli: 0 copper errors, 24 unconnected |
+| 1 Nov | Python checker dangling test corrected (end point must lie in same-net copper) | kicad-cli run 1 exposed 3 dangling ends the 31 Oct checker missed | Done; the 31 Oct report carries a correction note |
+| 1 Nov | Stale BOM files replaced by kicad-cli exports from CI | The old files dated from Stage 2 (pre design v2) | Done (133 references, 79 lines) |
+| 1 Nov | Blocker recommendations written (`docs/handover/ENGINEERING_BLOCKER_REVIEW_2026-11-01.md`) | Owner request | **All PROPOSED; owner decisions listed there** |

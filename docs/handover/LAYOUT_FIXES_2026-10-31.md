@@ -1,5 +1,7 @@
 # Layout-only fixes, 31 Oct 2026: engineering report
 
+> **Correction, 1 Nov 2026.** This report's "0 dangling" result was wrong. kicad-cli 10.0.4, run in GitHub Actions on 1 Nov, found **3 dangling track ends** on this board, which the Python checker had missed. They were removed the next day. All other predictions here matched KiCad: 28 unconnected, 0 copper errors, 0 unmirrored back text, D704 edge warning. See `LAYOUT_FIXES_2026-11-01.md`. KiCad verification is now available through CI, so the "not verified by KiCad" warnings below are superseded.
+
 Piezo Insulin Pump v2, Rev B digital handover. This continues from `976a17b`, which is tagged `checkpoint/pre-layout-fixes-2026-10-31`.
 
 > **Bench-only prototype.** Use water or 0.9 % saline only. Never connect it to a person or an animal, and never use real insulin. This is a digital handover design. It is not authorised for fabrication or for any clinical use.

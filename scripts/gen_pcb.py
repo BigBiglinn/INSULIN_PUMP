@@ -117,6 +117,8 @@ ANCHORS = {
     # 31 Oct 2026 (layout only): C305 (soft-start cap) north of U301, FLY_SS via B.Cu to pin 9; TP302 on the
     # FLY_PGOOD trace beside U301/R302 instead of beside J703. See docs/handover/LAYOUT_FIXES_2026-10-31.md
     "C305": (164.75, 149.4, 180), "TP302": (165.75, 155.75, 0),
+    # 1 Nov 2026 (layout only): R714 (DNP RS-485 termination) at the bus end, between U701 and J704
+    "R714": (197.5, 130.5, 90),
     # mounting holes
     "H901": (X0 + 3.5, Y0 + 3.5, 0), "H902": (X1 - 3.5, Y0 + 3.5, 0),
     "H903": (X0 + 3.5, Y1 - 3.5, 0), "H904": (X1 - 3.5, Y1 - 3.5, 0),

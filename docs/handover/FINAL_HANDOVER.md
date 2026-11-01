@@ -6,6 +6,12 @@
 >
 > **Not fabrication-ready.** No Gerbers have been generated. Nothing has been built or measured. A clean ERC or DRC report does not show that the circuit works.
 >
+> **1 Nov 2026 update: real KiCad results.** kicad-cli 10.0.4 now runs in GitHub Actions (`.github/workflows/kicad-checks.yml`). On commit `ef091c3`:
+> - ERC: 6 intentional errors and 1 cosmetic warning.
+> - DRC: **0 copper errors**, **0 schematic-parity issues**, **24 unconnected**, plus silkscreen warnings.
+>
+> Also on 1 Nov: ENC_VCC, ENC_I, RS485_B and the R302.2 +3V3 connection were routed, and R714 was moved to the bus end. Read `../report/PROJECT_ENGINEERING_REPORT.md` (full report), `ENGINEERING_BLOCKER_REVIEW_2026-11-01.md` (recommendations and owner decisions) and `LAYOUT_FIXES_2026-11-01.md`.
+>
 > **31 Oct 2026 update.** The board was edited by script without KiCad: +48V_MOT now reaches J703, FLY_SS is connected (C305 moved), TP302, J503 and the console and ENC_A_S nets are fixed, and dead-end stubs were removed. A pure-Python checker counts 28 unconnected pairs (was 35), 0 copper violations and 0 dangling items. **KiCad ERC/DRC have not been run on the modified board.** Refill the zones and run `scripts/run_checks.sh` first. Details: `LAYOUT_FIXES_2026-10-31.md`.
 
 ## 1. Opening the project
@@ -77,7 +83,17 @@ See `docs/bom_detailed.csv`, which lists every reference with its status and not
 
 ## 6. Final validation results
 
-Filled in from the last `scripts/run_checks.sh` run (see section 7 of `HANDOVER_GUIDE.md` for how to reproduce). **These kicad-cli reports are from 10 Oct and describe the board before the 31 Oct layout fixes.** For the current board, only the pcbcheck.py results in `validation/logs/pcbcheck_2026-10-31.txt` exist (28 unconnected, 0 copper violations, 0 dangling). They are not a KiCad DRC.
+Current board, kicad-cli 10.0.4 in GitHub Actions, commit `ef091c3` (`validation/KICAD_CI_PROVENANCE.md`):
+
+| Check | Result |
+| --- | --- |
+| ERC | 6 × `power_pin_not_driven` (intentional, U-05) + 1 × `lib_symbol_mismatch` (U701) |
+| DRC copper | 0 errors |
+| Schematic parity | 0 issues |
+| Unconnected | **24** (12 ST placeholders, 1 DNP switch, 11 blocked by U-05/U-12) |
+| Silkscreen | 69 overlap, 52 over copper, 1 edge |
+
+The 10 Oct kicad-cli 10.0.3 reports are in `validation/*/baseline_2026-10-10/`.
 
 - ERC: see `validation/erc/pump_v2-erc.rpt`.
 - DRC: see `validation/drc/pump_v2-drc.rpt`.

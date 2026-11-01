@@ -151,7 +151,13 @@ Freerouting and the Java runtime were used from a temporary folder and are **not
 
 ## 8. Final run results (kicad-cli 10.0.3, 10 Oct 2026)
 
-> These are the results for the board **before** the 31 Oct 2026 layout fixes (tag `checkpoint/pre-layout-fixes-2026-10-31`). For the current board only pcbcheck.py results exist: 28 unconnected pairs, 0 copper violations, 0 dangling items (`validation/logs/pcbcheck_2026-10-31.txt`). Re-run `scripts/run_checks.sh` after refilling the zones and replace this section with the real numbers.
+> These are the results for the board **before** the 31 Oct 2026 layout fixes (commit `976a17b`). The reports are now in `validation/*/baseline_2026-10-10/`.
+>
+> **Current board (1 Nov 2026), real kicad-cli 10.0.4 in GitHub Actions on commit `ef091c3`:**
+> - ERC: 6 × `power_pin_not_driven` (intentional) + 1 × `lib_symbol_mismatch` (U701).
+> - DRC: **0 copper errors, 0 schematic-parity issues, 24 unconnected**, 69/52/1 silkscreen warnings.
+>
+> See `validation/KICAD_CI_PROVENANCE.md` and `../report/PROJECT_ENGINEERING_REPORT.md` §16. To re-run, push to the branch (`.github/workflows/kicad-checks.yml`) or run `scripts/run_checks.sh` locally.
 
 Reproduce with `bash scripts/run_checks.sh`. The reports are `validation/erc/pump_v2-erc.rpt` and `validation/drc/pump_v2-drc.rpt`.
 
