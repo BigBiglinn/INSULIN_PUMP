@@ -1,6 +1,6 @@
 LTspice 26.1.1 for Windows
 Circuit: C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\q301\short_aonr_3p4.cir
-Start Time: Sat Oct 31 15:50:21 2026
+Start Time: Sun Nov  1 15:02:30 2026
 
 .step ipk=3.4
 solver = Normal
@@ -9,3 +9,66 @@ tnom = 27
 temp = 27
 method = trap
 Per .tran options, skipping operating point for transient analysis.
+
+.step ipk=4.9
+Total elapsed time: 346.058 seconds.
+Total iterations: 1527890
+
+Files loaded:
+C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\q301\short_aonr_3p4.cir
+
+
+Measurement: vds_max
+  step	MAX(V(sw))	FROM	TO
+     1	25.3940696716	0.0002	0.00023
+     2	27.2186908722	0.0002	0.00023
+
+Measurement: ip_max
+  step	MAX(I(Lm))	FROM	TO
+     1	3.23699092865	0.0002	0.00023
+     2	4.69508552551	0.0002	0.00023
+
+Measurement: vd1_rev
+  step	MAX(V(out)-V(sec))	FROM	TO
+     1	98.374912262	0.0002	0.00023
+     2	97.8411941528	0.0002	0.00023
+
+Measurement: pclamp
+  step	AVG((V(clamp)-V(vin))*(V(clamp)-V(vin))/{Rcl})	FROM	TO
+     1	0.967000592788	0.0002	0.00023
+     2	0.978404438833	0.0002	0.00023
+
+Measurement: ptv
+  step	AVG(V(clamp)-V(tv))*I(Rtv)	FROM	TO
+     1	-0.015528675142	0.0002	0.00023
+     2	-0.116735456279	0.0002	0.00023
+
+Measurement: vcl_avg
+  step	AVG(V(clamp)-V(vin))	FROM	TO
+     1	17.8553652976	0.0002	0.00023
+     2	17.9576659199	0.0002	0.00023
+
+Measurement: vcl_max
+  step	MAX(V(clamp)-V(vin))	FROM	TO
+     1	19.1337370872	0.0002	0.00023
+     2	19.7200789452	0.0002	0.00023
+
+Measurement: ip_min
+  step	MIN(I(Lm))	FROM	TO
+     1	-0.420328944921	0.0002	0.00023
+     2	-0.425145477057	0.0002	0.00023
+
+Measurement: pin
+  step	AVG(-V(vin)*I(V1))	FROM	TO
+     1	7.30482433254	0.0002	0.00023
+     2	11.2866987886	0.0002	0.00023
+
+Measurement: pout
+  step	AVG(-48.6*I(Vout))	FROM	TO
+     1	-4.81222678826	0.0002	0.00023
+     2	-6.16314091073	0.0002	0.00023
+
+Measurement: prc
+  step	AVG(V(sw)*Id(M1))	FROM	TO
+     1	0.220905187556	0.0002	0.00023
+     2	0.449833015151	0.0002	0.00023

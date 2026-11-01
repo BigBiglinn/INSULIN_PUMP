@@ -1,6 +1,6 @@
 LTspice 26.1.1 for Windows
 Circuit: C:\Users\cherr\STM32_Bluetooth_PCB\validation\sim\q301\short_buk_typ_4p2.cir
-Start Time: Sat Oct 31 15:50:21 2026
+Start Time: Sun Nov  1 15:02:30 2026
 
 .step ipk=3.4
 solver = Normal
@@ -11,7 +11,7 @@ method = trap
 Per .tran options, skipping operating point for transient analysis.
 
 .step ipk=4.9
-Total elapsed time: 22.128 seconds.
+Total elapsed time: 350.658 seconds.
 Total iterations: 1753719
 
 Files loaded:

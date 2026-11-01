@@ -64,7 +64,7 @@ Estimates below are hand calculations, not measurements. Nothing here proves the
 | Primary loop | Input caps at Q301, pin 3 about 31 mm away, planes continuous (same island, checked) | Estimate 8-9 nH extrinsic including about 2.3 nH for the In2/In1 pair. Commutation loop (Q301, D302, C308, VBAT via, C303) about 3-5 nH sets the fast spike. |
 | 48 V clearance | HV48 rule 0.6 mm on all layers; lowest pad gaps 0.72-0.85 mm. J703 0.40 mm is below the rule (vendor connector, FL-6 open). 105 V peak across D301 and snubber. | P3 checks routed copper. IPC-2221 values not confirmed from a source copy. |
 | PMD401 voltage | Neither PMD401 document gives an absolute maximum. Manual: 48 V error limit +/-5 %, motor stops on voltage error. | **NOT VERIFIED.** Trip at 50.5-53.9 V can exceed 50.4 V. See P3 decision. |
-| Q301 margin | 24.4 V simulated peak + 2.5-4.9 V estimated parasitic spike + about 1 V TVS heating = 27.9-30.3 V at the worst corner | **Margin not established.** Measure before continuous running; P3 proposes a gate resistor and a DNP drain snubber. |
+| Q301 margin | 24.4 V simulated peak + 2.5-4.9 V estimated parasitic spike + about 1 V TVS heating = 27.9-30.3 V at the worst corner | **Margin not established.** Measure before continuous running; P3 proposes a gate resistor and a DNP drain snubber. 1 Nov update: simulated with loop inductance, 28.9 V at the worst corner (about 29.9 V with TVS heating), see `validation/sim/q301/RESULTS.md`. |
 
 ## Stage P2: RF, WBA55 supplies, crystals, U501 pins 24-40, FLY_PGOOD (tag `pcb-p2-done`)
 
