@@ -25,7 +25,7 @@ The device is a water/saline bench prototype only. It must never be connected to
 | --- | --- | --- | --- | --- |
 | 7 | **Transformer T301** (U-04) | Custom winding to the `FLYBACK_DESIGN.md` specification, with **I<sub>sat</sub> raised to ≥ 6.5 A** (see 8); in parallel, check Coilcraft Hexa-Path parts against it | Primary RMS 2.30 A, secondary RMS 0.21 A; n = 5, L<sub>p</sub> 7.3 µH (5–10 µH), leakage ≤ 2 % [CALC] | Footprint, clamp/snubber re-tune, loop re-simulation, layout loop compaction |
 | 8 | **Current-limit headroom** (new: load steps) | **Firmware requirement FW-R1:** ramp every PMD401 speed change over ≥ 20 ms. Optional extra margin: R305 22 → 18 mΩ (limit 5.2–5.9 A) together with T301 I<sub>sat</sub> ≥ 6.5 A | A 6 → 100 mA **step** trips the LM51551 hiccup about 3 ms after the step at Vin 3.0 V and 3.4 V (none at 4.2 V); the 48 V rail would then stop for 110 ms. The same demand as a **20 ms ramp** at 3.0 V: no hiccup, dip 0.19 V, peak 3.39 A, V<sub>DS</sub> 18.4 V, about 83 % efficiency [SIM switching model + hiccup rule] | FW-R1 is firmware only; FW-R2 (motor parked until PGOOD) also needed, because startup into full load at 3.0 V trips hiccup [SIM]. The R305 option is a value change (2512 footprint kept) plus a T301 spec change |
-| 9 | **Q301 voltage margin** (new; fault and current-limit operation) | Re-tune the RCD clamp (R306/C308) with the real T301 for V<sub>DS</sub> ≤ 20 V **at current limit**, or move to a 30–40 V NexFET with Q<sub>g</sub> ≤ 6.5 nC | V<sub>DS</sub> 18.4–18.7 V in normal operation (including the 20 ms ramp), but 22–24 V on 100 mA load steps and about 25.7 V (model breakdown) at current limit with V<sub>out</sub> ≥ 48 V, against 25 V V<sub>DS</sub> [DS]; E<sub>AS</sub> 80 mJ single pulse [DS] | Part or value change after T301 |
+| 9 | **Q301 voltage rating — FABRICATION BLOCKER** (U-41) | **Replace Q301 with a ≥ 40 V N-MOSFET**, either one whose R<sub>DS(on)</sub> is specified at V<sub>GS</sub> ≤ 2.5 V, or any 40–60 V logic-level part combined with an auxiliary T301 winding feeding BIAS so that VCC is regulated (6.75 V typical [DS]). Also add a gate resistor footprint (0 Ω default, 4.7–10 Ω fitted if needed), place D302/C308 tight at the drain, and fit the interim clamp (done) | Investigation 1 Nov (`validation/sim/q301_stress/results.md`, 33 cases): the 25.7 V was **physical, not numerical** (26.1–26.2 V with the model breakdown removed and a 4× finer step). It occurs only in current-limit operation. Worst corner (V<sub>in</sub> 4.2 V, rail 55.9 V, V<sub>CLTH</sub> 107 mV, 3 % leakage): **31.4 V** with the 10 Oct clamp; **22.1 V** with the re-tuned clamp R306 220 Ω / C308 470 nF on an ideal layout; but **28.3 V with 2 nH and 33 V with 5 nH** of drain-loop inductance. A 10 Ω gate resistor + RC snubber reduce 5 nH to 23.9 V (96 %). Normal operation 14.7–15.3 V with the new clamp. A 25 V part therefore cannot be shown to stay below its 25 V abs max [DS] under fault current limit | New part; footprint may change. CSD16340Q3 and the in-repo CSD17575Q3 both use TI's "Q3" package (each datasheet §7.1/7.2), CSD17578Q3A uses "Q3A"; the land patterns must be compared drawing to drawing before reuse, and other makers' packages differ. In-repo 30 V options CSD17575Q3/CSD17578Q3A specify R<sub>DS(on)</sub> only at 4.5 V with V<sub>GS(th)</sub> up to 1.8–1.9 V [DS], so they are **not** valid at a 3.0 V gate drive without the auxiliary-winding change |
 | 10 | **Q301 footprint** | Move the four pads to TI's exact 0.65 mm pitch (SLPS247E §7.2) | Present footprint matches within 5 µm; removes a 0.127 mm DRU exception | Footprint edit; re-route Q301 pins |
 | 11 | **R313 snubber resistor** | ≥ 0.5 W (2010/2512), ≥ 200 V | 0.14–0.17 W [SIM]; sees about 100 V peak | Footprint change |
 
@@ -42,6 +42,30 @@ The device is a water/saline bench prototype only. It must never be connected to
 | 15 | **Fab house and stack-up** (U-16, U-20) | Choose before RF and fine-pitch routing | — | DRC rules and impedance |
 | 16 | **BQ25188 YBG land pattern** (U-12) | Provide TI's YBG package drawing (PDF in the repo lacks it) | — | Unblocks 3 unconnected items |
 | 17 | **Remaining PROPOSED requirements** (OPEN item 15) | Accept, change or strike each | — | Requirements frozen |
+
+## E. Closure review (final completion pass, 1 Nov 2026)
+
+Which decisions the available evidence now closes. **None of the safety-critical decisions can be closed without the owner**; the evidence for each is complete enough to decide.
+
+| # | Can it be closed now? | Evidence available | What is still missing |
+| --- | --- | --- | --- |
+| 1 Independent OVP | No: owner + part datasheet | Need shown by simulation (ratchet to 100 V in 2.9 s at no load); latch behaviour simulated | Comparator/reference datasheet; approval |
+| 2 Runaway stop | No: owner + PiezoMotor data | Timing calculated; S-06 bound: timeout ≤ 18 ms | PMD401 guaranteed timeout; gate part datasheet; approval |
+| 3 Switch vs bleeder | Ready to decide | Bleeder calculation; bleeder effect in open-FB fault simulated | Owner choice (E-11 status) |
+| 4 J703 | No | Distributor listing only [WEB-2ND] | JST datasheet or ≥ 100 V part datasheet |
+| 5 HV clearance | No | 0.6 mm used on all layers; worst rail now bounded at 55.9 V (53.1 V with decision 1) | IPC-2221C document for sign-off |
+| 6 FB divider 0.1 %, R307 ≥ 75 V | Ready to decide | Tolerance stack and overshoot simulated | Resistor datasheet (no MPN chosen) |
+| 7 Transformer | No | Specification complete | Part or custom winding; leakage measurement |
+| 8 Load-step headroom | **Mitigation defined** | 20 ms ramp simulated clean | Owner adopts FW-R1 (firmware) |
+| 9 Q301 rating | **Partly done**: clamp re-tuned (engineering change, see `decisions/DECISION_LOG.md` §11) | 33-case stress sweep | ≥ 40 V part choice (datasheet), possibly auxiliary winding: **fabrication blocker** |
+| 10 Q301 footprint | Superseded if 9 changes the part | — | — |
+| 11 R313 ≥ 0.5 W, ≥ 200 V | Ready to decide | Simulated dissipation 0.14–0.17 W normal | Resistor datasheet; footprint 1206 → 2010/2512 |
+| 12 ST documents | No | ST reference firmware: SMPS, HSE, LSE [REF] | DS14127, AN5948, AN6373, MB1803 |
+| 13 Battery, fuse, charge current | No | Calculations | Cell/fuse datasheets; approval |
+| 14 Supervisor VBAT | Ready to decide | Gap identified | Approval; pin check in CubeMX |
+| 15–17 | No | — | Owner |
+| 18 C305 for start-up under full load (new) | See `PROGRESS_LOG.md` / report §27.2 | End-of-ramp simulations at 2.2/3.3/4.7 µF | Owner accepts FW-R2 (motor parked until PGOOD) or a larger C305 |
+
 
 ## D. Approval record
 

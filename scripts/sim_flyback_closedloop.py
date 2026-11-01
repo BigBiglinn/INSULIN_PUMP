@@ -51,6 +51,11 @@ CASES = {
                          ic=(48.0, 1.186, 2.0)),
     "loadstep_3v4": dict(vin=3.4, tstop=11e-3, load="(time<3m || time>7m) ? 8000 : 480", css="2.2u",
                          ic=(48.0, 1.17, 2.0)),
+    # end of the soft-start ramp under full load at minimum battery, started on the ramp at 44 V (SS = 0.917 V):
+    # does the soft-start charge current on top of 100 mA trip hiccup? (hiccup counted from 2 ms to skip the IC)
+    "ssend_3v0_100mA_css2u2": dict(vin=3.0, tstop=30e-3, load="480", css="2.2u", ic=(44.0, 1.65, 0.9167)),
+    "ssend_3v0_100mA_css3u3": dict(vin=3.0, tstop=40e-3, load="480", css="3.3u", ic=(44.0, 1.65, 0.9167)),
+    "ssend_3v0_100mA_css4u7": dict(vin=3.0, tstop=55e-3, load="480", css="4.7u", ic=(44.0, 1.65, 0.9167)),
     # same 100 mA demand reached by a 20 ms ramp (firmware acceleration limit) instead of a step
     "loadramp_3v0_20ms": dict(vin=3.0, tstop=30e-3, css="2.2u", ic=(48.0, 1.186, 2.0),
                               load="v(mot)/(6m + 94m*min(1, max(0, (time-3m)/20m)))"),
@@ -187,6 +192,8 @@ def meas_lines(c):
         L += [".meas tran vpre AVG v(mot) FROM=2m TO=3m", ".meas tran vmin_step MIN v(mot) FROM=3m TO=7m",
               ".meas tran vmax_unload MAX v(mot) FROM=7m TO=11m", ".meas tran vpp_100mA PP v(mot) FROM=6m TO=7m",
               ".meas tran iin_100mA AVG i(V1) FROM=6m TO=7m", ".meas tran pout_100mA AVG par('v(mot)*v(mot)/480') FROM=6m TO=7m"]
+    if c["name"].startswith("ssend"):
+        L += [f".meas tran vpp_end PP v(mot) FROM={t0} TO={te}", ".meas tran t_reg47 WHEN v(mot)=47.5 RISE=1"]
     if c["name"].startswith("startup") and te > 0.1:
         L += [f".meas tran vpp_end PP v(mot) FROM={t0} TO={te}",
               f".meas tran pout_end AVG par('v(mot)*v(mot)/480') FROM={t0} TO={te}"]
@@ -352,7 +359,7 @@ def report(results):
          "| Case | Converged | Result |", "|---|---|---|"]
     for name, c, m, ok in results:
         try:
-            m["hiccup_trigger_t"] = hiccup_trigger(name) if ok else None
+            m["hiccup_trigger_t"] = hiccup_trigger(name, 2e-3 if name.startswith("ssend") else 0.0) if ok else None
         except Exception:
             m["hiccup_trigger_t"] = None
         bits = [f"C305={c['css']}"]

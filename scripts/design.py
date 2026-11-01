@@ -222,10 +222,10 @@ def build():
     s.add("D302", "Device:D_Schottky", "PMEG10020ELR", {"2": "FLY_SW", "1": "FLY_CLAMP"}, "Diode_SMD:Nexperia_CFP3_SOD-123W",
           status="DS", mpn="Nexperia PMEG10020ELR",
           note="RCD clamp diode (100 V/2 A Schottky; sees ~18.5 V). Clamp values R306/C308 from sim run 3")
-    R(s, "R306", "390R 1W", "FLY_CLAMP", "VBAT", FP_R2512, status="CALC",
-      note="RCD clamp (sim run 3, 2 % leakage assumed): Vds peak 18.5 V = 74 % of 25 V; dissipation 0.35-0.42 W -> 2512 1 W. "
-           "Re-tune once T301 leakage is known")
-    C(s, "C308", "22nF/50V X7R", "FLY_CLAMP", "VBAT", FP_C0805, status="CALC", note="RCD clamp capacitor (sees ~15 V)")
+    R(s, "R306", "220R 1W", "FLY_CLAMP", "VBAT", FP_R2512, status="CALC",
+      note="RCD clamp, re-tuned 1 Nov (sim_q301_stress.py): with C308 470 nF, current-limit Vds 17.7-18.7 V at 48 V, 22.1 V worst corner (ideal layout); normal 14.7-15.3 V; 0.48-0.54 W normal -> 2512 1 W. Interim: re-tune with real T301")
+    C(s, "C308", "470nF/50V X7R", "FLY_CLAMP", "VBAT", FP_C0805, status="CALC",
+      note="RCD clamp capacitor, 1 Nov: 22 nF let the clamp voltage ripple ~6 V per cycle at current limit (Vds > 25 V); 470 nF (220 nF after DC-bias derating still OK). Sees <= 17 V")
     C(s, "C309", "2.2uF/100V X7R", "+48V_RAW", "GND", FP_C1210, status="CALC",
       note="Ripple: dV = Iout x D / (fsw x C) -> needs >= 1.1 uF effective at 48 V for 0.24 V; 2 parts allow ~60 % DC-bias loss. E-06 >= 100 V")
     C(s, "C310", "2.2uF/100V X7R", "+48V_RAW", "GND", FP_C1210, status="CALC", note="see C309")

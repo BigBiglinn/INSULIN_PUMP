@@ -4407,7 +4407,7 @@
 			(at 195.61 125.73 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "390R 1W"
+		(property "Value" "220R 1W"
 			(at 195.61 128.27 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -4431,7 +4431,7 @@
 			(at 195.61 130.5 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "RCD clamp (sim run 3, 2 % leakage assumed): Vds peak 18.5 V = 74 % of 25 V; dissipation 0.35-0.42 W -> 2512 1 W. Re-tune once T301 leakage is known"
+		(property "Note" "RCD clamp, re-tuned 1 Nov (sim_q301_stress.py): with C308 470 nF, current-limit Vds 17.7-18.7 V at 48 V, 22.1 V worst corner (ideal layout); normal 14.7-15.3 V; 0.48-0.54 W normal -> 2512 1 W. Interim: re-tune with real T301"
 			(at 193.04 127 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -4463,7 +4463,7 @@
 			(at 218.47 125.73 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "22nF/50V X7R"
+		(property "Value" "470nF/50V X7R"
 			(at 218.47 128.27 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
@@ -4487,7 +4487,7 @@
 			(at 218.47 130.5 0)
 			(effects (font (size 1 1)) (justify left) (hide yes))
 		)
-		(property "Note" "RCD clamp capacitor (sees ~15 V)"
+		(property "Note" "RCD clamp capacitor, 1 Nov: 22 nF let the clamp voltage ripple ~6 V per cycle at current limit (Vds > 25 V); 470 nF (220 nF after DC-bias derating still OK). Sees <= 17 V"
 			(at 215.9 127 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
