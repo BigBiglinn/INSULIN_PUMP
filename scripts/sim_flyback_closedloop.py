@@ -247,7 +247,7 @@ def meas_lines(c):
         L += [f".meas tran vpp_end PP v(mot) FROM={t0} TO={te}", ".meas tran t_reg47 WHEN v(mot)=47.5 RISE=1"]
     if c["name"].startswith("startup") and te > 0.1:
         L += [f".meas tran vpp_end PP v(mot) FROM={t0} TO={te}",
-              f".meas tran pout_end AVG par('v(mot)*v(mot)/480') FROM={t0} TO={te}"]
+              f".meas tran pout_end AVG par('v(mot)*v(mot)/({c['load_expr']})') FROM={t0} TO={te}"]
     if c["fb_open"] is not None:
         L.append(f".meas tran vds_max_fault MAX v(sw) FROM={c['fb_open']} TO={te}")
         L.append(f".meas tran vd1_max_fault MAX par('v(out)-v(sec)') FROM={c['fb_open']} TO={te}")
@@ -423,6 +423,19 @@ def report(results):
         except Exception:
             m["hiccup_trigger_t"] = None
         bits = [f"C305={c['css']}"]
+        # logs written before the pout formula fix used 480 ohm for every long start-up run: recompute
+        cir = os.path.join(OUT, f"cl_{name}.cir")
+        if os.path.exists(cir):
+            ct = open(cir).read()
+            rc = re.search(r"^Rc clamp vin (\S+)", ct, re.M)
+            cc = re.search(r"^Cc clamp vin (\S+)", ct, re.M)
+            vcl = re.search(r"\(v\(csp?\) > ([\d.]+)\)", ct)
+            bits.append(f"clamp {rc.group(1) if rc else '?'}/{cc.group(1) if cc else '?'}; VCLTH {vcl.group(1) if vcl else '?'}"
+                        f"{'; CS filter' if 'Ccsf' in ct else ''}")
+        if "pout_end" in m and os.path.exists(cir) and "v(mot)*v(mot)/480')" in open(cir).read() \
+                and c["load"] not in ("480",) and m.get("vout_end"):
+            m["pout_end"] = m["vout_end"] ** 2 / float(c["load"])
+            bits.append("pout_end recomputed from vout_end (log used 480 ohm)")
         for k in sorted(m):
             v = m[k]
             if k == "stack":

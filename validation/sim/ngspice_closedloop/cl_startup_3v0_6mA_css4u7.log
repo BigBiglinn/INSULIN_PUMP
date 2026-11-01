@@ -197,3 +197,33 @@ vmcu#branch                       -0.000578947
 vramp#branch                                 0
 v1#branch                             -11.7156
 
+
+No. of Data Rows : 11000002
+
+  Measurements for Transient Analysis
+
+vout_end            =  4.799278e+01 from=  5.490000e-01 to=  5.500000e-01
+vout_max            =  4.812336e+01 at=  4.723819e-01
+ipri_max            =  3.621073e+00 at=  1.000000e-07
+vds_max             =  1.277070e+01 at=  4.700835e-01
+vd1_max             =  8.277979e+01 at=  4.697047e-01
+iin_end             =  -2.625202e-01 from=  5.490000e-01 to=  5.500000e-01
+t_reg               =   4.65080e-01
+vpp_end             =  8.281796e-03 from=  5.490000e-01 to=  5.500000e-01
+pout_end            =  4.798556e+00 from=  5.490000e-01 to=  5.500000e-01
+
+
+Total analysis time (seconds) = 1596.29
+
+Total elapsed time (seconds) = 1609.635 
+
+Total DRAM available = 16091.164 MB.
+DRAM currently available = 10444.844 MB.
+Maximum ngspice program size = 2707.203 MB.
+Current ngspice program size = 2698.328 MB.
+
+Shared ngspice pages =   10.453 MB.
+Text (code) pages =    6.156 MB.
+Stack = 0 bytes.
+Library pages = 2687.945 MB.
+

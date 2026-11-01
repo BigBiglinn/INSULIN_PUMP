@@ -13,7 +13,9 @@ Update this file at every checkpoint. Newest first.
 | BQ25188 | Footprint verified against TI YBG0008-C01 and corrected; U101 escapes routed | `02cb895`, `ab2eba2`, `32c4a8b` |
 | PCB | **19 unconnected** (12 ST, 6 U501, 1 SW48_GATE), 0 copper DRC, 0 parity (CI run 8) | `32c4a8b` |
 | Export dry run | Gerber/drill generated and inspected (not a release) | `32c4a8b` |
-| Docs | Report, approval sheet (decisions 16 closed, 18 done, 19 new), blockers, register, decision log §12 | final commit |
+| Long start-up, C305 4.7 µF (3.0 V, motor parked, 0.55 s switching run) | 47.5 V at 465 ms, no hiccup, V<sub>DS</sub> 12.8 V | final commit |
+| Footprints | U301, D301, D302 match; U201 accepted deviation (`validation/logs/footprint_verification.md`) | `156492e` |
+| Docs | Report, approval sheet (decisions 16 closed, 18 done, 19 new), blockers, register, decision log §12 | `f4633f7` … final commit |
 
 ## 1 Nov 2026: completion session
 

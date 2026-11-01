@@ -794,6 +794,8 @@ Three model levels, each with stated scope. No model includes the real transform
 
 **Validity rules.** A run that aborts or does not converge is discarded. Two such cases occurred and were rerun after the cause was fixed: the 1 Nov diode COMP clamp failed at t = 0 and was replaced by a piecewise-linear clamp, and the earlier no-snubber open-loop runs remain flagged invalid. A level-2 waveform is **invalid after the computed hiccup time**, because the real device would stop switching. Every result is a simulation, not a measurement.
 
+**Model versions.** `validation/sim/ngspice_closedloop/results.md` records, for every run, the clamp (R306/C308), V<sub>CLTH</sub>, C305 and whether the CS filter was present, as read from that run's netlist. Runs made before the 1 Nov clamp re-tune (390 Ω/22 nF) remain valid for control behaviour. Their Q301 drain-voltage figures are superseded by §27.6.
+
 **Fault-timing model:** `scripts/runaway_timing.py` (calculation) combines encoder-rate detection windows, the PMD401 SPI timeout band (5–20 ms, ASSUMED), IWDG periods and stored rail energy.
 
 ---
@@ -832,6 +834,7 @@ Three model levels, each with stated scope. No model includes the real transform
 | C305 sweep, worst case (V<sub>CLTH</sub> 93 mV, I<sub>SS</sub> 11 µA, V<sub>REF</sub> 1.01, 3.0 V) | 47–680 nF: hiccup. 1 µF: hiccup at 100 mA. **≥ 1.5 µF: clean start** at 6 mA and 100 mA | level 3 |
 | 2.2 µF, 3.0 V, 100 mA / 4.2 V, 6 mA | PGOOD at 209 ms, V<sub>max</sub> 48.2–48.4 V, no hiccup | level 3 (lossless) |
 | **Worst-case end-of-ramp, 3.0 V, 100 mA, V<sub>CLTH</sub> 93 mV, new clamp** (level 2, window from 44 V, hiccup counted after 2 ms) | 2.2 µF: hiccup 3.6 ms; 3.3 µF: 3.9 ms; **4.7 µF: 31.6 ms** (all fail). Same with leading-edge events ignored: 2.2/3.3 µF pass. With CS filter 100 Ω/470 pF: 2.2 µF pass; corners 1.6 µF-eq fail (5.09 A real current limit), 2.4 µF-eq pass (4.21 A, 0.5 % margin), **3.4 µF-eq pass (3.99 A, 5.7 % margin)**. Steady 100 mA at 93 mV: no hiccup (I<sub>pk</sub> 3.66 A). Parked-motor (6 mA) start: pass at 2.2 µF and 1.6 µF-eq | level 2 |
+| **4.7 µF (adopted), 3.0 V, motor parked (6 mA), full 0.55 s switching run** (lean storage, 50 ns grid) | 47.5 V at 465 ms; peak 48.12 V; final 47.99 V, ripple 8 mV; I<sub>pk</sub> 3.62 A; V<sub>DS</sub> 12.8 V; D301 82.8 V; **no hiccup**; 0.29 W out for 0.79 W in (light-load efficiency 37 %: clamp and switching losses dominate at 6 mA) | level 2 |
 | 2.2 µF, 3.0 V, **100 mA during startup**, switching model with losses (260 ms run) | 47.5 V at 218 ms, steady 47.99 V, ripple 45 mV, P<sub>out</sub> 4.80 W, I<sub>in</sub> 1.94 A; **hiccup trigger at 214 ms** (end of soft start). With the motor parked during startup (6 mA, the hardware default) the start is clean (level 3) | level 2 |
 | Load step 6 → 100 mA, 3.0 V | Dip to 47.0 V; **hiccup trigger 3.1 ms after the step** | level 2 |
 | Load step 6 → 100 mA, 3.4 V | Dip to 47.0 V; **hiccup trigger 3.2 ms after the step** | level 2 |
@@ -841,7 +844,7 @@ Three model levels, each with stated scope. No model includes the real transform
 
 ![Closed-loop results](figures/sim_cl_flyback.png)
 
-*Figure 27-2. Level-2 switching model: startup, load steps and ramp, R307-open fault, proposed OVP trip. Traces after a computed hiccup time are not valid.*
+*Figure 27-2. Level-2 switching model: start-up (adopted 4.7 µF with the motor parked; 2.2 µF into 100 mA), load steps and ramp, R307-open fault, proposed OVP trip. Traces after a computed hiccup time are not valid.*
 
 ![Cycle model](figures/sim_cycle_flyback.png)
 
