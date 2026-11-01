@@ -1,3 +1,5 @@
+> **1 Nov 2026, latest state: digital design complete, tag `pcb-p6-final`.** ERC 0, DRC 0, unconnected 0, parity 0. Objective is digital only, no fabrication. Not electrically verified. See `PCB_STAGES.md` (Stage P6) and `UNRESOLVED_ISSUES.md`. Sections below are the earlier history.
+
 # Piezo Insulin Pump v2 Rev B: current status and handoff (living document)
 
 **Updated:** 31 Oct 2026, schematic ECO1 applied at `sch-eco1-done` (see `ECO1_SCHEMATIC.md`). **The PCB is still at `route-stage5a-done`, so schematic parity differs until the owner approves the PCB update.** Sections below describe the routing state before ECO1.

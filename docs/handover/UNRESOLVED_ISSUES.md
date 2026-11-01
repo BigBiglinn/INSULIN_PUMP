@@ -1,3 +1,15 @@
+> **1 Nov 2026 update.** The design passes ERC and DRC with 0 violations and is fully routed (Stage P6, `PCB_STAGES.md`). Nothing was built or measured.
+>
+> Closed since this register was written: U-04 selection (HPH6-0090L), U-05 (ECO1, DS14127), U-06 and U-23 design side (ECO1/ECO2), U-15 (PESD5V0S1BA), U-21 (routing), U-30, U-32. Q301 pinout confirmed against the AOS datasheet (`docs/datasheets/AONR34332C.pdf`): 1-3 S, 4 G, 5-8 D. The footprint is still the KiCad NexFET pattern, not checked against an AOS land drawing.
+>
+> **Still open, and not closable digitally:**
+> - Q301 margin: 27.9-30.3 V estimated on a 30 V part. T301 leakage unpublished; clamp and snubber values provisional. No usable Q301 simulation from the `validation/sim/q301` decks.
+> - PMD401 absolute maximum: OVP trip 50.5-53.9 V can exceed 50.4 V. Vendor question not sent.
+> - LM51551 control loop not modelled; no thermal or signal-integrity simulation of the final copper.
+> - Footprint checks: BQ25188 pitch inferred (U-12); connector orientation (U-17); J703 rating at 48 V (0.40 mm pad gap).
+> - U-16 (no fab or stack-up, so RF impedance U-20 is estimated), U-14, U-18, U-24.
+> - Parts: F101 no part (no 5 A fuse in the 2920 footprint found); R316, R317, C314 values TBD and unfitted.
+
 # Unresolved issues: Rev B digital handover design
 
 Updated 10 Oct 2026 (second session). Severity:

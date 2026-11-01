@@ -149,3 +149,18 @@ Full record: `docs/handover/ECO1_SCHEMATIC.md`.
 | --- | --- | --- | --- |
 | 31 Oct | Objective is now a fabricated, working bench prototype; owner approved the recommended architecture where evidence supports it and asked for schematic implementation. K-7 Rev A gate: owner has not separately waived it in writing | Owner instruction | DECIDED (owner) for ECO1; K-7 waiver OPEN |
 | 31 Oct | ECO1: WBA55 supplies per DS14127 Fig. 15; MLPF-WB-04D3; HPH6-0090L; 1 uF soft start; 10 k bleeder; SMBJ48A clamp; K-12 switched output removed; READY/FAULT level shifters; LSE fitted; no MCU pin changes | Verification in ECO1_SCHEMATIC.md | IMPLEMENTED in schematic; PCB pending owner review |
+
+## 9. Digital completion, 1 Nov 2026
+
+Owner instruction in this session: the board will not be fabricated, it only has to be complete and error-free digitally, and open choices are to be made without further questions.
+
+| Date | Decision | Rationale | Status |
+| --- | --- | --- | --- |
+| 1 Nov | Objective is a digital design only, no fabrication. Replaces the 31 Oct "fabricated, working prototype" objective. K-7 and the Phase 6 manufacturing outputs do not apply | Owner | DECIDED (owner) |
+| 1 Nov | P3 hold lifted: flyback and 48 V routed with Q301 margin, T301 leakage and PMD401 overvoltage still open | These need hardware or the vendor; they cannot be closed digitally | DECIDED (owner authorised defaults) |
+| 1 Nov | D4 lifted: U101 routed on the 0.4 mm footprint. Pitch still inferred | SLUSFJ3 copy has no outline drawing | DECIDED; footprint stays marked UNVERIFIED |
+| 1 Nov | ENC_I_M: one B.Cu crossing under RF_MCU with In1 GND between; WBA_VDD11 B.Cu jog moved north of pin 48. Replaces the D7 caution for this net only | Avoids a schematic and firmware pin change | DECIDED (owner authorised defaults) |
+| 1 Nov | OVP group moved beside C311/C702; R315 and C313 on B.Cu | Original spot needed crossings; the top side under the capacitor bodies has no room | DECIDED |
+| 1 Nov | D701-D709 = Nexperia PESD5V0S1BA,115 | Bidirectional, VRWM 5 V, SOD323, from Nexperia product data | DECIDED |
+| 1 Nov | PWR_FLAG on WBA_VDDSMPS, WBA_VLXSMPS, WBA_VDD11, WBA_VDDHPA, WBA_VDDRFPA | These rails are fed through a bead or inductor, or by the chip's SMPS, so no pin is a KiCad power output | DECIDED |
+| 1 Nov | MAX3485 flattened into the project symbol library | Clears lib_symbol_mismatch; same pins and graphics | DECIDED |

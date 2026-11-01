@@ -1,0 +1,8 @@
+pads compared 493 mismatch 0 net nodes not on board []
+footprints 158 tracks 1114 vias 277 length mm 2991
+board 111.6 85.1
+RF_ANT segments 2 crossings 0
+ crossing RF_MCU ENC_I_M
+RF_MCU segments 3 crossings 1
+refs on fab ['TP701', 'R705', 'R706', 'D704', 'Y501', 'D709']
+B-side parts ['C313', 'JP301', 'R315', 'R316']

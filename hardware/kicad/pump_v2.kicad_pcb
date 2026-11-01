@@ -6694,7 +6694,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "faf773c3-eddb-40a8-bae1-ce7eb6102314")
@@ -6731,7 +6731,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -6743,7 +6743,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -6755,7 +6755,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -9803,7 +9803,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "353010a0-b8d8-4d22-aa04-31daeeaeebe5")
@@ -9840,7 +9840,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -9852,7 +9852,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -9864,7 +9864,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -10992,7 +10992,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "317ccb62-77aa-4876-98b0-61188e7d21f6")
@@ -11029,7 +11029,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -11041,7 +11041,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -11053,7 +11053,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -12852,7 +12852,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "d350da83-9821-465c-bfc5-f2f85fdcffa2")
@@ -12889,7 +12889,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -12901,7 +12901,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -12913,7 +12913,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13860,7 +13860,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "0c23c73f-66e1-4f91-81e2-cfa1ddad3757")
@@ -13897,7 +13897,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13909,7 +13909,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13921,7 +13921,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -25629,7 +25629,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "8eebaed7-a8d3-4b7b-a0cf-a956f5b94b61")
@@ -25666,7 +25666,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -25678,7 +25678,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -25690,7 +25690,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -38523,7 +38523,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "93c37e1b-e585-4e94-8319-53f587c2fde8")
@@ -38560,7 +38560,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -38572,7 +38572,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -38584,7 +38584,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -39782,7 +39782,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "2adc6257-6a4e-4caf-bb3a-9211a4322f52")
@@ -39819,7 +39819,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -39831,7 +39831,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -39843,7 +39843,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -40762,7 +40762,7 @@
 				)
 			)
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 0.1 1.9 0)
 			(layer "F.Fab")
 			(uuid "35354101-e226-43a7-89ab-bb8481451d44")
@@ -40799,7 +40799,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -40811,7 +40811,7 @@
 				)
 			)
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -40823,7 +40823,7 @@
 				)
 			)
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)

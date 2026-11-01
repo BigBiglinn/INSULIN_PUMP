@@ -1,0 +1,41 @@
+ERC report (2026-11-01T12:14:57, Encoding UTF8)
+Report includes: Errors, Warnings, Exclusions
+
+***** Sheet /
+[footprint_link_issues]: Assigned footprint (terminalblock_phoenix_mkds-1,5-2-5.08_1x02_p5.08mm_horizontal) doesn't match footprint filters (Connector*:*_1x??_*)
+    ; warning
+    @(86.36 mm, 45.72 mm): Symbol J102 [Conn_01x02]
+[footprint_link_issues]: Assigned footprint (c_0603_1608metric) doesn't match footprint filters (Inductor_* L_* *Ferrite*)
+    ; warning
+    @(307.34 mm, 66.04 mm): Symbol FB501 [FerriteBead]
+[footprint_link_issues]: Assigned footprint (c_0603_1608metric) doesn't match footprint filters (Inductor_* L_* *Ferrite*)
+    ; warning
+    @(543.56 mm, 68.58 mm): Symbol FB502 [FerriteBead]
+[footprint_link_issues]: Assigned footprint (sot-23_zener_a1_k3) doesn't match footprint filters (TO-???* *_Diode_* *SingleDiode* D_*)
+    ; warning
+    @(175.26 mm, 162.56 mm): Symbol D303 [D_Zener]
+[footprint_link_issues]: Assigned footprint (nexperia_cfp3_sod-123w) doesn't match footprint filters (TO-???* *_Diode_* *SingleDiode* D_*)
+    ; warning
+    @(185.42 mm, 111.76 mm): Symbol D301 [D]
+[footprint_link_issues]: Assigned footprint (nexperia_cfp3_sod-123w) doesn't match footprint filters (TO-???* *_Diode_* *SingleDiode* D_*)
+    ; warning
+    @(274.32 mm, 111.76 mm): Symbol D302 [D_Schottky]
+
+***** Sheet /Power input & charger/
+
+***** Sheet /3V3 buck/
+
+***** Sheet /48V flyback/
+
+***** Sheet /Kill path (fail-off)/
+
+***** Sheet /Main MCU STM32WBA55/
+
+***** Sheet /Supervisor STM32C031/
+
+***** Sheet /PMD401 & encoder interface/
+
+ ** ERC messages: 6  Errors 0  Warnings 6
+
+ ** Ignored checks:
+    - None

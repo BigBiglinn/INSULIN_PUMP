@@ -69,9 +69,10 @@ def L(s, ref, value, n1, n2, fp, **k):
 
 
 def TVS(s, ref, net, **k):
-    k.setdefault("status", "TBD")
-    k.setdefault("note", "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)")
-    return s.add(ref, "Device:D_TVS", "TVS_5V_TBD", {"1": net, "2": "GND"}, FP_TVS, **k)
+    k.setdefault("status", "DS")
+    k.setdefault("mpn", "Nexperia PESD5V0S1BA,115")
+    k.setdefault("note", "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware")
+    return s.add(ref, "Device:D_TVS", "PESD5V0S1BA", {"1": net, "2": "GND"}, FP_TVS, **k)
 
 
 def TP(s, ref, net):

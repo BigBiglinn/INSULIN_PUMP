@@ -5327,7 +5327,7 @@
 			(at 261.62 55.32 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 261.62 61.52 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5343,15 +5343,15 @@
 			(at 261.62 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 261.62 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 261.62 63.72 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 261.62 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5439,7 +5439,7 @@
 			(at 320.04 55.32 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 320.04 61.52 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5455,15 +5455,15 @@
 			(at 320.04 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 320.04 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 320.04 63.72 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 320.04 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5551,7 +5551,7 @@
 			(at 383.54 55.32 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 383.54 61.52 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5567,15 +5567,15 @@
 			(at 383.54 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 383.54 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 383.54 63.72 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 383.54 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5663,7 +5663,7 @@
 			(at 60.96 108.66 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 60.96 114.86 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5679,15 +5679,15 @@
 			(at 60.96 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 60.96 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 60.96 117.06 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 60.96 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5775,7 +5775,7 @@
 			(at 124.46 108.66 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 124.46 114.86 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5791,15 +5791,15 @@
 			(at 124.46 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 124.46 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 124.46 117.06 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 124.46 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5887,7 +5887,7 @@
 			(at 187.96 108.66 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 187.96 114.86 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5903,15 +5903,15 @@
 			(at 187.96 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 187.96 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 187.96 117.06 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 187.96 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5999,7 +5999,7 @@
 			(at 246.38 108.66 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 246.38 114.86 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -6015,15 +6015,15 @@
 			(at 246.38 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 246.38 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 246.38 117.06 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 246.38 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6111,7 +6111,7 @@
 			(at 304.8 108.66 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 304.8 114.86 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -6127,15 +6127,15 @@
 			(at 304.8 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 304.8 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 304.8 117.06 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 304.8 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6223,7 +6223,7 @@
 			(at 363.22 108.66 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TVS_5V_TBD"
+		(property "Value" "PESD5V0S1BA"
 			(at 363.22 114.86 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -6239,15 +6239,15 @@
 			(at 363.22 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "MPN" ""
+		(property "MPN" "Nexperia PESD5V0S1BA,115"
 			(at 363.22 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Status" "TBD"
+		(property "Status" "DS"
 			(at 363.22 117.06 0)
-			(effects (font (size 1 1)))
+			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "E-07: TVS on every PMD401 signal. Working voltage >=5 V class, low capacitance; part TBD (OPEN B.15)"
+		(property "Note" "E-07: TVS on every PMD401 signal. Bidirectional, VRWM 5 V, Cd 35 pF typ, SOD323 (Nexperia product data, 1 Nov 2026). Encoder/PMD401 levels still to confirm on hardware"
 			(at 363.22 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

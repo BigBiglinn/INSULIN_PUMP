@@ -154,3 +154,27 @@ No part above 30 V has been verified. Parts searches are not exhaustive.
 **ENC_I_M (pin 48):** no route exists without crossing the RF line or a pin change. Rows on B.Cu box it in, and every route east must pass the RF path. Options: one B.Cu crossing under the RF line with In1 GND between, or move the index to another pin. PA15 (pin 25) also had no route in a quick scratch test.
 
 Moved beyond the approved routing nets to clear the left side: L501, L503, L201, FB501, C509 and the NRST, SWO and VDD11 paths around them.
+
+## Stage P6: digital completion, 1 Nov 2026 (tags `pcb-p6-before`, `pcb-p6-routed`, `pcb-p6-clean`, `pcb-p6-final`)
+
+Replaces stages P3 and P5 for a digital-only objective. **Software validation only. Nothing has been built or measured, and a clean report does not show the circuit works.** Route specs: `validation/routing/p6_flyback.json`, `p6_enc_a.json`, `p6_enc_routes.json`. Silkscreen: `scripts/pcb_silk.py`.
+
+| Check (kicad-cli 10.0.3) | Before P6 | After P6 |
+|---|---|---|
+| ERC errors / warnings | 5 / 1 | **0 / 0** |
+| DRC violations, all severities | 305 | **0** |
+| Unconnected pads | 34 | **0** |
+| Schematic parity | 0 | **0** |
+| Pad nets against netlist (`validation/logs/p6_netlist_audit.txt`) | not run | 493 compared, **0 mismatches** |
+| MCU pin map (`verify_pinmap.py`) | 0 failing | **0 failing** |
+
+Project DRC checks that are off: missing courtyard, track not centred on via, tuning geometry, footprint filters, footprint type. With all of them and the ignored ERC checks enabled on a scratch copy, the only findings are 6 footprint-filter notes on deliberate assignments (J102, FB501, FB502, D301, D302, D303; `validation/logs/p6_strict_erc.rpt`). The 3 scoped clearance exceptions in `pump_v2.kicad_dru` (J703, Q301, FL501) remain.
+
+**Layout choices to review:**
+- FLY_SW runs from Q301 to T301 pin 10 on B.Cu at 1.0 mm through 2 + 2 vias. F.Cu is blocked by the T301 pin 9 HV clearance beside R305. This adds loop inductance. R305's GND via moved to two vias below the part.
+- T301 series links run on B.Cu under the transformer at 0.4 mm, HV48 rule met. Their vias sit under the body.
+- FLY_CLAMP uses one via pair to D304. +48V_RAW reaches C311 and R307 through B.Cu.
+- OVP group: fed from C311, FLY_EN joins by B.Cu at the existing via. R315 and C313 are new bottom-side parts.
+- ENC_I_M is 32 mm with one crossing under RF_MCU; RF_ANT still has none. Coupling not analysed.
+- U101: I2C_SCL escape re-routed to free pin C1. Vias beside the balls, 0.15 mm necks, VBAT_FUSED 0.25-0.3 mm.
+- Reference text: 6 parts moved to the fab layer (D704, D709, R705, R706, TP701, Y501). Some labels sit several mm from their part.
