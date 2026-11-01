@@ -44,6 +44,16 @@ jobs:
             -o out/pump_v2-drc.rpt hardware/kicad/pump_v2.kicad_pcb || true
           kicad-cli pcb drc --format json --severity-all --schematic-parity --refill-zones \
             -o out/pump_v2-drc.json hardware/kicad/pump_v2.kicad_pcb || true
+      - name: BOM export (same arguments as scripts/run_checks.sh)
+        run: |
+          kicad-cli sch export bom -o out/bom.csv \
+            --fields "Reference,Value,Footprint,MPN,Status,QUANTITY,DNP" \
+            --labels "Refs,Value,Footprint,MPN,Status,Qty,DNP" \
+            --group-by "Value,Footprint,MPN,Status,DNP" --ref-range-delimiter "" hardware/kicad/pump_v2.kicad_sch || true
+          kicad-cli sch export bom -o out/bom_detailed.csv \
+            --fields "Reference,Value,Footprint,MPN,Status,DNP,Note" \
+            --labels "Ref,Value,Footprint,MPN,Status,DNP,Note / source" \
+            --ref-range-delimiter "" hardware/kicad/pump_v2.kicad_sch || true
       - name: Summary
         run: |
           echo "== ERC summary"; grep -E "^\[" out/pump_v2-erc.rpt | sed 's/\]:.*/]/' | sort | uniq -c || true
@@ -58,6 +68,8 @@ jobs:
         run: |
           echo "=====BEGIN ERC REPORT====="; cat out/pump_v2-erc.rpt; echo "=====END ERC REPORT====="
           echo "=====BEGIN DRC REPORT====="; cat out/pump_v2-drc.rpt; echo "=====END DRC REPORT====="
+          echo "=====BEGIN BOM====="; cat out/bom.csv; echo; echo "=====END BOM====="
+          echo "=====BEGIN BOM DETAILED====="; cat out/bom_detailed.csv; echo; echo "=====END BOM DETAILED====="
       - uses: actions/upload-artifact@v4
         with:
           name: kicad-reports
