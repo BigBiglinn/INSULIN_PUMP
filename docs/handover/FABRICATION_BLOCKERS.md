@@ -14,7 +14,7 @@ Status at commit `a768755` plus the documentation commit that follows it (1 Nov 
 | Feedback divider 1 % versus 0.1 %; R307 working voltage (U-38) | 6 | BOM |
 | Transformer T301 not selected (placeholder footprint) | 7 | Footprint, clamp/snubber, compensation, flyback layout |
 | Current-limit headroom: hiccup on 100 mA load **steps** below about 4 V; a 20 ms speed ramp avoids it in simulation (FW-R1) | 8 | Firmware requirement; optionally R305 / T301 I<sub>sat</sub> |
-| Q301 V<sub>DS</sub> margin at current limit (about 25.7 V in simulation against 25 V) | 9 | Clamp values or FET choice |
+| **Q301 (25 V) exceeds its absolute maximum at fault current limit**: 22.1 V on an ideal layout after the 1 Nov clamp re-tune, but 28–33 V with 2–5 nH drain-loop inductance (`validation/sim/q301_stress/results.md`) | 9 | ≥ 40 V FET (gate-drive constraint), gate-resistor footprint, layout |
 | R313 rating | 11 | Footprint |
 | Battery cell, fuse, connector, charge current | 13 | BOM, firmware |
 | Supervisor cannot read the battery voltage | 14 | Schematic |

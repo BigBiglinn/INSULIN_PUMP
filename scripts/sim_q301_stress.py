@@ -35,12 +35,10 @@ def netlist(name, vin=4.2, vrail=52.0, vclth=0.100, k=0.99, r306="390", c308="22
     """regulate=False: R307 open from t=0 -> current-limit operation (fault/overload worst case).
        regulate=True : normal regulation at vrail (6 mA load) for comparison."""
     base = dict(vin=vin, tstop=tstop, load=load, css="2.2u", fb_open=None if regulate else 0.0,
-                ic=(vrail, comp if comp else (1.16 if regulate else 2.79), 2.0))
+                ic=(vrail, comp if comp else (1.16 if regulate else 2.79), 2.0), r306=r306, c308=c308, vclth=vclth)
     c, net = CL.build(name, base)
     net = net.replace("BV=25)", f"BV={bv})")
     net = net.replace("K1 Lp Ls 0.99", f"K1 Lp Ls {k}")
-    net = net.replace("Rc clamp vin 390", f"Rc clamp vin {r306}").replace("Cc clamp vin 22n", f"Cc clamp vin {c308}")
-    net = net.replace("(v(cs) > 0.1)", f"(v(cs) > {vclth})")
     if ldrain:
         # parasitic inductance of the drain loop (PCB trace + package) between the winding and the FET drain;
         # the clamp diode connects at the winding side, so this inductance is NOT clamped

@@ -56,6 +56,11 @@ CASES = {
     "ssend_3v0_100mA_css2u2": dict(vin=3.0, tstop=30e-3, load="480", css="2.2u", ic=(44.0, 1.65, 0.9167)),
     "ssend_3v0_100mA_css3u3": dict(vin=3.0, tstop=40e-3, load="480", css="3.3u", ic=(44.0, 1.65, 0.9167)),
     "ssend_3v0_100mA_css4u7": dict(vin=3.0, tstop=55e-3, load="480", css="4.7u", ic=(44.0, 1.65, 0.9167)),
+    # worst case for hiccup: VCLTH minimum 93 mV [DS]
+    "ssend_3v0_100mA_css3u3_vclth93": dict(vin=3.0, tstop=40e-3, load="480", css="3.3u", ic=(44.0, 1.65, 0.9167),
+                                           vclth=0.093),
+    "ssend_3v0_100mA_css4u7_vclth93": dict(vin=3.0, tstop=55e-3, load="480", css="4.7u", ic=(44.0, 1.65, 0.9167),
+                                           vclth=0.093),
     # same 100 mA demand reached by a 20 ms ramp (firmware acceleration limit) instead of a step
     "loadramp_3v0_20ms": dict(vin=3.0, tstop=30e-3, css="2.2u", ic=(48.0, 1.186, 2.0),
                               load="v(mot)/(6m + 94m*min(1, max(0, (time-3m)/20m)))"),
@@ -71,7 +76,8 @@ CASES = {
     # output short at 1 ms from regulation
     "short_3v0": dict(vin=3.0, tstop=1.6e-3, load="480", css="2.2u", short=1e-3, ic=(48.0, 1.628, 2.0)),
 }
-DEFAULTS = dict(css="2.2u", fb_open=None, ovp=None, short=None, ic=None, long=False)
+DEFAULTS = dict(css="2.2u", fb_open=None, ovp=None, short=None, ic=None, long=False, r306="220", c308="470n",
+                vclth=0.100)
 
 NET = """* Piezo Insulin Pump v2 - 48 V flyback, CLOSED-LOOP BEHAVIOURAL LM51551 model ({name})
 * see scripts/sim_flyback_closedloop.py header for every parameter source and assumption
@@ -91,8 +97,9 @@ K1 Lp Ls 0.99
 M1 sw g cs cs QCSD
 Rs cs 0 22m
 Dc sw clamp DSCH
-Rc clamp vin 390
-Cc clamp vin 22n
+* RCD clamp: R306/C308 as in design.py (re-tuned 1 Nov from 390 ohm / 22 nF; cases marked 'oldclamp' keep those)
+Rc clamp vin {r306}
+Cc clamp vin {c308}
 D1 sec out DHF
 Rsn sec snb 220
 Csn snb out 100p
@@ -134,11 +141,11 @@ C307 comp 0 3.3n
 Bclamp comp 0 I=v(comp) > 2.8 ? (v(comp)-2.8)/100 : (v(comp) < 1.0 ? (v(comp)-1.0)/100 : 0)
 * PWM latch: set at period start (tON(min)/blanking 140 ns = ramp < 0.0417), reset by PWM compare, CL or DMAX
 Bset set 0 V=v(ramp) < 0.0417 ? 1 : 0
-Brst rst 0 V=((v(cs) + 0.04*v(ramp) > 0.142*(v(comp)-1.0)) || (v(cs) > 0.1) || (v(ramp) > 0.9)) ? 1 : 0
+Brst rst 0 V=((v(cs) + 0.04*v(ramp) > 0.142*(v(comp)-1.0)) || (v(cs) > {vclth}) || (v(ramp) > 0.9)) ? 1 : 0
 Bq q 0 V=(v(enok) < 0.5 || v(ovd) > 0.5) ? 0 : ((v(set) > 0.5) ? 1 : ((v(rst) > 0.5) ? 0 : (v(qd) > 0.5 ? 1 : 0)))
 Rq q qd 100
 Cq qd 0 10p
-Bcl cl 0 V=(v(cs) > 0.1) ? 1 : 0
+Bcl cl 0 V=(v(cs) > {vclth}) ? 1 : 0
 * per-period current-limit flag (set by CL, cleared at period start) for the hiccup post-processor
 Bclf clf 0 V=(v(cl) > 0.5) ? 1 : ((v(ramp) < 0.01) ? 0 : (v(clfd) > 0.5 ? 1 : 0))
 Rclf clf clfd 100
@@ -234,7 +241,7 @@ def build(name, c):
     long_opts = (".options interp\n.save v(out) v(mot) v(comp) v(ss) v(clfd) v(sw) v(sec) v(cl) i(Lp) i(V1) v(en)"
                  if c["long"] else "")
     tstep = "50n" if c["long"] else "100n"
-    return c, NET.format(long_opts=long_opts, tstep=tstep, uic=uic, ic_line=ic_line, name=name, vin=c["vin"], load_expr=load, r307_expr=r307, ovp_block=ovp,
+    return c, NET.format(r306=c["r306"], c308=c["c308"], vclth=c["vclth"], long_opts=long_opts, tstep=tstep, uic=uic, ic_line=ic_line, name=name, vin=c["vin"], load_expr=load, r307_expr=r307, ovp_block=ovp,
                          tstop=c["tstop"], meas=meas_lines(c), wave=wave,
                          css=c["css"])
 

@@ -43,7 +43,7 @@ The design-value status field in the schematic (DECIDED, DS, CALC, ASSUMED, TBD,
 | Battery path, fuse, switch | ✔ (parts partly TBD) | Current budget | — | ✔ ERC/DRC/parity | ✘ | Fuse part, pack connector, IPC-2152 width check |
 | Charger BQ25188 | ✔ | Dissipation | — | ✔ | ✘ | Charge-current setting (firmware); YBG footprint check |
 | 3.3 V buck TPS62840 | ✔ | — | — | ✔ | ✘ | — |
-| 48 V flyback power stage | ✔ (transformer placeholder) | ✔ | ✔ open loop (LTspice + ngspice) **and closed loop (behavioural, 1 Nov)** | ✔ | ✘ | Real transformer, TI-model loop simulation, loop compaction |
+| 48 V flyback power stage | ✔ (transformer placeholder; **Q301 rejected, clamp re-tuned 1 Nov**) | ✔ | ✔ open loop (LTspice + ngspice) **and closed loop (behavioural, 1 Nov)** | ✔ | ✘ | Real transformer, TI-model loop simulation, loop compaction |
 | 48 V soft start | ✔ **corrected 1 Nov (C305 2.2 µF)** | ✔ | ✔ (two models) | ✔ | ✘ | — |
 | 48 V over-voltage protection | LM51551 FB-based only | ✔ | ✔ open-FB fault, with and without the proposed OVP | ✔ | ✘ | **Independent OVP** [OWNER 1] |
 | 48 V output switch / bleeder | Placeholders only | ✔ (bleeder) | ✔ (bleeder in open-FB fault) | ✔ (placeholders) | ✘ | [OWNER 3] |
@@ -444,9 +444,9 @@ The 48 V converter is power-limited at low cell voltage: a 100 mA load **step** 
 | Output divider | V<sub>out</sub> = V<sub>REF</sub>(1 + 470k/10k), V<sub>REF</sub> 0.99–1.01 V [DS] | 48.0 V nominal; **46.6–49.4 V** with 1 % resistors | CALC |
 | Over-voltage | FB > 107/110/113 % of V<sub>REF</sub> [DS] | 52.8 V typical; **49.9–55.9 V worst case** (V<sub>REF</sub> ±1 %, 1 % divider); ≥ 7 % above the regulation point for any one part set; **sensed on FB only** | DS / CALC |
 | Output capacitors | ΔV = I·D/(f·C) | 2 × 2.2 µF/100 V X7R + 47 µF/100 V; C702 100 µF/100 V at the connector | CALC / DECIDED |
-| FET | CSD16340Q3, 25 V, 6.1 mΩ at V<sub>GS</sub> 2.5 V, Q<sub>g</sub> 6.5 nC, E<sub>AS</sub> 80 mJ [DS] | Gate drive = VBAT. V<sub>DS</sub> 18.4–18.7 V normal; up to ≈ 25.7 V at current limit [SIM] → [OWNER 9] | DS / SIM |
+| FET | CSD16340Q3, 25 V, 6.1 mΩ at V<sub>GS</sub> 2.5 V, Q<sub>g</sub> 6.5 nC, E<sub>AS</sub> 80 mJ [DS] | Gate drive = VBAT. **Not acceptable for fabrication:** at fault current limit with 2–5 nH drain-loop inductance the peak reaches 28–33 V (§27.6) → ≥ 40 V replacement [OWNER 9] | DS / SIM |
 | Rectifier | PNE20010ER, 200 V / 1 A hyperfast [DS] | 100 V Schottky rejected (§27.1) | DS |
-| Clamp | PMEG10020ELR (100 V/2 A [DS]) + R306 390 Ω 1 W + C308 22 nF | V<sub>DS</sub> 18.5–18.7 V (≈ 75 % of 25 V) | SIM |
+| Clamp | PMEG10020ELR (100 V/2 A [DS]) + **R306 220 Ω 1 W + C308 470 nF/50 V** (re-tuned 1 Nov from 390 Ω / 22 nF) | Normal operation V<sub>DS</sub> 14.7–15.3 V (≈ 60 %); current limit at 48 V 17.7–18.7 V; worst corner 22.1 V on an ideal layout (§27.6) | SIM, interim until T301 exists |
 | Snubber | R313 220 Ω + C312 100 pF/250 V C0G across D301 | D301 88–97 V (≈ 49 %) | SIM |
 | Compensation | Type II, f<sub>c</sub> ≈ 3 kHz < f<sub>RHPZ</sub>/5 (≈ 30 kHz) | R303 3.01 kΩ, C306 180 nF, C307 3.3 nF | CALC, **preliminary** |
 | Transformer T301 | n = 5, L<sub>p</sub> 7.3 µH, I<sub>sat</sub> ≥ 5 A, I<sub>rms</sub> ≥ 2.5 A, leakage ≤ 2 %, ≥ 100 V | **No part; placeholder footprint** | PLACEHOLDER |
@@ -486,7 +486,7 @@ All figures are reproduced by `scripts/audit_calcs.py` (output `validation/logs/
 | Full-speed input current | 2.0–2.07 A at 3.0 V (sim) = the E-05 2.1 A budget |
 | Battery life driver | Idle power dominates: E-10 (3 days on ≈ 10 Wh) needs average idle ≤ ≈ 0.13 W |
 | Charger dissipation (linear, 5 V in) | 2.0 W at 1 A / 3.0 V; 1.0 W at 0.5 A / 3.0 V |
-| FET voltage margin | 18.7 V / 25 V = 75 % normal (80 % rule met narrowly); ≈ 25.7 V at current limit [SIM] |
+| FET voltage margin | Normal 14.7–15.3 V / 25 V (≈ 60 %, re-tuned clamp); fault current limit up to 22.1 V (ideal layout) and 28–33 V with 2–5 nH → 25 V part rejected (§27.6) |
 | Rectifier margin | 97 V / 200 V = 49 % |
 | Soft start (new) | 47 nF: 4.7 ms, 1.54 A charge demand (fails). 2.2 µF: 198–247 ms, 33 mA |
 | Unload overshoot vs PMD401 50.4 V | 1 % divider corner 49.4 V + 1.3 V = **50.7 V** (exceeds); 0.1 % corner 48.6 + 1.3 = 49.9 V |
@@ -764,6 +764,7 @@ Single-fault analysis of the safety functions (bench prototype; S/D = severity/d
 | FM-13 | J703 arcing / insulation (50 V part at 48–56 V) | Intermittent 48 V | None | M | ≥ 100 V connector [OWNER 4] |
 | FM-14 | PMD401 internal fault drives without SPI | Motor runs until the rail energy is spent after veto | Supervisor rate check + veto | **H** (0.6–2.2 U) [CALC] | No board-level fix; documented residual risk |
 | FM-15 | Load step at low battery | Hiccup → 48 V off 110 ms → PMD401 brown-out mid-move | None | M | FW-R1 ramp [SIM] |
+| FM-16 | Current-limit operation (fault, overload, start-up into load) at high V<sub>in</sub> | Q301 drain above its 25 V abs max (28–33 V with realistic layout inductance) → avalanche, possible FET failure → see FM-7 | Hiccup limits each burst to 64 cycles; re-tuned clamp | **H** (part rating exceeded) | ≥ 40 V FET [OWNER 9] |
 
 ---
 
@@ -853,6 +854,33 @@ Three model levels, each with stated scope. No model includes the real transform
 
 `validation/logs/runaway_timing.txt`. At 15 mm/s: SPI gate + 10 ms timeout → 0.30 U (pass); with a 20 ms timeout → 0.55 U (fail); the veto alone → 0.63–2.2 U (fail); park only → 6.3 U (fail). Slow-tier detection (0.10–0.8 mm/s) → ≤ 0.29 U. Supervisor hang + runaway (double fault) → 0.75–3.0 U.
 
+### 27.6 Q301 drain-voltage stress investigation
+
+`scripts/sim_q301_stress.py` → `validation/sim/q301_stress/results.md` (33 cases; level-2 netlist; QCSD breakdown raised to 60 V so the model's avalanche cannot hide the peak; current-limit operation forced with R307 open from a preset rail voltage; 0.25 ms windows, inside the 64-cycle hiccup time).
+
+| Question | Result |
+| --- | --- |
+| Numerical or physical? | **Physical in the model.** 25.7 V with the 25 V model clamp; 26.2 V with the clamp removed; 26.1 V with a 4× finer step and 10× tighter reltol |
+| When does it occur? | Only at **cycle-by-cycle current limit** (fault, overload, start-up into load). Normal regulation: 12.8–14.4 V at 6 mA, 17.7 V at 100 mA/3.0 V with the 10 Oct clamp |
+| Mechanism | At turn-off the leakage current (≈ 5.5 A at current limit) dumps into the RCD clamp. The 22 nF C308 charged by several volts within the cycle, then the drain rang at ≈ 20 MHz (leakage × drain capacitance) |
+| Worst-case input | V<sub>in</sub> 4.2 V (V<sub>DS</sub> = V<sub>in</sub> + clamp): 26.7 V vs 25.2 V at 3.0 V (rail 55.9 V) |
+| Tolerances | V<sub>CLTH</sub> 107 mV: 27.8 V; + 3 % leakage: **31.4 V** (10 Oct clamp) |
+| Parasitic inductance (unclamped drain loop) | +5 nH: 33.7 V; +10 nH: 39.4 V |
+| Clamp re-tune (adopted) | R306 220 Ω + C308 470 nF: worst corner **22.1 V** (ideal layout), 22.6 V with C308 derated to 220 nF; typical fault at 48 V: 17.7–18.7 V; normal operation 14.7–15.3 V; efficiency 87.2–88.0 % vs 88.9 % at 100 mA |
+| Clamp + layout parasitic | 2 nH: 28.3 V; 5 nH: 33.3 V |
+| Mitigations | 10 Ω gate resistor: 5 nH → 26.3 V; + 4.7 Ω/1 nF drain snubber and R306 150 Ω: 23.9 V; 2 nH + 10 Ω: 23.9 V |
+| D301 snubber effectiveness | D301 reverse 88–104 V in the level-2 runs of §27.2–27.3 (≤ 52 % of 200 V); not re-measured in this sweep |
+
+**Conclusion.** A 25 V MOSFET cannot be shown to stay below its absolute maximum in current-limit operation with realistic layout inductance. **CSD16340Q3 is rejected for fabrication** [OWNER 9]. The replacement must be **≥ 40 V** (33 V worst simulated at 5 nH = 83 %).
+
+The gate drive is VBAT, down to 3.0 V. The replacement therefore needs R<sub>DS(on)</sub> specified at V<sub>GS</sub> ≤ 2.5 V, or BIAS must come from an auxiliary T301 winding so that VCC regulates (6.75 V typical [DS SNVSB75E]). The 30 V TI parts in the repo (CSD17575Q3, CSD17578Q3A) specify R<sub>DS(on)</sub> only at V<sub>GS</sub> 4.5 V, with V<sub>GS(th)</sub> up to 1.8–1.9 V [DS], so they are not valid at a 3.0 V drive. No ≥ 40 V candidate datasheet is reachable from the design environment.
+
+Layout requirement: D302–C308 tight at the Q301 drain pad, with a minimal commutation loop. Add a gate-resistor footprint (0 Ω default). The interim clamp values were applied to the design (commit `36f06f2`).
+
+![Q301 drain](figures/sim_q301_drain.png)
+
+*Figure 27-5. Q301 drain at current limit: with the 25 V model clamp (clipped), true peak, and worst corner before and after the clamp re-tune. Simulation, not measurement.*
+
 ### 27.5 What the simulations do not show
 
 Real transformer behaviour, loop phase margin, thermal behaviour, EMI, the PMD401's response to a decaying supply, and any measured value.
@@ -930,7 +958,7 @@ Qualitative; S = severity, L = likelihood before mitigation (H/M/L), for a **ben
 | R14 | Python checker gives false confidence | M | L | Now cross-checked by kicad-cli in CI on every board change | Keep the CI workflow |
 | R16 | Soft-start lock-out (47 nF) | H | H | — | **Closed 1 Nov**: C305 2.2 µF [CALC/SIM]; confirm on bench (PW group) |
 | R17 | Hiccup on load steps at low battery → 48 V dropout mid-move | M | H | — | FW-R1 ramp [SIM]; optional R305/T301 change [OWNER 8] |
-| R18 | Q301 at ≈ 25.7 V during current-limit operation | M | M | Hiccup limits duration | Clamp re-tune or 30–40 V FET [OWNER 9] |
+| R18 | Q301 above its 25 V rating during current-limit operation (28–33 V with 2–5 nH) | H | M | Clamp re-tuned 1 Nov (22.1 V ideal layout) | **Open, fabrication blocker:** ≥ 40 V FET [OWNER 9] |
 | R19 | Unload overshoot can exceed the PMD401's 50.4 V at the 1 % tolerance corner | M | L | — | 0.1 % divider [OWNER 6] |
 | R20 | Supervisor has no battery-voltage input | M | M | Main MCU stops at 3.4 V | [OWNER 14] |
 
@@ -950,7 +978,7 @@ The issue register is `docs/handover/UNRESOLVED_ISSUES.md`, with U-39 (closed) t
 | 6 | FB divider | 0.1 %, R307 ≥ 75 V |
 | 7 | Transformer | Custom winding to spec (I<sub>sat</sub> ≥ 6.5 A if 8 is taken) |
 | 8 | Current-limit headroom | FW-R1 20 ms ramp; optional R305 18 mΩ |
-| 9 | Q301 margin | Clamp re-tune or 30–40 V FET |
+| 9 | Q301 rating (**fabrication blocker**) | ≥ 40 V FET with R<sub>DS(on)</sub> at V<sub>GS</sub> ≤ 2.5 V, or 40–60 V logic-level FET + auxiliary T301 winding to BIAS; gate-resistor footprint; clamp already re-tuned |
 | 10 | Q301 footprint | TI 0.65 mm pitch |
 | 11 | R313 | ≥ 0.5 W, ≥ 200 V |
 | 12 | ST documents; SMPS; antenna; LSE | Provide documents; SMPS; U.FL; fit Y502 |
