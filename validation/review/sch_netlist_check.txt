@@ -1,0 +1,3 @@
+pins compared: 411  mismatches vs design.py: 0
+pins with neither a connection nor a no-connect flag: 0 []
+no-connect flags per part: {'U501': 4, 'J502': 2, 'U601': 33, 'J601': 3}
