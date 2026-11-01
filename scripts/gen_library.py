@@ -87,7 +87,7 @@ def symbols():
         bottom=[("13", "EP", "passive")], width=20.32,
         extra_props=[("MPN", "LM51551DSSR")]))
     out.append(box_symbol(
-        "BQ25188", "U", "BQ25188YBGR", "pump_v2:TI_YBG0008_DSBGA-8_P0.4mm_UNVERIFIED",
+        "BQ25188", "U", "BQ25188YBGR", "pump_v2:TI_YBG0008_DSBGA-8_P0.4mm",
         "https://www.ti.com/lit/ds/symlink/bq25188.pdf",
         "I2C 1-cell 1 A linear charger with power path, DSBGA-8 (TI SLUSFJ3)",
         left=[("A2", "IN", "power_in"), ("B1", "SCL", "input"), ("C1", "SDA", "bidirectional"),
@@ -172,30 +172,33 @@ def write_xfmr_placeholder(d):
 
 
 def write_ybg_placeholder(d):
-    """Copy the 2x4, 0.4 mm-pitch ball pads from KiCad's Texas DSBGA-8 footprint.
-
-    The BQ25188 YBG mechanical drawing could not be text-extracted, so the 0.4 mm
-    pitch is an inference from the 1.6 x 1.1 mm body (0.5 mm would leave 0.05 mm
-    edge margin). Marked UNVERIFIED in the name.
+    """BQ25188 YBG0008-C01 land pattern, explicit geometry from TI SLUSFJ3 13.1 (pp. 50-52 of
+    docs/datasheets/bq25188.pdf; drawings are vector graphics, read by rendering the pages, 1 Nov 2026):
+    2 x 4 balls, 0.4 mm pitch, A1 top-left; 0.23 mm copper, non-solder-mask-defined (mask +0.05 mm max);
+    paste 0.25 mm square, R0.05, 0.1 mm stencil; body D 1.57-1.61 mm, E 1.02-1.06 mm.
+    (Function name kept for history; the footprint is no longer a placeholder.)
     """
-    src = os.path.join(FP_DIR, "Package_BGA.pretty", "Texas_DSBGA-8_0.705x1.468mm_Layout2x4_P0.4mm.kicad_mod")
-    with open(src, encoding="utf8") as f:
-        txt = f.read()
-    pads = re.findall(r'\(pad "[A-D][12]".*?\n\t\)', txt, re.S)
-    if not pads:
-        raise RuntimeError("could not copy DSBGA pads")
-    w, h = 1.1 / 2, 1.6 / 2
-    lines = fp_header("TI_YBG0008_DSBGA-8_P0.4mm_UNVERIFIED",
-                      "BQ25188 YBG 1.1x1.6 mm body; ball pads copied from KiCad Texas_DSBGA-8 2x4 P0.4mm. "
-                      "Pitch NOT verified against TI YBG0008 drawing")
-    lines += [fp_prop("Reference", "REF**", 0, -h - 1.0, "F.SilkS"),
-              fp_prop("Value", "TI_YBG0008_UNVERIFIED", 0, h + 1.0, "F.Fab"),
-              fp_rect(-w, -h, w, h, "F.Fab", 0.1), fp_rect(-w - 0.25, -h - 0.25, w + 0.25, h + 0.25, "F.CrtYd", 0.05),
-              f'\t(fp_line (start {-w-0.12:g} {-h-0.12:g}) (end {-w+0.3:g} {-h-0.12:g}) (stroke (width 0.12) (type solid)) (layer "F.SilkS"))',
-              f'\t(fp_line (start {-w-0.12:g} {-h-0.12:g}) (end {-w-0.12:g} {-h+0.3:g}) (stroke (width 0.12) (type solid)) (layer "F.SilkS"))']
-    lines += ["\t" + p.replace("\n", "\n") for p in pads]
+    import uuid
+    ns = uuid.UUID("2b7d0c1e-6f3a-4c55-9a7d-6d0b3e7f1a20")
+    name = "TI_YBG0008_DSBGA-8_P0.4mm"
+    w, h = 1.04 / 2, 1.59 / 2
+    lines = fp_header(name, "BQ25188 YBG0008-C01 DSBGA-8, 0.4 mm pitch. Verified 1 Nov 2026 against TI SLUSFJ3 13.1 "
+                            "(package outline, example board layout, example stencil): 0.23 mm NSMD pads, mask +0.05 mm, "
+                            "0.25 mm square paste R0.05")
+    lines += [fp_prop("Reference", "REF**", 0, -1.8, "F.SilkS"),
+              fp_prop("Value", "TI_YBG0008", 0, 1.8, "F.Fab"),
+              fp_rect(-w, -h, w, h, "F.Fab", 0.1), fp_rect(-0.8, -1.05, 0.8, 1.05, "F.CrtYd", 0.05),
+              '\t(fp_line (start -0.67 -0.92) (end -0.25 -0.92) (stroke (width 0.12) (type solid)) (layer "F.SilkS"))',
+              '\t(fp_line (start -0.67 -0.92) (end -0.67 -0.5) (stroke (width 0.12) (type solid)) (layer "F.SilkS"))']
+    balls = [(r + c, -0.2 if c == "1" else 0.2, -0.6 + 0.4 * "ABCD".index(r)) for r in "ABCD" for c in "12"]
+    for n, x, y in balls:
+        lines.append(f'\t(pad "{n}" smd circle (at {x:g} {y:g}) (size 0.23 0.23) (property pad_prop_bga) '
+                     f'(layers "F.Cu" "F.Mask") (solder_mask_margin 0.05) (uuid "{uuid.uuid5(ns, "lib:" + n)}"))')
+    for n, x, y in balls:
+        lines.append(f'\t(pad "" smd roundrect (at {x:g} {y:g}) (size 0.25 0.25) (layers "F.Paste") '
+                     f'(roundrect_rratio 0.2) (uuid "{uuid.uuid5(ns, "lib:paste:" + n)}"))')
     lines += ["\t(embedded_fonts no)", ")"]
-    with open(os.path.join(d, "TI_YBG0008_DSBGA-8_P0.4mm_UNVERIFIED.kicad_mod"), "w", encoding="utf8") as f:
+    with open(os.path.join(d, name + ".kicad_mod"), "w", encoding="utf8") as f:
         f.write("\n".join(lines) + "\n")
 
 

@@ -1363,7 +1363,7 @@
 					)
 				)
 			)
-			(property "Footprint" "pump_v2:TI_YBG0008_DSBGA-8_P0.4mm_UNVERIFIED"
+			(property "Footprint" "pump_v2:TI_YBG0008_DSBGA-8_P0.4mm"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2670,7 +2670,7 @@
 			(at 124.46 57.68 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "pump_v2:TI_YBG0008_DSBGA-8_P0.4mm_UNVERIFIED"
+		(property "Footprint" "pump_v2:TI_YBG0008_DSBGA-8_P0.4mm"
 			(at 124.46 50.8 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2690,7 +2690,7 @@
 			(at 124.46 59.88 0)
 			(effects (font (size 1 1)) (hide yes))
 		)
-		(property "Note" "K-12. Pinout SLUSFJ3 Table 5-1. Register defaults (SLUSFJ3 7.5): VBATREG code 70 -> 4.20 V (meets E-09); ICHG code 5 -> 10 mA (firmware must set charge current, OPEN B.19); I2C watchdog ON by default and resets registers on expiry. Footprint pitch UNVERIFIED (see footprint descr)"
+		(property "Note" "K-12. Pinout SLUSFJ3 Table 5-1. Register defaults (SLUSFJ3 7.5): VBATREG code 70 -> 4.20 V (meets E-09); ICHG code 5 -> 10 mA (firmware must set charge current, OPEN B.19); I2C watchdog ON by default and resets registers on expiry. Footprint verified 1 Nov 2026 against TI YBG0008-C01 (SLUSFJ3 13.1)"
 			(at 124.46 50.8 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

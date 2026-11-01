@@ -76,7 +76,7 @@
 		(exclude_from_sim no) (in_bom yes) (on_board yes)
 		(property "Reference" "U" (at 0 12.7 0) (effects (font (size 1.27 1.27))))
 		(property "Value" "BQ25188YBGR" (at 0 -12.7 0) (effects (font (size 1.27 1.27))))
-		(property "Footprint" "pump_v2:TI_YBG0008_DSBGA-8_P0.4mm_UNVERIFIED" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Footprint" "pump_v2:TI_YBG0008_DSBGA-8_P0.4mm" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/bq25188.pdf" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
 		(property "Description" "I2C 1-cell 1 A linear charger with power path, DSBGA-8 (TI SLUSFJ3)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
 		(property "MPN" "BQ25188YBGR" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))

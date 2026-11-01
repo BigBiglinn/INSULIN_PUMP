@@ -117,7 +117,7 @@ def build():
            "B2": "CHG_SYS", "C2": "VBAT_FUSED", "D2": "GND"},
           status="DECIDED", mpn="BQ25188YBGR", note="K-12. Pinout SLUSFJ3 Table 5-1. Register defaults (SLUSFJ3 7.5): VBATREG code 70 -> 4.20 V (meets E-09); "
                "ICHG code 5 -> 10 mA (firmware must set charge current, OPEN B.19); I2C watchdog ON by default and resets "
-               "registers on expiry. Footprint pitch UNVERIFIED (see footprint descr)")
+               "registers on expiry. Footprint verified 1 Nov 2026 against TI YBG0008-C01 (SLUSFJ3 13.1)")
     C(s, "C101", "2.2uF/25V", "VBUS_CHG", "GND", FP_C0805, status="DS",
       note="IN: >=1 uF effective after DC bias (SLUSFJ3 Table 5-1); 25 V for 5 V USB + margin")
     C(s, "C102", "1uF/10V", "VBAT_FUSED", "GND", status="DS", note="BAT: >=1 uF ceramic (SLUSFJ3 Table 5-1)")
