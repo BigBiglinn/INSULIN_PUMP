@@ -1,0 +1,48 @@
+* Reviewer flyback power-stage check (open loop, ideal PWM). Spec transformer n=5, Lp=7.3u, k=0.99
+.param vin=VIN dty=DTY lcl=LCL lpar=LPAR
+V1 vb 0 {vin}
+Cin vb 0 20u ic={vin}
+Cbulk vb nb 220u ic={vin}
+Rbulk nb 0 80m
+Lp vb sw 7.3u
+Ls 0 sec 182.5u
+K1 Lp Ls 0.99
+Rlp sw swx 15m
+S1 swx cs g 0 SWM
+.model SWM SW(Ron=8m Roff=10Meg Vt=1.5 Vh=0.2)
+Coss swx cs 450p
+Rs cs 0 22m
+Vg g 0 PULSE(0 3 0 10n 10n {dty/298k-10n} {1/298k})
+* RCD clamp with layout inductance lcl
+Lcl swx swc {lcl}
+Dc swc ncl DSCH
+Rcl ncl vb 390
+Ccl ncl vb 22n ic=12
+* secondary
+Rls sec secx 0.35
+D1 secx o1 DHF
+Rsn secx nsn 220
+Csn nsn o1 100p
+Lpar o1 o2 {lpar}
+Co o2 0 2.2u ic=48
+Lel o1 o3 20n
+Cel o3 n4 5u ic=48
+Rel n4 0 0.3
+Cel2 o3 n5 5u ic=48
+Rel2 n5 0 0.2
+Rload o2 0 480
+.model DHF D(IS=1e-9 N=1.8 RS=0.12 CJO=15p TT=20n BV=200)
+.model DSCH D(IS=2e-6 N=1.05 RS=0.04 CJO=120p BV=100)
+.options method=gear reltol=1e-3
+.tran 5n 25m 24.8m 5n uic
+.control
+run
+meas tran vds_max MAX v(swx) from=24.9m to=25m
+meas tran vr_d1 MIN v(secx) from=24.9m to=25m
+meas tran vout AVG v(o2) from=24.9m to=25m
+meas tran ipk MAX i(Lp) from=24.9m to=25m
+meas tran vclamp AVG v(ncl) from=24.9m to=25m
+meas tran vo1 AVG v(o1) from=24.9m to=25m
+meas tran vo2pp PP v(o2) from=24.9m to=25m
+.endc
+.end

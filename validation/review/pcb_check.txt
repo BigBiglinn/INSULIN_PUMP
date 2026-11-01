@@ -1,0 +1,118 @@
+BOARD OUTLINE: [('gr_line',), ('gr_line',), ('gr_line',), ('gr_line',)]
+
+=== SHORTS (different-net copper overlap) : 0
+
+=== NETS WITH MORE THAN ONE COPPER ISLAND (unrouted): 28 nets, 35 missing connections
+  +3V3             islands=2  C202.1,C501.1,C502.1,C503.1,C504.1,C505.1,C506.1,C507.1,C601.1,C602.1,C603.1,C703.1,J502.1,J601.1,JP701.1,L201.2,R104.2,R105.2,R106.2,R403.2,R405.2,R510.2,R511.2,R512.2,R513.2,TP201.1,U201.8,U501.11,U501.2,U501.22,U501.35,U501.44,U501.8,U601.5,U601.6,U701.8 | R302.2
+  +48V_MOT         islands=3  C702.1,Q302.3 | R311.2,R312.1,TP301.1 | J703.2
+  FLY_SS           islands=2  U301.9 | C305.1
+  SW48_GATE        islands=2  Q302.1,R310.1 | R309.1
+  HSE_IN           islands=3  U501.42 | Y501.1 | C516.1
+  HSE_OUT          islands=3  U501.41 | Y501.3 | C517.1
+  LSE_IN           islands=3  C518.1 | U501.17 | Y502.1
+  MAIN_SWCLK       islands=2  J502.4 | U501.26
+  RF_MCU           islands=2  C514.1,L502.1 | U501.37
+  WBA_VDD11        islands=3  L501.2 | C509.1 | U501.45
+  WBA_VDDANA       islands=2  U501.39 | C511.1,R511.1
+  WBA_VDDRF        islands=2  C512.1,R512.1 | U501.40
+  WBA_VDDRFPA      islands=2  C513.1,R513.1 | U501.43
+  ENC_I            islands=2  J705.1 | D709.1,R710.2
+  ENC_VCC          islands=2  C701.1,J705.3 | JP701.2
+  RS485_B          islands=2  R714.2 | J704.2,U701.7
+  VBAT_FUSED       islands=2  C102.1,F101.2,J102.1 | U101.C2
+  CHG_INT_N        islands=2  R106.1,U501.10 | U101.A1
+  CON_SUP_RX       islands=2  U601.32 | J503.4
+  CON_SUP_TX       islands=2  U601.29 | J503.3
+  ENC_A_S          islands=2  R711.1 | U601.17
+  ENC_I_M          islands=2  U501.48 | R710.1
+  FLY_PGOOD        islands=3  R302.1,U301.11 | TP302.1 | U501.28
+  I2C_SDA          islands=3  U501.6 | R105.1 | U101.C1
+  PMD_MOSI_M       islands=2  R702.1 | U501.15
+  PMD_READY_M      islands=2  U501.33 | R706.1
+  PMD_SCLK_M       islands=2  R704.1 | U501.13
+  VBAT_SENSE       islands=2  C104.1,R107.2,R108.1 | U501.14
+
+=== CLEARANCE VIOLATIONS (net-class clearance, own geometry; DRU exceptions for J703/Q301 applied)
+  count: 0
+
+=== NET CLASS ASSIGNMENT
+  +48V_MOT                           -> HV48
+  /48V flyback/+48V_RAW              -> HV48
+  /48V flyback/FLY_CLAMP             -> PWR
+  /48V flyback/FLY_COMP              -> Default
+  /48V flyback/FLY_COMP_RC           -> Default
+  /48V flyback/FLY_CS                -> Default
+  /48V flyback/FLY_FB                -> Default
+  /48V flyback/FLY_GATE              -> Default
+  /48V flyback/FLY_RT                -> Default
+  /48V flyback/FLY_SEC               -> HV48
+  /48V flyback/FLY_SNUB              -> Default
+  /48V flyback/FLY_SS                -> Default
+  /48V flyback/FLY_SW                -> PWR
+  /48V flyback/SW48_DRV              -> Default
+  /48V flyback/SW48_GATE             -> Default
+  /Main MCU STM32WBA55/RF_ANT        -> RF
+  /Main MCU STM32WBA55/RF_MCU        -> RF
+  /Power input & charger/VBAT_FUSED  -> Default
+  /Power input & charger/VBAT_RAW    -> PWR
+  GND                                -> Default
+  MCU_48V_EN                         -> Default
+  VBAT                               -> Default
+  VBAT_SENSE                         -> Default
+
+=== TRACK WIDTH SUMMARY (min/max width, total length) for current-carrying nets
+  +3V3           n= 51 min=0.20 max=0.30 len=56.7mm  narrow(<0.5mm) len=56.7mm
+  +48V_MOT       n= 22 min=0.40 max=0.40 len=88.5mm  narrow(<0.5mm) len=88.5mm
+  BUCK_SW        n= 10 min=0.20 max=0.20 len=7.7mm  narrow(<0.5mm) len=7.7mm
+  +48V_RAW       n= 39 min=0.40 max=0.40 len=133.8mm  narrow(<0.5mm) len=133.8mm
+  FLY_CLAMP      n= 11 min=0.80 max=0.80 len=29.9mm  narrow(<0.5mm) len=0.0mm
+  FLY_CS         n= 19 min=0.20 max=0.20 len=21.4mm  narrow(<0.5mm) len=21.4mm
+  FLY_GATE       n= 13 min=0.20 max=0.20 len=14.0mm  narrow(<0.5mm) len=14.0mm
+  FLY_SEC        n=  6 min=0.40 max=0.40 len=8.7mm  narrow(<0.5mm) len=8.7mm
+  FLY_SW         n= 10 min=0.80 max=0.80 len=38.4mm  narrow(<0.5mm) len=0.0mm
+  VBAT_FUSED     n= 12 min=0.20 max=0.20 len=55.7mm  narrow(<0.5mm) len=55.7mm
+  VBAT_RAW       n=  5 min=0.80 max=0.80 len=15.6mm  narrow(<0.5mm) len=0.0mm
+  GND            n=122 min=0.20 max=0.30 len=115.8mm  narrow(<0.5mm) len=115.8mm
+  MCU_48V_EN     n= 10 min=0.20 max=0.20 len=31.4mm  narrow(<0.5mm) len=31.4mm
+  VBAT           n= 33 min=0.20 max=0.30 len=49.3mm  narrow(<0.5mm) len=49.3mm
+  VBAT_SENSE     n=  8 min=0.20 max=0.20 len=11.4mm  narrow(<0.5mm) len=11.4mm
+
+=== ZONES
+   GND F.Cu 0.2 mm2
+   GND F.Cu 1.9 mm2
+   GND F.Cu 5801.7 mm2
+   GND F.Cu 92.0 mm2
+   GND F.Cu 0.4 mm2
+   GND F.Cu 1.4 mm2
+   GND F.Cu 192.6 mm2
+   GND F.Cu 163.0 mm2
+   GND F.Cu 23.2 mm2
+   GND F.Cu 24.8 mm2
+   GND F.Cu 41.8 mm2
+   GND F.Cu 13.0 mm2
+   GND F.Cu 10.2 mm2
+   GND F.Cu 10.7 mm2
+   GND F.Cu 7.8 mm2
+   GND F.Cu 8.7 mm2
+   GND F.Cu 13.5 mm2
+   GND F.Cu 29.4 mm2
+   GND F.Cu 45.4 mm2
+   GND F.Cu 19.4 mm2
+   GND F.Cu 36.5 mm2
+   GND F.Cu 12.6 mm2
+   GND F.Cu 6.3 mm2
+   GND F.Cu 0.4 mm2
+   GND F.Cu 10.3 mm2
+   GND F.Cu 12.6 mm2
+   GND B.Cu 0.4 mm2
+   GND B.Cu 8.0 mm2
+   GND B.Cu 1.2 mm2
+   GND B.Cu 0.4 mm2
+   GND B.Cu 8090.9 mm2
+   GND In1.Cu 0.4 mm2
+   GND In1.Cu 0.4 mm2
+   GND In1.Cu 8806.5 mm2
+   +3V3 In2.Cu 4883.0 mm2
+   +3V3 In2.Cu 0.3 mm2
+   +3V3 In2.Cu 0.3 mm2
+   VBAT In2.Cu 3790.5 mm2
