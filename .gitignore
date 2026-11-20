@@ -11,3 +11,7 @@ hardware/kicad/pump_v2.net
 # Q301 LTspice waveform outputs (hundreds of MB; regenerate from the decks)
 validation/sim/q301/*.raw
 validation/sim/q301/*.db
+
+# project report build scratch
+docs/project_report/.build/
+__pycache__/

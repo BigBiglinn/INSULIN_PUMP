@@ -1,0 +1,2 @@
+w 0.20 g 0.25: Z bare 62.9 ohm, with mask 57.3 ohm
+w 0.32 g 0.25: Z bare 50.5 ohm, with mask 46.9 ohm

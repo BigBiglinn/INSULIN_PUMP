@@ -1,0 +1,59 @@
+== 1. LM51551 slope compensation (SNVSB75E eq.8/9/10)
+fsw = 298.0 kHz
+ Rs=22 mohm: needed 17.7 kV/s vs fixed 11.9 kV/s -> SUBHARMONIC RISK; RSL min 645 ohm, RSL(82%) 1370 ohm
+    with RSL=1370: Ipk-CL(min, D=0.785) = 2.76 A
+    with RSL=1370: Ipk-CL(max, D=0.785) = 3.40 A
+    with RSL=1370: Ipk-CL(min, D=0.715) = 2.89 A
+    with RSL=1370: Ipk-CL(max, D=0.715) = 3.53 A
+ Rs=18 mohm: needed 14.5 kV/s vs fixed 11.9 kV/s -> SUBHARMONIC RISK; RSL min 285 ohm, RSL(82%) 878 ohm
+    with RSL=878: Ipk-CL(min, D=0.785) = 4.02 A
+    with RSL=878: Ipk-CL(max, D=0.785) = 4.80 A
+    with RSL=878: Ipk-CL(min, D=0.715) = 4.12 A
+    with RSL=878: Ipk-CL(max, D=0.715) = 4.90 A
+ Rs=15 mohm: needed 12.1 kV/s vs fixed 11.9 kV/s -> SUBHARMONIC RISK; RSL min 15 ohm, RSL(82%) 510 ohm
+    with RSL=510: Ipk-CL(min, D=0.785) = 5.40 A
+    with RSL=510: Ipk-CL(max, D=0.785) = 6.33 A
+    with RSL=510: Ipk-CL(min, D=0.715) = 5.47 A
+    with RSL=510: Ipk-CL(max, D=0.715) = 6.40 A
+  Required peak at 3.0 V / 100 mA (FLYBACK_DESIGN.md): ~3.1 A
+
+== 2. Current-sense error from the 0.2 mm FLY_CS track (Q301 source -> R305, ~6.1 mm)
+ track R = 15.0 mohm (1 oz, 25 C; +~30 % hot). Effective sense = 37.0 mohm
+ Ilim(min) = 93 mV/37.0 mohm = 2.51 A  (design intent 4.2-4.9 A; needed ~3.1 A)
+
+== 3. Battery-path track VBAT_FUSED (F101 -> J102), 0.2 mm, ~25 mm
+ length 26.9 mm, R = 66 mohm; at 2.1 A: drop 139 mV, loss 0.29 W
+ IPC-2152 (1 oz external, 10 K): 0.2 mm carries roughly 0.7-0.8 A; 2.1 A needs ~0.9-1.0 mm (verify with chart)
+
+== 4. 48 V set point tolerance (VREF 0.99-1.01 V, R307 470k 1 %, R308 10k 1 %)
+ Vout DC range 46.60 .. 49.44 V (limit 45.6-50.4 V); margin 1.00 V low / 0.96 V high for ripple+step
+ OVP (FB 107-113 % of VREF): 50.8..54.8 V -> above 50.4 V PMD401 limit; protects only E-11 (60 V)
+ R307 sees 47.0 V across one 0603 (typ. 50 V rated, some 75 V) -> 94 % of 50 V: fails the E-06 80 % rule
+
+== 5. Kill path (SNVSB75E: EN 0.4-0.7 V rising / 0.33-0.63 falling; UVLO 1.425-1.575 V rising)
+ 3V3=3.0: MCU high -> FLY_EN = 2.47 V (needs > 1.575 V to run) 
+ 3V3=3.3: MCU high -> FLY_EN = 2.72 V (needs > 1.575 V to run) 
+ 3V3=3.37: MCU high -> FLY_EN = 2.78 V (needs > 1.575 V to run) 
+ Pull-down only -> 0 V (shutdown); veto BSS138 on: I = 3.3 V/1k = 3.3 mA, Vds ~ few mV -> shutdown
+ UVLO hysteresis current 5 uA x (1k||4.7k = 825 ohm) = 4.1 mV (negligible)
+
+== 6. E-11 discharge (proposed): <5 V within 5 s after switch-off
+ C ~ 149 uF; with only R307+R308 (480k): tau = 72 s -> t(5 V) = 162 s (FAIL)
+ R312 needed <= 14.8 kohm; e.g. 12k: t(5 V) = 4.0 s, P = 0.19 W while 48 V on, I = 4.0 mA
+
+== 7. Cell -> VBAT drop at the 3.4 V dosing cut-off, 2 A flyback draw (estimates, not measured)
+  cell ESR (18650, est.)            35 mohm
+  protection PCB (est.)             40 mohm
+  fuse 5 A (est.)                   15 mohm
+  XT30 + wiring (est.)              10 mohm
+  VBAT_FUSED 0.2 mm track           66 mohm
+  master switch + leads (est.)      20 mohm
+ total 186 mohm -> drop 0.37 V; VBAT at IC = 3.03 V; 3V3 in 100 % mode ~ VBAT - ~0.02 V
+ LM51551: VCC UVLO rising 2.75-2.95 V, BIAS=VCC min 2.97 V. E-02 needs 3V3 >= 3.0 V while dosing.
+
+== 8. Encoder edge timing (if LL06 outputs need the pull-ups the PMD401 normally supplies)
+ max count rate 188 k counts/s -> per-channel 46.9 kHz, min edge spacing 5.33 us
+  pull-up 40k, C 100 pF: 10-90 % rise 8.80 us
+  pull-up 40k, C 200 pF: 10-90 % rise 17.60 us
+  pull-up 10k, C 100 pF: 10-90 % rise 2.20 us
+  pull-up 10k, C 200 pF: 10-90 % rise 4.40 us

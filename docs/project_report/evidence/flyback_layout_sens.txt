@@ -1,0 +1,4 @@
+Vin=3.0 D=0.775 Lclamp=1n Lsec=1n : vds_max=17.7 vr_d1=-44.5 vout=47.2 ipk=3.39 vclamp=15 vo2pp=0.062
+Vin=3.0 D=0.775 Lclamp=25n Lsec=30n : vds_max=28.2 vr_d1=-44.3 vout=47 ipk=3.37 vclamp=15.4 vo2pp=0.068
+Vin=4.2 D=0.71 Lclamp=1n Lsec=1n : vds_max=17.9 vr_d1=-50.1 vout=48.6 ipk=2.75 vclamp=15.4 vo2pp=0.0527
+Vin=4.2 D=0.71 Lclamp=25n Lsec=30n : vds_max=26.2 vr_d1=-50.1 vout=48.5 ipk=2.75 vclamp=15.8 vo2pp=0.0572

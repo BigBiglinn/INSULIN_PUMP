@@ -1,0 +1,15 @@
+Syringe area 16.69 mm^2; travel per U 599 um; steps per U 133 (no-load step)
+Time per U at the 15 steps/s cap: 8.9 s  (0.113 U/s)
+48 V load, rail on, motor still: 0.518 W (PMD401 idle 0.288 W + bleeder 0.230 W)
+48 V load while moving: low 0.593 W (LL06 5 mW/Hz) ... high 5.030 W (PMD401 100 mA)
+Per rail cycle: charge 182 uF to 48 V 0.257 J; overhead time 441 ms (soft start + unpark + park, PMD401 boot time unknown, MT-07); overhead energy 0.536 J
+[low] motion 0.070 Wh/day + rail cycles 0.072 Wh/day + idle 2.64 Wh/day = 2.78 Wh/day -> 3.6 days on 10.1 Wh
+[high] motion 0.592 Wh/day + rail cycles 0.072 Wh/day + idle 2.64 Wh/day = 3.30 Wh/day -> 3.1 days on 10.1 Wh
+Sensitivity to idle power (48 V off), high motion case:
+  idle    10 mW -> 0.90 Wh/day -> 11.2 days
+  idle    20 mW -> 1.14 Wh/day -> 8.8 days
+  idle    50 mW -> 1.86 Wh/day -> 5.4 days
+  idle   110 mW -> 3.30 Wh/day -> 3.1 days
+  idle   200 mW -> 5.46 Wh/day -> 1.8 days
+If the 48 V rail were left on all day: PMD401 idle alone 6.9 Wh/day (+ bleeder 5.5 Wh/day) at the rail, before conversion loss
+All values are estimates from recorded datasheet figures and assumptions; none is measured (PW-09, MT-07, BT-01 open).

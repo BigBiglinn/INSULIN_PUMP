@@ -1,0 +1,13 @@
+ST w.45 g.13 over In1: [np.float64(22.5), np.float64(2.9)]
+ST w.45 g.13 over L3 (In1 void): [np.float64(55.7), np.float64(2.5)]
+ST MLPF w.30 g.15 over L3: [np.float64(60.6), np.float64(2.4)]
+JLC7628 w 0.25 g 0.25 Z 58.3, with mask 53.6, eeff 3.37
+JLC7628 w 0.25 g 0.30 Z 59.1, with mask 54.5, eeff 3.38
+JLC7628 w 0.22 g 0.25 Z 60.4, with mask 55.2, eeff 3.36
+JLC7628 w 0.28 g 0.25 Z 54.0, with mask 49.9, eeff 3.38
+JLC7628 w 0.36 g 0.25 Z 47.5, with mask 44.3, eeff 3.40
+JLC7628 w 0.36 g 0.30 Z 48.2, with mask 45.2, eeff 3.41
+JLC7628 w 0.33 g 0.25 Z 50.7, with mask 47.2, eeff 3.39
+JLC7628 w 0.38 g 0.30 Z 46.8, with mask 44.0, eeff 3.42
+er 4.0 w.25 55.4; w.36 45.9
+er 4.8 w.25 51.9; w.36 42.9

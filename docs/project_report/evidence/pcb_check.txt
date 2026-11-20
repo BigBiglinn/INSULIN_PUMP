@@ -1,0 +1,102 @@
+BOARD OUTLINE: [('gr_line',), ('gr_line',), ('gr_line',), ('gr_line',)]
+
+=== SHORTS (different-net copper overlap) : 0
+
+=== NETS WITH MORE THAN ONE COPPER ISLAND (unrouted): 0 nets, 0 missing connections
+
+=== CLEARANCE VIOLATIONS (net-class clearance, own geometry; DRU exceptions for J703/Q301 applied)
+  count: 2
+   (0.18, 0.2, 'F.Cu', 'FL501.A1', 'RF_MCU', 'FL501.B1', 'GND')
+   (0.18, 0.2, 'F.Cu', 'FL501.A3', 'RF_ANT', 'FL501.B3', 'GND')
+
+=== NET CLASS ASSIGNMENT
+  +48V_MOT                           -> HV48
+  /48V flyback/+48V_RAW              -> HV48
+  /48V flyback/FLY_CLAMP             -> PWR
+  /48V flyback/FLY_COMP              -> Default
+  /48V flyback/FLY_COMP_RC           -> Default
+  /48V flyback/FLY_CS                -> Default
+  /48V flyback/FLY_DSNB              -> Default
+  /48V flyback/FLY_FB                -> Default
+  /48V flyback/FLY_GATE              -> Default
+  /48V flyback/FLY_GATE_Q            -> Default
+  /48V flyback/FLY_RT                -> Default
+  /48V flyback/FLY_SEC               -> HV48
+  /48V flyback/FLY_SEC_A             -> HV48
+  /48V flyback/FLY_SEC_B             -> HV48
+  /48V flyback/FLY_SEC_C             -> HV48
+  /48V flyback/FLY_SEC_D             -> HV48
+  /48V flyback/FLY_SNUB              -> Default
+  /48V flyback/FLY_SS                -> Default
+  /48V flyback/FLY_SW                -> PWR
+  /48V flyback/OVP_G                 -> Default
+  /48V flyback/OVP_K                 -> Default
+  /Main MCU STM32WBA55/RF_ANT        -> RF
+  /Main MCU STM32WBA55/RF_MCU        -> RF
+  /Power input & charger/VBAT_FUSED  -> Default
+  /Power input & charger/VBAT_RAW    -> PWR
+  GND                                -> Default
+  MCU_48V_EN                         -> Default
+  VBAT                               -> Default
+  VBAT_SENSE                         -> Default
+
+=== TRACK WIDTH SUMMARY (min/max width, total length) for current-carrying nets
+  +3V3           n= 60 min=0.20 max=0.30 len=71.1mm  narrow(<0.5mm) len=71.1mm
+  +48V_MOT       n=  6 min=0.30 max=0.50 len=23.5mm  narrow(<0.5mm) len=3.6mm
+  BUCK_SW        n=  3 min=0.20 max=0.20 len=2.9mm  narrow(<0.5mm) len=2.9mm
+  +48V_RAW       n= 20 min=0.20 max=0.80 len=64.8mm  narrow(<0.5mm) len=45.3mm
+  FLY_CLAMP      n=  7 min=0.50 max=1.00 len=21.0mm  narrow(<0.5mm) len=0.0mm
+  FLY_CS         n=  8 min=0.20 max=0.50 len=13.0mm  narrow(<0.5mm) len=6.8mm
+  FLY_GATE       n=  4 min=0.20 max=0.30 len=4.9mm  narrow(<0.5mm) len=4.9mm
+  FLY_GATE_Q     n=  4 min=0.20 max=0.30 len=4.9mm  narrow(<0.5mm) len=4.9mm
+  FLY_SEC        n=  2 min=0.40 max=0.60 len=8.3mm  narrow(<0.5mm) len=3.4mm
+  FLY_SEC_A      n=  3 min=0.40 max=0.40 len=31.2mm  narrow(<0.5mm) len=31.2mm
+  FLY_SEC_B      n=  3 min=0.40 max=0.40 len=32.0mm  narrow(<0.5mm) len=32.0mm
+  FLY_SEC_C      n=  3 min=0.40 max=0.40 len=31.2mm  narrow(<0.5mm) len=31.2mm
+  FLY_SEC_D      n=  3 min=0.40 max=0.40 len=31.2mm  narrow(<0.5mm) len=31.2mm
+  FLY_SW         n= 10 min=0.30 max=1.00 len=15.6mm  narrow(<0.5mm) len=1.0mm
+  VBAT_FUSED     n= 20 min=0.15 max=0.30 len=68.5mm  narrow(<0.5mm) len=68.5mm
+  VBAT_RAW       n=  5 min=0.80 max=0.80 len=15.6mm  narrow(<0.5mm) len=0.0mm
+  GND            n=114 min=0.20 max=0.50 len=109.5mm  narrow(<0.5mm) len=106.3mm
+  MCU_48V_EN     n= 10 min=0.20 max=0.20 len=31.4mm  narrow(<0.5mm) len=31.4mm
+  VBAT           n= 29 min=0.20 max=0.30 len=50.1mm  narrow(<0.5mm) len=50.1mm
+  VBAT_SENSE     n= 18 min=0.20 max=0.20 len=43.3mm  narrow(<0.5mm) len=43.3mm
+
+=== ZONES
+   GND F.Cu 0.2 mm2
+   GND F.Cu 1.9 mm2
+   GND F.Cu 6280.8 mm2
+   GND F.Cu 0.4 mm2
+   GND F.Cu 8.8 mm2
+   GND F.Cu 108.8 mm2
+   GND F.Cu 11.7 mm2
+   GND F.Cu 13.5 mm2
+   GND F.Cu 29.4 mm2
+   GND F.Cu 19.4 mm2
+   GND F.Cu 1.8 mm2
+   GND F.Cu 3.7 mm2
+   GND F.Cu 5.9 mm2
+   GND F.Cu 1.1 mm2
+   GND F.Cu 2.6 mm2
+   GND F.Cu 21.3 mm2
+   GND F.Cu 15.9 mm2
+   GND F.Cu 6.3 mm2
+   GND F.Cu 0.4 mm2
+   GND F.Cu 10.0 mm2
+   GND F.Cu 12.1 mm2
+   GND B.Cu 0.4 mm2
+   GND B.Cu 124.1 mm2
+   GND B.Cu 50.9 mm2
+   GND B.Cu 166.1 mm2
+   GND B.Cu 27.5 mm2
+   GND B.Cu 12.9 mm2
+   GND B.Cu 3.3 mm2
+   GND B.Cu 0.6 mm2
+   GND B.Cu 0.4 mm2
+   GND B.Cu 7293.2 mm2
+   GND In1.Cu 0.4 mm2
+   GND In1.Cu 0.4 mm2
+   GND In1.Cu 8882.0 mm2
+   +3V3 In2.Cu 4869.6 mm2
+   +3V3 In2.Cu 0.3 mm2
+   VBAT In2.Cu 3875.1 mm2
