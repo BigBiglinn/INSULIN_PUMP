@@ -15,3 +15,4 @@ validation/sim/q301/*.db
 # project report build scratch
 docs/project_report/.build/
 __pycache__/
+firmware/host_test/pump_host_test
